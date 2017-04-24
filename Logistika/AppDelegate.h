@@ -11,7 +11,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+-(void)defaultLogin;
+-(void)goHome:(UIViewController*)origin;
 @end
 
