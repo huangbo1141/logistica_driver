@@ -90,6 +90,11 @@ extern NSArray* c_weight;
 extern NSArray* c_weight_value;
 extern NSArray* c_packageLists;
 extern NSArray* c_paymentWay;
+
+extern NSString* PUBLISHABLE_KEY;
+//card validataion
+
+
 //basic data
 extern OrderModel* g_cameraOrderModel;
 extern OrderModel* g_itemOrderModel;

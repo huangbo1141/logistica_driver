@@ -15,7 +15,9 @@
 #import "PersonalMainViewController.h"
 #import "AppDelegate.h"
 #import "MyNavViewController.h"
-
+#import "NetworkParser.h"
+#import "OrderResponse.h"
+#import "TrackingViewController.h"
 
 @interface MainViewController ()
 @end
@@ -73,12 +75,11 @@
         }
         case 202:
         {
-            // guest
-            // hgcneed
             EnvVar*env = [CGlobal sharedId].env;
-            env.lastLogin = 1;
+            env.lastLogin = 0;
             g_mode = c_GUEST;
             env.mode = c_GUEST;
+            
             
             
             // LoginProcess
@@ -96,17 +97,63 @@
         {
             // tracking
             // hgcneed
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
+                                                                                      message: @"Input Tracking Number"
+                                                                               preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"Tracking Number";
+                textField.textColor = [UIColor blueColor];
+                textField.borderStyle = UITextBorderStyleLine;
+            }];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                NSArray * textfields = alertController.textFields;
+                UITextField * namefield = textfields[0];
+                NSString* number = namefield.text;
+                if ([number length]>0) {
+                    [self tracking:number];
+                }
+                
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
             break;
         }
         case 204:
         {
             // call
-            // hgcneed
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:12125551212"]];
             break;
         }
         default:
             break;
     }
+}
+-(void)tracking:(NSString*)number{
+    EnvVar* env = [CGlobal sharedId].env;
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    params[@"id"] = number;
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [CGlobal showIndicator:self];
+    [manager ontemplateGeneralRequest2:params BasePath:BASE_URL_ORDER Path:@"tracking" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil) {
+                OrderResponse* response = [[OrderResponse alloc] initWithDictionary_his:dict];
+                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+                
+                TrackingViewController*vc = [ms instantiateViewControllerWithIdentifier:@"TrackingViewController"] ;
+                vc.response = response;
+                vc.inputData = response.orders[0];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.navigationController.navigationBar.hidden = true;
+                    self.navigationController.viewControllers = @[vc];
+                });
+                
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        [CGlobal stopIndicator:self];
+    } method:@"POST"];
 }
 -(void)onChange:(UISegmentedControl*)seg{
     NSInteger index = seg.selectedSegmentIndex;

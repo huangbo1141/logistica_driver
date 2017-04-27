@@ -42,12 +42,7 @@
         [CGlobal AlertMessage:@"Please Sign In" Title:nil];
     }else{
         if (self.cameraOrderModel.itemModels.count>0) {
-            //hgc need
-//            if (self.viewExceed.isHidden) {
-//                // not exceed
-//            }else{
-//                // exceed
-//            }
+            g_cameraOrderModel = self.cameraOrderModel;
             UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
             AddressDetailViewController* vc = [ms instantiateViewControllerWithIdentifier:@"AddressDetailViewController"];
             dispatch_async(dispatch_get_main_queue(), ^{

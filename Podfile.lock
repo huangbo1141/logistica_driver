@@ -16,17 +16,20 @@ PODS:
     - AFNetworking/NSURLSession
   - ECDrawerLayout (0.1.7)
   - IQKeyboardManager (4.0.9)
+  - Stripe (10.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - ECDrawerLayout
   - IQKeyboardManager
+  - Stripe
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ECDrawerLayout: 01b1c9b065bacaba78a5efd4d20e94114b830c3a
   IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
+  Stripe: dd6df0e2c6a8463e2f1ca9b15dc246e5ae1eee64
 
-PODFILE CHECKSUM: 6d069043ff216c81baaab78729f896945f1eec33
+PODFILE CHECKSUM: e8bd973dcda4303eb83386191f805fdb65c9eb95
 
 COCOAPODS: 1.1.1

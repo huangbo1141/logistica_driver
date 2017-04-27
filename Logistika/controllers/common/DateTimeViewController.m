@@ -11,6 +11,7 @@
 #import "NSArray+BVJSONString.h"
 #import "NetworkParser.h"
 #import "AppDelegate.h"
+#import "ReviewOrderViewController.h"
 
 @interface DateTimeViewController ()
 @property (assign,nonatomic) int index;
@@ -34,7 +35,7 @@
     time.datePickerMode = UIDatePickerModeTime;
     self.txtTime.inputView = time;
     
-    [date addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+    [date addTarget:self action:@selector(timeChanged:) forControlEvents:UIControlEventValueChanged];
     date.tag = 200;
     
     [time addTarget:self action:@selector(timeChanged:) forControlEvents:UIControlEventValueChanged];
@@ -83,13 +84,14 @@
     }
     
     EnvVar* env = [CGlobal sharedId].env;
-    if (env.mode == c_CORPERATION) {
+    if (env.mode != c_CORPERATION) {
         [self addService];
     }else{
         if(env.quote ){
             [self addService];
             [self.btnReview setTitle:@"Continue" forState:UIControlStateNormal];
         }else{
+            self.viewExpress.hidden = true;
             [self.btnReview setTitle:@"Send Email" forState:UIControlStateNormal];
         }
     }
@@ -149,6 +151,8 @@
             [dateFormat setDateFormat:@"MM-dd-yyyy"];
             NSString *prettyVersion = [dateFormat stringFromDate:myDate];
             _txtDate.text = prettyVersion;
+            
+            g_dateModel.date = prettyVersion;
             break;
         }
         case 201:{
@@ -157,6 +161,8 @@
             [dateFormat setDateFormat:@"hh:mm a"];
             NSString *prettyVersion = [dateFormat stringFromDate:myDate];
             _txtTime.text = prettyVersion;
+            
+            g_dateModel.time = prettyVersion;
             break;
         }
             
@@ -175,7 +181,11 @@
     EnvVar* env = [CGlobal sharedId].env;
     if (env.mode != c_CORPERATION || env.quote ) {
         if (self.index>=0) {
-            // hgcneed review fragment
+            UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+            ReviewOrderViewController* vc = [ms instantiateViewControllerWithIdentifier:@"ReviewOrderViewController"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:vc animated:true];
+            });
         }else{
             [CGlobal AlertMessage:@"Choose Service" Title:nil];
         }

@@ -12,11 +12,11 @@
 
 @interface MainViewController : MenuViewController
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-
 @property (weak, nonatomic) IBOutlet UIButton *btnSignIn;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
 @property (weak, nonatomic) IBOutlet UIButton *btnGuest;
 @property (weak, nonatomic) IBOutlet UIButton *btnCall;
 @property (weak, nonatomic) IBOutlet UIButton *btnTracking;
+
 
 @end

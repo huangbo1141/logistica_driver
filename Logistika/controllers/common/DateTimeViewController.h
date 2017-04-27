@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTime;
 @property (weak, nonatomic) IBOutlet UIButton *btnReview;
 
+@property (weak, nonatomic) IBOutlet UIView *viewExpress;
 
 @end
 

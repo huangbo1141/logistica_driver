@@ -20,4 +20,6 @@
 @property (nonatomic,assign) int weight_value;
 
 @property (nonatomic,strong) UIImage* image_data;
+
+-(instancetype)initWithDictionary:(NSDictionary*) dict;
 @end

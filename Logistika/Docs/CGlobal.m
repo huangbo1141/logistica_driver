@@ -30,7 +30,7 @@ NSString* ZIP_LOCATION = @"http://maps.googleapis.com/maps/api/geocode/json";
 NSString* PHOTO_URL = @"/uploads/";
 //NSString* g_baseUrl = @"https://travpholer.com/adminuser";
 BOOL g_lock = false;
-BOOL g_isii = true;
+BOOL g_isii = false;
 
 
 NSString*   APISERVICE_IP_URL = @"http://ip-api.com/json";
@@ -80,6 +80,8 @@ NSArray* c_weight;
 NSArray* c_weight_value;
 NSArray* c_packageLists;
 NSArray* c_paymentWay;
+
+NSString* PUBLISHABLE_KEY;
 
 OrderModel* g_cameraOrderModel;
 OrderModel* g_itemOrderModel;
@@ -188,6 +190,9 @@ NSMutableArray* menu_topList;
     
 }
 +(void)showIndicator:(UIViewController*)viewcon{
+    if (viewcon==nil) {
+        return;
+    }
     WNAActivityIndicator* activityIndicator = (WNAActivityIndicator*)[viewcon.view viewWithTag:1999];
     if(activityIndicator == nil){
         CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -201,6 +206,9 @@ NSMutableArray* menu_topList;
     [viewcon.view bringSubviewToFront:activityIndicator];
 }
 +(void)stopIndicator:(UIViewController*)viewcon{
+    if (viewcon==nil) {
+        return;
+    }
     WNAActivityIndicator* activityIndicator = (WNAActivityIndicator*)[viewcon.view viewWithTag:1999];
     if(activityIndicator!=nil){
         [activityIndicator setHidden:YES];
@@ -1475,6 +1483,8 @@ NSMutableArray* menu_topList;
                      @"Cash on Pick up"];
     
     COLOR_PRIMARY = [CGlobal colorWithHexString:@"008080" Alpha:1.0f];
+    
+    PUBLISHABLE_KEY = @"pk_test_C0xTsdez4BI0rXKZp6ObLitq";
 }
 +(BOOL)validatePassword:(NSString*)password{
     NSError *error = NULL;

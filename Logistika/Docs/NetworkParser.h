@@ -16,6 +16,7 @@ typedef void (^NetworkCompletionBlock)(NSDictionary*dict, NSError* error);
 + (instancetype)sharedManager;
 
 - (void)uploadImage:(UIImage*)image FileName:(NSString*)fileName withCompletionBlock:(NetworkCompletionBlock)completionBlock;
+- (void)uploadImage2:(NSMutableDictionary*)params Data:(NSMutableArray*)data_list Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock;
 
 -(void)ontemplateGeneralRequest2:(id) data BasePath:(NSString*)url Path:(NSString*)path withCompletionBlock:(NetworkCompletionBlock)completionBlock method:(NSString*)method;
 -(void)ontemplateRequestWithNoCheck2:(id) data BasePath:(NSString*)url Path:(NSString*)path  withCompletionBlock:(NetworkCompletionBlock)completionBlock;

@@ -9,4 +9,5 @@ target 'Logistika' do
 pod ”IQKeyboardManager”
 pod 'AFNetworking', '~> 3.0'
 pod "ECDrawerLayout"
+pod 'Stripe'
 end

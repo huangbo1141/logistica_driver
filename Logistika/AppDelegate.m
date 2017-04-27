@@ -35,7 +35,7 @@
 }
 -(void)goHome:(UIViewController*)origin{
     EnvVar* env = [CGlobal sharedId].env;
-    if (env.mode == c_PERSONAL ) {
+    if (env.mode == c_PERSONAL || env.mode == c_GUEST ) {
         UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
         
         PersonalMainViewController*vc = [ms instantiateViewControllerWithIdentifier:@"PersonalMainViewController"] ;
@@ -45,7 +45,14 @@
             origin.navigationController.viewControllers = @[vc];
         });
     }else{
-        // hgcneed
+        UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Cor" bundle:nil];
+        
+        PersonalMainViewController*vc = [ms instantiateViewControllerWithIdentifier:@"CorMainViewController"] ;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            origin.navigationController.navigationBar.hidden = true;
+            origin.navigationController.viewControllers = @[vc];
+        });
     }
     
 }

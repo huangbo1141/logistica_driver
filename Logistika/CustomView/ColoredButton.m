@@ -44,6 +44,9 @@
             break;
         }
         case 2:{
+            // review order white textcolor primary back
+            self.backgroundColor = COLOR_PRIMARY;
+            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             break;
         }

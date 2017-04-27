@@ -27,7 +27,6 @@
         NSLog(@"TopBarView initWithFrame");
 //        [self customLayout];
     }
-    self.backgroundColor = [CGlobal colorWithHexString:@"38373c" Alpha:1.0f];
     return self;
 }
 
@@ -37,7 +36,7 @@
         NSLog(@"TopBarView initWithCoder");
 //        [self customLayout];	
     }
-    self.backgroundColor = [CGlobal colorWithHexString:@"008080" Alpha:1.0f];
+    self.backgroundColor = COLOR_PRIMARY;
     return self;
 }
 -(void)customLayout:(UIViewController*)vc{

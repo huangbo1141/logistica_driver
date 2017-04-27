@@ -114,7 +114,14 @@
                             delegate.window.rootViewController = nav;
                         });
                     }else{
-                        // hgcneed
+                        UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Cor" bundle:nil];
+                        PersonalMainViewController*vc = [ms instantiateViewControllerWithIdentifier:@"CorMainViewController"] ;
+                        MyNavViewController* nav = [[MyNavViewController alloc] initWithRootViewController:vc];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                            delegate.window.rootViewController = nav;
+                        });
                     }
                     
                 }else{

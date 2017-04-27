@@ -134,6 +134,7 @@
         }];
     }else{
         
+        
         [manager POST:serverurl parameters:questionDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if(completionBlock){
 //                NSData *jsonData = [myJsonString dataUsingEncoding:NSUTF8StringEncoding];
@@ -155,8 +156,6 @@
             }
         }];
     }
-    
-    
 }
 -(void)generalNetwork:(NSString*)serverurl Data:(NSDictionary*)questionDict withCompletionBlock:(NetworkCompletionBlock)completionBlock method:(NSString*)method{
     //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -214,7 +213,55 @@
     
     
 }
-
+- (void)uploadImage2:(NSMutableDictionary*)params Data:(NSMutableArray*)data_list Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock{
+    
+        
+    NSDictionary *parameters = params;
+    
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:serverurl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (int k=0; k<data_list.count; k++) {
+            NSString* name = [NSString stringWithFormat:@"file%d",k];
+            NSData*imageData = data_list[k];
+            [formData appendPartWithFileData:imageData name:name fileName:name mimeType:@"multipart/form-data;boundary=*****"];
+        }
+        
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    if ([[serverurl lowercaseString] hasPrefix:@"https://"]) {
+        manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
+        [manager.securityPolicy setValidatesDomainName:NO];
+    }
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:nil
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      if (error) {
+                          NSLog(@"Error: %@", error);
+                          if(completionBlock){
+                              if ([self checkResponse:responseObject]) {
+                                  
+                                  completionBlock(responseObject,nil);
+                              }else{
+                                  completionBlock(nil,[[NSError alloc] init]);
+                              }
+                              
+                          }
+                      } else {
+                          NSLog(@"%@ %@", response, responseObject);
+                          if(completionBlock) {
+                              completionBlock(nil,error);
+                          }
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+}
 - (void)uploadImage:(UIImage*)image FileName:(NSString*)fileName withCompletionBlock:(NetworkCompletionBlock)completionBlock{
     
     NSString *serverurl = g_baseUrl ;

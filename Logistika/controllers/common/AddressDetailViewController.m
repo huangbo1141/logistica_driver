@@ -23,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    EnvVar* env = [CGlobal sharedId].env;
+    env.order_id = @"0";
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recvNoti:) name:GLOBALNOTIFICATION_ADDRESSPICKUP object:nil];
 }
@@ -84,37 +86,44 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)clickContinue:(id)sender {
-    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
-    DateTimeViewController* vc = [ms instantiateViewControllerWithIdentifier:@"DateTimeViewController"];
-    [self.navigationController pushViewController:vc animated:true];
-    [CGlobal stopIndicator:self];
-    return;
     
-//    AddressModel*data = [self checkInput];
-//    if (data!=nil) {
-//        g_addressModel = data;
-//        EnvVar* env = [CGlobal sharedId].env;
-//        if (env.mode == c_CORPERATION) {
-//            // hgcneed navigate to datetime activity
-//        }else if([self.type isEqualToString:@"exceed"] && env.mode == c_PERSONAL){
-//            if ([CGlobal isPostCode:data.sourcePinCode] && [CGlobal isPostCode:data.desPinCode]) {
-//                if ([_swQuote isOn]) {
-//                    [self order_quote];
-//                }else{
-//                    [CGlobal AlertMessage:@"Enable Switch" Title:nil];
-//                }
-//            }else{
-//                [CGlobal AlertMessage:@"Invalid Post Code" Title:nil];
-//            }
-//        }else{
-//            if ([CGlobal isPostCode:data.sourcePinCode] && [CGlobal isPostCode:data.desPinCode]) {
-//                _distance_apicalls = 0;
-//                [self getDistanceWebService];
-//            }else{
-//                [CGlobal AlertMessage:@"Invalid Post Code" Title:nil];
-//            }
-//        }
-//    }
+    if (g_isii) {
+        UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+        DateTimeViewController* vc = [ms instantiateViewControllerWithIdentifier:@"DateTimeViewController"];
+        [self.navigationController pushViewController:vc animated:true];
+        [CGlobal stopIndicator:self];
+        return;
+    }
+    
+    
+    AddressModel*data = [self checkInput];
+    if (data!=nil) {
+        g_addressModel = data;
+        EnvVar* env = [CGlobal sharedId].env;
+        if (env.mode == c_CORPERATION) {
+            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+            DateTimeViewController* vc = [ms instantiateViewControllerWithIdentifier:@"DateTimeViewController"];
+            [self.navigationController pushViewController:vc animated:true];
+            return;
+        }else if([self.type isEqualToString:@"exceed"] && env.mode == c_PERSONAL){
+            if ([CGlobal isPostCode:data.sourcePinCode] && [CGlobal isPostCode:data.desPinCode]) {
+                if ([_swQuote isOn]) {
+                    [self order_quote];
+                }else{
+                    [CGlobal AlertMessage:@"Enable Switch" Title:nil];
+                }
+            }else{
+                [CGlobal AlertMessage:@"Invalid Post Code" Title:nil];
+            }
+        }else{
+            if ([CGlobal isPostCode:data.sourcePinCode] && [CGlobal isPostCode:data.desPinCode]) {
+                _distance_apicalls = 0;
+                [self getDistanceWebService];
+            }else{
+                [CGlobal AlertMessage:@"Invalid Post Code" Title:nil];
+            }
+        }
+    }
 }
 -(void)getDistanceWebService{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -214,7 +223,7 @@
         }
     }
     NSArray* temp = [NSArray arrayWithArray:productsArrays];
-    params[@"product"] = [temp bv_jsonStringWithPrettyPrint:true];
+    params[@"products"] = [temp bv_jsonStringWithPrettyPrint:true];
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];

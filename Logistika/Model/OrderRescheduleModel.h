@@ -11,6 +11,7 @@
 #import "ServiceModel.h"
 #import "DateModel.h"
 #import "OrderModel.h"
+#import <UIKit/UIKit.h>
 
 @interface OrderRescheduleModel : BaseModel
 @property (nonatomic,copy) NSString* orderId;
@@ -24,4 +25,11 @@
 @property (nonatomic,strong) ServiceModel* serviceModel;
 @property (nonatomic,strong) DateModel* dateModel;
 @property (nonatomic,strong) OrderModel* orderModel;
+
+//@property (nonatomic,assign) BOOL isShowing;
+//@property (nonatomic,assign) CGFloat cellHeight;
+//@property (nonatomic,assign) CGFloat entireHeight;
+//@property (nonatomic,assign) CGFloat contentHeight;
+//@property (nonatomic,assign) CGFloat tableHeight;
+//-(CGFloat)getHeight;
 @end
