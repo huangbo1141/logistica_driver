@@ -16,6 +16,7 @@
 @property (nonatomic,copy) NSString* orderId;
 @property (nonatomic,copy) NSString* trackId;
 @property (nonatomic,copy) NSString* state;
+@property (nonatomic,copy) NSString* freight;
 @property (nonatomic,copy) NSString* payment;
 @property (nonatomic,copy) NSString* receiver_signature;
 

@@ -20,4 +20,6 @@
 @property (nonatomic,copy) NSString* driver_id;
 @property (nonatomic,copy) NSString* driver_name;
 @property (nonatomic,copy) NSString* signature;
+
+-(instancetype)initWithDictionary:(NSDictionary*) dict;
 @end

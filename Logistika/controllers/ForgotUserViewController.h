@@ -6,13 +6,18 @@
 //  Copyright © 2017 BoHuang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 
-@interface ForgotUserViewController : UIViewController
+@interface ForgotUserViewController : BasicViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lblMessage;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UITextField *txtAnswer;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (assign, nonatomic) NSInteger segIndex;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblQuestion;
+@property (weak, nonatomic) IBOutlet UIStackView *stack1;
+
+@property (weak, nonatomic) IBOutlet UIStackView *stack2;
 @end

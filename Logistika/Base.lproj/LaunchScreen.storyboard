@@ -1,27 +1,56 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="10u-VF-f93">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
+        <scene sceneID="NkH-qG-XBo">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController id="10u-VF-f93" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="Pix-Hs-ugX"/>
+                        <viewControllerLayoutGuide type="bottom" id="njI-0s-g5h"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="q5Y-10-UdK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4B-pz-o80">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="TxW-MZ-zyA">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="647"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="TxW-MZ-zyA" secondAttribute="trailing" constant="30" id="DhH-r2-n0L"/>
+                                    <constraint firstItem="TxW-MZ-zyA" firstAttribute="top" secondItem="a4B-pz-o80" secondAttribute="top" id="JPb-r3-h4n"/>
+                                    <constraint firstItem="TxW-MZ-zyA" firstAttribute="leading" secondItem="a4B-pz-o80" secondAttribute="leading" id="asq-6j-lmh"/>
+                                    <constraint firstAttribute="bottom" secondItem="TxW-MZ-zyA" secondAttribute="bottom" id="wZJ-7t-wiq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="njI-0s-g5h" firstAttribute="top" secondItem="a4B-pz-o80" secondAttribute="bottom" id="2KS-MK-0n0"/>
+                            <constraint firstItem="a4B-pz-o80" firstAttribute="top" secondItem="Pix-Hs-ugX" secondAttribute="bottom" id="3qE-bJ-wsX"/>
+                            <constraint firstItem="a4B-pz-o80" firstAttribute="width" secondItem="q5Y-10-UdK" secondAttribute="width" id="6C0-H9-qxe"/>
+                            <constraint firstItem="a4B-pz-o80" firstAttribute="leading" secondItem="q5Y-10-UdK" secondAttribute="leading" id="QVb-do-JsP"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qwx-l4-mza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo.png" width="500" height="179"/>
+    </resources>
 </document>

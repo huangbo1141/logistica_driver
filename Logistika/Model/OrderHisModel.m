@@ -16,18 +16,23 @@
     if(self){
         [self initDefault];
         if (dict!=nil) {
-            self.orderId = [dict[@"id"] stringValue];
-            self.trackId = [dict[@"track"] stringValue];
-            self.payment = [dict[@"payment"] stringValue];
             
-            self.dateModel.date = [dict[@"date"] stringValue];
-            self.dateModel.time = [dict[@"time"] stringValue];
+            NSDictionary*abcDict = @{@"orderId":@"id" ,
+                                     @"trackId":@"id",
+                                     @"state":@"state",
+                                     @"payment":@"payment",
+                                     @"receiver_signature":@"receiver_signature"};
             
-            self.serviceModel.name = [dict[@"service_name"] stringValue];
-            self.serviceModel.price = [dict[@"service_price"] stringValue];
-            self.serviceModel.time_in = [dict[@"service_timein"] stringValue];
+            [BaseModel parseResponseABC:self Dict:dict ABC:abcDict];
             
-            self.state = [dict[@"state"] stringValue];
+            
+            self.dateModel.date = dict[@"date"] ;
+            self.dateModel.time = dict[@"time"] ;
+            
+            self.serviceModel.name = dict[@"service_name"] ;
+            self.serviceModel.price = dict[@"service_price"] ;
+            self.serviceModel.time_in = dict[@"service_timein"] ;
+            
             
             if (dict[@"address"]!=nil) {
                 NSArray*obj = dict[@"address"];

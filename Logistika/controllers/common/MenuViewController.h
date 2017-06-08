@@ -6,10 +6,13 @@
 //  Copyright © 2017 BoHuang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 #import <ECDrawerLayout.h>
 #import "TopBarView.h"
 
-@interface MenuViewController : UIViewController<ECDrawerLayoutDelegate>
+@interface MenuViewController : BasicViewController<ECDrawerLayoutDelegate>
+
 @property (weak, nonatomic) IBOutlet TopBarView *topBarView;
+
+
 @end

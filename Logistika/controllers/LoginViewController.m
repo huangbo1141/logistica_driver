@@ -34,28 +34,33 @@
     _btnForgotPassword.tag = 201;
     _btnForgotUsername.tag = 202;
     _txtPassword.secureTextEntry = true;
-    _txtUsername.text=@"aaa@aaa.com";
-    _txtPassword.text=@"aaaaaaa1";
-}
--(void)clickView:(UIView*)sender{
-    if (g_isii) {
-        EnvVar* env = [CGlobal sharedId].env;
-        env.lastLogin = 1;
-        if (_segIndex == 0) {
-            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-            PersonalMainViewController*vc = [ms instantiateViewControllerWithIdentifier:@"PersonalMainViewController"] ;
-            MyNavViewController* nav = [[MyNavViewController alloc] initWithRootViewController:vc];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                delegate.window.rootViewController = nav;
-            });
-        }else{
-            // hgcneed
-        }
-        return;
+    
+    EnvVar* env = [CGlobal sharedId].env;
+    if (self.segIndex == 0) {
+        _txtUsername.text= env.username;
+        _txtPassword.text= env.password;
+    }else{
+        _txtUsername.text= env.cor_email;
+        _txtPassword.text= env.cor_password;
     }
     
+    if (g_isii) {
+        if (self.segIndex == 0) {
+            _txtUsername.text= @"fff@fff.com";
+            _txtPassword.text= @"aaaaaaa1";
+        }else{
+            _txtUsername.text= @"ooo@ooo.com";
+            _txtPassword.text= @"aaaaaaa1";
+        }
+    }
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"Log In";
+}
+-(void)clickView:(UIView*)sender{
+        
     int tag = (int)sender.tag;
     switch (tag) {
         case 200:
@@ -88,7 +93,7 @@
             
             NetworkParser* manager = [NetworkParser sharedManager];
             [CGlobal showIndicator:self];
-            [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"login" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+            [manager ontemplateGeneralRequest2:data BasePath:g_URL Path:@"login" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
                 if (error == nil) {
                     // succ
                     if (dict[@"result" ]!=nil) {

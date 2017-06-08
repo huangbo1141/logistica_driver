@@ -16,17 +16,17 @@
         [self initDefault];
         if (dict!=nil) {
             self.orderId = [dict[@"id"] stringValue];
-            self.trackId = [dict[@"track"] stringValue];
-            self.payment = [dict[@"payment"] stringValue];
+            self.trackId = dict[@"track"];
+            self.payment = dict[@"payment"];
             
-            self.dateModel.date = [dict[@"date"] stringValue];
-            self.dateModel.time = [dict[@"time"] stringValue];
+            self.dateModel.date = dict[@"date"];
+            self.dateModel.time = dict[@"time"];
             self.newdate = @"";
             self.newtime = @"";
             
-            self.serviceModel.name = [dict[@"service_name"] stringValue];
-            self.serviceModel.price = [dict[@"service_price"] stringValue];
-            self.serviceModel.time_in = [dict[@"service_timein"] stringValue];
+            self.serviceModel.name = dict[@"service_name"];
+            self.serviceModel.price = dict[@"service_price"];
+            self.serviceModel.time_in = dict[@"service_timein"];
             
             if (dict[@"address"]!=nil) {
                 NSArray*obj = dict[@"address"];
@@ -61,16 +61,5 @@
     self.serviceModel = [[ServiceModel alloc] initWithDictionary:nil];
     self.dateModel = [[DateModel alloc] initWithDictionary:nil];
     self.orderModel = [[OrderModel alloc] initWithDictionary:nil];
-}
--(CGFloat)getHeight{
-    CGFloat reduced =self.entireHeight - self.contentHeight;
-    if (self.isShowing) {
-        // calculate
-        CGFloat content1 = self.contentHeight - self.tableHeight;
-        CGFloat tableHeight = self.orderModel.itemModels.count * self.cellHeight;
-        CGFloat total = reduced + content1 + tableHeight;
-        return total;
-    }
-    return reduced;
 }
 @end

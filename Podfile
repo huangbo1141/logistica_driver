@@ -10,4 +10,6 @@ pod ”IQKeyboardManager”
 pod 'AFNetworking', '~> 3.0'
 pod "ECDrawerLayout"
 pod 'Stripe'
+pod “SDWebImage”, ‘~>3.7’
+pod "MTBBarcodeScanner"
 end

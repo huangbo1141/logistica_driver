@@ -23,8 +23,10 @@ UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
 NSString* g_baseUrl = @"http://192.168.1.106";
-NSString* BASE_URL = @"/WebService/";
-NSString* BASE_URL_ORDER = @"/Order/";
+NSString* BASE_DATA_URL = @"/Basic/";
+NSString* g_URL = @"/Employer/";
+NSString* SERVICE_URL = @"/WebService/";
+NSString* ORDER_URL = @"/Order/";
 NSString* FORGOT = @"/Forgot/";
 NSString* ZIP_LOCATION = @"http://maps.googleapis.com/maps/api/geocode/json";
 NSString* PHOTO_URL = @"/uploads/";
@@ -74,6 +76,12 @@ int g_CAMERA_OPTION = 1;
 int g_ITEM_OPTION = 2;
 int g_PACKAGE_OPTION = 3;
 
+int g_ORDER = 0;
+int g_PICKUP = 1;
+int g_COMPLETE = 2;
+int g_ONHOLD = 3;
+int g_RETURN = 4;
+
 NSArray* g_securityList;
 NSArray* c_quantity;
 NSArray* c_weight;
@@ -82,6 +90,7 @@ NSArray* c_packageLists;
 NSArray* c_paymentWay;
 
 NSString* PUBLISHABLE_KEY;
+NSString* curPaymentWay;
 
 OrderModel* g_cameraOrderModel;
 OrderModel* g_itemOrderModel;
@@ -106,6 +115,7 @@ NSString* g_quote_order_id;
 NSString* g_quote_id;
 PriceType* g_priceType;
 CorporateModel* g_corporateModel;
+LoginResponse* g_areaData;
 
 //basic info
 
@@ -1428,6 +1438,24 @@ NSMutableArray* menu_topList;
     [webview loadHTMLString:text baseURL:nil];
 }
 +(void)clearData{
+//    g_cameraOrderModel = [[OrderModel alloc] initWithDictionary:nil];
+//    g_itemOrderModel= [[OrderModel alloc] initWithDictionary:nil];
+//    g_packageOrderModel = [[OrderModel alloc] initWithDictionary:nil];
+    
+    g_cameraOrderModel = [[OrderModel alloc] initWithDictionary:nil];
+    g_itemOrderModel = [[OrderModel alloc] initWithDictionary:nil];
+    g_packageOrderModel = [[OrderModel alloc] initWithDictionary:nil];
+    
+    g_addressModel = [[AddressModel alloc] initWithDictionary:nil];
+    g_dateModel = [[DateModel alloc] initWithDictionary:nil];
+    g_serviceModel = [[ServiceModel alloc] initWithDictionary:nil];
+    g_quoteModels = [[NSMutableArray alloc] init];
+    g_quoteCoperationModels= [[NSMutableArray alloc] init];
+    g_orderHisModels = [[NSMutableArray alloc] init];
+    g_orderRescheduleModels = [[NSMutableArray alloc] init];
+    
+    g_corporateModel = [[CorporateModel alloc] initWithDictionary:nil];
+    
     
 }
 +(void)initGlobal{

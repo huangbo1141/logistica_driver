@@ -17,9 +17,12 @@
 #import "MyNavViewController.h"
 #import "NetworkParser.h"
 #import "OrderResponse.h"
-#import "TrackingViewController.h"
+#import "MyPopupDialog.h"
+#import "ViewAuthen.h"
 
 @interface MainViewController ()
+@property (nonatomic,strong) MyPopupDialog* dialog;
+
 @end
 
 @implementation MainViewController
@@ -45,6 +48,9 @@
     _btnGuest.tag = 202;
     _btnTracking.tag = 203;
     _btnCall.tag = 204;
+    
+    self.segment.tintColor = COLOR_PRIMARY;
+    
 }
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
@@ -64,23 +70,27 @@
         case 201:
         {
             // sign up
-            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            SignupViewController*vc = [ms instantiateViewControllerWithIdentifier:@"SignupViewController"] ;
-            vc.segIndex = self.segment.selectedSegmentIndex;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.navigationController.navigationBar.hidden = false;
-                [self.navigationController pushViewController:vc animated:true];
-            });
+            self.dialog = [[MyPopupDialog alloc] init];
+            UIViewController*vc = self;
+            NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"ViewAuthen" owner:vc options:nil];
+            ViewAuthen* view = array[0];
+            [view firstProcess:@{@"aDelegate":self}];
+            
+            self.dialog = [[MyPopupDialog alloc] init];
+            [self.dialog setup:view backgroundDismiss:true backgroundColor:[UIColor grayColor]];
+            [self.dialog showPopup:vc.view];
+            
+            
+
             break;
         }
         case 202:
         {
+            // guest
             EnvVar*env = [CGlobal sharedId].env;
             env.lastLogin = 0;
             g_mode = c_GUEST;
             env.mode = c_GUEST;
-            
-            
             
             // LoginProcess
             UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
@@ -96,25 +106,8 @@
         case 203:
         {
             // tracking
-            // hgcneed
-            UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
-                                                                                      message: @"Input Tracking Number"
-                                                                               preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = @"Tracking Number";
-                textField.textColor = [UIColor blueColor];
-                textField.borderStyle = UITextBorderStyleLine;
-            }];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                NSArray * textfields = alertController.textFields;
-                UITextField * namefield = textfields[0];
-                NSString* number = namefield.text;
-                if ([number length]>0) {
-                    [self tracking:number];
-                }
-                
-            }]];
-            [self presentViewController:alertController animated:YES completion:nil];
+            
+            [CGlobal AlertMessage:@"Please Sign In" Title:nil];
             break;
         }
         case 204:
@@ -128,37 +121,14 @@
     }
 }
 -(void)tracking:(NSString*)number{
-    EnvVar* env = [CGlobal sharedId].env;
-    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-    params[@"id"] = number;
+
     
-    NetworkParser* manager = [NetworkParser sharedManager];
-    [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:params BasePath:BASE_URL_ORDER Path:@"tracking" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
-        if (error == nil) {
-            if (dict!=nil) {
-                OrderResponse* response = [[OrderResponse alloc] initWithDictionary_his:dict];
-                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-                
-                TrackingViewController*vc = [ms instantiateViewControllerWithIdentifier:@"TrackingViewController"] ;
-                vc.response = response;
-                vc.inputData = response.orders[0];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.navigationController.navigationBar.hidden = true;
-                    self.navigationController.viewControllers = @[vc];
-                });
-                
-            }
-        }else{
-            NSLog(@"Error");
-        }
-        [CGlobal stopIndicator:self];
-    } method:@"POST"];
 }
 -(void)onChange:(UISegmentedControl*)seg{
     NSInteger index = seg.selectedSegmentIndex;
     if (index == 0) {
         _btnGuest.hidden = false;
+        
     }else{
         _btnGuest.hidden = true;
     }
@@ -175,6 +145,47 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
+    if (view.xo!=nil && [view.xo isKindOfClass:[MyPopupDialog class]]) {
+        MyPopupDialog* dialog = (MyPopupDialog*)view.xo;
+        [dialog dismissPopup];
+    }
+    if (data[@"data"]!=nil) {
+        // authencation
+        NSString* auth = data[@"data"];
+        NSMutableDictionary* req = [[NSMutableDictionary alloc] init];
+        
+        NetworkParser* manager = [NetworkParser sharedManager];
+        [manager ontemplateGeneralRequest2:req BasePath:g_URL Path:@"get_authentication" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+            if (error == nil) {
+                if (dict!=nil && dict[@"result"] != nil) {
+                    if ([dict[@"result"] intValue] == [auth intValue]) {
+                        UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        SignupViewController*vc = [ms instantiateViewControllerWithIdentifier:@"SignupViewController"] ;
+                        vc.segIndex = self.segment.selectedSegmentIndex;
+                        vc.authentication = auth;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self.navigationController.navigationBar.hidden = false;
+                            [self.navigationController pushViewController:vc animated:true];
+                        });
+                        return;
+                    }
+                }
+            }else{
+                NSLog(@"Error");
+            }
+            
+            [CGlobal AlertMessage:@"Tracking number not found in our records" Title:nil];
+            
+        } method:@"POST"];
+    }
+}
+-(void)didCancel:(NSDictionary *)data View:(UIView *)view{
+    if (view.xo!=nil && [view.xo isKindOfClass:[MyPopupDialog class]]) {
+        MyPopupDialog* dialog = (MyPopupDialog*)view.xo;
+        [dialog dismissPopup];
+    }
+}
 /*
 #pragma mark - Navigation
 

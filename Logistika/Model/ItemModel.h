@@ -22,4 +22,5 @@
 @property (nonatomic,strong) UIImage* image_data;
 
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
+-(void)firstPackage;
 @end

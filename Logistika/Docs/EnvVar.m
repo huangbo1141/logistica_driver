@@ -61,6 +61,7 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
     _landmark = UDValue(@"landmark");
     _phone = UDValue(@"phone");
     _quote = UDBool(@"quote");
+    _quote = false;
     _mode = UDInteger(@"mode");
     _order_id = UDValue(@"order_id");
     _question = UDValue(@"question");
@@ -72,6 +73,8 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
     _cor_email = UDValue(@"cor_email");
     _cor_password = UDValue(@"cor_password");
     _cor_order_id = UDValue(@"cor_order_id");
+    _quote_id = UDValue(@"quote_id");
+    _carrier_id= UDValue(@"carrier_id");
     
     if (_token == nil) {
         _token = @"123456789";
@@ -160,6 +163,7 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
 {
     [self setLastLogin:-1];
     if (self.mode == 0) {
+        [self setUsername:@""];
         [self setEmail:@""];
         [self setPassword:@""];
         
@@ -209,7 +213,7 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
     [self saveDefaults:@"city" value:city];
 }
 -(void)setState:(NSString *)state{
-    state = state;
+    _state = state;
     [self saveDefaults:@"state" value:state];
 }
 -(void)setPincode:(NSString *)pincode{
@@ -272,6 +276,14 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
 -(void)setCor_order_id:(NSString *)cor_order_id{
     _cor_order_id = cor_order_id;
     [self saveDefaults:@"cor_order_id" value:cor_order_id];
+}
+-(void)setQuote_id:(NSString *)quote_id{
+    _quote_id = quote_id;
+    [self saveDefaults:@"quote_id" value:quote_id];
+}
+-(void)setCarrier_id:(NSString *)carrier_id{
+    _carrier_id = carrier_id;
+    [self saveDefaults:@"carrier_id" value:carrier_id];
 }
 -(void)setNickname:(NSString *)nickname{
     _nickname = nickname;

@@ -9,6 +9,7 @@
 #import "FeedBackViewController.h"
 #import "CGlobal.h"
 #import "NetworkParser.h"
+#import "AppDelegate.h"
 
 @interface FeedBackViewController ()
 
@@ -22,7 +23,16 @@
     _btnSubmit.tag = 200;
     EnvVar*env = [CGlobal sharedId].env;
     
+    self.txtFeedback.placeholder = @"Feedback";
+    self.txtFeedback.layer.borderWidth = 1;
+    self.txtFeedback.layer.borderColor = [UIColor blackColor].CGColor;
+    self.txtFeedback.layer.masksToBounds = true;
     // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"Feedback";
+    self.topBarView.caption.text = @"Feedback";
 }
 -(NSMutableDictionary*)checkInput{
     NSString* mFirst = _txtFirst.text;
@@ -55,7 +65,7 @@
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"feedback" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager ontemplateGeneralRequest2:data BasePath:SERVICE_URL Path:@"feedback" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //
@@ -68,6 +78,9 @@
                 EnvVar*env = [CGlobal sharedId].env;
                 env.feedback_id = [NSString stringWithFormat:@"%d",ret];
                 [CGlobal AlertMessage:@"Success" Title:nil];
+                
+                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [delegate goHome:self];
             }
             
         }else{

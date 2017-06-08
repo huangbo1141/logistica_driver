@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+IB_DESIGNABLE
 @interface ColoredView : UIView
 
 @property (nonatomic) IBInspectable NSInteger backMode;

@@ -13,7 +13,14 @@
     self = [super init];
     if(self){
         [self initDefault];
-        [BaseModel parseResponse:self Dict:dict];
+        if (dict!=nil) {
+            NSDictionary*abcDict = @{@"name":@"service_name" ,
+                                     @"price":@"service_price",
+                                     @"time_in":@"service_timein"};
+            
+            [BaseModel parseResponseABC:self Dict:dict ABC:abcDict];   
+        }
+//        [BaseModel parseResponse:self Dict:dict];
     }
     return self;
 }

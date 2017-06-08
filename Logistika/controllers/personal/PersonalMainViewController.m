@@ -8,8 +8,9 @@
 
 #import "PersonalMainViewController.h"
 #import "CGlobal.h"
-#import "PhotoUploadViewController.h"
-#import "SelectItemViewController.h"
+#import "OrderPickUpViewController.h"
+
+
 
 @interface PersonalMainViewController ()
 
@@ -19,8 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    EnvVar* env = [CGlobal sharedId].env;
-    env.quote = false;
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -28,30 +29,57 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [CGlobal clearData];
+    
+    [self.topBarView updateCaption];
+    
+    EnvVar* env = [CGlobal sharedId].env;
+    env.quote = false;
+}
 - (IBAction)menu1:(id)sender {
-    UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
+    vc.type = g_ORDER;
+    vc.mode = @"";
     dispatch_async(dispatch_get_main_queue(), ^{
-        vc.limit =  3;
-        g_ORDER_TYPE = g_CAMERA_OPTION;
         [self.navigationController pushViewController:vc animated:true];
     });
 }
 - (IBAction)menu2:(id)sender {
-    UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    SelectItemViewController* vc = [ms instantiateViewControllerWithIdentifier:@"SelectItemViewController"];
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
+    vc.type = g_PICKUP;
+    vc.mode = @"";
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        g_ORDER_TYPE = g_CAMERA_OPTION;
         [self.navigationController pushViewController:vc animated:true];
     });
 }
 - (IBAction)menu3:(id)sender {
-    UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    SelectItemViewController* vc = [ms instantiateViewControllerWithIdentifier:@"SelectItemViewController"];
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
+    vc.type = g_COMPLETE;
+    vc.mode = @"";
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        g_ORDER_TYPE = g_PACKAGE_OPTION;
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+- (IBAction)menu4:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
+    vc.type = g_ONHOLD;
+    vc.mode = @"";
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+- (IBAction)menu5:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
+    vc.type = g_RETURN;
+    vc.mode = @"";
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self.navigationController pushViewController:vc animated:true];
     });
 }

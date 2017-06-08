@@ -23,12 +23,17 @@
     [self loadContent];
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"About Us";
+    self.topBarView.caption.text = @"About Us";
+}
 -(void)loadContent{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"aboutus" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager ontemplateGeneralRequest2:data BasePath:SERVICE_URL Path:@"aboutus" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //

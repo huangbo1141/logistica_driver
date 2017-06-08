@@ -41,7 +41,14 @@
     self.weight = c_weight[0];
     self.weight_value = [c_weight_value[0] intValue];
     self.quantity = c_quantity[0];
-    
-    
+}
+-(void)firstPackage{
+    self.title = c_packageLists[0];
+    self.dimension1 = @"";
+    self.dimension2 = @"";
+    self.dimension3 = @"";
+    self.weight = c_weight[0];
+    self.weight_value = [c_weight_value[0] intValue];
+    self.quantity = c_quantity[0];
 }
 @end

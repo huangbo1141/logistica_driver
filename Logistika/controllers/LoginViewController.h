@@ -5,10 +5,9 @@
 //  Created by BoHuang on 4/19/17.
 //  Copyright © 2017 BoHuang. All rights reserved.
 //
+#import "BasicViewController.h"
 
-#import <UIKit/UIKit.h>
-
-@interface LoginViewController : UIViewController
+@interface LoginViewController : BasicViewController
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignIn;

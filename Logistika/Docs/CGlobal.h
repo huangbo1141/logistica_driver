@@ -35,9 +35,11 @@ extern  UIColor*   COLOR_SECONDARY_THIRD;
 extern  UIColor*   COLOR_RESERVED;
 
 extern  NSString * g_baseUrl;
-extern  NSString* BASE_URL;
-extern  NSString* BASE_URL_ORDER;
-extern  NSString* FORGOT ;
+extern  NSString * BASE_DATA_URL;
+extern  NSString* g_URL;
+extern  NSString* SERVICE_URL;
+extern  NSString* ORDER_URL;
+extern  NSString* FORGOT;
 extern  NSString* ZIP_LOCATION ;
 extern  NSString* PHOTO_URL ;
 
@@ -84,6 +86,12 @@ extern int g_CAMERA_OPTION;
 extern int g_ITEM_OPTION;
 extern int g_PACKAGE_OPTION;
 
+extern int g_ORDER;
+extern int g_PICKUP;
+extern int g_COMPLETE;
+extern int g_ONHOLD;
+extern int g_RETURN;
+
 extern NSArray* g_securityList;
 extern NSArray* c_quantity;
 extern NSArray* c_weight;
@@ -92,6 +100,7 @@ extern NSArray* c_packageLists;
 extern NSArray* c_paymentWay;
 
 extern NSString* PUBLISHABLE_KEY;
+extern NSString* curPaymentWay;
 //card validataion
 
 
@@ -119,7 +128,7 @@ extern NSString* g_quote_order_id;
 extern NSString* g_quote_id;
 extern PriceType* g_priceType;
 extern CorporateModel* g_corporateModel;
-
+extern LoginResponse* g_areaData;
 
 
 //notifications

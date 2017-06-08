@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "CGlobal.h"
 #import "PersonalMainViewController.h"
+#import <IQKeyboardManager.h>
+#import "NetworkParser.h"
 
 @interface AppDelegate ()
 
@@ -20,12 +22,50 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [CGlobal initGlobal];
     EnvVar*env = [CGlobal sharedId].env;
-    env.lastLogin = 0;
+    env.lastLogin = -1;
     env.quote = true;
+    
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+    [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
+    
+    double delayInSeconds = 1.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //code to be executed on the main queue after delay
+        [self defaultLogin];
+    });
+    
     return YES;
 }
-
+-(void)loadBasicData{
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_basic" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                if ([dict[@"result"] intValue] == 200) {
+                    LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
+                    if (data.area.count > 0) {
+                        g_areaData = data;
+                    }
+                    
+                }else{
+                    [CGlobal AlertMessage:@"Fail" Title:nil];
+                }
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        
+    } method:@"POST"];
+}
 -(void)defaultLogin{
+    
+//    EnvVar* env = [CGlobal sharedId].env;
+//    env.lastLogin = -1;
+    
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController*vc = [ms instantiateViewControllerWithIdentifier:@"CLoginNav"] ;
     

@@ -40,6 +40,8 @@
 @property (nonatomic, copy) NSString * cor_email;
 @property (nonatomic, copy) NSString * cor_password;
 @property (nonatomic, copy) NSString * cor_order_id;
+@property (nonatomic, copy) NSString * quote_id;
+@property (nonatomic, copy) NSString * carrier_id;
 
 
 - (BOOL)hasLoginDetails;

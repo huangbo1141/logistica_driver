@@ -29,6 +29,8 @@
     
 //    UIFont* font = [UIFont fontWithName:@"Tw Cen MT" size:17];
 //    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
+    UIFont* font = [UIFont boldSystemFontOfSize:18.0f];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
     self.navigationBar.barTintColor = [CGlobal colorWithHexString:@"008080" Alpha:1.0f];
     self.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -39,6 +41,8 @@
     //    //        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:Constants.COLOR_TOOLBAR_TEXT];
     //    let titleDict: [String:Any] = [NSForegroundColorAttributeName: Constants.COLOR_TOOLBAR_TEXT]
     //    self.navigationBar.titleTextAttributes = titleDict
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {

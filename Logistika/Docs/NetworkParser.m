@@ -213,6 +213,60 @@
     
     
 }
+- (void)uploadImage3:(NSMutableDictionary*)params Data:(NSData*)imageData Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock{
+    
+    
+    NSDictionary *parameters = params;
+    
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:serverurl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSString* name = @"file";
+//        NSString* filename = [NSString stringWithFormat:@"image%d.jpg",k];
+        
+        [formData appendPartWithFileData:imageData name:name fileName:name mimeType:@"multipart/form-data;boundary=*****"];
+        
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    if ([[serverurl lowercaseString] hasPrefix:@"https://"]) {
+        manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
+        [manager.securityPolicy setValidatesDomainName:NO];
+    }
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:nil
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      NSString* str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                      //str = @"{\"result\":400}";
+                      //NSLog(str);
+                      NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+                      id dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                      if (error == nil) {
+                          NSLog(@"Error: %@", error);
+                          if(completionBlock){
+                              if ([self checkResponse:dict]) {
+                                  
+                                  completionBlock(dict,nil);
+                              }else{
+                                  completionBlock(nil,[[NSError alloc] init]);
+                              }
+                              
+                          }
+                      } else {
+                          NSLog(@"%@ %@", response, responseObject);
+                          if(completionBlock) {
+                              completionBlock(nil,error);
+                          }
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+}
 - (void)uploadImage2:(NSMutableDictionary*)params Data:(NSMutableArray*)data_list Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock{
     
         
@@ -222,6 +276,8 @@
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:serverurl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (int k=0; k<data_list.count; k++) {
             NSString* name = [NSString stringWithFormat:@"file%d",k];
+            NSString* filename = [NSString stringWithFormat:@"image%d.jpg",k];
+            
             NSData*imageData = data_list[k];
             [formData appendPartWithFileData:imageData name:name fileName:name mimeType:@"multipart/form-data;boundary=*****"];
         }
@@ -234,18 +290,24 @@
         manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
         [manager.securityPolicy setValidatesDomainName:NO];
     }
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSURLSessionUploadTask *uploadTask;
     uploadTask = [manager
                   uploadTaskWithStreamedRequest:request
                   progress:nil
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                      if (error) {
+                      NSString* str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                      //str = @"{\"result\":400}";
+                      //NSLog(str);
+                      NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+                      id dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                      if (error == nil) {
                           NSLog(@"Error: %@", error);
                           if(completionBlock){
-                              if ([self checkResponse:responseObject]) {
+                              if ([self checkResponse:dict]) {
                                   
-                                  completionBlock(responseObject,nil);
+                                  completionBlock(dict,nil);
                               }else{
                                   completionBlock(nil,[[NSError alloc] init]);
                               }

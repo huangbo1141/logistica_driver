@@ -35,6 +35,12 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 1:{
+            // bottom banner label
+            UIFont* font = [UIFont boldSystemFontOfSize:16.5];
+            self.font = font;
+            break;
+        }
         default:
         {
             
@@ -45,6 +51,8 @@
 }
 -(void)setMsize:(CGFloat)msize{
     if (msize > 0) {
+//        UIFont* font = [UIFont boldSystemFontOfSize:msize];
+//        self.font = font;
         UIFont* font = [UIFont fontWithName:@"Verdana" size:msize];
         self.font = font;
     }

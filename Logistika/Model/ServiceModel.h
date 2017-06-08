@@ -12,4 +12,6 @@
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* price;
 @property (nonatomic,copy) NSString* time_in ;
+
+-(instancetype)initWithDictionary:(NSDictionary*) dict;
 @end

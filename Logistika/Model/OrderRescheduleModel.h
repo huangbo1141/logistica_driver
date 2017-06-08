@@ -18,7 +18,6 @@
 @property (nonatomic,copy) NSString* trackId;
 @property (nonatomic,copy) NSString* payment;
 
-// hgcneed
 @property (nonatomic,copy) NSString* newdate;
 @property (nonatomic,copy) NSString* newtime;
 @property (nonatomic,strong) AddressModel* addressModel;

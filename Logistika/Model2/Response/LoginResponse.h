@@ -14,10 +14,10 @@
 @property (strong, nonatomic) TblUser* row ;
 
 
-@property (strong, nonatomic) NSMutableArray* achievements ;
-
-@property (strong, nonatomic) NSMutableArray* rows_base_ach ;
-@property (strong, nonatomic) NSMutableArray* rows_base_rank ;
+@property (strong, nonatomic) NSMutableArray* area ;
+@property (strong, nonatomic) NSMutableArray* city ;
+@property (strong, nonatomic) NSMutableArray* pincode ;
+@property (strong, nonatomic) NSMutableArray* truck ;
 
 @property (copy, nonatomic) NSString* likes_left ;
 @property (copy, nonatomic) NSString* upload_photo ;

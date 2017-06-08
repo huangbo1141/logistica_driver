@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
+#import "MyPopupDialog.h"
 
-
-@interface MainViewController : MenuViewController
+@interface MainViewController : MenuViewController<ViewDialogDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignIn;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;

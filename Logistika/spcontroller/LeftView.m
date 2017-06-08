@@ -15,6 +15,12 @@
 #import "AppDelegate.h"
 #import "SignupViewController.h"
 #import "ProfileViewController.h"
+#import "FeedBackViewController.h"
+
+#import "OrderPickUpViewController.h"
+
+
+
 
 @implementation LeftView
 
@@ -39,50 +45,9 @@
                     ProfileViewController*vc = [ms instantiateViewControllerWithIdentifier:@"ProfileViewController"] ;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        _vc.navigationController.navigationBar.hidden = true;
-                        _vc.navigationController.viewControllers = @[vc];
+                        [_vc.navigationController pushViewController:vc animated:true];
                     });
                 }
-            }else{
-                [CGlobal AlertMessage:@"Please Sign in" Title:nil];
-            }
-            break;
-        }
-        case 201:
-        {
-            //btnQuotes
-            if (env.lastLogin>0) {
-                
-            }else{
-                [CGlobal AlertMessage:@"Please Sign in" Title:nil];
-            }
-            break;
-        }
-        case 202:
-        {
-            //btnOrderHistory
-            if (env.lastLogin>0) {
-                
-            }else{
-                [CGlobal AlertMessage:@"Please Sign in" Title:nil];
-            }
-            break;
-        }
-        case 203:
-        {
-            //btnReschedule
-            if (env.lastLogin>0) {
-                
-            }else{
-                [CGlobal AlertMessage:@"Please Sign in" Title:nil];
-            }
-            break;
-        }
-        case 204:
-        {
-            //btnCancel
-            if (env.lastLogin>0) {
-                
             }else{
                 [CGlobal AlertMessage:@"Please Sign in" Title:nil];
             }
@@ -130,7 +95,15 @@
         {
             //btnFeedback
             if (env.lastLogin>0) {
-                
+                if(_vc.navigationController!= nil){
+                    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+                    FeedBackViewController*vc = [ms instantiateViewControllerWithIdentifier:@"FeedBackViewController"] ;
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        _vc.navigationController.navigationBar.hidden = true;
+                        _vc.navigationController.viewControllers = @[vc];
+                    });
+                }
             }else{
                 [CGlobal AlertMessage:@"Please Sign in" Title:nil];
             }
@@ -157,16 +130,15 @@
         case 209:
         {
             //btnSignIn
-            if (env.lastLogin>0) {
-                
-            }else{
-                [CGlobal AlertMessage:@"Please Sign in" Title:nil];
-            }
+            AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+            [delegate defaultLogin];
             break;
         }
         case 210:{
             // sign out
-            [env logOut];
+            if (g_isii == false) {
+                [env logOut];
+            }
             [CGlobal clearData];
             AppDelegate* delegate = [UIApplication sharedApplication].delegate;
             [delegate defaultLogin];
@@ -184,10 +156,7 @@
 }
 -(void)initMenu{
     [self.btnProfile addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btnQuotes addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btnOrderHistory addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btnReschedule addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btnCancel addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.btnAbout addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnContact addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnFeedback addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
@@ -195,10 +164,7 @@
     [self.btnSignIn addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnProfile.tag = 200;
-    self.btnQuotes.tag = 201;
-    self.btnOrderHistory.tag = 202;
-    self.btnReschedule.tag = 203;
-    self.btnCancel.tag = 204;
+    
     self.btnAbout.tag = 205;
     self.btnContact.tag = 206;
     self.btnFeedback.tag = 207;
@@ -212,6 +178,12 @@
     }else{
         self.btnSignIn.tag = 209;
         self.lblSignIn.text = @"Sign In";
+    }
+    
+    if (env.lastLogin<0) {
+        _viewSignIn.hidden = true;
+    }else{
+        _viewSignIn.hidden = false;
     }
 }
 -(void)initMe:(UIViewController*)vc{

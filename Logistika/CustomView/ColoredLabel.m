@@ -36,7 +36,8 @@
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
         case 2:{
-            
+            // service label pack
+            self.font = [UIFont systemFontOfSize:14];
         }
         case 1:{
             // forgot password

@@ -69,12 +69,35 @@
         
         if (value!=nil && [value isKindOfClass:[NSString class]] && value != [NSNull null] ) {
             [targetClass setValue:value forKey:name];
+        }else if(value!=nil && [value isKindOfClass:[NSNumber class]] && value != [NSNull null] ) {
+            
+            [targetClass setValue:[value stringValue] forKey:name];
         }
         //NSLog(@"Property %@ attributes: %@", name, name);
     }
     free(propertyArray);
+}
++(void)parseResponseABC:(id)targetClass Dict:(NSDictionary*)dict ABC:(NSDictionary*)abcDict{
+    unsigned int numberOfProperties = 0;
+    objc_property_t *propertyArray = class_copyPropertyList([targetClass class], &numberOfProperties);
     
-    
+    for (NSUInteger i = 0; i < numberOfProperties; i++)
+    {
+        objc_property_t property = propertyArray[i];
+        NSString *name = [[NSString alloc] initWithUTF8String:property_getName(property)];
+        if (abcDict[name] != nil) {
+            NSString* nameABC = abcDict[name];
+            id value = dict[nameABC];
+            
+            if (value!=nil && [value isKindOfClass:[NSString class]] && value != [NSNull null] ) {
+                [targetClass setValue:value forKey:name];
+            }else if (value!=nil && [value isKindOfClass:[NSNumber class]] && value != [NSNull null] ) {
+                NSNumber* val = value;
+                [targetClass setValue:[val stringValue]  forKey:name];
+            }
+        }
+    }
+    free(propertyArray);
 }
 
 +(NSData*)buildJsonData:(id)targetClass{

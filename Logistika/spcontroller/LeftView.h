@@ -10,13 +10,13 @@
 #import <ECDrawerLayout.h>
 
 #import "FontLabel.h"
+#import "ColoredView.h"
 
 @interface LeftView : UIView
+
+@property (weak, nonatomic) IBOutlet UIView *viewSignIn;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnProfile;
-@property (weak, nonatomic) IBOutlet UIButton *btnQuotes;
-@property (weak, nonatomic) IBOutlet UIButton *btnOrderHistory;
-@property (weak, nonatomic) IBOutlet UIButton *btnReschedule;
-@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (weak, nonatomic) IBOutlet UIButton *btnAbout;
 @property (weak, nonatomic) IBOutlet UIButton *btnContact;
 @property (weak, nonatomic) IBOutlet UIButton *btnFeedback;

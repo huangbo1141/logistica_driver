@@ -22,6 +22,7 @@
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
 +(NSMutableDictionary*)getQuestionDict:(id)targetClass;
 +(void)parseResponse:(id)targetClass Dict:(NSDictionary*)dict;
++(void)parseResponseABC:(id)targetClass Dict:(NSDictionary*)dict ABC:(NSDictionary*)abcDict;
 +(id)getDuplicate:(id)targetClass;
 
 +(NSData*)buildJsonData:(id)targetClass;

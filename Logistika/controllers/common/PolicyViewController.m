@@ -21,12 +21,17 @@
     [self loadContent];
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"Policy and Terms";
+    self.topBarView.caption.text = @"Policy and Terms";
+}
 -(void)loadContent{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"privacy" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager ontemplateGeneralRequest2:data BasePath:SERVICE_URL Path:@"privacy" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //

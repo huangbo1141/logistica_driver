@@ -54,6 +54,8 @@
     self.drawerLayout = vc.view.drawerLayout;
     self.vc = vc;
     
+    UIFont* font= [UIFont boldSystemFontOfSize:18.0f];
+    self.caption.font = font;
     [self updateCaption];
     
 }
@@ -89,7 +91,7 @@
         case 201:{
             if (_vc!=nil) {
                 // home
-                if (env.lastLogin>0 && _vc.navigationController!= nil) {
+                if (env.lastLogin>=0 && _vc.navigationController!= nil) {
                     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
                     [delegate goHome:self.vc];
                     

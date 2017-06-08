@@ -16,9 +16,13 @@
 #import "PersonalMainViewController.h"
 #import "MyNavViewController.h"
 #import "AppDelegate.h"
+#import "MyTextDelegate.h"
+#import "TblArea.h"
 
-@interface ProfileViewController ()<UIComboBoxDelegate>
+@interface ProfileViewController ()<UIComboBoxDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CAAutoFillDelegate>
 @property(nonatomic,assign) BOOL isChange;
+@property(nonatomic,assign) NSInteger selrow;
+@property(nonatomic,strong) MyTextDelegate* textDelegate;
 @end
 
 @implementation ProfileViewController
@@ -29,64 +33,135 @@
     [_btnCreate addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     _btnCreate.tag = 200;
     //
-    self.cbAnswer.delegate = self;
-    self.cbAnswer.entries = g_securityList;
     
-//    if(self.inputData == nil){
-//        // sign up
-//        [_btnCreate setTitle:@"Create" forState:UIControlStateNormal];
-//        _btnCreate.tag = 200;
-//    }else{
-//        // edit profile
-//        [_btnCreate setTitle:@"Save Changes" forState:UIControlStateNormal];
-//        _btnCreate.tag = 201;
-//        _swTermView.hidden = true;
-//        _swPolicy.hidden = true;
-//        [self initData:self.inputData];
-//        _isChange = false;
-//    }
     
     [_btnCreate setTitle:@"Save Changes" forState:UIControlStateNormal];
     _btnCreate.tag = 201;
-    _swTermView.hidden = true;
-    _swPolicy.hidden = true;
+    self.inputData = [NSNumber numberWithInteger:1];
     [self initData:self.inputData];
     _isChange = false;
     
-}
--(void)initData:(NSMutableDictionary*)data{
-    if (data!=nil) {
-        EnvVar*env = [CGlobal sharedId].env;
-        NSUInteger found = [g_securityList indexOfObject:env.question];
-        if (found!=NSNotFound) {
-            self.cbAnswer.selectedItem = found;
-        }
-        self.txtAnswer.text = env.answer;
-        self.txtFirstName.text = env.first_name;
-        self.txtLastName.text = env.last_name;
-        self.txtPhoneNumber.text = env.phone;
-        self.txtAddress.text = env.address1;
-        self.txtCity.text = env.city;
-        self.txtState.text = env.state;
-        self.txtPin.text = env.pincode;
-        self.txtLandMark.text = env.landmark;
-        if (env.mode == c_CORPERATION) {
-            self.txtEmail.text = env.cor_email;
-            self.txtPassword.text = env.cor_password;
-            self.txtRePassword.text = env.cor_password;
-        }else{
-            self.txtEmail.text = env.email;
-            self.txtPassword.text = env.password;
-            self.txtRePassword.text = env.password;
-        }
+    MyTextDelegate* textDelegate = [[MyTextDelegate alloc] init];
+    textDelegate.mode = 1;
+    textDelegate.length = 10;
+    self.txtPhoneNumber.delegate = textDelegate;
+    self.textDelegate = textDelegate;
+    
+    AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+    if (g_areaData == nil) {
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
         
-        NSArray* controls = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtCity,self.txtState,self.txtPin,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer];
-        for (UITextField*text in controls) {
-            [text addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventValueChanged];
-        }
+        NetworkParser* manager = [NetworkParser sharedManager];
+        [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_basic" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+            if (error == nil) {
+                if (dict!=nil && dict[@"result"] != nil) {
+                    if ([dict[@"result"] intValue] == 200) {
+                        LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
+                        if (data.area.count > 0) {
+                            g_areaData = data;
+                            [self setAreaDatas];
+                        }
+                        
+                    }else{
+                        [CGlobal AlertMessage:@"Fail" Title:nil];
+                    }
+                }
+            }else{
+                NSLog(@"Error");
+            }
+            
+        } method:@"POST"];
         
+    }else{
+        [self setAreaDatas];
     }
 }
+-(void)setAreaDatas{
+    
+//    if (g_areaData.area.count > 0) {
+//        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+//        for (int i = 0; i<g_areaData.area.count; i++) {
+//            TblArea* item = g_areaData.area[i];
+//            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+//            [tempArray addObject:object];
+//        }
+//        [self.txtArea setDataSourceArray:tempArray];
+//        [self.txtArea setDelegate:self];
+//        
+//        self.txtArea.viewParent = [self.txtArea superview];
+//        self.txtArea.txtField.placeholder = @"Area,Locality";
+//        self.txtArea.scrollParent = self.scrollParent;
+//    }
+    
+    if (g_areaData.city.count > 0) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i<g_areaData.city.count; i++) {
+            TblArea* item = g_areaData.city[i];
+            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+            [tempArray addObject:object];
+        }
+        [self.txtCity setDataSourceArray:tempArray];
+        [self.txtCity setDelegate:self];
+        
+        self.txtCity.viewParent = [self.txtCity superview];
+        self.txtCity.txtField.placeholder = @"City";
+        self.txtCity.scrollParent = self.scrollParent;
+    }
+    
+    if (g_areaData.pincode.count > 0) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i<g_areaData.pincode.count; i++) {
+            TblArea* item = g_areaData.pincode[i];
+            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+            [tempArray addObject:object];
+        }
+        [self.txtPin setDataSourceArray:tempArray];
+        [self.txtPin setDelegate:self];
+        
+        self.txtPin.viewParent = [self.txtPin superview];
+        self.txtPin.txtField.placeholder = @"Pincode";
+        self.txtPin.scrollParent = self.scrollParent;
+    }
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"Profile";
+    self.navigationController.navigationBar.hidden = false;
+}-(void)initData:(NSMutableDictionary*)data{
+    EnvVar*env = [CGlobal sharedId].env;
+    NSUInteger found = [g_securityList indexOfObject:env.question];
+    if (found!=NSNotFound) {
+        self.selrow = found;
+        self.lblPicker1.text = g_securityList[found];
+    }else{
+        self.selrow = 0;
+        self.lblPicker1.text = g_securityList[0];
+    }
+    self.txtAnswer.text = env.answer;
+    self.txtFirstName.text = env.first_name;
+    self.txtLastName.text = env.last_name;
+    self.txtPhoneNumber.text = env.phone;
+    self.txtAddress.text = env.address1;
+    self.txtCity.txtField.text = env.city;
+    self.txtState.text = env.state;
+    self.txtPin.txtField.text = env.pincode;
+    self.txtLandMark.text = env.landmark;
+    if (env.mode == c_CORPERATION) {
+        self.txtEmail.text = env.cor_email;
+        self.txtPassword.text = env.cor_password;
+        self.txtRePassword.text = env.cor_password;
+    }else{
+        self.txtEmail.text = env.email;
+        self.txtPassword.text = env.password;
+        self.txtRePassword.text = env.password;
+    }
+    
+    NSArray* controls = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtCity,self.txtState,self.txtPin,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer];
+    for (UITextField*text in controls) {
+        [text addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+    }
+}
+
 -(void)textChange:(UITextField*)field{
     self.isChange = true;
 }
@@ -96,9 +171,9 @@
     NSString* mPhone = _txtPhoneNumber.text;
     NSString* mAddress1 = _txtAddress.text;
     //    NSString* mAddress2 = _txtad.text;
-    NSString* mCity = _txtCity.text;
+    NSString* mCity = _txtCity.txtField.text;
     NSString* mState = _txtState.text;
-    NSString* mPinCode = _txtPin.text;
+    NSString* mPinCode = _txtPin.txtField.text;
     NSString* mLandMark = _txtLandMark.text;
     NSString* mEmail = _txtEmail.text;
     NSString* mPassword = _txtPassword.text;
@@ -119,27 +194,21 @@
         return nil;
     }
     if (![mPassword isEqualToString:mConfirmPassword]) {
-        [CGlobal AlertMessage:@"Not Match Password" Title:nil];
+        [CGlobal AlertMessage:@"Password doesn't match" Title:nil];
         return nil;
     }
     if (![CGlobal isPostCode:mPinCode]) {
         [CGlobal AlertMessage:@"Invalid Post Code" Title:nil];
         return nil;
     }
-    if (![self.swTerm isOn]) {
-        _swTermView.borderWidth = 1;
-        return nil;
-    }else{
-        _swTermView.borderWidth = 0;
-    }
-    if (![self.swPolicy isOn]) {
-        _swPolicyView.borderWidth = 1;
-        return nil;
-    }else{
-        _swPolicyView.borderWidth = 0;
-    }
+    
     if (![CGlobal isValidEmail:mEmail]) {
         [CGlobal AlertMessage:@"Invalid Email" Title:nil];
+        return nil;
+    }
+    
+    if ([self.txtPhoneNumber.text length] != 10) {
+        [CGlobal AlertMessage:@"Phone Number should be 10 characters" Title:nil];
         return nil;
     }
     NSString*dp = [CGlobal encrypt:mPassword];
@@ -149,7 +218,7 @@
     }else{
         usertype = [NSString stringWithFormat:@"%d",c_CORPERATION];
     }
-    NSString*question = g_securityList[self.cbAnswer.selectedItem];
+    NSString*question = g_securityList[self.selrow];
     
     NSDictionary* tdata = @{@"firstName":mFirst
                             ,@"lastName":mLast
@@ -192,48 +261,7 @@
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
     switch (tag) {
-        case 200:
-        {
-            NSMutableDictionary* data = [self checkInput];
-            if (data != nil) {
-                NetworkParser* manager = [NetworkParser sharedManager];
-                [CGlobal showIndicator:self];
-                [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"register" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
-                    if (error == nil) {
-                        // succ
-                        if ([dict[@"result"] isEqualToString:@"400"]) {
-                            //
-                            [CGlobal AlertMessage:@"Username already exists" Title:nil];
-                            [CGlobal stopIndicator:self];
-                            return;
-                        }
-                        
-                        TblUser* user = [[TblUser alloc] initWithDictionary:dict];
-                        [user saveResponse:_segIndex Password:_txtPassword.text];
-                        
-                        if (_segIndex == 0) {
-                            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-                            PersonalMainViewController*vc = [ms instantiateViewControllerWithIdentifier:@"PersonalMainViewController"] ;
-                            MyNavViewController* nav = [[MyNavViewController alloc] initWithRootViewController:vc];
-                            
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                                delegate.window.rootViewController = nav;
-                            });
-                        }else{
-                            // hgcneed
-                        }
-                        
-                    }else{
-                        // error
-                        [CGlobal AlertMessage:@"Register Fail" Title:nil];
-                    }
-                    
-                    [CGlobal stopIndicator:self];
-                } method:@"POST"];
-            }
-            break;
-        }
+        
         case 201:{
             NSMutableDictionary* data = [self checkInput];
             if (data != nil && _isChange) {
@@ -247,10 +275,16 @@
                 
                 NetworkParser* manager = [NetworkParser sharedManager];
                 [CGlobal showIndicator:self];
-                [manager ontemplateGeneralRequest2:data BasePath:BASE_URL Path:@"update" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+                [manager ontemplateGeneralRequest2:data BasePath:g_URL Path:@"update" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
                     if (error == nil) {
                         // succ
-                        if ([dict[@"result"] isEqualToString:@"400"]) {
+                        NSString* ret = @"";
+                        if ([dict[@"result"] isKindOfClass:[NSNumber class]]) {
+                            ret = [dict[@"result"] stringValue];
+                        }else{
+                            ret = dict[@"result"];
+                        }
+                        if ([ret isEqualToString:@"400"]) {
                             //
                             [CGlobal AlertMessage:@"Fail" Title:nil];
                             [CGlobal stopIndicator:self];
@@ -258,9 +292,10 @@
                         }
                         
                         TblUser* user = [[TblUser alloc] initWithDictionary:dict];
-                        [user saveResponse:_segIndex Password:_txtPassword.text];
+                        [user saveResponse:env.mode Password:_txtPassword.text];
                         
                         [CGlobal AlertMessage:@"Changes updated successfully" Title:nil];
+                        self.isChange = false;
                     }else{
                         // error
                         [CGlobal AlertMessage:@"Fail" Title:nil];
@@ -279,6 +314,94 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)donePicker:(UIView*)view{
+    UIPickerView* pickerview = [self.viewPickerContainer1 viewWithTag:200];
+    if (pickerview!= nil) {
+        self.selrow  =[pickerview selectedRowInComponent:0];
+        NSString*answer = g_securityList[self.selrow];
+        self.lblPicker1.text = answer;
+        [self.viewPickerContainer1 removeFromSuperview];
+        self.isChange = true;
+    }
+}
+-(void)tapPickerContainer:(UITapGestureRecognizer*)gesture{
+    if (gesture.view!=nil) {
+        int tag = (int)gesture.view.tag;
+        switch (tag) {
+            case 999:
+            {
+                [self showPicker1:nil];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+- (IBAction)showPicker1:(id)sender {
+    UIView* superview = [self.viewPickerContainer1 superview];
+    if (superview == nil) {
+        CGRect main = [UIScreen mainScreen].bounds;
+        CGRect rt = self.view.frame;
+        CGFloat topPadding = [UIApplication sharedApplication].statusBarFrame.size.height;
+        if (self.navigationController.navigationBar!=nil && self.navigationController.navigationBar.hidden == false) {
+            topPadding = self.navigationController.navigationBar.frame.size.height + topPadding;
+        }
+        if ([self isKindOfClass:[MenuViewController class]]) {
+            MenuViewController* vc = self;
+            topPadding =  vc.topBarView.constraint_Height.constant + topPadding;
+        }
+        rt = CGRectMake(0, topPadding, rt.size.width, rt.size.height - topPadding);
+        CGFloat height = 266;
+        CGFloat h_toolbar = 44;
+        CGFloat h_picker = height - h_toolbar;
+        CGFloat top = rt.size.height - height;
+        
+        self.viewPickerContainer1 = [[UIView alloc]initWithFrame:CGRectMake(0, topPadding, rt.size.width, rt.size.height)];
+        
+        UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, top, rt.size.width, h_toolbar)];
+        
+        
+        UIBarButtonItem *temp2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePicker:)];
+        
+        toolBar.barStyle = UIBarStyleDefault;
+        toolBar.translucent = true;
+        toolBar.tintColor = [UIColor darkGrayColor];
+        [toolBar setItems:@[temp2,btn]];
+        [self.viewPickerContainer1 addSubview:toolBar];
+        
+        
+        UIPickerView* valuePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, top+h_toolbar, rt.size.width, h_picker)];
+        valuePicker.delegate=self;
+        valuePicker.dataSource=self;
+        valuePicker.showsSelectionIndicator=YES;
+        valuePicker.tag = 200;
+        valuePicker.backgroundColor = [UIColor whiteColor];
+        
+        [valuePicker selectRow:self.selrow inComponent:0 animated:false];
+        
+        [self.viewPickerContainer1 addSubview:valuePicker];
+        
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPickerContainer:)];
+        [self.viewPickerContainer1 addGestureRecognizer:gesture];
+        self.viewPickerContainer1.tag = 999;
+        
+        [self.view addSubview:self.viewPickerContainer1];
+    }else{
+        [self.viewPickerContainer1 removeFromSuperview];
+    }
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return g_securityList.count;
+}
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return g_securityList[row];
+}
+
 
 /*
  #pragma mark - Navigation

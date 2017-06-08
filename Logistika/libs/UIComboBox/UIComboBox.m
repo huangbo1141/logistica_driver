@@ -170,7 +170,12 @@
     _textLabel = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     _textLabel.textLabel.textAlignment = NSTextAlignmentCenter;
     _textLabel.backgroundColor = [UIColor clearColor];
-    [_textLabel setTextColor:[CGlobal colorWithHexString:@"#0099cc" Alpha:1.0]];
+//    [_textLabel setTextColor:[CGlobal colorWithHexString:@"#0099cc" Alpha:1.0]];
+    [_textLabel.textLabel setTextColor:[UIColor blackColor]];
+//    _textLabel.textLabel.adjustsFontSizeToFitWidth = true;
+
+    [_textLabel.textLabel setFont:[UIFont systemFontOfSize:10]];
+    _textLabel.textLabel.numberOfLines = 0;
     [self addSubview:_textLabel];
     
     _rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"combobox_down"]];

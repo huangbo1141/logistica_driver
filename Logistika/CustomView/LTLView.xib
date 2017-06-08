@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3P-nV-YKO" customClass="LTLView">
+            <rect key="frame" x="0.0" y="0.0" width="267" height="60"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqD-vA-hO6" customClass="ColoredView">
+                    <rect key="frame" x="0.0" y="0.0" width="267" height="60"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yWd-7b-DON">
+                            <rect key="frame" x="121" y="21" width="25.5" height="18"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LTL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDu-8A-pho" customClass="FontLabel">
+                                    <rect key="frame" x="0.0" y="0.0" width="25.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                            <real key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLm-Im-G4q">
+                            <rect key="frame" x="0.0" y="0.0" width="267" height="60"/>
+                            <connections>
+                                <action selector="clickAction:" destination="J3P-nV-YKO" eventType="touchUpInside" id="h4k-zc-teL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="yWd-7b-DON" firstAttribute="centerX" secondItem="ZqD-vA-hO6" secondAttribute="centerX" id="3g0-sm-Bh9"/>
+                        <constraint firstAttribute="bottom" secondItem="lLm-Im-G4q" secondAttribute="bottom" id="9ud-us-BbH"/>
+                        <constraint firstItem="yWd-7b-DON" firstAttribute="centerY" secondItem="ZqD-vA-hO6" secondAttribute="centerY" id="Pah-QX-6Me"/>
+                        <constraint firstAttribute="trailing" secondItem="lLm-Im-G4q" secondAttribute="trailing" id="VJb-ei-m2G"/>
+                        <constraint firstItem="lLm-Im-G4q" firstAttribute="leading" secondItem="ZqD-vA-hO6" secondAttribute="leading" id="ZYc-xV-nvQ"/>
+                        <constraint firstItem="lLm-Im-G4q" firstAttribute="top" secondItem="ZqD-vA-hO6" secondAttribute="top" id="eS7-ni-emR"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ZqD-vA-hO6" firstAttribute="leading" secondItem="J3P-nV-YKO" secondAttribute="leading" id="EsU-qm-eu5"/>
+                <constraint firstAttribute="trailing" secondItem="ZqD-vA-hO6" secondAttribute="trailing" id="Kju-Wk-HE2"/>
+                <constraint firstAttribute="height" constant="60" id="TbX-pA-qm5"/>
+                <constraint firstAttribute="bottom" secondItem="ZqD-vA-hO6" secondAttribute="bottom" id="cH5-0W-WYW"/>
+                <constraint firstItem="ZqD-vA-hO6" firstAttribute="top" secondItem="J3P-nV-YKO" secondAttribute="top" id="g5d-q0-Gmz"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnAction" destination="lLm-Im-G4q" id="IUX-sD-c6N"/>
+                <outlet property="lblContent" destination="gDu-8A-pho" id="CzJ-ld-eYv"/>
+                <outlet property="viewRoot" destination="ZqD-vA-hO6" id="7uA-dl-Fro"/>
+            </connections>
+            <point key="canvasLocation" x="-222.5" y="157"/>
+        </view>
+    </objects>
+</document>

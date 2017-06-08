@@ -7,6 +7,8 @@
 //
 
 #import "ReviewCameraTableViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "CGlobal.h"
 
 @implementation ReviewCameraTableViewCell
 
@@ -23,8 +25,20 @@
 -(void)initMe:(ItemModel*)model{
     self.backgroundColor = [UIColor whiteColor];
     
+    if (model.image_data == nil) {
+        // path
+        NSString* path = [NSString stringWithFormat:@"%@%@products/%@",g_baseUrl,PHOTO_URL,model.image];
+        [_imgContent sd_setImageWithURL:[NSURL URLWithString:path]
+                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   model.image_data = image;
+                               }];
+    }else{
+        self.imgContent.image = model.image_data;
+    }
     
-    self.imgContent.image = model.image_data;
+    
+    
     self.lblQuantity.text = model.quantity;
     self.lblWeight.text = model.weight;
     

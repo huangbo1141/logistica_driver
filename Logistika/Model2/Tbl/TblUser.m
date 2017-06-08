@@ -50,6 +50,7 @@
     if (segIndex == 0) {
         env.user_id = user.id;
         env.email = user.email;
+        env.username = user.email;
         env.password = password;
         g_mode = c_PERSONAL;
         env.mode = c_PERSONAL;
@@ -60,6 +61,7 @@
         g_mode = c_CORPERATION;
         env.mode = c_CORPERATION;
     }
+    env.first_name = user.first_name;
     env.nickname = user.first_name;
     env.last_name = user.last_name;
     env.phone = user.phone;
