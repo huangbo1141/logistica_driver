@@ -11,10 +11,17 @@
 
 #import "FontLabel.h"
 #import "ColoredView.h"
-
+#import "MenuItem.h"
 @interface LeftView : UIView
 
-@property (weak, nonatomic) IBOutlet UIView *viewSignIn;
+@property (copy, nonatomic) NSString *currentMenu;
+
+@property (weak, nonatomic) IBOutlet MenuItem *menuProfile;
+@property (weak, nonatomic) IBOutlet MenuItem *menuAbout;
+@property (weak, nonatomic) IBOutlet MenuItem *menuContact;
+@property (weak, nonatomic) IBOutlet MenuItem *menuFeedback;
+@property (weak, nonatomic) IBOutlet MenuItem *menuPrivacy;
+@property (weak, nonatomic) IBOutlet MenuItem *viewSignIn;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnProfile;
 @property (weak, nonatomic) IBOutlet UIButton *btnAbout;

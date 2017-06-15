@@ -88,6 +88,8 @@ NSArray* c_weight;
 NSArray* c_weight_value;
 NSArray* c_packageLists;
 NSArray* c_paymentWay;
+NSArray* c_freights;
+NSArray* c_menu_title;
 
 NSString* PUBLISHABLE_KEY;
 NSString* curPaymentWay;
@@ -1513,6 +1515,10 @@ NSMutableArray* menu_topList;
     COLOR_PRIMARY = [CGlobal colorWithHexString:@"008080" Alpha:1.0f];
     
     PUBLISHABLE_KEY = @"pk_test_C0xTsdez4BI0rXKZp6ObLitq";
+    
+    c_freights = @[@"cl",@"ftl",@"stl",@"rl"];
+    
+    c_menu_title = @[@"profile",@"about",@"contact",@"feedback",@"privacy",@"sign"];
 }
 +(BOOL)validatePassword:(NSString*)password{
     NSError *error = NULL;

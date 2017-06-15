@@ -31,6 +31,21 @@
     // Drawing code
 }
 */
+-(void)setCurrentMenu:(NSString *)currentMenu{
+    _currentMenu = currentMenu;
+    // c_menu_title = @[@"profile",@"about",@"contact",@"feedback",@"privacy",@"sign"];
+    NSArray* menus = @[_menuProfile,_menuAbout,_menuContact,_menuFeedback,_menuPrivacy,_viewSignIn];
+    for (MenuItem*item in menus) {
+        item.backMode = 0;
+    }
+    if (currentMenu!=nil) {
+        NSUInteger found = [c_menu_title indexOfObject:currentMenu];
+        if (found!= NSNotFound) {
+            MenuItem* item = menus[found];
+            item.backMode = 1;
+        }
+    }
+}
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
     EnvVar* env = [CGlobal sharedId].env;

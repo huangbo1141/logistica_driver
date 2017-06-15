@@ -20,13 +20,13 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblOrderNumber;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_BOTTOMSPACE;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_TH;
-
-@property (weak, nonatomic) IBOutlet UIView *viewHeader;
-
-@property (weak, nonatomic) IBOutlet UIView *viewHeader_CAMERA;
-@property (weak, nonatomic) IBOutlet UIView *viewHeader_ITEM;
-@property (weak, nonatomic) IBOutlet UIView *viewHeader_PACKAGE;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_TH;
+//
+//@property (weak, nonatomic) IBOutlet UIView *viewHeader;
+//
+//@property (weak, nonatomic) IBOutlet UIView *viewHeader_CAMERA;
+//@property (weak, nonatomic) IBOutlet UIView *viewHeader_ITEM;
+//@property (weak, nonatomic) IBOutlet UIView *viewHeader_PACKAGE;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *btnAction1;
@@ -34,7 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnAction3;
 
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblPickAddress;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickCity;
@@ -71,6 +71,10 @@
 @property (weak, nonatomic) IBOutlet UIStackView *stackSignature;
 @property (weak, nonatomic) IBOutlet UIStackView *stackPickup;
 @property (weak, nonatomic) IBOutlet UIStackView *stackEta;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *txtWeight;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpdateWeight;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdate;
 @property (weak, nonatomic) IBOutlet UITextField *txtEta;

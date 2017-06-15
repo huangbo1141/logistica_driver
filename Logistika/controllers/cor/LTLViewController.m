@@ -98,28 +98,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)menu1:(id)sender {
-    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
-    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
-    vc.type = self.type;
-    vc.mode = @"tl";
-    vc.hideMode = 1;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.title = @"";
-        [self.navigationController pushViewController:vc animated:true];
-    });
-}
-- (IBAction)menu2:(id)sender {
-    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
-    OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];
-    vc.type = self.type;
-    vc.mode = @"ltl";
-    vc.hideMode = 1;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.title = @"";
-        [self.navigationController pushViewController:vc animated:true];
-    });
-}
 -(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
     if ([view isKindOfClass:[LTLView class]] && data[@"truck"]!=nil)   {
         TblTruck* truck = data[@"truck"];

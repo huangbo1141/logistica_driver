@@ -84,10 +84,9 @@
     [self.tableview3 reloadData];
 }
 -(void)filterDataCorporate{
-    NSArray* titles = @[@"cl",@"ftl",@"stl",@"rl"];
-    NSUInteger found = [titles indexOfObject:self.mode];
+    NSUInteger found = [c_freights indexOfObject:self.mode];
     if (found!=NSNotFound) {
-        self.mMode = [titles[found] uppercaseString];
+        self.mMode = [c_freights[found] uppercaseString];
     }
     self.data_0 = [[NSMutableArray alloc] init];
     self.data_1 = [[NSMutableArray alloc] init];
@@ -165,11 +164,10 @@
 }
 -(void)initHeader{
     self.mode = [self.mode lowercaseString];
-    NSArray* titles = @[@"cl",@"ftl",@"stl",@"rl"];
     NSString* selectedTitle = nil;
-    NSUInteger found = [titles indexOfObject:self.mode];
+    NSUInteger found = [c_freights indexOfObject:self.mode];
     if (found!=NSNotFound) {
-        selectedTitle = [titles[found] uppercaseString];
+        selectedTitle = [c_freights[found] uppercaseString];
     }
     switch (self.type) {
         case 0:

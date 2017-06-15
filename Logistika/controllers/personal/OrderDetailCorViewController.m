@@ -34,7 +34,7 @@
 //@property (nonatomic,strong) UIImage* mReceiverSignature;
 
 @property (nonatomic,copy) NSString* mETA;
-
+@property (nonatomic,copy) NSString* mWeight;
 @end
 
 @implementation OrderDetailCorViewController
@@ -222,10 +222,12 @@
     [self.btnUpdate addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     self.btnUpdate.tag = 300;
     
-    if ([self.mode isEqualToString:@"tl"]) {
-        _txtFrieght.text = @"TL";
-    }else{
-        _txtFrieght.text = @"LTL";
+    [self.btnUpdateWeight addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
+    self.btnUpdateWeight.tag = 301;
+    
+    NSUInteger found = [c_freights indexOfObject:self.mode];
+    if (found!=NSNotFound) {
+        _txtFrieght.text = [c_freights[found] uppercaseString];
     }
 }
 -(NSString*)getTime{
@@ -322,6 +324,15 @@
                 [self update_eta];
             }else{
                 [CGlobal AlertMessage:@"Please Input ETA" Title:nil];
+            }
+            break;
+        }
+        case 301:{
+            self.mWeight = self.txtWeight.text;
+            if (self.mWeight != nil || [self.mWeight length] > 0) {
+                [self update_weight];
+            }else{
+                [CGlobal AlertMessage:@"Please Input WEIGHT" Title:nil];
             }
             break;
         }
@@ -437,87 +448,39 @@
     }
     return true;
 }
--(void)showItemLists{
-    EnvVar* env = [CGlobal sharedId].env;
-    if (g_ORDER_TYPE == g_CAMERA_OPTION) {
-        self.orderModel = g_cameraOrderModel;
-        self.viewHeader_CAMERA.hidden = false;
-        self.viewHeader_ITEM.hidden = true;
-        self.viewHeader_PACKAGE.hidden = true;
-        
-        UINib* nib = [UINib nibWithNibName:@"ReviewCameraTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
-        self.cellHeight = 40;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-    }else if(g_ORDER_TYPE == g_ITEM_OPTION){
-        self.orderModel = g_itemOrderModel;
-        self.viewHeader_CAMERA.hidden = true;
-        self.viewHeader_ITEM.hidden = false;
-        self.viewHeader_PACKAGE.hidden = true;
-        
-        UINib* nib = [UINib nibWithNibName:@"ReviewItemTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
-        self.cellHeight = 40;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-    }else if(g_ORDER_TYPE == g_PACKAGE_OPTION){
-        self.orderModel = g_packageOrderModel;
-        self.viewHeader_CAMERA.hidden = true;
-        self.viewHeader_ITEM.hidden = true;
-        self.viewHeader_PACKAGE.hidden = false;
-        
-        UINib* nib = [UINib nibWithNibName:@"ReviewPackageTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
-        self.cellHeight = 40;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-    }
-    
-    [self.tableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+
+
+-(void)update_weight{
+    EnvVar* env = [CGlobal sharedId].env;
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    params[@"order_id"] = env.order_id;
+    params[@"weight"] = self.mWeight;
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [CGlobal showIndicator:self];
+    [manager ontemplateGeneralRequest2:params BasePath:g_URL Path:@"update_weight" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                //
+                if([dict[@"result"] intValue] == 200){
+                    [CGlobal AlertMessage:@"Success" Title:nil];
+                }else if([dict[@"result"] intValue] == 300){
+                    
+                }else {
+                    
+                }
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        [CGlobal stopIndicator:self];
+    } method:@"POST"];
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    CGFloat height = self.cellHeight * self.orderModel.itemModels.count;
-    self.constraint_TH.constant = height;
-    [self.tableView setNeedsUpdateConstraints];
-    [self.tableView layoutIfNeeded];
-    return self.orderModel.itemModels.count;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (g_ORDER_TYPE == g_CAMERA_OPTION) {
-        ReviewCameraTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        
-        [cell initMe:self.orderModel.itemModels[indexPath.row]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.aDelegate = self;
-        return cell;
-    }else if(g_ORDER_TYPE == g_ITEM_OPTION){
-        ReviewItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        
-        [cell initMe:self.orderModel.itemModels[indexPath.row]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.aDelegate = self;
-        return cell;
-    }else{
-        ReviewPackageTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        
-        [cell initMe:self.orderModel.itemModels[indexPath.row]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.aDelegate = self;
-        return cell;
-    }
-}
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.cellHeight;
-}
+
 -(void)update_eta{
     EnvVar* env = [CGlobal sharedId].env;
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];

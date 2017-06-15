@@ -98,6 +98,8 @@ extern NSArray* c_weight;
 extern NSArray* c_weight_value;
 extern NSArray* c_packageLists;
 extern NSArray* c_paymentWay;
+extern NSArray* c_freights;
+extern NSArray* c_menu_title;
 
 extern NSString* PUBLISHABLE_KEY;
 extern NSString* curPaymentWay;
