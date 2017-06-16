@@ -122,28 +122,26 @@
 	[self.autoCompleteTableView reloadData];
     
     if (self.scrollParent!=nil) {
-        CGRect screenRect = [UIScreen mainScreen].bounds;
-        UIWindow* window = [UIApplication sharedApplication].keyWindow;
-        CGRect src = self.frame;
-        CGRect dst = [self convertRect:self.frame toView:window];
-        
-        NSLog(@"src %f %f %f %f",src.origin.x,src.origin.y,src.size.width,src.size.height);
-        NSLog(@"dst %f %f %f %f",dst.origin.x,dst.origin.y,dst.size.width,dst.size.height);
-        
-        CGRect tableRect = [self.autoCompleteTableView convertRect:self.autoCompleteTableView.bounds toView:window];
-        
-        CGFloat total = tableRect.origin.y + tableRect.size.height + g_keyboardRect.size.height;
-        if (total > screenRect.size.height) {
-            // need more
-            CGPoint pt = self.scrollParent.contentOffset;
-            pt.y = pt.y + total - screenRect.size.height;
-            [self.scrollParent setContentOffset:pt animated:TRUE];
-        }else{
-            
-        }
+//        CGRect screenRect = [UIScreen mainScreen].bounds;
+//        UIWindow* window = [UIApplication sharedApplication].keyWindow;
+//        CGRect src = self.frame;
+//        CGRect dst = [self convertRect:self.frame toView:window];
+//        
+//        NSLog(@"src %f %f %f %f",src.origin.x,src.origin.y,src.size.width,src.size.height);
+//        NSLog(@"dst %f %f %f %f",dst.origin.x,dst.origin.y,dst.size.width,dst.size.height);
+//        
+//        CGRect tableRect = [self.autoCompleteTableView convertRect:self.autoCompleteTableView.bounds toView:window];
+//        
+//        CGFloat total = tableRect.origin.y + tableRect.size.height + g_keyboardRect.size.height;
+//        if (total > screenRect.size.height) {
+//            // need more
+//            CGPoint pt = self.scrollParent.contentOffset;
+//            pt.y = pt.y + total - screenRect.size.height;
+//            [self.scrollParent setContentOffset:pt animated:TRUE];
+//        }else{
+//            
+//        }
     }
-    
-    
     
 }
 

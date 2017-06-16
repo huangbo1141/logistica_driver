@@ -200,9 +200,13 @@
     }else{
         _viewSignIn.hidden = false;
     }
+    
+    
+
 }
 -(void)initMe:(UIViewController*)vc{
     _vc = vc;
     [self initMenu];
+    self.backgroundColor = [CGlobal colorWithHexString:@"000000" Alpha:0.8];
 }
 @end

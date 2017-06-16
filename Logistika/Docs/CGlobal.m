@@ -148,12 +148,6 @@ NSString *const kPhotoManagerChangedContentNotificationOthers = @"NOTIFICATION_P
 CGFloat GLOBAL_MENUHEIGHT = 50;
 CGFloat GLOBAL_MENUWIDTH = 200;
 
-//common variables
-NSMutableArray *g_buttonTitles;
-UIFont * g_largefont;
-CGFloat g_menuHeight = 50;
-NSMutableArray* menu_bottomList;
-NSMutableArray* menu_topList;
 
 @implementation CGlobal
 

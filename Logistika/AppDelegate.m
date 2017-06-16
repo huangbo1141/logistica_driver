@@ -11,15 +11,17 @@
 #import "PersonalMainViewController.h"
 #import <IQKeyboardManager.h>
 #import "NetworkParser.h"
+#import "TCTrackingController.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) TCTrackingController *trackingController;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [CGlobal initGlobal];
     EnvVar*env = [CGlobal sharedId].env;
     env.lastLogin = -1;
@@ -28,15 +30,55 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
-    
-    double delayInSeconds = 1.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        //code to be executed on the main queue after delay
-        [self defaultLogin];
-    });
-    
+        
     return YES;
+}
+-(void)startOrStopTraccar{
+    [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+    
+    // Initialize device identifier
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if (![userDefaults stringForKey:@"device_id_preference"]) {
+        srandomdev();
+        NSString *identifier = [NSString stringWithFormat:@"%ld", (random() % 900000) + 100000];
+        [userDefaults setValue:identifier forKey:@"device_id_preference"];
+    }
+    
+    [userDefaults setValue:@"192.168.1.106" forKey:@"server_address_preference"];
+    [userDefaults setInteger:100 forKey:@"server_port_preference"];
+    [userDefaults setInteger:60 forKey:@"frequency_preference"];
+    [userDefaults setInteger:0 forKey:@"angle_preference"];
+    [userDefaults setInteger:0 forKey:@"distance_preference"];
+    
+    NSUserDefaults *defaults = userDefaults;
+    BOOL status = [defaults boolForKey:@"service_status_preference"];
+    if (status && !self.trackingController) {
+        
+        NSString *validHost = @"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
+        NSPredicate *hostPredicate  = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validHost];
+        
+        NSString *address = [defaults stringForKey:@"server_address_preference"];
+        long port = [defaults integerForKey:@"server_port_preference"];
+        long frequency = [defaults integerForKey:@"frequency_preference"];
+        
+        if (![hostPredicate evaluateWithObject:address]) {
+            NSLog(@"Invalid server address");
+        } else if (port <= 0 || port > 65535) {
+            NSLog(@"Invalid server port");
+        } else if (frequency <= 0) {
+            NSLog(@"Invalid frequency value");
+        } else {
+            self.trackingController = [[TCTrackingController alloc] init];
+            [self.trackingController start];
+        }
+        
+    } else if (!status && self.trackingController) {
+        
+        [self.trackingController stop];
+        self.trackingController = nil;
+        
+    }
+    // Initialize other defaults
 }
 -(void)loadBasicData{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
@@ -117,10 +159,68 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    // Change service status
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:nil forKey:@"service_status_preference"];
+    
+    [self saveContext];
 }
 
+#pragma mark - Core Data
 
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+- (NSURL *)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"TraccarClient" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TraccarClient.sqlite"];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:nil]) {
+        NSLog(@"Error in persistentStoreCoordinator");
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    return _managedObjectContext;
+}
+
+- (void)saveContext {
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:nil]) {
+            NSLog(@"Error in saveContext");
+        }
+    }
+}
 @end

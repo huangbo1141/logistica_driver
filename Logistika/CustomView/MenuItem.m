@@ -28,6 +28,7 @@
         default:{
             self.backgroundColor = [CGlobal colorWithHexString:@"000000" Alpha:0.8];
             self.lblTitle.textColor = [CGlobal colorWithHexString:@"ffffff" Alpha:1.0];
+            self.backgroundColor = [UIColor clearColor];
             break;
         }
     }

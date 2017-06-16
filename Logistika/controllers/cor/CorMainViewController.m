@@ -9,6 +9,7 @@
 #import "CorMainViewController.h"
 #import "CGlobal.h"
 #import "LTLViewController.h"
+#import "AppDelegate.h"
 
 @interface CorMainViewController ()
 
@@ -19,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:true forKey:@"service_status_preference"];
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate startOrStopTraccar];
     // Do any additional setup after loading the view.
 }
 
