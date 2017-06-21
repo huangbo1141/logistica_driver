@@ -45,6 +45,9 @@
     }
     
     [userDefaults setValue:@"192.168.1.106" forKey:@"server_address_preference"];
+    
+    
+    
     [userDefaults setInteger:100 forKey:@"server_port_preference"];
     [userDefaults setInteger:60 forKey:@"frequency_preference"];
     [userDefaults setInteger:0 forKey:@"angle_preference"];

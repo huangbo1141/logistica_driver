@@ -11,7 +11,8 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic, strong) AVPlayer *avplayer;
-@property (strong, nonatomic) IBOutlet UIView *movieView;
+@property (strong, nonatomic) UIView *movieView;
+
 //@property (strong, nonatomic) IBOutlet UIView *gradientView;
 //@property (strong, nonatomic) IBOutlet UIView *contentView;
 

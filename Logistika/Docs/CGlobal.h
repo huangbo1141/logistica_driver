@@ -253,4 +253,8 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 +(int)getTotalWeight;
 +(NSString*)getDeviceID;
 +(NSString*)getDeviceName;
++(NSString*)getOrderIds;
++(void)removeOrderFromTrackOrder:(NSString*) orderID;
++(NSString*)addOrderToTrackOrder:(NSString*)track_str;
++(void)setOrderForTrackOrder:(NSMutableArray*)array;
 @end

@@ -12,6 +12,7 @@
 #import <Photos/Photos.h>
 #import <CoreLocation/CoreLocation.h>
 #import "UIView+Property.h"
+#import "AppDelegate.h"
 
 
 UIColor*   COLOR_TOOLBAR_TEXT;
@@ -1606,57 +1607,77 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     NSString* idd = [UIDevice currentDevice].name;
     return idd;
 }
-//+(UIImage*)customImageForMap:(NSString*)role PolyData:(TblPolygon*)polygon{
-//    NSString* image = "0"
-//    int spellsize = 8;
-//    UIFont*font = [UIFont fontWithName:@"Helvetica" size:spellsize];
-//    CGSize textSize = [number sizeWithAttributes:@{NSFontAttributeName:font}];
-//    CGFloat bw = textSize.width;
-//    CGFloat bh = textSize.height;
-//    UIImage*bm = [UIImage imageNamed:@"map_pos.png"];
-//    float radius = 10;
-//    if (bw<bh) {
-//        radius = bh/2;
-//    }else{
-//        radius = bw/2;
-//    }
-//    //radius+=5;
-//
-//    int sm,cw,tw,th;
-//    sm = 1;
-//    cw = radius;
-//    tw = 20;
-//    th = 30;
-//    CGPoint A = CGPointMake(2, 2);
-//    CGPoint B = CGPointMake(17, 17);
-//
-//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(tw,th), NO, 1.0);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    // drawing with a white stroke color
-//    CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-//    // drawing with a white fill color
-//    CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0);
-//    //    CGContextFillRect(context, CGRectMake(0, 0, tw*2, th*2));
-//
-//    //    CGRect dst = CGRectMake(tw,0,tw,th);
-//    CGRect dst = CGRectMake(0,0,tw,th);
-//    [bm drawInRect:dst];
-//
-//    if ([number intValue] >= 1) {
-//        CGRect circle_rect = CGRectMake(A.x, A.y, B.x-A.x, B.y-A.y);
-//        CGContextSetRGBFillColor(context, 0.29, 0.60, 0.85,1.0);
-//        CGContextFillEllipseInRect(context, circle_rect);
-//
-//        CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-//        NSDictionary* dict =  [NSDictionary dictionaryWithObjectsAndKeys:
-//                               font, NSFontAttributeName,
-//                               [NSNumber numberWithFloat:1.0], NSBaselineOffsetAttributeName, nil];
-//
-//        CGRect text_rect = CGRectMake((circle_rect.size.width-bw)/2+circle_rect.origin.x,(circle_rect.size.height-bh)/2+circle_rect.origin.y,bw,bh);
-//        [number drawInRect:text_rect withAttributes:dict];
-//    }
-//    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return resultImage;
-//}
++(NSString*)getOrderIds{
+    id trackingOrderIds = [[NSUserDefaults standardUserDefaults] valueForKey:@"trackingOrderIds"];
+    NSString *orders = @"";
+    if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
+        NSMutableArray* array = trackingOrderIds;
+        
+        for(int k = 0; k < array.count ;k++){
+            NSString* item = array[k];
+            NSArray* trackData = [item componentsSeparatedByString:@","];
+            if (trackData.count == 2) {
+                if ([orders length] == 0) {
+                    orders = [NSString stringWithFormat:@"%@B%@",trackData[0],trackData[1]];
+                }else{
+                    NSString* temp = [NSString stringWithFormat:@"A%@B%@",trackData[0],trackData[1]];
+                    orders = [orders stringByAppendingString:temp];
+                }
+            }
+            
+        }
+    }
+    return orders;
+}
++(void)removeOrderFromTrackOrder:(NSString*) orderID{
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    id trackingOrderIds = [userd valueForKey:@"trackingOrderIds"];
+    
+    NSMutableArray* data= [[NSMutableArray alloc] init];
+    if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
+        data = trackingOrderIds;
+        
+        for(int k = 0; k < data.count ;k++){
+            NSString* item = data[k];
+            NSArray* trackData = [item componentsSeparatedByString:@","];
+            if ([trackData[0] isEqualToString:orderID]) {
+                [data removeObject:item];
+                break;
+            }
+        }
+    }
+    [CGlobal setOrderForTrackOrder:data];
+}
++(NSString*)addOrderToTrackOrder:(NSString*)track_str{
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    id trackingOrderIds = [userd valueForKey:@"trackingOrderIds"];
+    NSString *orders = @"";
+    NSMutableArray* data= [[NSMutableArray alloc] init];
+    if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
+        data = trackingOrderIds;
+        [data addObject:track_str];
+    }else{
+        [data addObject:track_str];
+    }
+    
+    [CGlobal setOrderForTrackOrder:data];
+    
+    return orders;
+}
++(void)setOrderForTrackOrder:(NSMutableArray*)array{
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    [userd setValue:array forKey:@"trackingOrderIds"];
+    
+    if (array.count>0) {
+        if(![userd boolForKey:@"service_status_preference"]){
+            [userd setBool:true forKey:@"service_status_preference"];
+            AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            [delegate startOrStopTraccar];
+        }
+    }else if(array.count == 0){
+        [userd setBool:false forKey:@"service_status_preference"];
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate startOrStopTraccar];
+    }
+}
 @end

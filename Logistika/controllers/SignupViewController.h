@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblPicker1;
 @property (strong, nonatomic) UIView *viewPickerContainer1;
 
+@property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtArea;
+
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhoneNumber;

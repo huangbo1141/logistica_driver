@@ -235,7 +235,7 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
 }
 -(void)setMode:(long )mode{
     _mode = mode;
-    [self saveDefaultsLong:@"" value:mode];
+    [self saveDefaultsLong:@"mode" value:mode];
 }
 -(void)setOrder_id:(NSString *)order_id{
     _order_id = order_id;

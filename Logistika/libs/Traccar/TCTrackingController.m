@@ -21,6 +21,8 @@
 #import "TCProtocolFormatter.h"
 #import "TCRequestManager.h"
 #import "TCStatusViewController.h"
+#import "CGlobal.h"
+#import "NetworkParser.h"
 
 int64_t kRetryDelay = 30 * 1000;
 
@@ -131,15 +133,44 @@ int64_t kRetryDelay = 30 * 1000;
 }
 
 - (void)send:(TCPosition *)position {
-    NSURL *request = [TCProtocolFormatter formatPostion:position address:self.address port:self.port secure:self.secure];
-    [TCRequestManager sendRequest:request completionHandler:^(BOOL success) {
-        if (success) {
-            [self delete:position];
-        } else {
-            [TCStatusViewController addMessage:NSLocalizedString(@"Send failed", @"")];
-            [self retry];
+    EnvVar* env = [CGlobal sharedId].env;
+    if ([env.user_id length]>0) {
+        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+        
+        if (env.mode == c_PERSONAL) {
+            params[@"employer_id"] = env.user_id;
+        }else if(env.mode == c_CORPERATION){
+            params[@"employer_id"] = env.corporate_user_id;
         }
-    }];
+        params[@"orders"] = [CGlobal getOrderIds];
+        
+        params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
+        params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
+        params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
+        
+        
+        
+        NetworkParser* manager = [NetworkParser sharedManager];
+        [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+            if (error == nil) {
+                [self delete:position];
+            }else{
+                NSLog(@"Error");
+            }
+        } method:@"POST"];
+    }
+    
+    
+    
+//    NSURL *request = [TCProtocolFormatter formatPostion:position address:self.address port:self.port secure:self.secure];
+//    [TCRequestManager sendRequest:request completionHandler:^(BOOL success) {
+//        if (success) {
+//            [self delete:position];
+//        } else {
+//            [TCStatusViewController addMessage:NSLocalizedString(@"Send failed", @"")];
+//            [self retry];
+//        }
+//    }];
 }
 
 - (void)retry {

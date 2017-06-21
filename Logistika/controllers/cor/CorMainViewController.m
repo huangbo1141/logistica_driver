@@ -10,6 +10,9 @@
 #import "CGlobal.h"
 #import "LTLViewController.h"
 #import "AppDelegate.h"
+#import "NetworkParser.h"
+#import "OrderResponse.h"
+#import "OrderHisModel.h"
 
 @interface CorMainViewController ()
 
@@ -21,9 +24,11 @@
     [super viewDidLoad];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:true forKey:@"service_status_preference"];
+    [userDefaults setBool:false forKey:@"service_status_preference"];
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [delegate startOrStopTraccar];
+    
+    [self getOrderAndStartService];
     // Do any additional setup after loading the view.
 }
 
@@ -75,6 +80,7 @@
 - (IBAction)menu5:(id)sender {
     
 }
+
 
 /*
  #pragma mark - Navigation

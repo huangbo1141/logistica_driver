@@ -20,7 +20,7 @@
 #import "TblArea.h"
 #import "TermViewController.h"
 
-@interface SignupViewController ()<UIComboBoxDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface SignupViewController ()<UIComboBoxDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CAAutoFillDelegate>
 @property(nonatomic,assign) BOOL isChange;
 @property(nonatomic,assign) NSInteger selrow;
 @property(nonatomic,strong) MyTextDelegate* textDelegate;
@@ -80,20 +80,20 @@
 }
 -(void)setAreaDatas{
     
-//    if (g_areaData.area.count > 0) {
-//        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-//        for (int i = 0; i<g_areaData.area.count; i++) {
-//            TblArea* item = g_areaData.area[i];
-//            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-//            [tempArray addObject:object];
-//        }
-//        [self.txtArea setDataSourceArray:tempArray];
-//        [self.txtArea setDelegate:self];
-//        
-//        self.txtArea.viewParent = [self.txtArea superview];
-//        self.txtArea.txtField.placeholder = @"Area,Locality";
-//        self.txtArea.scrollParent = self.scrollParent;
-//    }
+    if (g_areaData.area.count > 0) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i<g_areaData.area.count; i++) {
+            TblArea* item = g_areaData.area[i];
+            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+            [tempArray addObject:object];
+        }
+        [self.txtArea setDataSourceArray:tempArray];
+        [self.txtArea setDelegate:self];
+        
+        self.txtArea.viewParent = [self.txtArea superview];
+        self.txtArea.txtField.placeholder = @"Area,Locality";
+        self.txtArea.scrollParent = self.scrollParent;
+    }
     
     if (g_areaData.city.count > 0) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -399,5 +399,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void) CAAutoTextFillBeginEditing:(CAAutoFillTextField *) textField {
+    
+}
 
+- (void) CAAutoTextFillEndEditing:(CAAutoFillTextField *) textField {
+    
+}
+
+- (BOOL) CAAutoTextFillWantsToEdit:(CAAutoFillTextField *) textField {
+    return YES;
+}
 @end

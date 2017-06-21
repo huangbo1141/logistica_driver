@@ -311,6 +311,9 @@
                 return;
             }
             [self completeCorporateOrder:@"4"];
+            
+            EnvVar* env = [CGlobal sharedId].env;
+            [CGlobal removeOrderFromTrackOrder:env.order_id];
             break;
         }
         case 204:{
@@ -399,6 +402,11 @@
                 //
                 int ret = [dict[@"result"] intValue];
                 if(ret == 200){
+                    
+                    NSString*trackstr = [NSString stringWithFormat:@"%@,%d",env.order_id,g_mode];
+                    [CGlobal addOrderToTrackOrder:trackstr];
+                    
+                    
                     [self.navigationController popViewControllerAnimated:true];
                 }else if(ret == 300){
                     

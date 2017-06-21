@@ -143,6 +143,10 @@
         case 202:{
             // btn_delivered
             [self pickupOrder:@"4"];
+            
+            EnvVar* env = [CGlobal sharedId].env;
+            [CGlobal removeOrderFromTrackOrder:env.order_id];
+            
             break;
         }
         case 203:{
@@ -272,6 +276,9 @@
                     [CGlobal AlertMessage:@"Fail" Title:nil];
                 }else if([dict[@"result"] intValue] == 200){
                     // succ
+                    NSString*trackstr = [NSString stringWithFormat:@"%@,%d",env.order_id,g_mode];
+                    [CGlobal addOrderToTrackOrder:trackstr];
+                    
                     [self.navigationController popViewControllerAnimated:true];
                 }
             }

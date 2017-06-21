@@ -33,7 +33,7 @@
 @property (assign, nonatomic) NSInteger segIndex;
 @property (strong, nonatomic) id inputData;
 
-
+@property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtArea;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollParent;
 @property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtCity;
 @property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtPin;
