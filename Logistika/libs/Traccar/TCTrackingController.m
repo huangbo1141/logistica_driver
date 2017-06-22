@@ -134,7 +134,7 @@ int64_t kRetryDelay = 30 * 1000;
 
 - (void)send:(TCPosition *)position {
     EnvVar* env = [CGlobal sharedId].env;
-    if ([env.user_id length]>0) {
+    if ([env.user_id length]>0 || [env.corporate_user_id length]>0) {
         NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
         
         if (env.mode == c_PERSONAL) {
@@ -157,7 +157,7 @@ int64_t kRetryDelay = 30 * 1000;
             }else{
                 NSLog(@"Error");
             }
-        } method:@"POST"];
+        } method:@"get"];
     }
     
     

@@ -33,7 +33,7 @@ NSString* ZIP_LOCATION = @"http://maps.googleapis.com/maps/api/geocode/json";
 NSString* PHOTO_URL = @"/uploads/";
 //NSString* g_baseUrl = @"https://travpholer.com/adminuser";
 BOOL g_lock = false;
-BOOL g_isii = false;
+BOOL g_isii = true;
 
 
 NSString*   APISERVICE_IP_URL = @"http://ip-api.com/json";
@@ -1612,8 +1612,7 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     id trackingOrderIds = [[NSUserDefaults standardUserDefaults] valueForKey:@"trackingOrderIds"];
     NSString *orders = @"";
     if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
-        NSMutableArray* array = trackingOrderIds;
-        
+        NSMutableArray* array = [[NSMutableArray alloc] initWithArray:trackingOrderIds];
         for(int k = 0; k < array.count ;k++){
             NSString* item = array[k];
             NSArray* trackData = [item componentsSeparatedByString:@","];
@@ -1636,7 +1635,7 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     
     NSMutableArray* data= [[NSMutableArray alloc] init];
     if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
-        data = trackingOrderIds;
+        data = [[NSMutableArray alloc] initWithArray:trackingOrderIds];
         
         for(int k = 0; k < data.count ;k++){
             NSString* item = data[k];
@@ -1655,7 +1654,7 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     NSString *orders = @"";
     NSMutableArray* data= [[NSMutableArray alloc] init];
     if ([trackingOrderIds isKindOfClass:[NSMutableArray class]]) {
-        data = trackingOrderIds;
+        data = [[NSMutableArray alloc] initWithArray:trackingOrderIds];
         [data addObject:track_str];
     }else{
         [data addObject:track_str];
@@ -1670,11 +1669,9 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     [userd setValue:array forKey:@"trackingOrderIds"];
     
     if (array.count>0) {
-        if(![userd boolForKey:@"service_status_preference"]){
-            [userd setBool:true forKey:@"service_status_preference"];
-            AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            [delegate startOrStopTraccar];
-        }
+        [userd setBool:true forKey:@"service_status_preference"];
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate startOrStopTraccar];
     }else if(array.count == 0){
         [userd setBool:false forKey:@"service_status_preference"];
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;

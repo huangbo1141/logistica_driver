@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BasicViewController : UIViewController
--(void)getOrderAndStartService;
+-(void)trackOrders:(NSInteger)mode;
+-(void)trackCorporateOrders;
 @end

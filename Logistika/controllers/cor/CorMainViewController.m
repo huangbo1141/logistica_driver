@@ -23,12 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:false forKey:@"service_status_preference"];
-    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate startOrStopTraccar];
-    
-    [self getOrderAndStartService];
+    [self trackCorporateOrders];
     // Do any additional setup after loading the view.
 }
 

@@ -117,10 +117,14 @@
         [manager GET:serverurl parameters:questionDict progress:nil success:^(NSURLSessionTask *task, id responseObject) {
             //        NSLog(@"JSON: %@", responseObject);
             if(completionBlock){
-                if ([self checkResponse:responseObject] && completionBlock) {
-                    completionBlock(responseObject,nil);
+            
+                NSString* str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+                id dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                if ([self checkResponse:dict] && completionBlock) {
+                    completionBlock(dict,nil);
                 }else{
-                    completionBlock(responseObject,[[NSError alloc] init]);
+                    completionBlock(dict,[[NSError alloc] init]);
                 }
                 
             }

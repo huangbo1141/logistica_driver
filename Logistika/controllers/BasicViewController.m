@@ -29,6 +29,7 @@
     // Do any additional setup after loading the view.
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
+    self.trackOrderStrs = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +40,7 @@
     self.returnKeyHandler = nil;
 }
 
--(void)getOrderAndStartService{
+-(void)trackOrders:(NSInteger)mode{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
     if (env.mode == c_PERSONAL) {
@@ -51,9 +52,13 @@
     params[@"state"] = @"3";
     NetworkParser* manager = [NetworkParser sharedManager];
 //    [CGlobal showIndicator:self];
+    if (params[@"employer_id"] == nil) {
+        return;
+    }
     [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_orders_by_state" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             // succ
+            self.trackOrderStrs = [[NSMutableArray alloc] init];
             if (dict[@"result" ]!=nil) {
                 if ([dict[@"result"] intValue] == 200) {
                     
@@ -68,11 +73,16 @@
                     
                     self.trackOrderStrs = array;
                     
-                    [self getCorporateOrders];
-                    return;
+                    
                 }
             }
+            if (mode == 1) {
+                [CGlobal setOrderForTrackOrder:self.trackOrderStrs];
+            }else{
+                [self trackCorporateOrders];
+            }
             
+            return;
         }else{
             // error
             NSLog(@"Error");
@@ -81,7 +91,7 @@
 //        [CGlobal stopIndicator:self];
     } method:@"POST"];
 }
--(void)getCorporateOrders{
+-(void)trackCorporateOrders{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
     if (env.mode == c_PERSONAL) {
@@ -105,12 +115,11 @@
                         NSString* track_str = [NSString stringWithFormat:@"%@,%d",order.orderId,c_CORPERATION];
                         [array addObject:track_str];
                     }
-                    
-                    [CGlobal setOrderForTrackOrder:array];
                     self.trackOrderStrs = array;
+                    
                 }
             }
-            
+            [CGlobal setOrderForTrackOrder:self.trackOrderStrs];
         }else{
             // error
             NSLog(@"Error");

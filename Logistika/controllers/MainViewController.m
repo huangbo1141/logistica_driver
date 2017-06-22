@@ -51,6 +51,7 @@
     
     self.segment.tintColor = COLOR_PRIMARY;
     
+    [self trackOrders:0];
 }
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
