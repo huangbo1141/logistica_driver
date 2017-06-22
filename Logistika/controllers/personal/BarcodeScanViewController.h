@@ -10,5 +10,5 @@
 
 @interface BarcodeScanViewController : BasicViewController
 
-@property (nonatomic,strong) UILabel* targetLabel;
+@property (nonatomic,strong) UITextField* targetLabel;
 @end

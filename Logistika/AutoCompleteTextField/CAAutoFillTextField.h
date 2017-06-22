@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "BorderTextField.h"
 @protocol CAAutoFillDelegate;
 @class CAAutoCompleteObject;
 
 @interface CAAutoFillTextField : UIView <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) NSMutableArray <CAAutoCompleteObject *> *dataSourceArray;
-@property (nonatomic, strong) UITextField * txtField;
+@property (nonatomic, strong) BorderTextField * txtField;
 @property (nonatomic, assign) id<CAAutoFillDelegate>delegate;
 @property (nonatomic,strong) UIView* viewParent;
 @property (nonatomic,strong) UIScrollView* scrollParent;

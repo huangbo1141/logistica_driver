@@ -7,12 +7,13 @@
 //
 
 #import "BasicViewController.h"
+#import "BorderTextField.h"
 
 @interface ForgotUserViewController : BasicViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lblMessage;
-@property (weak, nonatomic) IBOutlet UITextField *txtPhone;
-@property (weak, nonatomic) IBOutlet UITextField *txtAnswer;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtPhone;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtAnswer;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (assign, nonatomic) NSInteger segIndex;
 

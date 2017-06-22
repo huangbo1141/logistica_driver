@@ -23,6 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [CGlobal initGlobal];
+    [self initData];
     EnvVar*env = [CGlobal sharedId].env;
     env.lastLogin = -1;
     env.quote = true;
@@ -82,6 +83,21 @@
         
     }
     // Initialize other defaults
+}
+-(void)initData{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+}
+- (void)keyboardOnScreen:(NSNotification *)notification {
+    NSDictionary* keyboardInfo = [notification userInfo];
+    // UIKeyboardFrameEndUserInfoKey UIKeyboardFrameBeginUserInfoKey
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    g_keyboardRect = keyboardFrameBeginRect;
+    
+    NSNotificationCenter *center;
+    [center removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    
 }
 -(void)loadBasicData{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];

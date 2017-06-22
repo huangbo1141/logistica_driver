@@ -23,11 +23,19 @@
     _btnSubmit.tag = 200;
     EnvVar*env = [CGlobal sharedId].env;
     
-    self.txtFeedback.placeholder = @"Feedback";
-    self.txtFeedback.layer.borderWidth = 1;
-    self.txtFeedback.layer.borderColor = [UIColor blackColor].CGColor;
-    self.txtFeedback.layer.masksToBounds = true;
+//    self.txtFeedback.placeholder = @"Feedback";
+//    self.txtFeedback.layer.borderWidth = 1;
+//    self.txtFeedback.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.txtFeedback.layer.masksToBounds = true;
     // Do any additional setup after loading the view.
+    
+    NSArray* fields = @[self.txtFirst,self.txtLast,self.txtFeedback];
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        [field addBotomLayer:frame];
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

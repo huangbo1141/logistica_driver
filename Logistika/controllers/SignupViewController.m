@@ -49,38 +49,34 @@
     self.txtPhoneNumber.delegate = textDelegate;
     self.textDelegate = textDelegate;
     
-    AppDelegate* delegate = [UIApplication sharedApplication].delegate;
-    if (g_areaData == nil) {
-        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-        
-        NetworkParser* manager = [NetworkParser sharedManager];
-        [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_basic" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
-            if (error == nil) {
-                if (dict!=nil && dict[@"result"] != nil) {
-                    if ([dict[@"result"] intValue] == 200) {
-                        LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
-                        if (data.area.count > 0) {
-                            g_areaData = data;
-                            [self setAreaDatas];
-                        }
-                        
-                    }else{
-                        [CGlobal AlertMessage:@"Fail" Title:nil];
+    
+    [self setAreaDatas];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_basic" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                if ([dict[@"result"] intValue] == 200) {
+                    LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
+                    if (data.area.count > 0) {
+                        g_areaData = data;
+                        [self setAreaDatas];
                     }
+                    
+                }else{
+                    [CGlobal AlertMessage:@"Fail" Title:nil];
                 }
-            }else{
-                NSLog(@"Error");
             }
-            
-        } method:@"POST"];
+        }else{
+            NSLog(@"Error");
+        }
         
-    }else{
-        [self setAreaDatas];
-    }
+    } method:@"POST"];
 }
 -(void)setAreaDatas{
     
-    if (g_areaData.area.count > 0) {
+    if(true) { // if (g_areaData.area.count > 0) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.area.count; i++) {
             TblArea* item = g_areaData.area[i];
@@ -95,7 +91,7 @@
         self.txtArea.scrollParent = self.scrollParent;
     }
     
-    if (g_areaData.city.count > 0) {
+    if(true) { // if (g_areaData.city.count > 0) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.city.count; i++) {
             TblArea* item = g_areaData.city[i];
@@ -110,7 +106,7 @@
         self.txtCity.scrollParent = self.scrollParent;
     }
     
-    if (g_areaData.pincode.count > 0) {
+    if(true) { // if (g_areaData.pincode.count > 0) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.pincode.count; i++) {
             TblArea* item = g_areaData.pincode[i];
@@ -123,6 +119,14 @@
         self.txtPin.viewParent = [self.txtPin superview];
         self.txtPin.txtField.placeholder = @"Pincode";
         self.txtPin.scrollParent = self.scrollParent;
+    }
+    
+    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea.txtField,self.txtCity.txtField,self.txtPin.txtField];
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        [field addBotomLayer:frame];
     }
 }
 -(void)textChange:(UITextField*)field{

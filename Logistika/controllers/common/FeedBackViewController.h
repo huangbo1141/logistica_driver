@@ -9,11 +9,13 @@
 #import "MenuViewController.h"
 #import "ColoredButton.h"
 #import "GCPlaceholderTextView.h"
+#import "BorderTextField.h"
 
 @interface FeedBackViewController : MenuViewController
-@property (weak, nonatomic) IBOutlet UITextField *txtFirst;
-@property (weak, nonatomic) IBOutlet UITextField *txtLast;
-@property (weak, nonatomic) IBOutlet GCPlaceholderTextView *txtFeedback;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtFirst;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtLast;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtFeedback;
+//@property (weak, nonatomic) IBOutlet GCPlaceholderTextView *txtFeedback;
 
 @property (weak, nonatomic) IBOutlet ColoredButton *btnSubmit;
 @end

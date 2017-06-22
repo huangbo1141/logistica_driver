@@ -53,7 +53,21 @@
     _lblOrderNumber.text = env.order_id;
     _lblTrackingNumber.text = env.order_id;
     
+    NSArray* fields = @[self.txtFrieght,self.txtLoadType,self.txtScanCon,self.txtDateTime,self.txtVehicleNumber,self.txtDriverID,self.txtDriverName];
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake(0, 0, (screenRect.size.width-16)*0.5, 30);
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        [field addBotomLayer:frame];
+    }
     
+    fields = @[self.txtWeight,self.txtEta];
+    frame = CGRectMake(0, 0, (screenRect.size.width-16)*0.33, 24);
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        [field addBotomLayer:frame];
+    }
+    //self.txtWeight,self.txtEta
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -117,7 +131,7 @@
                 // barcode
                 UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
                 BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
-                vc.targetLabel = self.lblScanCon;
+                vc.targetLabel = self.txtScanCon;
                 [self.navigationController pushViewController:vc animated:true];
                 
                 break;
@@ -178,20 +192,20 @@
         _stackPickup.hidden = false;
         
         _txtLoadType.enabled = false;
-        _lblScanCon.enabled = false;
+        _txtScanCon.enabled = false;
         _txtDriverID.enabled = false;
         _txtDriverName.enabled = false;
         _imgSignature.userInteractionEnabled = false;
         _txtVehicleNumber.enabled = false;
         _txtDateTime.enabled = false;
         
-        _lblScanCon.userInteractionEnabled = false;
+        _txtScanCon.userInteractionEnabled = false;
         _btnScan.enabled = false;
         
     }else {
         _txtLoadType.enabled = false;
-        _lblScanCon.enabled = false;
-        _lblScanCon.userInteractionEnabled = false;
+        _txtScanCon.enabled = false;
+        _txtScanCon.userInteractionEnabled = false;
         _btnScan.enabled = false;
         _txtDriverID.enabled = false;
         _txtDriverName.enabled = false;
@@ -211,7 +225,7 @@
     [self.btnAction3 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     
     if (g_isii) {
-        _lblScanCon.text = @"11223344";
+        _txtScanCon.text = @"11223344";
     }
     
     _mDate = [self getDate];
@@ -274,7 +288,7 @@
 - (IBAction)scanBarcode:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
     BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
-    vc.targetLabel = self.lblScanCon;
+    vc.targetLabel = self.txtScanCon;
     [self.navigationController pushViewController:vc animated:true];
 }
 
@@ -348,7 +362,7 @@
         CarrierModel* cm = g_carrierModel;
         _txtFrieght.text = cm.freight;
         _txtLoadType.text = cm.load_type;
-        _lblScanCon.text = cm.consignment;
+        _txtScanCon.text = cm.consignment;
         _txtDateTime.text = [NSString stringWithFormat:@"%@ %@",cm.date,cm.time];
         _txtVehicleNumber.text = cm.vehicle;
         _txtDriverID.text = cm.driver_id;
@@ -425,7 +439,7 @@
 -(BOOL)checkInput{
     self.mFreight = _txtFrieght.text;
     self.mLoadType = _txtLoadType.text;
-    self.mConsignment = _lblScanCon.text;
+    self.mConsignment = _txtScanCon.text;
     self.mVehicle = _txtVehicleNumber.text;
     self.mDriverId = _txtDriverID.text;
     self.mDriverName = _txtDriverName.text;

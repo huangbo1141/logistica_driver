@@ -7,11 +7,12 @@
 //
 
 #import "BasicViewController.h"
+#import "BorderTextField.h"
 
 @interface ForgotPasswordViewController : BasicViewController
 @property (weak, nonatomic) IBOutlet UILabel *lblMessage;
-@property (weak, nonatomic) IBOutlet UITextField *txtUsername;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtUsername;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (assign, nonatomic) NSInteger segIndex;
 

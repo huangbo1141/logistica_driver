@@ -345,7 +345,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7WA-j8-cUn">
                                                 <rect key="frame" x="0.0" y="40.5" width="250" height="70"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hE-WG-zyo">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hE-WG-zyo" customClass="BorderTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="SzV-ax-cCl"/>
@@ -354,7 +354,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2xO-fp-CDt">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2xO-fp-CDt" customClass="BorderTextField">
                                                         <rect key="frame" x="0.0" y="40" width="250" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="I5R-aW-QSQ"/>
@@ -483,7 +483,7 @@ Please try again.</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3zG-Op-RYU">
                                         <rect key="frame" x="0.0" y="102" width="280" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Please enter your Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eJ4-mn-6KA">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please enter your Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eJ4-mn-6KA" customClass="BorderTextField">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="tj7-iw-ewn"/>
@@ -503,7 +503,7 @@ Please try again.</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Security Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QSt-c5-lNn">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Security Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QSt-c5-lNn" customClass="BorderTextField">
                                                 <rect key="frame" x="0.0" y="24.5" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Fis-I3-MDr"/>
@@ -599,7 +599,7 @@ Please try again.</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="txc-7L-JDU">
                                         <rect key="frame" x="0.0" y="102" width="280" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Please enter your username, which is the email address you" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL4-jU-zCC">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please enter your username, which is the email address you" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL4-jU-zCC" customClass="BorderTextField">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="rTK-Oz-hQ5"/>
@@ -619,7 +619,7 @@ Please try again.</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Security Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-Sz-sjO">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Security Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-Sz-sjO" customClass="BorderTextField">
                                                 <rect key="frame" x="0.0" y="24.5" width="280" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="lG5-6C-ejf"/>
@@ -692,16 +692,16 @@ Please try again.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GP7-Ht-IYH">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1123"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1093"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="G8J-yA-fwv">
-                                                <rect key="frame" x="0.0" y="8" width="375" height="975"/>
+                                                <rect key="frame" x="0.0" y="8" width="375" height="945"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEE-JP-8nA" customClass="ColoredView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocI-mS-f21" customClass="ViewHeading">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKK-kh-hA4" customClass="ColoredLabel">
-                                                                <rect key="frame" x="20" y="10.5" width="94" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orU-R4-ExR" customClass="ColoredLabel">
+                                                                <rect key="frame" x="20" y="5.5" width="94" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -717,18 +717,26 @@ Please try again.</string>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="XKK-kh-hA4" firstAttribute="leading" secondItem="NEE-JP-8nA" secondAttribute="leading" constant="20" id="05H-wD-alO"/>
-                                                            <constraint firstAttribute="height" constant="40" id="UVW-zM-u1f"/>
-                                                            <constraint firstItem="XKK-kh-hA4" firstAttribute="centerY" secondItem="NEE-JP-8nA" secondAttribute="centerY" id="YS9-Pn-JrJ"/>
+                                                            <constraint firstItem="orU-R4-ExR" firstAttribute="centerY" secondItem="ocI-mS-f21" secondAttribute="centerY" id="OTl-tJ-A2S"/>
+                                                            <constraint firstAttribute="height" constant="30" id="f88-l8-Kgu"/>
+                                                            <constraint firstItem="orU-R4-ExR" firstAttribute="leading" secondItem="ocI-mS-f21" secondAttribute="leading" constant="20" id="v6D-Ad-9Be"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="backMode">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="headMode">
+                                                                <integer key="value" value="0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="constraint_Height" destination="f88-l8-Kgu" id="rfD-wk-U3F"/>
+                                                            <outlet property="constraint_Leading" destination="v6D-Ad-9Be" id="Y5Q-BE-KZB"/>
+                                                            <outlet property="lblTitle" destination="orU-R4-ExR" id="heS-8m-Hl1"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-U0-jJI">
-                                                        <rect key="frame" x="0.0" y="55" width="375" height="106"/>
+                                                        <rect key="frame" x="0.0" y="45" width="375" height="106"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BGv-Ap-Sb7">
                                                                 <rect key="frame" x="20" y="0.0" width="335" height="106"/>
@@ -736,7 +744,7 @@ Please try again.</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fSr-sw-MYZ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="106"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UHl-cB-eDe">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UHl-cB-eDe" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="A67-ae-92U"/>
@@ -745,7 +753,7 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LqF-Qu-yxi">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LqF-Qu-yxi" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="38" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="yIp-wp-qfK"/>
@@ -754,7 +762,7 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-h7-svu">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-h7-svu" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="76" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="dac-l3-9Ro"/>
@@ -776,11 +784,11 @@ Please try again.</string>
                                                             <constraint firstItem="BGv-Ap-Sb7" firstAttribute="leading" secondItem="B2a-U0-jJI" secondAttribute="leading" constant="20" id="Gx3-vI-8vp"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWA-pO-NxS" customClass="ColoredView">
-                                                        <rect key="frame" x="0.0" y="176" width="375" height="40"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyy-Xb-xsp" customClass="ViewHeading">
+                                                        <rect key="frame" x="0.0" y="166" width="375" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peM-7p-EjE" customClass="ColoredLabel">
-                                                                <rect key="frame" x="20" y="10.5" width="96" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBx-SY-U0U" customClass="ColoredLabel">
+                                                                <rect key="frame" x="20" y="5.5" width="96" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -796,18 +804,26 @@ Please try again.</string>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="peM-7p-EjE" firstAttribute="leading" secondItem="FWA-pO-NxS" secondAttribute="leading" constant="20" id="Na8-xP-JBW"/>
-                                                            <constraint firstAttribute="height" constant="40" id="hty-Im-Mrk"/>
-                                                            <constraint firstItem="peM-7p-EjE" firstAttribute="centerY" secondItem="FWA-pO-NxS" secondAttribute="centerY" id="pE5-IY-DkB"/>
+                                                            <constraint firstItem="mBx-SY-U0U" firstAttribute="centerY" secondItem="Gyy-Xb-xsp" secondAttribute="centerY" id="9Ac-bC-Pde"/>
+                                                            <constraint firstItem="mBx-SY-U0U" firstAttribute="leading" secondItem="Gyy-Xb-xsp" secondAttribute="leading" constant="20" id="Xna-9n-kLC"/>
+                                                            <constraint firstAttribute="height" constant="30" id="g9S-88-cQb"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="backMode">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="headMode">
+                                                                <integer key="value" value="0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="constraint_Height" destination="g9S-88-cQb" id="Q2f-m7-6gM"/>
+                                                            <outlet property="constraint_Leading" destination="Xna-9n-kLC" id="46o-Ve-wN9"/>
+                                                            <outlet property="lblTitle" destination="mBx-SY-U0U" id="Ukj-tv-WOW"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6m-Ve-3aj">
-                                                        <rect key="frame" x="0.0" y="231" width="375" height="220"/>
+                                                        <rect key="frame" x="0.0" y="211" width="375" height="220"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEe-iQ-JeR">
                                                                 <rect key="frame" x="20" y="0.0" width="335" height="220"/>
@@ -815,7 +831,7 @@ Please try again.</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="523-eh-zlT">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2l-Ew-NYB">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2l-Ew-NYB" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="Bzk-Bp-RUA"/>
@@ -838,7 +854,7 @@ Please try again.</string>
                                                                                     <constraint firstAttribute="height" constant="30" id="eeM-wq-dfJ"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qUq-It-wNV">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qUq-It-wNV" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="114" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="lYc-7p-YWM"/>
@@ -854,7 +870,7 @@ Please try again.</string>
                                                                                     <constraint firstAttribute="height" constant="30" id="YaB-0V-uKG"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Land Mark" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Am8-nA-7OT">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Land Mark" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Am8-nA-7OT" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="190" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="jr6-T3-iHV"/>
@@ -876,11 +892,11 @@ Please try again.</string>
                                                             <constraint firstItem="rEe-iQ-JeR" firstAttribute="leading" secondItem="Q6m-Ve-3aj" secondAttribute="leading" constant="20" id="wbk-PT-RHU"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6LS-Sh-ggK" customClass="ColoredView">
-                                                        <rect key="frame" x="0.0" y="466" width="375" height="40"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9jc-qM-1Bv" customClass="ViewHeading">
+                                                        <rect key="frame" x="0.0" y="446" width="375" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email and Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7H-ku-Wrs" customClass="ColoredLabel">
-                                                                <rect key="frame" x="20" y="10.5" width="152" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email and Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vp0-sQ-b90" customClass="ColoredLabel">
+                                                                <rect key="frame" x="20" y="5.5" width="152" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -896,18 +912,26 @@ Please try again.</string>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="6Xt-9I-9zp"/>
-                                                            <constraint firstItem="M7H-ku-Wrs" firstAttribute="leading" secondItem="6LS-Sh-ggK" secondAttribute="leading" constant="20" id="kzi-os-usd"/>
-                                                            <constraint firstItem="M7H-ku-Wrs" firstAttribute="centerY" secondItem="6LS-Sh-ggK" secondAttribute="centerY" id="xhE-8J-hfa"/>
+                                                            <constraint firstItem="vp0-sQ-b90" firstAttribute="leading" secondItem="9jc-qM-1Bv" secondAttribute="leading" constant="20" id="B7s-hN-Afb"/>
+                                                            <constraint firstItem="vp0-sQ-b90" firstAttribute="centerY" secondItem="9jc-qM-1Bv" secondAttribute="centerY" id="UCC-gi-LK2"/>
+                                                            <constraint firstAttribute="height" constant="30" id="UeH-iP-4pw"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="backMode">
                                                                 <integer key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="headMode">
+                                                                <integer key="value" value="0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="constraint_Height" destination="UeH-iP-4pw" id="CJl-gj-74Z"/>
+                                                            <outlet property="constraint_Leading" destination="B7s-hN-Afb" id="JBe-v6-Q0B"/>
+                                                            <outlet property="lblTitle" destination="vp0-sQ-b90" id="87h-4N-o5q"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PG-An-wEK">
-                                                        <rect key="frame" x="0.0" y="521" width="375" height="454"/>
+                                                        <rect key="frame" x="0.0" y="491" width="375" height="454"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Wm-xc-OiG">
                                                                 <rect key="frame" x="20" y="0.0" width="335" height="454"/>
@@ -915,7 +939,7 @@ Please try again.</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-mr-yLe">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="106"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5w7-n0-cZq">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5w7-n0-cZq" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="HaN-Eq-nPk"/>
@@ -924,7 +948,7 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                             </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2KJ-Vh-b5x">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2KJ-Vh-b5x" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="38" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="J1G-Vq-LYC"/>
@@ -933,7 +957,7 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JZn-vZ-lGR">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JZn-vZ-lGR" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="76" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="K9Y-6b-f7o"/>
@@ -993,7 +1017,7 @@ Please try again.</string>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="he3-YZ-Epn">
                                                                                 <rect key="frame" x="0.0" y="60" width="335" height="30"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tk6-ai-WCF">
+                                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tk6-ai-WCF" customClass="BorderTextField">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="30" id="x9a-Af-TFS"/>

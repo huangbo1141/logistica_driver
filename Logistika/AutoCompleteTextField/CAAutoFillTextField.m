@@ -27,8 +27,8 @@
         CGRect frame = self.frame;
         self.tableHeight = 30.0;
         
-        _txtField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 30)];
-        _txtField.borderStyle = UITextBorderStyleLine; // rounded, recessed rectangle
+        _txtField = [[BorderTextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 30)];
+        _txtField.borderStyle = UITextBorderStyleNone; // rounded, recessed rectangle
         _txtField.autocorrectionType = UITextAutocorrectionTypeNo;
         _txtField.textAlignment = NSTextAlignmentLeft;
         _txtField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -41,7 +41,7 @@
         [self addSubview:_txtField];
         
         //Autocomplete Table
-//        self.autoCompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(3, _txtField.frame.origin.y+_txtField.frame.size.height, frame.size.width - 5, self.tableHeight) style:UITableViewStylePlain];
+        //        self.autoCompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(3, _txtField.frame.origin.y+_txtField.frame.size.height, frame.size.width - 5, self.tableHeight) style:UITableViewStylePlain];
         CGRect autoFrame = CGRectMake(self.frame.origin.x, self.frame.origin.y+_txtField.frame.size.height, frame.size.width, self.tableHeight);
         self.autoCompleteTableView = [[UITableView alloc] initWithFrame:autoFrame style:UITableViewStylePlain];
         self.autoCompleteTableView.delegate = self;
@@ -50,8 +50,8 @@
         self.autoCompleteTableView.hidden = NO;
         self.autoCompleteTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.autoCompleteTableView.rowHeight = self.tableHeight;
-//        [self addSubview:self.autoCompleteTableView];
-        self.autoCompleteTableView.backgroundColor = [UIColor blackColor];
+        //        [self addSubview:self.autoCompleteTableView];
+        self.autoCompleteTableView.backgroundColor = [UIColor clearColor];
         
         
         
@@ -69,7 +69,7 @@
     }
     [viewParent addSubview:self.autoCompleteTableView];
     self.autoCompleteTableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    
+    viewParent.backgroundColor = [UIColor clearColor];
     
 }
 - (id) initWithFrame:(CGRect)frame {
@@ -77,8 +77,8 @@
         
         self.tableHeight = 30.0;
         
-        _txtField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 30)];
-        _txtField.borderStyle = 3; // rounded, recessed rectangle
+        _txtField = [[BorderTextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 30)];
+        _txtField.borderStyle = UITextBorderStyleNone; // rounded, recessed rectangle
         _txtField.autocorrectionType = UITextAutocorrectionTypeNo;
         _txtField.textAlignment = NSTextAlignmentLeft;
         _txtField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -90,7 +90,7 @@
         [self addSubview:_txtField];
         
         //Autocomplete Table
-//        self.autoCompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(3, _txtField.frame.origin.y+_txtField.frame.size.height, frame.size.width - 5, self.tableHeight) style:UITableViewStylePlain];
+        //        self.autoCompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(3, _txtField.frame.origin.y+_txtField.frame.size.height, frame.size.width - 5, self.tableHeight) style:UITableViewStylePlain];
         CGRect autoFrame = CGRectMake(self.frame.origin.x, self.frame.origin.y+_txtField.frame.size.height, frame.size.width, self.tableHeight);
         self.autoCompleteTableView = [[UITableView alloc] initWithFrame:autoFrame style:UITableViewStylePlain];
         self.autoCompleteTableView.delegate = self;
@@ -98,50 +98,56 @@
         self.autoCompleteTableView.scrollEnabled = YES;
         self.autoCompleteTableView.hidden = NO;
         self.autoCompleteTableView.rowHeight = self.tableHeight;
-//        [self addSubview:self.autoCompleteTableView];
+        //        [self addSubview:self.autoCompleteTableView];
         
         _dataSourceArray = [[NSMutableArray alloc] init];
         _autoCompleteArray = [[NSMutableArray alloc] init];
     }
+    
+    self.autoCompleteTableView.backgroundColor = [UIColor clearColor];
+    [self setBackgroundColor:[UIColor clearColor]];
     return self;
 }
 
 // Take string from Search Textfield and compare it with autocomplete array
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
-	
-	[_autoCompleteArray removeAllObjects];
     
-	for(CAAutoCompleteObject *object in _dataSourceArray) {
-		NSRange substringRangeLowerCase = [[object.objName lowercaseString] rangeOfString:[substring lowercaseString]];
-		
+    [_autoCompleteArray removeAllObjects];
+    
+    for(CAAutoCompleteObject *object in _dataSourceArray) {
+        NSRange substringRangeLowerCase = [[object.objName lowercaseString] rangeOfString:[substring lowercaseString]];
+        
         if (substringRangeLowerCase.length != 0) {
-			[_autoCompleteArray addObject:object];
-		}
-	}
-	self.autoCompleteTableView.hidden = NO;
-	[self.autoCompleteTableView reloadData];
+            [_autoCompleteArray addObject:object];
+        }
+    }
+    self.autoCompleteTableView.hidden = NO;
+    [self.autoCompleteTableView reloadData];
     
     if (self.scrollParent!=nil) {
-//        CGRect screenRect = [UIScreen mainScreen].bounds;
-//        UIWindow* window = [UIApplication sharedApplication].keyWindow;
-//        CGRect src = self.frame;
-//        CGRect dst = [self convertRect:self.frame toView:window];
-//        
-//        NSLog(@"src %f %f %f %f",src.origin.x,src.origin.y,src.size.width,src.size.height);
-//        NSLog(@"dst %f %f %f %f",dst.origin.x,dst.origin.y,dst.size.width,dst.size.height);
-//        
-//        CGRect tableRect = [self.autoCompleteTableView convertRect:self.autoCompleteTableView.bounds toView:window];
-//        
-//        CGFloat total = tableRect.origin.y + tableRect.size.height + g_keyboardRect.size.height;
-//        if (total > screenRect.size.height) {
-//            // need more
-//            CGPoint pt = self.scrollParent.contentOffset;
-//            pt.y = pt.y + total - screenRect.size.height;
-//            [self.scrollParent setContentOffset:pt animated:TRUE];
-//        }else{
-//            
-//        }
+        CGRect screenRect = [UIScreen mainScreen].bounds;
+        UIWindow* window = [UIApplication sharedApplication].keyWindow;
+        CGRect src = self.frame;
+        CGRect dst = [self convertRect:self.frame toView:window];
+        
+        NSLog(@"src %f %f %f %f",src.origin.x,src.origin.y,src.size.width,src.size.height);
+        NSLog(@"dst %f %f %f %f",dst.origin.x,dst.origin.y,dst.size.width,dst.size.height);
+        
+        CGRect tableRect = [self.autoCompleteTableView convertRect:self.autoCompleteTableView.bounds toView:window];
+        
+        CGFloat total = tableRect.origin.y + tableRect.size.height + g_keyboardRect.size.height;
+        if (total > screenRect.size.height) {
+            // need more
+            CGPoint pt = self.scrollParent.contentOffset;
+            pt.y = pt.y + total - screenRect.size.height;
+            [self.scrollParent setContentOffset:pt animated:TRUE];
+        }else{
+            
+        }
+        self.scrollParent.backgroundColor = [UIColor clearColor];
     }
+    
+    
     
 }
 
@@ -152,7 +158,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section {
     
-	//Resize auto complete table based on how many elements will be displayed in the table
+    //Resize auto complete table based on how many elements will be displayed in the table
     
     CGRect tableRect;
     CGRect baseViewRect;
@@ -161,20 +167,20 @@
     if (_autoCompleteArray.count >=3) {
         tableRect = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, self.tableHeight*3);
         baseViewRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, (self.tableHeight*3)+30);
-		returnCount = _autoCompleteArray.count;
-	}
-	
-	else if (_autoCompleteArray.count == 2 || _autoCompleteArray.count == 1) {
-		tableRect = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, self.tableHeight*2);
+        returnCount = _autoCompleteArray.count;
+    }
+    
+    else if (_autoCompleteArray.count == 2 || _autoCompleteArray.count == 1) {
+        tableRect = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, self.tableHeight*2);
         baseViewRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, (self.tableHeight*2)+30);
-		returnCount = _autoCompleteArray.count;
-	}
-	
-	else {
-		tableRect = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, 0.0);
+        returnCount = _autoCompleteArray.count;
+    }
+    
+    else {
+        tableRect = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, 0.0);
         baseViewRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.tableHeight);
-		returnCount = _autoCompleteArray.count;
-	}
+        returnCount = _autoCompleteArray.count;
+    }
     
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^ {
         self.autoCompleteTableView.frame = tableRect;
@@ -189,34 +195,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = nil;
-	static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
-	cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
-	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
+    UITableViewCell *cell = nil;
+    static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+    cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
         [cell.textLabel setFont:[UIFont systemFontOfSize:14.0]];
-       
+        
         CGFloat version = [[[ UIDevice currentDevice ] systemVersion ] floatValue];
         if( version > 6 ){
             [cell setBackgroundColor:[UIColor clearColor]];
         }
-	}
+    }
     CAAutoCompleteObject *object = [_autoCompleteArray objectAtIndex:indexPath.row];
-	cell.textLabel.text = object.objName;
+    cell.textLabel.text = object.objName;
     cell.backgroundColor = [CGlobal colorWithHexString:@"F3F5E1" Alpha:1.0f];
-	return cell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	CAAutoCompleteObject *object = [_autoCompleteArray objectAtIndex:indexPath.row];
-	_txtField.text = object.objName;
-	[self finishedSearching];
+    CAAutoCompleteObject *object = [_autoCompleteArray objectAtIndex:indexPath.row];
+    _txtField.text = object.objName;
+    [self finishedSearching];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.tableHeight;
 }
 - (void) finishedSearching {
-	[self resignFirstResponder];
+    [self resignFirstResponder];
     
     [_autoCompleteArray removeAllObjects];
     [self.autoCompleteTableView reloadData];
@@ -251,7 +257,7 @@
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *substring = [NSString stringWithString:_txtField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
-	[self searchAutocompleteEntriesWithSubstring:substring];
+    [self searchAutocompleteEntriesWithSubstring:substring];
     
     return YES;
 }

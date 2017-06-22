@@ -54,6 +54,11 @@
         }
     }
     
+    NSArray* fields = @[_txtUsername,_txtPassword];
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        field.backMode = 1;
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

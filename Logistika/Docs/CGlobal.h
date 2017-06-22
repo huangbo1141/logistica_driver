@@ -116,6 +116,7 @@ extern DateModel* g_dateModel;
 extern ServiceModel* g_serviceModel;
 extern CarrierModel* g_carrierModel;
 extern NSString* g_state;
+extern CGRect g_keyboardRect;
 
 extern NSMutableArray* g_quoteModels;
 extern NSMutableArray* g_quoteCoperationModels;

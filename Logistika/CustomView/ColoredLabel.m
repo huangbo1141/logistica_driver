@@ -35,6 +35,11 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 3:{
+            // sign up section title
+            self.textColor = [CGlobal colorWithHexString:@"2f4f4f" Alpha:1.0f];
+            break;
+        }
         case 2:{
             // service label pack
             self.font = [UIFont systemFontOfSize:14];

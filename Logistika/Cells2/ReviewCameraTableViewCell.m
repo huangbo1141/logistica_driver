@@ -9,6 +9,8 @@
 #import "ReviewCameraTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CGlobal.h"
+#import "ViewPhotoFull.h"
+#import "UIView+Property.h"
 
 @implementation ReviewCameraTableViewCell
 
@@ -44,5 +46,30 @@
     
     
     self.data = model;
+}
+- (IBAction)clickImage:(id)sender {
+    if (self.imgContent.image!=nil) {
+        // show full content
+        if ([self.aDelegate isKindOfClass:[UIViewController class]]) {
+            UIViewController* vc = self.aDelegate;
+            NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"ViewPhotoFull" owner:vc options:nil];
+            ViewPhotoFull* view = array[0];
+            [view firstProcess:@{@"vc":vc,@"image":self.imgContent.image,@"aDelegate":self}];
+            
+            self.dialog = [[MyPopupDialog alloc] init];
+            [self.dialog setup:view backgroundDismiss:true backgroundColor:[UIColor grayColor]];
+            [self.dialog showPopup:vc.view];
+        }
+        
+    }
+}
+-(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
+    
+}
+-(void)didCancel:(NSDictionary *)data View:(UIView *)view{
+    if (view.xo!=nil && [view.xo isKindOfClass:[MyPopupDialog class]]) {
+        MyPopupDialog* dialog =  (MyPopupDialog*)view.xo;
+        [dialog dismissPopup];
+    }
 }
 @end

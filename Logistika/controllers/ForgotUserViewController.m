@@ -27,6 +27,15 @@
     [_btnSubmit setTitle:@"Continue" forState:UIControlStateNormal];
     
     _btnSubmit.tag = 200;
+    
+    NSArray* fields = @[self.txtPhone,self.txtAnswer];
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);
+    for (int i=0; i<fields.count; i++) {
+        BorderTextField*field = fields[i];
+        //        [field addBotomLayer:frame];
+        field.backMode = 1;
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

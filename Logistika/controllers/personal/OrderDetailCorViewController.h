@@ -9,6 +9,8 @@
 #import "BasicViewController.h"
 #import "ColoredView.h"
 #import "ConfirmBarViewController.h"
+#import "BorderTextField.h"
+
 
 @interface OrderDetailCorViewController : BasicViewController
 @property (weak, nonatomic) IBOutlet UILabel *lbl_signature;
@@ -73,18 +75,20 @@
 @property (weak, nonatomic) IBOutlet UIStackView *stackEta;
 
 
-@property (weak, nonatomic) IBOutlet UITextField *txtWeight;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateWeight;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdate;
-@property (weak, nonatomic) IBOutlet UITextField *txtEta;
-@property (weak, nonatomic) IBOutlet UITextField *txtFrieght;
-@property (weak, nonatomic) IBOutlet UITextField *txtLoadType;
-@property (weak, nonatomic) IBOutlet UILabel *lblScanCon;
-@property (weak, nonatomic) IBOutlet UITextField *txtDateTime;
-@property (weak, nonatomic) IBOutlet UITextField *txtVehicleNumber;
-@property (weak, nonatomic) IBOutlet UITextField *txtDriverID;
-@property (weak, nonatomic) IBOutlet UITextField *txtDriverName;
+
+@property (weak, nonatomic) IBOutlet BorderTextField *txtWeight;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtEta;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtFrieght;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtLoadType;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtScanCon;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtDateTime;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtVehicleNumber;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtDriverID;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtDriverName;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgSignature;
 @property (weak, nonatomic) IBOutlet UIImageView *imgSignature_recv;
 @end

@@ -33,12 +33,21 @@
                                                     <constraint firstAttribute="height" constant="20" id="dhS-IO-j0g"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0w-Ud-AHU">
+                                                <rect key="frame" x="18" y="25" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="DoF-3A-ZIj"/>
+                                                    <constraint firstAttribute="width" constant="40" id="m5Q-eB-FtJ"/>
+                                                </constraints>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Ux1-Pi-Yg5" firstAttribute="centerY" secondItem="Az2-Nl-77s" secondAttribute="centerY" id="2Vd-Wb-a9j"/>
                                             <constraint firstAttribute="width" constant="76" id="DtB-is-ce3"/>
+                                            <constraint firstItem="U0w-Ud-AHU" firstAttribute="centerY" secondItem="Ux1-Pi-Yg5" secondAttribute="centerY" id="JMr-SE-4wT"/>
                                             <constraint firstItem="Ux1-Pi-Yg5" firstAttribute="centerX" secondItem="Az2-Nl-77s" secondAttribute="centerX" id="Xhg-hp-RVk"/>
+                                            <constraint firstItem="U0w-Ud-AHU" firstAttribute="centerX" secondItem="Ux1-Pi-Yg5" secondAttribute="centerX" id="zxV-ZZ-4lP"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="backMode">

@@ -104,6 +104,7 @@ DateModel* g_dateModel;
 ServiceModel* g_serviceModel;
 CarrierModel* g_carrierModel;
 NSString* g_state;
+CGRect g_keyboardRect;
 
 NSMutableArray* g_quoteModels;
 NSMutableArray* g_quoteCoperationModels;
