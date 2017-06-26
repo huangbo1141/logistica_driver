@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1790,9 +1790,8 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znT-EO-j5C">
                                                                                 <rect key="frame" x="152" y="0.0" width="152" height="24"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wee-Wb-lcD" customClass="BorderTextField">
+                                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wee-Wb-lcD" customClass="BorderTextField">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="152" height="24"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                         <nil key="textColor"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <textInputTraits key="textInputTraits"/>
@@ -1806,10 +1805,14 @@
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
+                                                                                    <constraint firstItem="wee-Wb-lcD" firstAttribute="top" secondItem="znT-EO-j5C" secondAttribute="top" id="1zQ-YV-62c"/>
                                                                                     <constraint firstItem="wMn-DT-ZI8" firstAttribute="leading" secondItem="znT-EO-j5C" secondAttribute="leading" id="EDx-1J-jOc"/>
                                                                                     <constraint firstItem="wMn-DT-ZI8" firstAttribute="top" secondItem="znT-EO-j5C" secondAttribute="top" id="KkG-rv-ErA"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="wMn-DT-ZI8" secondAttribute="trailing" id="UZa-Qb-KgM"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="wee-Wb-lcD" secondAttribute="bottom" id="YME-kY-UVi"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="wMn-DT-ZI8" secondAttribute="bottom" id="dQY-Do-o8q"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="wee-Wb-lcD" secondAttribute="trailing" id="vnI-Rw-2D3"/>
+                                                                                    <constraint firstItem="wee-Wb-lcD" firstAttribute="leading" secondItem="znT-EO-j5C" secondAttribute="leading" id="ypP-oT-u7k"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>

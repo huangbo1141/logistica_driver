@@ -14,6 +14,7 @@
 #import "NetworkParser.h"
 #import "OrderResponse.h"
 #import "OrderHisModel.h"
+#import "OrderCorporateHisModel.h"
 
 @interface BasicViewController ()
 @property (nonatomic,strong) IQKeyboardReturnKeyHandler* returnKeyHandler;
@@ -43,11 +44,8 @@
 -(void)trackOrders:(NSInteger)mode{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
-    if (env.mode == c_PERSONAL) {
-        params[@"employer_id"] = env.user_id;
-    }else if(env.mode == c_CORPERATION){
-        params[@"employer_id"] = env.corporate_user_id;
-    }
+    
+    params[@"employer_id"] = env.user_id;
     
     params[@"state"] = @"3";
     NetworkParser* manager = [NetworkParser sharedManager];
@@ -79,7 +77,12 @@
             if (mode == 1) {
                 [CGlobal setOrderForTrackOrder:self.trackOrderStrs];
             }else{
-                [self trackCorporateOrders];
+                if ([env.cor_email length]>0) {
+                    [self trackCorporateOrders];
+                }else{
+                    [CGlobal setOrderForTrackOrder:self.trackOrderStrs];
+                }
+                
             }
             
             return;
@@ -94,12 +97,11 @@
 -(void)trackCorporateOrders{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
-    if (env.mode == c_PERSONAL) {
-        params[@"employer_id"] = env.user_id;
-    }else if(env.mode == c_CORPERATION){
-        params[@"employer_id"] = env.corporate_user_id;
-    }
+    params[@"employer_id"] = env.corporate_user_id;
     
+    if (params[@"employer_id"] == nil) {
+        return;
+    }
     params[@"state"] = @"3";
     NetworkParser* manager = [NetworkParser sharedManager];
 //    [CGlobal showIndicator:self];
@@ -108,10 +110,10 @@
             // succ
             if (dict[@"result" ]!=nil) {
                 if ([dict[@"result"] intValue] == 200) {
-                    OrderResponse* response = [[OrderResponse alloc] initWithDictionary_his:dict];
+                    OrderResponse* response = [[OrderResponse alloc] initWithDictionary_his_cor:dict];
                     NSMutableArray* array = self.trackOrderStrs;
                     for (int i=0; i<response.orders.count; i++) {
-                        OrderHisModel* order = response.orders[i];
+                        OrderCorporateHisModel* order = response.orders[i];
                         NSString* track_str = [NSString stringWithFormat:@"%@,%d",order.orderId,c_CORPERATION];
                         [array addObject:track_str];
                     }

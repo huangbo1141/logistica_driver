@@ -7,6 +7,7 @@
 //
 
 #import "BorderTextView.h"
+#import "CGlobal.h"
 
 @implementation BorderTextView
 
@@ -34,6 +35,8 @@
                 
                 
                 _bottomLine = border;
+                
+                self.delegate = self;
             }
             
             break;
@@ -61,6 +64,8 @@
     self.layer.masksToBounds = YES;
         
     _bottomLine = border;
+    
+    self.delegate = self;
 }
 - (CGRect)textRectForBounds:(CGRect)bounds {
     return CGRectInset(bounds, 5, 5);
@@ -68,5 +73,17 @@
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return CGRectInset(bounds, 5, 5);
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (_bottomLine != nil) {
+        CALayer *border = _bottomLine;
+        border.borderColor = COLOR_PRIMARY.CGColor;
+    }
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_bottomLine != nil) {
+        CALayer *border = _bottomLine;
+        border.borderColor = [UIColor darkGrayColor].CGColor;
+    }
 }
 @end

@@ -26,7 +26,7 @@
 }
 - (IBAction)clickOK:(id)sender {
     NSString* auth = _edtAuthentication.text;
-    if (_edtAuthentication.text!=nil && [auth length] == 0) {
+    if ([_edtAuthentication.text length]>0) {
         if (self.aDelegate!=nil) {
             [self.aDelegate didSubmit:@{@"data":auth} View:self];
         }

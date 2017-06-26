@@ -35,6 +35,7 @@
 	<string>Logistika app access your photo library to upload your photo</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Verdanab.ttf</string>
 		<string>Verdana.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>

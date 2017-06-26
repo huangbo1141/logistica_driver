@@ -46,11 +46,12 @@
     
     if (g_isii) {
         if (self.segIndex == 0) {
-            _txtUsername.text= @"fff@fff.com";
-            _txtPassword.text= @"aaaaaaa1";
+            _txtUsername.text= @"custemp@custemp.com";
+//            _txtUsername.text= @".com";
+            _txtPassword.text= @"password1";
         }else{
-            _txtUsername.text= @"ooo@ooo.com";
-            _txtPassword.text= @"aaaaaaa1";
+            _txtUsername.text= @"corpemp@corpemp.com";
+            _txtPassword.text= @"password1";
         }
     }
     

@@ -74,21 +74,29 @@
         
     } method:@"POST"];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"Create Profile";
+}
 -(void)setAreaDatas{
     
     if(true) { // if (g_areaData.area.count > 0) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (int i = 0; i<g_areaData.area.count; i++) {
-            TblArea* item = g_areaData.area[i];
-            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-            [tempArray addObject:object];
-        }
-        [self.txtArea setDataSourceArray:tempArray];
-        [self.txtArea setDelegate:self];
         
-        self.txtArea.viewParent = [self.txtArea superview];
-        self.txtArea.txtField.placeholder = @"Area,Locality";
-        self.txtArea.scrollParent = self.scrollParent;
+        self.txtArea.txtField.text = @"area";
+        self.txtArea.hidden = true;
+        
+//        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+//        for (int i = 0; i<g_areaData.area.count; i++) {
+//            TblArea* item = g_areaData.area[i];
+//            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+//            [tempArray addObject:object];
+//        }
+//        [self.txtArea setDataSourceArray:tempArray];
+//        [self.txtArea setDelegate:self];
+//        
+//        self.txtArea.viewParent = [self.txtArea superview];
+//        self.txtArea.txtField.placeholder = @"Area,Locality";
+//        self.txtArea.scrollParent = self.scrollParent;
     }
     
     if(true) { // if (g_areaData.city.count > 0) {
@@ -121,12 +129,18 @@
         self.txtPin.scrollParent = self.scrollParent;
     }
     
-    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea.txtField,self.txtCity.txtField,self.txtPin.txtField];
+    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea,self.txtCity,self.txtPin];
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);
     for (int i=0; i<fields.count; i++) {
-        BorderTextField*field = fields[i];
-        [field addBotomLayer:frame];
+        if ([fields[i] isKindOfClass:[BorderTextField class]]) {
+            BorderTextField*field = fields[i];
+            [field addBotomLayer:frame];
+        }else if([fields[i] isKindOfClass:[CAAutoFillTextField class]]){
+            CAAutoFillTextField* ca = fields[i];
+            [ca.txtField addBotomLayer:frame];
+            ca.txtField.delegate = ca;
+        }
     }
 }
 -(void)textChange:(UITextField*)field{

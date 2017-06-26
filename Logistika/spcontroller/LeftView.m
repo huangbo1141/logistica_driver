@@ -151,9 +151,7 @@
         }
         case 210:{
             // sign out
-            if (g_isii == false) {
-                [env logOut];
-            }
+            [env logOut];
             [CGlobal clearData];
             AppDelegate* delegate = [UIApplication sharedApplication].delegate;
             [delegate defaultLogin];

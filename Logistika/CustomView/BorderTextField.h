@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BorderTextField : UITextField
+@interface BorderTextField : UITextField<UITextFieldDelegate>
 
 @property (nonatomic) IBInspectable NSInteger backMode;
 @property (nonatomic,strong) CALayer*bottomLine;

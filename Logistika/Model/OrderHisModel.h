@@ -17,6 +17,7 @@
 @property (nonatomic,copy) NSString* trackId;
 @property (nonatomic,copy) NSString* state;
 @property (nonatomic,copy) NSString* payment;
+@property (nonatomic,copy) NSString* address;
 
 @property (nonatomic,strong) AddressModel* addressModel;
 @property (nonatomic,strong) ServiceModel* serviceModel;

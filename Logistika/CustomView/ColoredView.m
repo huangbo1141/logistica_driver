@@ -35,6 +35,19 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+            case 6:{
+                // card box frame
+                UIView* shadowView = self;
+                shadowView.backgroundColor= [CGlobal colorWithHexString:@"ffffff" Alpha:1.0f];
+                [shadowView.layer setCornerRadius:5.0f];
+                [shadowView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+                [shadowView.layer setBorderWidth:0.1f];
+                [shadowView.layer setShadowColor:[UIColor colorWithRed:225.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0].CGColor];
+                [shadowView.layer setShadowOpacity:1.0];
+                [shadowView.layer setShadowRadius:5.0];
+                [shadowView.layer setShadowOffset:CGSizeMake(5.0f, 5.0f)];
+                break;
+            }
         case 5:{
             UIView* shadowView = self;
             shadowView.backgroundColor= [CGlobal colorWithHexString:@"eeeeee" Alpha:1.0f];

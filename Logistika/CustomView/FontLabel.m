@@ -57,4 +57,10 @@
         self.font = font;
     }
 }
+-(void)setBsize:(CGFloat)bsize{
+    if (bsize > 0) {
+        UIFont* font = [UIFont fontWithName:@"Verdana-Bold" size:bsize];
+        self.font = font;
+    }
+}
 @end

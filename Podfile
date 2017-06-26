@@ -8,7 +8,7 @@ target 'Logistika' do
   # Pods for Logistika
 pod ”IQKeyboardManager”
 pod 'AFNetworking', '~> 3.0'
-pod "ECDrawerLayout"
+# pod "ECDrawerLayout"
 pod 'Stripe'
 pod “SDWebImage”, ‘~>3.7’
 pod "MTBBarcodeScanner"

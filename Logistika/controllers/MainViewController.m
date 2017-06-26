@@ -51,7 +51,10 @@
     
     self.segment.tintColor = COLOR_PRIMARY;
     
-    [self trackOrders:0];
+    EnvVar* env = [CGlobal sharedId].env;
+    if ([env.username length]>0) {
+        [self trackOrders:0];
+    }
 }
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
@@ -71,24 +74,26 @@
         case 201:
         {
             // sign up
-//            self.dialog = [[MyPopupDialog alloc] init];
-//            UIViewController*vc = self;
-//            NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"ViewAuthen" owner:vc options:nil];
-//            ViewAuthen* view = array[0];
-//            [view firstProcess:@{@"aDelegate":self}];
-//            
-//            self.dialog = [[MyPopupDialog alloc] init];
-//            [self.dialog setup:view backgroundDismiss:true backgroundColor:[UIColor grayColor]];
-//            [self.dialog showPopup:vc.view];
+            self.dialog = [[MyPopupDialog alloc] init];
+            UIViewController*vc = self;
+            NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"ViewAuthen" owner:vc options:nil];
+            ViewAuthen* view = array[0];
+            [view firstProcess:@{@"aDelegate":self}];
             
-            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            SignupViewController*vc = [ms instantiateViewControllerWithIdentifier:@"SignupViewController"] ;
-            vc.segIndex = self.segment.selectedSegmentIndex;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.navigationController.navigationBar.hidden = false;
-                [self.navigationController pushViewController:vc animated:true];
-            });
-
+            self.dialog = [[MyPopupDialog alloc] init];
+            [self.dialog setup:view backgroundDismiss:true backgroundColor:[UIColor grayColor]];
+            [self.dialog showPopup:vc.view];
+            
+//            UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            SignupViewController*vc = [ms instantiateViewControllerWithIdentifier:@"SignupViewController"] ;
+//            vc.segIndex = self.segment.selectedSegmentIndex;
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.navigationController.navigationBar.hidden = false;
+//                [self.navigationController pushViewController:vc animated:true];
+//            });
+//
+            
+            
             break;
         }
         case 202:
@@ -153,21 +158,21 @@
 }
 
 -(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
-    if (view.xo!=nil && [view.xo isKindOfClass:[MyPopupDialog class]]) {
-        MyPopupDialog* dialog = (MyPopupDialog*)view.xo;
-        [dialog dismissPopup];
-    }else if([view isKindOfClass:[ViewAuthen class]]){
+    if([view isKindOfClass:[ViewAuthen class]]){
         if (data[@"data"]!=nil) {
             // authencation
             NSString* auth = data[@"data"];
             NSMutableDictionary* req = [[NSMutableDictionary alloc] init];
+            req[@"authentication"] = auth;
             
             NetworkParser* manager = [NetworkParser sharedManager];
             [CGlobal showIndicator:self];
             [manager ontemplateGeneralRequest2:req BasePath:g_URL Path:@"get_authentication" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
                 if (error == nil) {
-                    if (dict!=nil && dict[@"result"] != nil) {
-                        if ([dict[@"result"] intValue] == [auth intValue]) {
+                    if (dict!=nil && [dict[@"result"] isKindOfClass:[NSString class]]) {
+                        NSString* a = [dict[@"result"] lowercaseString];
+                        NSString* b = [auth lowercaseString];
+                        if ([a isEqualToString:b]) {
                             UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                             SignupViewController*vc = [ms instantiateViewControllerWithIdentifier:@"SignupViewController"] ;
                             vc.segIndex = self.segment.selectedSegmentIndex;
@@ -183,11 +188,15 @@
                     NSLog(@"Error");
                 }
                 
-                [CGlobal AlertMessage:@"Tracking number not found in our records" Title:nil];
+//                [CGlobal AlertMessage:@"Tracking number not found in our records" Title:nil];
                 [CGlobal stopIndicator:self];
                 
-            } method:@"POST"];
+            } method:@"post"];
         }
+    }
+    if (view.xo!=nil && [view.xo isKindOfClass:[MyPopupDialog class]]) {
+        MyPopupDialog* dialog = (MyPopupDialog*)view.xo;
+        [dialog dismissPopup];
     }
     
 }

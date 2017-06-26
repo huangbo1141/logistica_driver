@@ -19,47 +19,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    CGRect screenRect = [UIScreen mainScreen].bounds;
-    CGFloat width = screenRect.size.width;
-    CGFloat height = width*1080/1920.0;
-    self.movieView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    [self.view addSubview:self.movieView];
-    self.movieView.center = self.view.center;
-    
-    NSURL *movieURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"new_white" ofType:@"mp4"]];
-    AVAsset *avAsset = [AVAsset assetWithURL:movieURL];
-    AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
-    self.avplayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
-    AVPlayerLayer *avPlayerLayer =[AVPlayerLayer playerLayerWithPlayer:self.avplayer];
-    [avPlayerLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    //    [avPlayerLayer setFrame:[[UIScreen mainScreen] bounds]];
-    
-    //    [avPlayerLayer setFrame:self.movieView.bounds];
-    
-    [avPlayerLayer setFrame:[self.movieView bounds]];
-    [self.movieView.layer addSublayer:avPlayerLayer];
-    
-    
-    
-    //Config player
-    [self.avplayer seekToTime:kCMTimeZero];
-    [self.avplayer setVolume:0.0f];
-    [self.avplayer setActionAtItemEnd:AVPlayerActionAtItemEndNone];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerItemDidReachEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[self.avplayer currentItem]];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerStartPlaying)
-                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-    //Config dark gradient view
-//    CAGradientLayer *gradient = [CAGradientLayer layer];
-//    gradient.frame = [[UIScreen mainScreen] bounds];
-//    gradient.colors = [NSArray arrayWithObjects:(id)[UIColorFromRGB(0x030303) CGColor], (id)[[UIColor clearColor] CGColor], (id)[UIColorFromRGB(0x030303) CGColor],nil];
-//    [self.gradientView.layer insertSublayer:gradient atIndex:0];
+//    CGRect screenRect = [UIScreen mainScreen].bounds;
+//    CGFloat width = screenRect.size.width;
+//    CGFloat height = width*1080/1920.0;
+//    self.movieView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+//    [self.view addSubview:self.movieView];
+//    self.movieView.center = self.view.center;
 //    
-//    _gradientView.hidden = true;
+//    NSURL *movieURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"new_white" ofType:@"mp4"]];
+//    AVAsset *avAsset = [AVAsset assetWithURL:movieURL];
+//    AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
+//    self.avplayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
+//    AVPlayerLayer *avPlayerLayer =[AVPlayerLayer playerLayerWithPlayer:self.avplayer];
+//    [avPlayerLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+//    //    [avPlayerLayer setFrame:[[UIScreen mainScreen] bounds]];
+//    
+//    //    [avPlayerLayer setFrame:self.movieView.bounds];
+//    
+//    [avPlayerLayer setFrame:[self.movieView bounds]];
+//    [self.movieView.layer addSublayer:avPlayerLayer];
+//    
+//    
+//    
+//    //Config player
+//    [self.avplayer seekToTime:kCMTimeZero];
+//    [self.avplayer setVolume:0.0f];
+//    [self.avplayer setActionAtItemEnd:AVPlayerActionAtItemEndNone];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(playerItemDidReachEnd:)
+//                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+//                                               object:[self.avplayer currentItem]];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(playerStartPlaying)
+//                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate defaultLogin];
+    });
 }
 
 
@@ -70,13 +68,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.avplayer pause];
+//    [self.avplayer pause];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.avplayer play];
+//    [self.avplayer play];
 }
 
 - (void)dealloc

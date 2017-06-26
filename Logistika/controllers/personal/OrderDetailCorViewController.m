@@ -55,7 +55,7 @@
     
     NSArray* fields = @[self.txtFrieght,self.txtLoadType,self.txtScanCon,self.txtDateTime,self.txtVehicleNumber,self.txtDriverID,self.txtDriverName];
     CGRect screenRect = [UIScreen mainScreen].bounds;
-    CGRect frame = CGRectMake(0, 0, (screenRect.size.width-16)*0.5, 30);
+    CGRect frame = CGRectMake(0, 0, (screenRect.size.width-16)*0.5, 24);
     for (int i=0; i<fields.count; i++) {
         BorderTextField*field = fields[i];
         [field addBotomLayer:frame];

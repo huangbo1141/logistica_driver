@@ -8,7 +8,7 @@
 
 #import "GCPlaceholderTextView.h"
 
-@interface BorderTextView : GCPlaceholderTextView
+@interface BorderTextView : GCPlaceholderTextView<UITextViewDelegate>
 @property (nonatomic) IBInspectable NSInteger backMode;
 @property (nonatomic,strong) CALayer*bottomLine;
 

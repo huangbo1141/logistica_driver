@@ -72,29 +72,38 @@
         
     } method:@"POST"];
     
-    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea.txtField,self.txtCity.txtField,self.txtPin.txtField];
+    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea,self.txtCity,self.txtPin];
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);
     for (int i=0; i<fields.count; i++) {
-        BorderTextField*field = fields[i];
-        [field addBotomLayer:frame];
+        if ([fields[i] isKindOfClass:[BorderTextField class]]) {
+            BorderTextField*field = fields[i];
+            [field addBotomLayer:frame];
+        }else if([fields[i] isKindOfClass:[CAAutoFillTextField class]]){
+            CAAutoFillTextField* ca = fields[i];
+            [ca.txtField addBotomLayer:frame];
+            ca.txtField.delegate = ca;
+        }
     }
 }
 -(void)setAreaDatas{
     
     if(true) { // if (g_areaData.area.count > 0) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (int i = 0; i<g_areaData.area.count; i++) {
-            TblArea* item = g_areaData.area[i];
-            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-            [tempArray addObject:object];
-        }
-        [self.txtArea setDataSourceArray:tempArray];
-        [self.txtArea setDelegate:self];
+        self.txtArea.txtField.text = @"area";
+        self.txtArea.hidden = true;
         
-        self.txtArea.viewParent = [self.txtArea superview];
-        self.txtArea.txtField.placeholder = @"Area,Locality";
-        self.txtArea.scrollParent = self.scrollParent;
+//        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+//        for (int i = 0; i<g_areaData.area.count; i++) {
+//            TblArea* item = g_areaData.area[i];
+//            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+//            [tempArray addObject:object];
+//        }
+//        [self.txtArea setDataSourceArray:tempArray];
+//        [self.txtArea setDelegate:self];
+//        
+//        self.txtArea.viewParent = [self.txtArea superview];
+//        self.txtArea.txtField.placeholder = @"Area,Locality";
+//        self.txtArea.scrollParent = self.scrollParent;
     }
     
     if(true) { // if (g_areaData.city.count > 0) {
@@ -170,9 +179,15 @@
         self.txtRePassword.text = env.password;
     }
     
-    NSArray* controls = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtCity,self.txtState,self.txtPin,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer];
-    for (UITextField*text in controls) {
-        [text addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+    NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtCity,self.txtState,self.txtPin,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer];
+    for (int i=0; i<fields.count; i++) {
+        if ([fields[i] isKindOfClass:[BorderTextField class]]) {
+            BorderTextField*text = fields[i];
+            [text addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+        }else if([fields[i] isKindOfClass:[CAAutoFillTextField class]]){
+            CAAutoFillTextField* ca = fields[i];
+            [ca.txtField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+        }
     }
 }
 

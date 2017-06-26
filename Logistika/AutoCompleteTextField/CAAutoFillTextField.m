@@ -232,12 +232,15 @@
     if ([_delegate respondsToSelector:@selector(CAAutoTextFillBeginEditing:)]) {
         [_delegate CAAutoTextFillBeginEditing:self];
     }
+    self.txtField.bottomLine.borderColor = COLOR_PRIMARY.CGColor;
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if ([_delegate respondsToSelector:@selector(CAAutoTextFillEndEditing:)]) {
         [_delegate CAAutoTextFillEndEditing:self];
     }
+    self.txtField.bottomLine.borderColor = [UIColor darkGrayColor].CGColor;
+    
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {

@@ -7,6 +7,7 @@
 //
 
 #import "BorderTextField.h"
+#import "CGlobal.h"
 
 @implementation BorderTextField
 
@@ -52,6 +53,7 @@
                 self.leftViewMode = UITextFieldViewModeAlways;
                 
                 _bottomLine = border;
+                self.delegate = self;
             }
             
             break;
@@ -83,5 +85,19 @@
     self.leftViewMode = UITextFieldViewModeAlways;
     
     _bottomLine = border;
+    
+    self.delegate = self;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (_bottomLine != nil) {
+        CALayer *border = _bottomLine;
+        border.borderColor = COLOR_PRIMARY.CGColor;
+    }
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_bottomLine != nil) {
+        CALayer *border = _bottomLine;
+        border.borderColor = [UIColor darkGrayColor].CGColor;
+    }
 }
 @end

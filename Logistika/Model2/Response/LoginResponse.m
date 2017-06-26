@@ -44,13 +44,13 @@
             }
         }
         
-        obj = [dict objectForKey:@"city"];
+        obj = [dict objectForKey:@"pincode"];
         if (obj!=nil && obj!= [NSNull null]) {
             NSArray* list = (NSArray*)obj;
-            self.city = [[NSMutableArray alloc] init];
+            self.pincode = [[NSMutableArray alloc] init];
             for (int i=0; i<list.count; i++) {
                 TblArea* area = [[TblArea alloc] initWithDictionary:list[i]];
-                [self.city addObject:area];
+                [self.pincode addObject:area];
             }
         }
         obj = [dict objectForKey:@"truck"];
