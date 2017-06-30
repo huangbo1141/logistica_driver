@@ -326,8 +326,7 @@
             }
             [self completeCorporateOrder:@"4"];
             
-            EnvVar* env = [CGlobal sharedId].env;
-            [CGlobal removeOrderFromTrackOrder:env.order_id];
+            
             break;
         }
         case 204:{
@@ -403,7 +402,7 @@
         [images addObject:imageData];
     }
     if (images.count == 0) {
-        [CGlobal AlertMessage:@"Invalid Image" Title:nil];
+        [CGlobal AlertMessage:@"Please Signature" Title:nil];
         return;
     }
     
@@ -588,7 +587,7 @@
     }
     params[@"receiver_signature"] = @"receiver_signature";
     if (images.count == 0) {
-        [CGlobal AlertMessage:@"Invalid Image" Title:nil];
+        [CGlobal AlertMessage:@"Please Signature" Title:nil];
         return;
     }
     params[@"eta"] = self.mETA;
@@ -601,7 +600,10 @@
             if (dict!=nil && dict[@"result"] != nil) {
                 //
                 if([dict[@"result"] intValue] == 200){
+                    EnvVar* env = [CGlobal sharedId].env;
+                    [CGlobal removeOrderFromTrackOrder:env.order_id];
                     [self.navigationController popViewControllerAnimated:true];
+                    
                 }else if([dict[@"result"] intValue] == 300){
                     
                 }else {

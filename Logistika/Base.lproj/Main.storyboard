@@ -88,15 +88,12 @@
                                             <segment title="Corporate Delivery"/>
                                         </segments>
                                     </segmentedControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="8kS-hF-aec">
-                                        <rect key="frame" x="68" y="204.5" width="240" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8kS-hF-aec">
+                                        <rect key="frame" x="30" y="204.5" width="315" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVM-ga-Mu3" customClass="ColoredButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="30"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="CK1-Cb-9Zr"/>
-                                                </constraints>
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -110,11 +107,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iz6-2N-AUz" customClass="ColoredButton">
-                                                <rect key="frame" x="140" y="0.0" width="100" height="30"/>
+                                                <rect key="frame" x="172.5" y="0.0" width="142.5" height="30"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="v1D-Fo-YH6"/>
-                                                </constraints>
                                                 <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -257,19 +251,20 @@
                                 <constraints>
                                     <constraint firstItem="58e-Qd-bF4" firstAttribute="centerX" secondItem="p2l-qF-vko" secondAttribute="centerX" id="10K-sE-u8o"/>
                                     <constraint firstAttribute="trailing" secondItem="aZr-zO-DCP" secondAttribute="trailing" id="23I-R5-iRX"/>
-                                    <constraint firstItem="8kS-hF-aec" firstAttribute="centerX" secondItem="p2l-qF-vko" secondAttribute="centerX" id="5ca-Lg-hVG"/>
                                     <constraint firstItem="58e-Qd-bF4" firstAttribute="top" secondItem="pWY-oQ-Txc" secondAttribute="bottom" constant="24" id="5tf-ix-8pi"/>
                                     <constraint firstItem="SN6-JE-vvg" firstAttribute="leading" secondItem="fMO-dg-fvQ" secondAttribute="trailing" id="84D-5D-LMC"/>
                                     <constraint firstItem="SN6-JE-vvg" firstAttribute="width" secondItem="p2l-qF-vko" secondAttribute="width" multiplier="0.5" constant="-1" id="8Cx-PS-aP1"/>
                                     <constraint firstItem="SXb-Qc-yiL" firstAttribute="leading" secondItem="p2l-qF-vko" secondAttribute="leading" id="8tj-GX-41Z"/>
                                     <constraint firstItem="SN6-JE-vvg" firstAttribute="top" secondItem="SXb-Qc-yiL" secondAttribute="top" id="CKu-FQ-zfl"/>
                                     <constraint firstItem="8kS-hF-aec" firstAttribute="top" secondItem="58e-Qd-bF4" secondAttribute="bottom" constant="29.5" id="F4q-J1-Dk8"/>
+                                    <constraint firstAttribute="trailing" secondItem="8kS-hF-aec" secondAttribute="trailing" constant="30" id="G0u-1p-hCa"/>
                                     <constraint firstAttribute="bottom" secondItem="fMO-dg-fvQ" secondAttribute="bottom" id="Hbl-qT-Jec"/>
                                     <constraint firstAttribute="bottom" secondItem="SN6-JE-vvg" secondAttribute="bottom" id="Jge-Am-Mre"/>
                                     <constraint firstAttribute="bottom" secondItem="SXb-Qc-yiL" secondAttribute="bottom" id="NGd-cx-8gJ"/>
                                     <constraint firstItem="aZr-zO-DCP" firstAttribute="top" secondItem="p2l-qF-vko" secondAttribute="top" id="YXg-bp-jrj"/>
                                     <constraint firstItem="SXb-Qc-yiL" firstAttribute="width" secondItem="p2l-qF-vko" secondAttribute="width" multiplier="0.5" constant="-1" id="ZEr-tb-Qrg"/>
                                     <constraint firstAttribute="trailing" secondItem="SN6-JE-vvg" secondAttribute="trailing" id="aKa-kG-EQ1"/>
+                                    <constraint firstItem="8kS-hF-aec" firstAttribute="leading" secondItem="p2l-qF-vko" secondAttribute="leading" constant="30" id="h2T-YZ-TsP"/>
                                     <constraint firstItem="fMO-dg-fvQ" firstAttribute="leading" secondItem="SXb-Qc-yiL" secondAttribute="trailing" id="hFt-WG-CGo"/>
                                     <constraint firstItem="fMO-dg-fvQ" firstAttribute="top" secondItem="SXb-Qc-yiL" secondAttribute="top" id="pZd-7H-qoO"/>
                                     <constraint firstItem="pWY-oQ-Txc" firstAttribute="top" secondItem="p2l-qF-vko" secondAttribute="top" constant="100" id="qAV-pr-V0G"/>

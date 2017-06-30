@@ -183,10 +183,10 @@
         return nil;
     }
     
-    if ([self.txtPhoneNumber.text length] != 10) {
-        [CGlobal AlertMessage:@"Phone Number should be 10 characters" Title:nil];
-        return nil;
-    }
+//    if ([self.txtPhoneNumber.text length] != 10) {
+//        [CGlobal AlertMessage:@"Phone Number should be 10 characters" Title:nil];
+//        return nil;
+//    }
     if (![self.swTerm isOn]) {
         _swTermView.borderWidth = 1;
         return nil;

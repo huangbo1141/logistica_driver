@@ -34,7 +34,7 @@ NSString* ZIP_LOCATION = @"http://maps.googleapis.com/maps/api/geocode/json";
 NSString* PHOTO_URL = @"/uploads/";
 //NSString* g_baseUrl = @"https://travpholer.com/adminuser";
 BOOL g_lock = false;
-BOOL g_isii = true;
+BOOL g_isii = false;
 
 
 NSString*   APISERVICE_IP_URL = @"http://ip-api.com/json";
@@ -1530,7 +1530,7 @@ CGFloat GLOBAL_MENUWIDTH = 200;
     }
 }
 +(BOOL)isPostCode:(NSString*)postcode{
-    if ([postcode length] == 6) {
+    if ([postcode length] >=4) {
         return true;
     }else{
         return false;
