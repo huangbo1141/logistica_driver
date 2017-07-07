@@ -181,6 +181,7 @@
                                 self.navigationController.navigationBar.hidden = false;
                                 [self.navigationController pushViewController:vc animated:true];
                             });
+                            [CGlobal stopIndicator:self];
                             return;
                         }
                     }

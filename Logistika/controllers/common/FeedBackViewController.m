@@ -111,6 +111,11 @@
         }];
         [ac addAction:ac1];
         [ac addAction:ac2];
+        
+        [ac setModalPresentationStyle:UIModalPresentationFormSheet];
+        UIPopoverPresentationController* popPresenter =  ac.popoverPresentationController;
+        popPresenter.sourceView = sender;
+        
         [self presentViewController:ac animated:true completion:^{
             
         }];

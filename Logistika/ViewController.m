@@ -54,7 +54,7 @@
 //                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
     
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [delegate defaultLogin];
     });

@@ -85,6 +85,8 @@
             ca.txtField.delegate = ca;
         }
     }
+    
+    [self.txtPin.txtField setKeyboardType:UIKeyboardTypeNumberPad];
 }
 -(void)setAreaDatas{
     

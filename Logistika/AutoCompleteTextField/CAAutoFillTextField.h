@@ -26,6 +26,6 @@
 - (void) CAAutoTextFillBeginEditing:(CAAutoFillTextField *) textField;
 - (void) CAAutoTextFillEndEditing:(CAAutoFillTextField *) textField;
 - (BOOL) CAAutoTextFillWantsToEdit:(CAAutoFillTextField *) textField;
-
+- (void) CAAutoTextFillDidSelectRow:(CAAutoCompleteObject *) row;
 
 @end

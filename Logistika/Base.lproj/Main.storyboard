@@ -1278,7 +1278,7 @@ Please try again.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lw2-b8-JG0">
-                                        <rect key="frame" x="94" y="290" width="187.5" height="67"/>
+                                        <rect key="frame" x="103.5" y="293.5" width="169" height="60.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="lw2-b8-JG0" secondAttribute="height" multiplier="500:179" id="5xd-PW-EyS"/>
                                         </constraints>
@@ -1288,7 +1288,7 @@ Please try again.</string>
                                 <constraints>
                                     <constraint firstItem="lw2-b8-JG0" firstAttribute="centerX" secondItem="ywO-j9-HUU" secondAttribute="centerX" id="F4A-Ln-eTD"/>
                                     <constraint firstItem="lw2-b8-JG0" firstAttribute="centerY" secondItem="ywO-j9-HUU" secondAttribute="centerY" id="amc-ft-z0z"/>
-                                    <constraint firstItem="lw2-b8-JG0" firstAttribute="width" secondItem="ywO-j9-HUU" secondAttribute="width" multiplier="0.5" id="uyk-ZU-EG8"/>
+                                    <constraint firstItem="lw2-b8-JG0" firstAttribute="width" secondItem="ywO-j9-HUU" secondAttribute="width" multiplier="0.45" id="uyk-ZU-EG8"/>
                                 </constraints>
                             </view>
                         </subviews>

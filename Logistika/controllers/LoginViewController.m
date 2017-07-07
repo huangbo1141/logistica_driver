@@ -100,6 +100,7 @@
             NetworkParser* manager = [NetworkParser sharedManager];
             [CGlobal showIndicator:self];
             [manager ontemplateGeneralRequest2:data BasePath:g_URL Path:@"login" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+                [CGlobal stopIndicator:self];
                 if (error == nil) {
                     // succ
                     if (dict[@"result" ]!=nil) {

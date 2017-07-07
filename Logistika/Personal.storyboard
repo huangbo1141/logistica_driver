@@ -2490,7 +2490,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-Um-7b3">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1053"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="913"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AA2-Nf-W8O">
                                                 <rect key="frame" x="0.0" y="8" width="375" height="905"/>
@@ -2807,15 +2807,57 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AoI-7I-V2r">
                                                                         <rect key="frame" x="0.0" y="216" width="335" height="168"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKZ-9c-BHl">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ve-dt-ays">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
-                                                                                <state key="normal" title="Terms and Conditions">
-                                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                </state>
-                                                                                <connections>
-                                                                                    <action selector="clickTerm:" destination="juq-Nq-hoa" eventType="touchUpInside" id="Ukh-Tq-kCY"/>
-                                                                                </connections>
-                                                                            </button>
+                                                                                <subviews>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Wa-TK-TcW">
+                                                                                        <rect key="frame" x="0.0" y="5.5" width="150" height="19"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Terms and Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhZ-eq-M7I" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                <nil key="textColor"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="bsize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seF-eR-KGJ">
+                                                                                                <rect key="frame" x="0.0" y="18" width="150" height="1"/>
+                                                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="height" constant="1" id="jt8-kL-mAS"/>
+                                                                                                </constraints>
+                                                                                            </view>
+                                                                                        </subviews>
+                                                                                        <constraints>
+                                                                                            <constraint firstItem="seF-eR-KGJ" firstAttribute="trailing" secondItem="DhZ-eq-M7I" secondAttribute="trailing" id="CV4-vE-VCB"/>
+                                                                                            <constraint firstItem="seF-eR-KGJ" firstAttribute="leading" secondItem="DhZ-eq-M7I" secondAttribute="leading" id="Pjk-X9-Xxg"/>
+                                                                                        </constraints>
+                                                                                    </stackView>
+                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeV-JS-DK3">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
+                                                                                        <state key="normal">
+                                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        </state>
+                                                                                        <connections>
+                                                                                            <action selector="clickTerm:" destination="juq-Nq-hoa" eventType="touchUpInside" id="mi5-qU-NM5"/>
+                                                                                        </connections>
+                                                                                    </button>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="30" id="5eo-Uo-rYy"/>
+                                                                                    <constraint firstItem="2Wa-TK-TcW" firstAttribute="centerY" secondItem="5ve-dt-ays" secondAttribute="centerY" id="LIj-sW-87y"/>
+                                                                                    <constraint firstItem="2Wa-TK-TcW" firstAttribute="leading" secondItem="5ve-dt-ays" secondAttribute="leading" id="eBG-3u-j7l"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="xeV-JS-DK3" secondAttribute="trailing" id="kqx-cU-AZV"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="xeV-JS-DK3" secondAttribute="bottom" id="lrH-sU-LhN"/>
+                                                                                    <constraint firstItem="xeV-JS-DK3" firstAttribute="leading" secondItem="5ve-dt-ays" secondAttribute="leading" id="s4Z-kF-hPU"/>
+                                                                                    <constraint firstItem="xeV-JS-DK3" firstAttribute="top" secondItem="5ve-dt-ays" secondAttribute="top" id="tg2-eX-aYk"/>
+                                                                                </constraints>
+                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-3R-8V1">
                                                                                 <rect key="frame" x="0.0" y="40" width="335" height="128"/>
                                                                                 <subviews>
@@ -2867,7 +2909,7 @@
                                             <constraint firstAttribute="trailing" secondItem="AA2-Nf-W8O" secondAttribute="trailing" id="DOr-El-2qg"/>
                                             <constraint firstItem="AA2-Nf-W8O" firstAttribute="leading" secondItem="6a0-Um-7b3" secondAttribute="leading" id="Hx3-1t-QaQ"/>
                                             <constraint firstItem="AA2-Nf-W8O" firstAttribute="top" secondItem="6a0-Um-7b3" secondAttribute="top" constant="8" id="OYn-Bb-HZe"/>
-                                            <constraint firstAttribute="bottom" secondItem="AA2-Nf-W8O" secondAttribute="bottom" constant="140" id="c9v-fh-SSc"/>
+                                            <constraint firstAttribute="bottom" secondItem="AA2-Nf-W8O" secondAttribute="bottom" id="c9v-fh-SSc"/>
                                         </constraints>
                                     </view>
                                 </subviews>

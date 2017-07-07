@@ -34,7 +34,7 @@
         _txtField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         _txtField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _txtField.returnKeyType = UIReturnKeyDone;
-        _txtField.font = [UIFont systemFontOfSize:17.0];
+        _txtField.font = [UIFont systemFontOfSize:14.0];
         _txtField.textColor = [UIColor blackColor];
         _txtField.clipsToBounds = NO;
         [_txtField setDelegate:self];
@@ -217,6 +217,10 @@
     CAAutoCompleteObject *object = [_autoCompleteArray objectAtIndex:indexPath.row];
     _txtField.text = object.objName;
     [self finishedSearching];
+    
+    if ([self.delegate respondsToSelector:@selector(CAAutoTextFillDidSelectRow:)]) {
+        [self.delegate CAAutoTextFillDidSelectRow:object];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.tableHeight;
@@ -233,14 +237,15 @@
         [_delegate CAAutoTextFillBeginEditing:self];
     }
     self.txtField.bottomLine.borderColor = COLOR_PRIMARY.CGColor;
+    self.txtField.bottomLine.borderWidth = g_txtBorderWidth;
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if ([_delegate respondsToSelector:@selector(CAAutoTextFillEndEditing:)]) {
         [_delegate CAAutoTextFillEndEditing:self];
     }
-    self.txtField.bottomLine.borderColor = [UIColor darkGrayColor].CGColor;
-    
+    self.txtField.bottomLine.borderColor = [UIColor lightGrayColor].CGColor;
+    self.txtField.bottomLine.borderWidth = g_txtBorderWidth;
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {

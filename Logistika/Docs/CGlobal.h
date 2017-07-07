@@ -85,6 +85,8 @@ extern int g_ORDER_TYPE;
 extern int g_CAMERA_OPTION;
 extern int g_ITEM_OPTION;
 extern int g_PACKAGE_OPTION;
+extern int g_limitCnt;
+extern CGFloat g_txtBorderWidth;
 
 extern int g_ORDER;
 extern int g_PICKUP;

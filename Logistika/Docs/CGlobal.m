@@ -77,6 +77,8 @@ int g_ORDER_TYPE = 0;
 int g_CAMERA_OPTION = 1;
 int g_ITEM_OPTION = 2;
 int g_PACKAGE_OPTION = 3;
+int g_limitCnt = 10;
+CGFloat g_txtBorderWidth = 1.7;
 
 int g_ORDER = 0;
 int g_PICKUP = 1;

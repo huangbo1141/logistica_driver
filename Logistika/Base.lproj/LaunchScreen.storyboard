@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="TxW-MZ-zyA">
-                                        <rect key="frame" x="94" y="290" width="187.5" height="67"/>
+                                        <rect key="frame" x="103.5" y="293" width="169" height="61"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TxW-MZ-zyA" secondAttribute="height" multiplier="500:179" id="5pa-gp-JQn"/>
                                         </constraints>
@@ -36,7 +36,7 @@
                                 <constraints>
                                     <constraint firstItem="TxW-MZ-zyA" firstAttribute="centerX" secondItem="a4B-pz-o80" secondAttribute="centerX" id="0gN-n5-xmN"/>
                                     <constraint firstItem="TxW-MZ-zyA" firstAttribute="centerY" secondItem="a4B-pz-o80" secondAttribute="centerY" id="4rM-zo-uCV"/>
-                                    <constraint firstItem="TxW-MZ-zyA" firstAttribute="width" secondItem="a4B-pz-o80" secondAttribute="width" multiplier="0.5" id="PRd-f0-dPQ"/>
+                                    <constraint firstItem="TxW-MZ-zyA" firstAttribute="width" secondItem="a4B-pz-o80" secondAttribute="width" multiplier="0.45" id="PRd-f0-dPQ"/>
                                 </constraints>
                             </view>
                         </subviews>
