@@ -36,7 +36,7 @@
     _lblPaymentMethod.text = [NSString stringWithFormat:@"Cash on Pick Up"];
     
     _lblOrderNumber.text = env.order_id;
-    _lblTrackingNumber.text = env.order_id;
+    _lblTrackingNumber.text = g_track_id;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -262,7 +262,9 @@
     params[@"id"] = env.order_id;
     if (env.mode == c_PERSONAL) {
         params[@"user_id"] = env.user_id;
-    }else{
+    }
+    else
+    {
         params[@"user_id"] = env.corporate_user_id;
     }
     

@@ -276,6 +276,7 @@
     [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_orders_by_state" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             // succ
+            
             if (dict[@"result" ]!=nil) {
                 if ([dict[@"result"] intValue] == 200) {
                     [self clearReschedule];
@@ -458,6 +459,7 @@
             g_addressModel = model.addressModel;
             g_serviceModel = model.serviceModel;
             env.order_id = model.orderId;
+            g_track_id = model.trackId;
             if (model.orderModel.product_type == g_CAMERA_OPTION) {
                 g_ORDER_TYPE = g_CAMERA_OPTION;
                 g_cameraOrderModel = model.orderModel;

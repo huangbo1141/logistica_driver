@@ -51,7 +51,7 @@
     
     
     _lblOrderNumber.text = env.order_id;
-    _lblTrackingNumber.text = env.order_id;
+    _lblTrackingNumber.text = g_track_id;
     
     NSArray* fields = @[self.txtFrieght,self.txtLoadType,self.txtScanCon,self.txtDateTime,self.txtVehicleNumber,self.txtDriverID,self.txtDriverName];
     CGRect screenRect = [UIScreen mainScreen].bounds;
@@ -427,6 +427,9 @@
                     
                 }
             }else{
+                
+                NSString*trackstr = [NSString stringWithFormat:@"%@,%d",env.order_id,g_mode];
+                [CGlobal addOrderToTrackOrder:trackstr];
                 [self.navigationController popViewControllerAnimated:true];
             }
         }else{

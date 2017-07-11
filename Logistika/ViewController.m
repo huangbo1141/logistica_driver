@@ -53,8 +53,11 @@
 //                                             selector:@selector(playerStartPlaying)
 //                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
     
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
+    
+    double delayInSeconds = 5.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //code to be executed on the main queue after delay
         AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [delegate defaultLogin];
     });

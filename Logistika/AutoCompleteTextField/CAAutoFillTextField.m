@@ -1,3 +1,4 @@
+
 //
 //  AutoCompleteTextField.m
 //  AutoCompleteTextField
@@ -58,6 +59,9 @@
         _dataSourceArray = [[NSMutableArray alloc] init];
         _autoCompleteArray = [[NSMutableArray alloc] init];
         
+        UITapGestureRecognizer*gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [self.autoCompleteTableView addGestureRecognizer:gesture];
+        
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
@@ -100,6 +104,9 @@
         self.autoCompleteTableView.rowHeight = self.tableHeight;
         //        [self addSubview:self.autoCompleteTableView];
         
+        UITapGestureRecognizer*gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [self.autoCompleteTableView addGestureRecognizer:gesture];
+        
         _dataSourceArray = [[NSMutableArray alloc] init];
         _autoCompleteArray = [[NSMutableArray alloc] init];
     }
@@ -107,6 +114,21 @@
     self.autoCompleteTableView.backgroundColor = [UIColor clearColor];
     [self setBackgroundColor:[UIColor clearColor]];
     return self;
+}
+-(void)handleTapGesture:(UITapGestureRecognizer*)gesture{
+    NSLog(@"sss");
+    CGPoint pt = [gesture locationInView:self.autoCompleteTableView];
+    NSIndexPath* indexPath = [self.autoCompleteTableView indexPathForRowAtPoint:pt];
+    
+    CAAutoCompleteObject *object = [_autoCompleteArray objectAtIndex:indexPath.row];
+    _txtField.text = object.objName;
+    [self finishedSearching];
+    
+    if ([self.delegate respondsToSelector:@selector(CAAutoTextFillDidSelectRow:)]) {
+        [self.delegate CAAutoTextFillDidSelectRow:object];
+    }
+    
+    [self.txtField resignFirstResponder];
 }
 
 // Take string from Search Textfield and compare it with autocomplete array
@@ -138,11 +160,18 @@
         CGFloat total = tableRect.origin.y + tableRect.size.height + g_keyboardRect.size.height;
         if (total > screenRect.size.height) {
             // need more
+            //            self.scrollParent.scrollEnabled = true;
+            
             CGPoint pt = self.scrollParent.contentOffset;
             pt.y = pt.y + total - screenRect.size.height;
             [self.scrollParent setContentOffset:pt animated:TRUE];
-        }else{
             
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            //                self.scrollParent.scrollEnabled = false;
+            //
+            //            });
+        }else{
+            //            self.scrollParent.scrollEnabled = false;
         }
         self.scrollParent.backgroundColor = [UIColor clearColor];
     }
@@ -235,7 +264,16 @@
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
     if ([_delegate respondsToSelector:@selector(CAAutoTextFillBeginEditing:)]) {
         [_delegate CAAutoTextFillBeginEditing:self];
+        
+        double delayInSeconds = 3.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            //code to be executed on the main queue after delay
+            self.scrollParent.scrollEnabled = false;
+            self.autoCompleteTableView.scrollEnabled = true;
+        });
     }
+    self.autoCompleteTableView.scrollEnabled = true;
     self.txtField.bottomLine.borderColor = COLOR_PRIMARY.CGColor;
     self.txtField.bottomLine.borderWidth = g_txtBorderWidth;
 }
@@ -243,6 +281,11 @@
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if ([_delegate respondsToSelector:@selector(CAAutoTextFillEndEditing:)]) {
         [_delegate CAAutoTextFillEndEditing:self];
+        
+        self.autoCompleteTableView.hidden = true;
+        double delayInSeconds = 1.0;
+        self.scrollParent.scrollEnabled = true;
+        self.autoCompleteTableView.scrollEnabled = false;
     }
     self.txtField.bottomLine.borderColor = [UIColor lightGrayColor].CGColor;
     self.txtField.bottomLine.borderWidth = g_txtBorderWidth;
@@ -270,7 +313,16 @@
     return YES;
 }
 
-
+-(void)setDataSourceArray:(NSMutableArray<CAAutoCompleteObject *> *)dataSourceArray{
+    [dataSourceArray sortUsingComparator:^NSComparisonResult(CAAutoCompleteObject* obj1, CAAutoCompleteObject* obj2) {
+        NSString* first = obj1.objName;
+        NSString* second = obj2.objName;
+        
+        return [first compare:second];
+    }];
+    
+    _dataSourceArray = dataSourceArray;
+}
 - (void)dealloc {
     [_dataSourceArray removeAllObjects];
     [_autoCompleteArray removeAllObjects];

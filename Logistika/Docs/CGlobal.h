@@ -134,7 +134,7 @@ extern NSString* g_quote_id;
 extern PriceType* g_priceType;
 extern CorporateModel* g_corporateModel;
 extern LoginResponse* g_areaData;
-
+extern NSString* g_track_id;
 
 //notifications
 extern NSString *GLOBALNOTIFICATION_DATA_CHANGED_PHOTO ;

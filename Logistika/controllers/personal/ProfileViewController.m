@@ -92,20 +92,20 @@
     
     if(true) { // if (g_areaData.area.count > 0) {
         self.txtArea.txtField.text = @"area";
-        self.txtArea.hidden = true;
+//        self.txtArea.hidden = true;
         
-//        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-//        for (int i = 0; i<g_areaData.area.count; i++) {
-//            TblArea* item = g_areaData.area[i];
-//            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-//            [tempArray addObject:object];
-//        }
-//        [self.txtArea setDataSourceArray:tempArray];
-//        [self.txtArea setDelegate:self];
-//        
-//        self.txtArea.viewParent = [self.txtArea superview];
-//        self.txtArea.txtField.placeholder = @"Area,Locality";
-//        self.txtArea.scrollParent = self.scrollParent;
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i<g_areaData.area.count; i++) {
+            TblArea* item = g_areaData.area[i];
+            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
+            [tempArray addObject:object];
+        }
+        [self.txtArea setDataSourceArray:tempArray];
+        [self.txtArea setDelegate:self];
+        
+        self.txtArea.viewParent = [self.txtArea superview];
+        self.txtArea.txtField.placeholder = @"Area,Locality";
+        self.txtArea.scrollParent = self.scrollParent;
     }
     
     if(true) { // if (g_areaData.city.count > 0) {

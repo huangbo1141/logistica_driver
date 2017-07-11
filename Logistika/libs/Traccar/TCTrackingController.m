@@ -138,8 +138,15 @@ int64_t kRetryDelay = 30 * 1000;
         NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
         
         if (env.mode == c_PERSONAL) {
+            if (env.user_id == nil) {
+                return;
+            }
             params[@"employer_id"] = env.user_id;
+            
         }else if(env.mode == c_CORPERATION){
+            if (env.corporate_user_id == nil) {
+                return;
+            }
             params[@"employer_id"] = env.corporate_user_id;
         }
         params[@"orders"] = [CGlobal getOrderIds];

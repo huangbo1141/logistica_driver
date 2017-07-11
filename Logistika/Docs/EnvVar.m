@@ -166,12 +166,14 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
         [self setUsername:@""];
         [self setEmail:@""];
         [self setPassword:@""];
-        
+        self.user_id = nil;
     }else{
         [self setCor_email:@""];
         [self setCor_password:@""];
-        
+        self.corporate_user_id = nil;
     }
+    
+//    self.mode = 10;
 }
 
 

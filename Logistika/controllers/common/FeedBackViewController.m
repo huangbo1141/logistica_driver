@@ -59,14 +59,19 @@
         return nil;
     }
     EnvVar*env = [CGlobal sharedId].env;
-    NSDictionary* tdata = @{@"user_mode":@"0"
+    NSDictionary* tdata = @{@"user_mode":@"1"
                             ,@"name":mFirst
                             ,@"email":mEmail
                             ,@"feedback":feed
-                            ,@"user_id":env.user_id
-                            ,@"id":env.feedback_id};
+                            ,@"id":@"0"};
     
     NSMutableDictionary* data = [[NSMutableDictionary alloc] initWithDictionary:tdata];
+    
+    if (env.mode == c_PERSONAL) {
+        data[@"user_id"] = env.user_id;
+    }else{
+        data[@"user_id"] = env.corporate_user_id;
+    }
     return data;
 }
 -(void)feedback:(NSMutableDictionary*)data{
