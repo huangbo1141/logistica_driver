@@ -143,7 +143,7 @@ NSString *GLOBALNOTIFICATION_LIKEDBUTTON =  @"GLOBALNOTIFICATION_LIKEDBUTTON";
 
 NSString *NOTIFICATION_RECEIVEUUID =  @"NOTIFICATION_RECEIVEUUID";
 
-NSString *const kPhotoManagerChangedContentNotificationHot = @"NOTIFICATION_PhotoManagerChangedContentHot";
+NSString *const kSpeedChangeNotification = @"NOTIFICATION_SPEEDCHANGENOTIFICATION";
 
 NSString *const kPhotoManagerChangedContentNotificationFresh = @"NOTIFICATION_PhotoManagerChangedContentFresh";
 
@@ -153,7 +153,7 @@ NSString *const kPhotoManagerChangedContentNotificationOthers = @"NOTIFICATION_P
 //MENU HEIGHT
 CGFloat GLOBAL_MENUHEIGHT = 50;
 CGFloat GLOBAL_MENUWIDTH = 200;
-
+double g_limitSpeed_kph = 80;
 
 @implementation CGlobal
 

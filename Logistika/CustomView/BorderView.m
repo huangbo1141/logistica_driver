@@ -34,6 +34,12 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 4:{
+            // limit red circle view
+            self.layer.borderColor = [UIColor redColor].CGColor;
+            self.backgroundColor = [UIColor clearColor];
+            break;
+        }
         case 3:{
             // red border
             self.layer.borderColor = [UIColor redColor].CGColor;

@@ -147,7 +147,7 @@
                 //NSLog(str);
                 NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
                 id dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                if ([self checkResponse:dict] && completionBlock) {
+                if (dict!= nil && [self checkResponse:dict] && completionBlock) {
                     completionBlock(dict,nil);
                 }else{
                     completionBlock(dict,[[NSError alloc] init]);

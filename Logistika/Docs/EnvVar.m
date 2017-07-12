@@ -162,15 +162,15 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
 - (void)logOut
 {
     [self setLastLogin:-1];
-    if (self.mode == 0) {
+    if (_mode == c_PERSONAL) {
         [self setUsername:@""];
         [self setEmail:@""];
         [self setPassword:@""];
-        self.user_id = nil;
+        [self setUser_id:@""];
     }else{
         [self setCor_email:@""];
         [self setCor_password:@""];
-        self.corporate_user_id = nil;
+        [self setCorporate_user_id:@""];
     }
     
 //    self.mode = 10;

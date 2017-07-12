@@ -134,40 +134,46 @@ int64_t kRetryDelay = 30 * 1000;
 
 - (void)send:(TCPosition *)position {
     EnvVar* env = [CGlobal sharedId].env;
-    if ([env.user_id length]>0 || [env.corporate_user_id length]>0) {
-        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-        
-        if (env.mode == c_PERSONAL) {
-            if (env.user_id == nil) {
-                return;
-            }
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    
+    if (env.mode == c_PERSONAL) {
+        if ([env.user_id length]>0) {
             params[@"employer_id"] = env.user_id;
-            
-        }else if(env.mode == c_CORPERATION){
-            if (env.corporate_user_id == nil) {
-                return;
-            }
-            params[@"employer_id"] = env.corporate_user_id;
+            NSLog(@"tracking personal %@",env.user_id);
+        }else{
+            NSLog(@"tracking personal return");
+            return;
         }
-        params[@"orders"] = [CGlobal getOrderIds];
-        
-        params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
-        params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
-        params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
         
         
-        
-        NetworkParser* manager = [NetworkParser sharedManager];
-        [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
-            if (error == nil) {
-                [self delete:position];
-            }else{
-                NSLog(@"Error");
-            }
-        } method:@"get"];
+    }else if(env.mode == c_CORPERATION){
+        if ([env.corporate_user_id length]>0) {
+            params[@"employer_id"] = env.corporate_user_id;
+            NSLog(@"tracking corporation %@",env.corporate_user_id);
+        }else{
+            NSLog(@"tracking corporation return");
+            return;
+        }
+    }else{
+        NSLog(@"tracking non personal corporation");
+        return;
     }
+    params[@"orders"] = [CGlobal getOrderIds];
+    
+    params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
+    params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
+    params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
     
     
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            [self delete:position];
+        }else{
+            NSLog(@"Error");
+        }
+    } method:@"get"];
     
 //    NSURL *request = [TCProtocolFormatter formatPostion:position address:self.address port:self.port secure:self.secure];
 //    [TCRequestManager sendRequest:request completionHandler:^(BOOL success) {

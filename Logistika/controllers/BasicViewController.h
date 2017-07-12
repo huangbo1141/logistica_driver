@@ -11,4 +11,6 @@
 @interface BasicViewController : UIViewController
 -(void)trackOrders:(NSInteger)mode;
 -(void)trackCorporateOrders;
+
+-(void)showSpeedView:(NSDictionary*)data;
 @end

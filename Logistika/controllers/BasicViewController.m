@@ -15,12 +15,13 @@
 #import "OrderResponse.h"
 #import "OrderHisModel.h"
 #import "OrderCorporateHisModel.h"
+#import "LimitSpeedView.h"
 
 @interface BasicViewController ()
 @property (nonatomic,strong) IQKeyboardReturnKeyHandler* returnKeyHandler;
 
 @property (nonatomic,strong) NSMutableArray* trackOrderStrs;
-
+@property (nonatomic,strong) LimitSpeedView* speedView;
 @end
 
 @implementation BasicViewController
@@ -31,8 +32,38 @@
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.trackOrderStrs = [[NSMutableArray alloc] init];
+    
+    
+    
 }
-
+-(void)showSpeedView:(NSDictionary*)data{
+    if (data!=nil) {
+        if (self.speedView == nil) {
+            self.speedView = [[NSBundle mainBundle] loadNibNamed:@"LeftView" owner:self options:nil][1];
+        }
+        if ([self.speedView superview] == nil) {
+            [self.view addSubview:self.speedView];
+            self.speedView.frame = self.view.frame;
+        }
+        [self.speedView setData:data];
+//        NSNotificationCenter* defaultCenter = [[NSNotificationCenter alloc] init];
+//        [defaultCenter addObserver:self selector:@selector(recvNoti:) name:kSpeedChangeNotification object:nil];
+    }else{
+        if (self.speedView != nil) {
+            [self.speedView removeFromSuperview];
+        }
+//        NSNotificationCenter* defaultCenter = [[NSNotificationCenter alloc] init];
+//        [defaultCenter removeObserver:self name:kSpeedChangeNotification object:nil];
+    }
+}
+-(void)recvNoti:(NSNotification*)notification{
+    if ([notification.object isKindOfClass:[NSMutableDictionary class]]) {
+        NSMutableDictionary* dict = notification.object;
+        if (self.speedView!=nil) {
+            [self.speedView setData:dict];
+        }
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -122,6 +153,8 @@
                 }
             }
             [CGlobal setOrderForTrackOrder:self.trackOrderStrs];
+            
+            self.trackOrderStrs = [[NSMutableArray alloc] init];
         }else{
             // error
             NSLog(@"Error");

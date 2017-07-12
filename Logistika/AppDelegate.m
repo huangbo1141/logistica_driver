@@ -12,7 +12,8 @@
 #import <IQKeyboardManager.h>
 #import "NetworkParser.h"
 #import "TCTrackingController.h"
-
+#import "MyNavViewController.h"
+// AIzaSyD6411yESCnRFYvjLbE4IvoagnN4j4t61s
 @interface AppDelegate ()
 @property (nonatomic, strong) TCTrackingController *trackingController;
 @end
@@ -22,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self startLocationService];
     [CGlobal initGlobal];
     [self initData];
     EnvVar*env = [CGlobal sharedId].env;
@@ -241,5 +243,123 @@
             NSLog(@"Error in saveContext");
         }
     }
+}
+
+-(void)startLocationService{
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation];
+    
+    if ([CLLocationManager locationServicesEnabled] == NO)
+    {
+        [CGlobal AlertMessage:@"Location services were previously denied by the you. Please enable location services for this app in settings." Title:@"Location services"];
+        
+        return;
+    }
+    
+    
+    // Request "when in use" location service authorization.
+    // If authorization has been denied previously, we can display an alert if the user has denied location services previously.
+    
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
+    {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
+    {
+        
+        [CGlobal AlertMessage:@"Location services were previously denied by the you. Please enable location services for this app in settings." Title:@"Location services"];
+        
+        return;
+    }
+    
+    // Start updating locations.
+    _locationManager.delegate = self;
+    [_locationManager startUpdatingLocation];
+}
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    //g_lastLocation = newLocation;
+    //    NSLog(@"%.6f %.6f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+    EnvVar* env = [CGlobal sharedId].env;
+    if (env.lastLogin>0) {
+        // signed
+        double gpsSpeed = newLocation.speed;
+        double kph = gpsSpeed*3.6;
+        
+        NSMutableDictionary*speedParam = [[NSMutableDictionary alloc] init];
+        speedParam[@"speed"] = [NSString stringWithFormat:@"%.1f",kph];
+        speedParam[@"speed_limit"] = [NSString stringWithFormat:@"%.1f",g_limitSpeed_kph];
+        
+        if (true) {     // kph>g_limitSpeed_kph
+            // notify about this
+            UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+            if ([vc isKindOfClass:[BasicViewController class]]) {
+                BasicViewController*bvc = (BasicViewController*)vc;
+                [bvc showSpeedView:speedParam];
+            }
+            else{
+                [CGlobal AlertMessage:@"speed limit" Title:nil];
+                NSLog(@"speed limit");
+            }
+        }else{
+            // notify about this
+            UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+            if ([vc isKindOfClass:[BasicViewController class]]) {
+                BasicViewController*bvc = (BasicViewController*)vc;
+                [bvc showSpeedView:nil];
+            }else{
+                [CGlobal AlertMessage:@"speed limit" Title:nil];
+                NSLog(@"speed limit");
+            }
+        }
+        
+        
+//        NSNotificationCenter*defaultCenter = [NSNotificationCenter defaultCenter];
+//        [defaultCenter postNotificationName:kSpeedChangeNotification object:data];
+        
+        // alternative manual method
+//        if(oldLocation != nil)
+//        {
+//            CLLocationDistance distanceChange = [newLocation getDistanceFrom:oldLocation];
+//            NSTimeInterval sinceLastUpdate = [newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
+//            double calculatedSpeed = distanceChange / sinceLastUpdate;
+//            
+//        }
+    }
+    
+    
+}
+- (UIViewController *)visibleViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil)
+    {
+        if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController*nav = (UINavigationController*)rootViewController;
+            if (nav.viewControllers.count>0) {
+                UIViewController*vc = nav.viewControllers[0];
+                return vc;
+            }
+        }
+        return rootViewController;
+    }
+    if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]])
+    {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        
+        return [self visibleViewController:lastViewController];
+    }
+    if ([rootViewController.presentedViewController isKindOfClass:[UITabBarController class]])
+    {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController.presentedViewController;
+        UIViewController *selectedViewController = tabBarController.selectedViewController;
+        
+        return [self visibleViewController:selectedViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    
+    return [self visibleViewController:presentedViewController];
 }
 @end

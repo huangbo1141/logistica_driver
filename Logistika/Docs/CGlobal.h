@@ -150,13 +150,14 @@ extern NSString *GLOBALNOTIFICATION_LIKEDBUTTON;
 
 extern NSString *NOTIFICATION_RECEIVEUUID;
 
-extern NSString *const kPhotoManagerChangedContentNotificationHot;
+extern NSString *const kSpeedChangeNotification;
 extern NSString *const kPhotoManagerChangedContentNotificationFresh;
 extern NSString *const kPhotoManagerChangedContentNotificationOthers;
 
 //menu height
 extern CGFloat GLOBAL_MENUHEIGHT;
 extern CGFloat GLOBAL_MENUWIDTH;
+extern double g_limitSpeed_kph;
 
 typedef void (^PermissionCallback)(BOOL ret);
 typedef void (^ImagePickerCallback)(UIImage* image);
