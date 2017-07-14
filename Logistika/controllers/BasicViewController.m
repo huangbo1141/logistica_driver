@@ -16,12 +16,19 @@
 #import "OrderHisModel.h"
 #import "OrderCorporateHisModel.h"
 #import "LimitSpeedView.h"
+#import "BreakView.h"
+#import "AppDelegate.h"
 
 @interface BasicViewController ()
 @property (nonatomic,strong) IQKeyboardReturnKeyHandler* returnKeyHandler;
 
 @property (nonatomic,strong) NSMutableArray* trackOrderStrs;
 @property (nonatomic,strong) LimitSpeedView* speedView;
+
+@property (nonatomic,strong) NSDate* startTime;
+@property (nonatomic,strong) NSDate* endTime;
+@property (nonatomic,strong) NSTimer* timer;
+@property (nonatomic,assign) NSInteger tick;
 @end
 
 @implementation BasicViewController
@@ -44,17 +51,53 @@
         if ([self.speedView superview] == nil) {
             [self.view addSubview:self.speedView];
             self.speedView.frame = self.view.frame;
+            
+            if (self.timer != nil) {
+                [self.timer invalidate];
+                self.timer = nil;
+            }
+            NSTimeInterval intval2hr = 3600*2;
+            if (g_isii) {
+              intval2hr = 30;
+            }
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:intval2hr target:self selector:@selector(runnable1:) userInfo:nil repeats:true];
+            self.tick = 0;
         }
         [self.speedView setData:data];
-//        NSNotificationCenter* defaultCenter = [[NSNotificationCenter alloc] init];
-//        [defaultCenter addObserver:self selector:@selector(recvNoti:) name:kSpeedChangeNotification object:nil];
+        self.startTime = [NSDate date];
     }else{
         if (self.speedView != nil) {
             [self.speedView removeFromSuperview];
         }
-//        NSNotificationCenter* defaultCenter = [[NSNotificationCenter alloc] init];
-//        [defaultCenter removeObserver:self name:kSpeedChangeNotification object:nil];
+        self.startTime = nil;
+        [self.timer invalidate];
     }
+}
+-(void)runnable1:(id)sender{
+    //NSLog(@"Speed Limit View Runnable %ld",self.tick);
+    //self.tick = self.tick+1;
+    
+//    [CGlobal AlertMessage:@"Break Time Please stop at the nearest Truck Stop/Rest Area" Title:@"Break Time"];
+    g_breakShowing = true;
+    AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    [delegate.warningSound stop];
+    delegate.warningSound = nil;
+    
+    
+    
+    MyPopupDialog* dialog = [[MyPopupDialog alloc] init];
+    BreakView* view = [[NSBundle mainBundle] loadNibNamed:@"PromptDialog" owner:self options:nil][1];
+    
+    [dialog setup:view backgroundDismiss:false backgroundColor:[UIColor darkGrayColor]];
+    
+    [dialog showPopup:self.view];
+    
+    view.breakSound = [delegate loadBeepSound:@"breaktime"];
+    view.breakSound.numberOfLoops = 1;
+    [view.breakSound play];
+    
+    [self.timer invalidate];
+    self.timer = nil;
 }
 -(void)recvNoti:(NSNotification*)notification{
     if ([notification.object isKindOfClass:[NSMutableDictionary class]]) {

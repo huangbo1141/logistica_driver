@@ -19,9 +19,9 @@
     self.lblSpeed.text = data[@"speed"];
     self.lblSpeedLimit.text = data[@"speed_limit"];
     
+    
 }
 - (IBAction)clickAction:(id)sender {
     [self removeFromSuperview];
 }
-
 @end

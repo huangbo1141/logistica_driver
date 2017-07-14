@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 
@@ -22,5 +23,8 @@
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 -(void)startLocationService;
+
+@property (nonatomic, strong) AVAudioPlayer *warningSound;
+-(AVAudioPlayer*)loadBeepSound:(NSString*)filename;
 @end
 

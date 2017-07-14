@@ -13,9 +13,12 @@
 #import "NetworkParser.h"
 #import "TCTrackingController.h"
 #import "MyNavViewController.h"
+
+
 // AIzaSyD6411yESCnRFYvjLbE4IvoagnN4j4t61s
 @interface AppDelegate ()
 @property (nonatomic, strong) TCTrackingController *trackingController;
+
 @end
 
 @implementation AppDelegate
@@ -29,6 +32,7 @@
     EnvVar*env = [CGlobal sharedId].env;
     env.lastLogin = -1;
     env.quote = true;
+    g_isii = false;
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
@@ -282,53 +286,81 @@
     //g_lastLocation = newLocation;
     //    NSLog(@"%.6f %.6f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
     EnvVar* env = [CGlobal sharedId].env;
-    if (env.lastLogin>0) {
+    
+    // check if break time message shows
+    if (env.lastLogin>0 && !g_breakShowing) {
         // signed
         double gpsSpeed = newLocation.speed;
+        if (g_isii) {
+            gpsSpeed = arc4random_uniform(100);
+        }
         double kph = gpsSpeed*3.6;
+//        NSLog(@"kph %.1f",kph);
         
         NSMutableDictionary*speedParam = [[NSMutableDictionary alloc] init];
         speedParam[@"speed"] = [NSString stringWithFormat:@"%.1f",kph];
         speedParam[@"speed_limit"] = [NSString stringWithFormat:@"%.1f",g_limitSpeed_kph];
         
-        if (true) {     // kph>g_limitSpeed_kph
+        if (kph>1) {
+            // kph>g_limitSpeed_kph
+            // kph>1
+            
             // notify about this
             UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
             if ([vc isKindOfClass:[BasicViewController class]]) {
                 BasicViewController*bvc = (BasicViewController*)vc;
                 [bvc showSpeedView:speedParam];
             }
-            else{
-                [CGlobal AlertMessage:@"speed limit" Title:nil];
-                NSLog(@"speed limit");
+            if (kph>g_limitSpeed_kph) {
+                // play sound
+                if(_warningSound == nil){
+                    _warningSound = [self loadBeepSound:@"speedlimit"];
+                }
+                [_warningSound play];
+            }else{
+                // stop sound
+                [_warningSound stop];
             }
+            
         }else{
             // notify about this
             UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
             if ([vc isKindOfClass:[BasicViewController class]]) {
                 BasicViewController*bvc = (BasicViewController*)vc;
                 [bvc showSpeedView:nil];
-            }else{
-                [CGlobal AlertMessage:@"speed limit" Title:nil];
-                NSLog(@"speed limit");
+            }
+            
+            if(_warningSound != nil){
+                [_warningSound stop];
             }
         }
         
-        
-//        NSNotificationCenter*defaultCenter = [NSNotificationCenter defaultCenter];
-//        [defaultCenter postNotificationName:kSpeedChangeNotification object:data];
-        
-        // alternative manual method
-//        if(oldLocation != nil)
-//        {
-//            CLLocationDistance distanceChange = [newLocation getDistanceFrom:oldLocation];
-//            NSTimeInterval sinceLastUpdate = [newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
-//            double calculatedSpeed = distanceChange / sinceLastUpdate;
-//            
-//        }
     }
     
     
+}
+-(AVAudioPlayer*)loadBeepSound:(NSString*)filename{
+    // Get the path to the beep.mp3 file and convert it to a NSURL object.
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+    
+    NSError *error;
+    
+    // Initialize the audio player object using the NSURL object previously set.
+    AVAudioPlayer* avplayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    
+    avplayer.numberOfLoops = -1;
+    if (error) {
+        // If the audio player cannot be initialized then log a message.
+        NSLog(@"Could not play beep file.");
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    else{
+        // If the audio player was successfully initialized then load it in memory.
+        [avplayer prepareToPlay];
+    }
+    
+    return avplayer;
 }
 - (UIViewController *)visibleViewController:(UIViewController *)rootViewController
 {

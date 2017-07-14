@@ -134,6 +134,7 @@
 
 - (IBAction)segChanged:(id)sender {
     NSInteger index= self.segControl.selectedSegmentIndex;
+    
     switch (index) {
         case 0:
         {

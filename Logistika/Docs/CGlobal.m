@@ -154,6 +154,7 @@ NSString *const kPhotoManagerChangedContentNotificationOthers = @"NOTIFICATION_P
 CGFloat GLOBAL_MENUHEIGHT = 50;
 CGFloat GLOBAL_MENUWIDTH = 200;
 double g_limitSpeed_kph = 80;
+BOOL g_breakShowing = false;
 
 @implementation CGlobal
 

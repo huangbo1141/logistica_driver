@@ -158,6 +158,7 @@ extern NSString *const kPhotoManagerChangedContentNotificationOthers;
 extern CGFloat GLOBAL_MENUHEIGHT;
 extern CGFloat GLOBAL_MENUWIDTH;
 extern double g_limitSpeed_kph;
+extern BOOL g_breakShowing;
 
 typedef void (^PermissionCallback)(BOOL ret);
 typedef void (^ImagePickerCallback)(UIImage* image);
