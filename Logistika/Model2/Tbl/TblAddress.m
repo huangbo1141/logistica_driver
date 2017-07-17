@@ -15,6 +15,9 @@
         
         [BaseModel parseResponse:self Dict:dict];
         
+        if (self.address2 == nil) {
+            self.address2 = dict[@"area"];
+        }
         
     }
     return self;

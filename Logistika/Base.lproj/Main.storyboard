@@ -835,20 +835,24 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xt-OC-WVL" customClass="CAAutoFillTextField">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Area,Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDR-gi-52m" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="38" width="335" height="30"/>
-                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="6DM-vJ-0OA"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="cq8-Cl-NBW"/>
                                                                                 </constraints>
-                                                                            </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYt-OR-LR3" customClass="CAAutoFillTextField">
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGg-4O-ior" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="76" width="335" height="30"/>
-                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="eeM-wq-dfJ"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="0m0-Pp-STE"/>
                                                                                 </constraints>
-                                                                            </view>
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qUq-It-wNV" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="114" width="335" height="30"/>
                                                                                 <constraints>
@@ -858,13 +862,15 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FD4-G7-yne" customClass="CAAutoFillTextField">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pincode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xev-Bl-Wwu" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="152" width="335" height="30"/>
-                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="YaB-0V-uKG"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="NdY-nb-gQF"/>
                                                                                 </constraints>
-                                                                            </view>
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Land Mark" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Am8-nA-7OT" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="190" width="335" height="30"/>
                                                                                 <constraints>
@@ -1245,15 +1251,15 @@ Please try again.</string>
                         <outlet property="swTermView" destination="qaJ-gQ-LpD" id="fe1-sT-WSq"/>
                         <outlet property="txtAddress" destination="C2l-Ew-NYB" id="NrX-jG-5yv"/>
                         <outlet property="txtAnswer" destination="tk6-ai-WCF" id="a6F-fa-Qad"/>
-                        <outlet property="txtArea" destination="6xt-OC-WVL" id="9Tv-Uv-Jya"/>
-                        <outlet property="txtCity" destination="TYt-OR-LR3" id="9cu-9X-gca"/>
+                        <outlet property="txtArea" destination="sDR-gi-52m" id="pq6-cZ-LxJ"/>
+                        <outlet property="txtCity" destination="CGg-4O-ior" id="pYO-V3-nUf"/>
                         <outlet property="txtEmail" destination="5w7-n0-cZq" id="a97-Wb-4E8"/>
                         <outlet property="txtFirstName" destination="UHl-cB-eDe" id="Myp-FQ-Vvz"/>
                         <outlet property="txtLandMark" destination="Am8-nA-7OT" id="csB-SK-CrU"/>
                         <outlet property="txtLastName" destination="LqF-Qu-yxi" id="og4-3i-ZB3"/>
                         <outlet property="txtPassword" destination="2KJ-Vh-b5x" id="qkd-sG-y7E"/>
                         <outlet property="txtPhoneNumber" destination="DWV-h7-svu" id="oBe-Kc-oJX"/>
-                        <outlet property="txtPin" destination="FD4-G7-yne" id="sUp-rA-cnb"/>
+                        <outlet property="txtPin" destination="Xev-Bl-Wwu" id="oHs-pU-Id4"/>
                         <outlet property="txtRePassword" destination="JZn-vZ-lGR" id="hns-Kq-beg"/>
                         <outlet property="txtState" destination="qUq-It-wNV" id="exq-KN-hhy"/>
                     </connections>

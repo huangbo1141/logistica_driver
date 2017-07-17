@@ -93,8 +93,8 @@
     [dialog showPopup:self.view];
     
     view.breakSound = [delegate loadBeepSound:@"breaktime"];
-    view.breakSound.numberOfLoops = 1;
     [view.breakSound play];
+    [view setData:@{@"vc":self}];
     
     [self.timer invalidate];
     self.timer = nil;

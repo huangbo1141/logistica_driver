@@ -41,6 +41,7 @@
     if (address!=nil) {
         
         env.address1 = address.address;
+        env.address2 = address.address2;
         env.city = address.city;
         env.state = address.state;
         env.pincode = address.pincode;

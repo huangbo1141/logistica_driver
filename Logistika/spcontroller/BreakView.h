@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MyBaseView.h"
 #import <AVFoundation/AVFoundation.h>
-@interface BreakView : MyBaseView
+#import <CoreLocation/CoreLocation.h>
+
+@interface BreakView : MyBaseView<CLLocationManagerDelegate>
 
 @property (nonatomic, strong) AVAudioPlayer *breakSound;
-
+@property (strong,nonatomic) CLLocationManager *locationManager;
 @end

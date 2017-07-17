@@ -10,6 +10,7 @@
 
 @interface TblAddress : BaseModel
 @property (nonatomic,copy) NSString* address;
+@property (nonatomic,copy) NSString* address2;
 @property (nonatomic,copy) NSString* city;
 @property (nonatomic,copy) NSString* state;
 @property (nonatomic,copy) NSString* pincode;

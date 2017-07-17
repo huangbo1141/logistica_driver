@@ -19,7 +19,13 @@
     self.lblSpeed.text = data[@"speed"];
     self.lblSpeedLimit.text = data[@"speed_limit"];
     
-    
+    double speed = [data[@"speed"] intValue];
+    double speed_limit = [data[@"speed_limit"] intValue];
+    if (speed>speed_limit) {
+        self.lblSpeed.textColor = [UIColor redColor];
+    }else{
+        self.lblSpeed.textColor = [UIColor blackColor];
+    }
 }
 - (IBAction)clickAction:(id)sender {
     [self removeFromSuperview];

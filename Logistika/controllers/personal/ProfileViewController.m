@@ -86,56 +86,68 @@
         }
     }
     
-    [self.txtPin.txtField setKeyboardType:UIKeyboardTypeNumberPad];
+    [self.txtPin setKeyboardType:UIKeyboardTypeNumberPad];
 }
 -(void)setAreaDatas{
     
-    if(true) { // if (g_areaData.area.count > 0) {
-        self.txtArea.txtField.text = @"area";
-//        self.txtArea.hidden = true;
-        
+    if (true) {//g_areaData.area.count > 0
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.area.count; i++) {
             TblArea* item = g_areaData.area[i];
-            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-            [tempArray addObject:object];
+            [tempArray addObject:item.title];
         }
-        [self.txtArea setDataSourceArray:tempArray];
-        [self.txtArea setDelegate:self];
+        UIPickerView* pkView = [[UIPickerView alloc] init];
+        pkView.delegate = self;
+        pkView.dataSource = self;
+        self.txtArea.placeholder = @"Area,Locality";
+        self.pkArea = pkView;
+        self.txtArea.inputView= pkView;
+        self.dataArea = tempArray;
         
-        self.txtArea.viewParent = [self.txtArea superview];
-        self.txtArea.txtField.placeholder = @"Area,Locality";
-        self.txtArea.scrollParent = self.scrollParent;
+        NSInteger found = [tempArray indexOfObject:self.txtArea.text];
+        if (found!=NSNotFound) {
+            [pkView selectRow:found inComponent:0 animated:false];
+        }
     }
     
-    if(true) { // if (g_areaData.city.count > 0) {
+    if (true) {//g_areaData.area.count > 0
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.city.count; i++) {
             TblArea* item = g_areaData.city[i];
-            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-            [tempArray addObject:object];
+            [tempArray addObject:item.title];
         }
-        [self.txtCity setDataSourceArray:tempArray];
-        [self.txtCity setDelegate:self];
+        UIPickerView* pkView = [[UIPickerView alloc] init];
+        pkView.delegate = self;
+        pkView.dataSource = self;
+        self.txtCity.placeholder = @"City";
+        self.pkCity = pkView;
+        self.txtCity.inputView= pkView;
+        self.dataCity = tempArray;
         
-        self.txtCity.viewParent = [self.txtCity superview];
-        self.txtCity.txtField.placeholder = @"City";
-        self.txtCity.scrollParent = self.scrollParent;
+        NSInteger found = [tempArray indexOfObject:self.txtCity.text];
+        if (found!=NSNotFound) {
+            [pkView selectRow:found inComponent:0 animated:false];
+        }
     }
     
-    if(true) { // if (g_areaData.pincode.count > 0) {
+    if (true) {//g_areaData.area.count > 0
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (int i = 0; i<g_areaData.pincode.count; i++) {
             TblArea* item = g_areaData.pincode[i];
-            CAAutoCompleteObject *object = [[CAAutoCompleteObject alloc] initWithObjectName:item.title AndID:i];
-            [tempArray addObject:object];
+            [tempArray addObject:item.title];
         }
-        [self.txtPin setDataSourceArray:tempArray];
-        [self.txtPin setDelegate:self];
+        UIPickerView* pkView = [[UIPickerView alloc] init];
+        pkView.delegate = self;
+        pkView.dataSource = self;
+        self.txtPin.placeholder = @"Pincode";
+        self.pkPin = pkView;
+        self.txtPin.inputView= pkView;
+        self.dataPin = tempArray;
         
-        self.txtPin.viewParent = [self.txtPin superview];
-        self.txtPin.txtField.placeholder = @"Pincode";
-        self.txtPin.scrollParent = self.scrollParent;
+        NSInteger found = [tempArray indexOfObject:self.txtPin.text];
+        if (found!=NSNotFound) {
+            [pkView selectRow:found inComponent:0 animated:false];
+        }
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -167,9 +179,10 @@
     self.txtLastName.text = env.last_name;
     self.txtPhoneNumber.text = env.phone;
     self.txtAddress.text = env.address1;
-    self.txtCity.txtField.text = env.city;
+    self.txtArea.text = env.address2;
+    self.txtCity.text = env.city;
     self.txtState.text = env.state;
-    self.txtPin.txtField.text = env.pincode;
+    self.txtPin.text = env.pincode;
     self.txtLandMark.text = env.landmark;
     if (env.mode == c_CORPERATION) {
         self.txtEmail.text = env.cor_email;
@@ -201,17 +214,17 @@
     NSString* mLast = _txtLastName.text;
     NSString* mPhone = _txtPhoneNumber.text;
     NSString* mAddress1 = _txtAddress.text;
-    //    NSString* mAddress2 = _txtad.text;
-    NSString* mCity = _txtCity.txtField.text;
+    NSString* mAddress2 = _txtArea.text;
+    NSString* mCity = _txtCity.text;
     NSString* mState = _txtState.text;
-    NSString* mPinCode = _txtPin.txtField.text;
+    NSString* mPinCode = _txtPin.text;
     NSString* mLandMark = _txtLandMark.text;
     NSString* mEmail = _txtEmail.text;
     NSString* mPassword = _txtPassword.text;
     NSString* mConfirmPassword = _txtRePassword.text;
     NSString* mAnswer = _txtAnswer.text;
     
-    NSArray* labels = @[mFirst,mLast,mPhone,mAddress1,mCity,mState,mPinCode,mLandMark,mEmail,mPassword,mConfirmPassword,mAnswer];
+    NSArray* labels = @[mFirst,mLast,mPhone,mAddress1,mAddress2,mCity,mState,mPinCode,mLandMark,mEmail,mPassword,mConfirmPassword,mAnswer];
     for (NSString*label in labels) {
         if ([label isEqualToString:@""]) {
             [CGlobal AlertMessage:@"Please enter all info" Title:nil];
@@ -264,7 +277,7 @@
     NSMutableDictionary * data = [[NSMutableDictionary alloc] initWithDictionary:tdata];
     if (self.inputData == nil) {
         NSDictionary*jsonMap = @{@"address1":mAddress1
-                                 ,@"address2":@""
+                                 ,@"address2":mAddress2
                                  ,@"city":mCity
                                  ,@"state":mState
                                  ,@"pincode":mPinCode
@@ -274,7 +287,7 @@
     }else{
         EnvVar* env = [CGlobal sharedId].env;
         NSDictionary*jsonMap = @{@"address1":mAddress1
-                                 ,@"address2":@""
+                                 ,@"address2":mAddress2
                                  ,@"city":mCity
                                  ,@"state":mState
                                  ,@"pincode":mPinCode
@@ -427,10 +440,34 @@
     return 1;
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    if (pickerView == self.pkArea) {
+        return self.dataArea.count;
+    }else if (pickerView == self.pkCity) {
+        return self.dataCity.count;
+    }else if (pickerView == self.pkPin) {
+        return self.dataPin.count;
+    }
     return g_securityList.count;
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if (pickerView == self.pkArea) {
+        return _dataArea[row];
+    }else if (pickerView == self.pkCity) {
+        return _dataCity[row];
+    }else if (pickerView == self.pkPin) {
+        return _dataPin[row];
+    }
     return g_securityList[row];
+}
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    if (pickerView == self.pkArea) {
+        self.txtArea.text = _dataArea[row];
+    }else if (pickerView == self.pkCity) {
+        self.txtCity.text = _dataCity[row];
+    }else if (pickerView == self.pkPin) {
+        self.txtPin.text = _dataPin[row];
+    }
+    _isChange = true;
 }
 
 - (void) CAAutoTextFillBeginEditing:(CAAutoFillTextField *) textField {

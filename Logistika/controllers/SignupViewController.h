@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblPicker1;
 @property (strong, nonatomic) UIView *viewPickerContainer1;
 
-@property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtArea;
-
 @property (weak, nonatomic) IBOutlet BorderTextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtLastName;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtPhoneNumber;
@@ -46,6 +44,14 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnTerms;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollParent;
-@property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtCity;
-@property (weak, nonatomic) IBOutlet CAAutoFillTextField *txtPin;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtArea;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtCity;
+@property (weak, nonatomic) IBOutlet BorderTextField *txtPin;
+
+@property (strong, nonatomic) UIPickerView *pkArea;
+@property (strong, nonatomic) UIPickerView *pkCity;
+@property (strong, nonatomic) UIPickerView *pkPin;
+@property (strong, nonatomic) NSMutableArray *dataArea;
+@property (strong, nonatomic) NSMutableArray *dataCity;
+@property (strong, nonatomic) NSMutableArray *dataPin;
 @end

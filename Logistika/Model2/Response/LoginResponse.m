@@ -32,6 +32,14 @@
                 TblArea* area = [[TblArea alloc] initWithDictionary:list[i]];
                 [self.area addObject:area];
             }
+            
+            if (self.area.count>0) {
+                [self.area sortUsingComparator:^NSComparisonResult(TblArea* obj1, TblArea* obj2) {
+                    NSString* first = obj1.title;
+                    NSString* second = obj2.title;
+                    return [first compare:second];
+                }];
+            }
         }
         
         obj = [dict objectForKey:@"city"];
@@ -42,6 +50,14 @@
                 TblArea* area = [[TblArea alloc] initWithDictionary:list[i]];
                 [self.city addObject:area];
             }
+            
+            if (self.city.count>0) {
+                [self.city sortUsingComparator:^NSComparisonResult(TblArea* obj1, TblArea* obj2) {
+                    NSString* first = obj1.title;
+                    NSString* second = obj2.title;
+                    return [first compare:second];
+                }];
+            }
         }
         
         obj = [dict objectForKey:@"pincode"];
@@ -51,6 +67,14 @@
             for (int i=0; i<list.count; i++) {
                 TblArea* area = [[TblArea alloc] initWithDictionary:list[i]];
                 [self.pincode addObject:area];
+            }
+            
+            if (self.pincode.count>0) {
+                [self.pincode sortUsingComparator:^NSComparisonResult(TblArea* obj1, TblArea* obj2) {
+                    NSString* first = obj1.title;
+                    NSString* second = obj2.title;
+                    return [first compare:second];
+                }];
             }
         }
         obj = [dict objectForKey:@"truck"];

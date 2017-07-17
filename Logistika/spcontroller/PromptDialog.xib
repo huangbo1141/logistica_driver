@@ -81,9 +81,6 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQH-6I-X4f">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                            <connections>
-                                                <action selector="clickAction:" destination="08Y-1k-HLL" eventType="touchUpInside" id="43v-yU-1Xx"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
