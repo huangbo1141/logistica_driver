@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8C-ey-kFr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8C-ey-kFr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -89,10 +89,10 @@
                                         </segments>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8kS-hF-aec">
-                                        <rect key="frame" x="30" y="204.5" width="315" height="30"/>
+                                        <rect key="frame" x="30" y="204.5" width="315" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVM-ga-Mu3" customClass="ColoredButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="45"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,7 +107,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iz6-2N-AUz" customClass="ColoredButton">
-                                                <rect key="frame" x="172.5" y="0.0" width="142.5" height="30"/>
+                                                <rect key="frame" x="172.5" y="0.0" width="142.5" height="45"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,6 +122,9 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="If8-w0-7bW"/>
+                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An App that Delivers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58e-Qd-bF4" customClass="ColoredLabel">
                                         <rect key="frame" x="101" y="152" width="174" height="23"/>
@@ -326,7 +329,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="LmW-gd-xsy">
-                                <rect key="frame" x="63" y="148.5" width="250" height="170.5"/>
+                                <rect key="frame" x="63" y="141" width="250" height="185.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9Sm-Wo-y2K">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="110.5"/>
@@ -366,10 +369,11 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-d7-dIx" customClass="ColoredButton">
-                                        <rect key="frame" x="55" y="140.5" width="140" height="30"/>
+                                        <rect key="frame" x="50" y="140.5" width="150" height="45"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="140" id="pce-Cz-xIA"/>
+                                            <constraint firstAttribute="height" constant="45" id="8Jx-M5-WU7"/>
+                                            <constraint firstAttribute="width" constant="150" id="pce-Cz-xIA"/>
                                         </constraints>
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -386,26 +390,32 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKX-Yg-ApD">
-                                <rect key="frame" x="125" y="349" width="126" height="30"/>
+                                <rect key="frame" x="125" y="356.5" width="126" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="o3p-vn-EZ4"/>
+                                </constraints>
                                 <state key="normal" title="Forgot User Name">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69b-XB-ZkA">
-                                <rect key="frame" x="125" y="373" width="126" height="1"/>
+                                <rect key="frame" x="125" y="395.5" width="126" height="1"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="grq-jd-qee"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zua-oF-tjO">
-                                <rect key="frame" x="129.5" y="394" width="115" height="30"/>
+                                <rect key="frame" x="129.5" y="416.5" width="115" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="1qD-lt-9TI"/>
+                                </constraints>
                                 <state key="normal" title="Forgot Password">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMp-Ir-LRn">
-                                <rect key="frame" x="129.5" y="418" width="115" height="1"/>
+                                <rect key="frame" x="129.5" y="455.5" width="115" height="1"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="1Ma-O0-2B4"/>
@@ -512,10 +522,11 @@ Please try again.</string>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ9-D3-rT9" customClass="ColoredButton">
-                                <rect key="frame" x="117" y="296.5" width="140" height="30"/>
+                                <rect key="frame" x="112" y="296.5" width="150" height="45"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="R9L-c7-AKf"/>
+                                    <constraint firstAttribute="height" constant="45" id="CXr-il-VCx"/>
+                                    <constraint firstAttribute="width" constant="150" id="R9L-c7-AKf"/>
                                 </constraints>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -628,10 +639,11 @@ Please try again.</string>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ws-iv-ZuG" customClass="ColoredButton">
-                                <rect key="frame" x="117" y="346" width="140" height="30"/>
+                                <rect key="frame" x="112" y="346" width="150" height="45"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="Id8-eL-FJe"/>
+                                    <constraint firstAttribute="height" constant="45" id="8iX-9W-PqD"/>
+                                    <constraint firstAttribute="width" constant="150" id="Id8-eL-FJe"/>
                                 </constraints>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -687,7 +699,7 @@ Please try again.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GP7-Ht-IYH">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1093"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="953"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="G8J-yA-fwv">
                                                 <rect key="frame" x="0.0" y="8" width="375" height="945"/>
@@ -835,8 +847,17 @@ Please try again.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Area,Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDR-gi-52m" customClass="BorderTextField">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="House No, Flat No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Am8-nA-7OT" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="38" width="335" height="30"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="30" id="jr6-T3-iHV"/>
+                                                                                </constraints>
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Area,Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDR-gi-52m" customClass="BorderTextField">
+                                                                                <rect key="frame" x="0.0" y="76" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="cq8-Cl-NBW"/>
                                                                                 </constraints>
@@ -845,7 +866,7 @@ Please try again.</string>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGg-4O-ior" customClass="BorderTextField">
-                                                                                <rect key="frame" x="0.0" y="76" width="335" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="114" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="0m0-Pp-STE"/>
                                                                                 </constraints>
@@ -854,7 +875,7 @@ Please try again.</string>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qUq-It-wNV" customClass="BorderTextField">
-                                                                                <rect key="frame" x="0.0" y="114" width="335" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="152" width="335" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="lYc-7p-YWM"/>
                                                                                 </constraints>
@@ -863,18 +884,9 @@ Please try again.</string>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pincode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xev-Bl-Wwu" customClass="BorderTextField">
-                                                                                <rect key="frame" x="0.0" y="152" width="335" height="30"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="NdY-nb-gQF"/>
-                                                                                </constraints>
-                                                                                <nil key="textColor"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
-                                                                            </textField>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Land Mark" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Am8-nA-7OT" customClass="BorderTextField">
                                                                                 <rect key="frame" x="0.0" y="190" width="335" height="30"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="jr6-T3-iHV"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="NdY-nb-gQF"/>
                                                                                 </constraints>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1125,11 +1137,11 @@ Please try again.</string>
                                                                                 <rect key="frame" x="0.0" y="110" width="335" height="128"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLc-wo-wlM" customClass="ColoredButton">
-                                                                                        <rect key="frame" x="108" y="29" width="120" height="30"/>
+                                                                                        <rect key="frame" x="93" y="21.5" width="150" height="45"/>
                                                                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="height" constant="30" id="SX1-h2-Gzb"/>
-                                                                                            <constraint firstAttribute="width" constant="120" id="TDo-JD-z3Y"/>
+                                                                                            <constraint firstAttribute="height" constant="45" id="SX1-h2-Gzb"/>
+                                                                                            <constraint firstAttribute="width" constant="150" id="TDo-JD-z3Y"/>
                                                                                         </constraints>
                                                                                         <state key="normal" title="Create">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1144,7 +1156,7 @@ Please try again.</string>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </button>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EVm-QW-was">
-                                                                                        <rect key="frame" x="28" y="74" width="280" height="30"/>
+                                                                                        <rect key="frame" x="28" y="81.5" width="280" height="30"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="dN0-bM-DNB">
                                                                                                 <rect key="frame" x="6.5" y="0.0" width="267" height="25"/>
@@ -1180,7 +1192,7 @@ Please try again.</string>
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2B-Zg-tMS">
-                                                                                        <rect key="frame" x="28" y="74" width="280" height="30"/>
+                                                                                        <rect key="frame" x="28" y="81.5" width="280" height="30"/>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1214,7 +1226,7 @@ Please try again.</string>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="G8J-yA-fwv" secondAttribute="bottom" constant="140" id="730-fD-wYI"/>
+                                            <constraint firstAttribute="bottom" secondItem="G8J-yA-fwv" secondAttribute="bottom" id="730-fD-wYI"/>
                                             <constraint firstItem="G8J-yA-fwv" firstAttribute="leading" secondItem="GP7-Ht-IYH" secondAttribute="leading" id="PPS-CN-2ql"/>
                                             <constraint firstAttribute="trailing" secondItem="G8J-yA-fwv" secondAttribute="trailing" id="ZrQ-ns-q7z"/>
                                             <constraint firstItem="G8J-yA-fwv" firstAttribute="top" secondItem="GP7-Ht-IYH" secondAttribute="top" constant="8" id="heh-aV-wlq"/>

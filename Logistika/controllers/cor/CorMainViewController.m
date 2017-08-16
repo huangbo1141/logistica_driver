@@ -13,6 +13,7 @@
 #import "NetworkParser.h"
 #import "OrderResponse.h"
 #import "OrderHisModel.h"
+#import "WaveViewController.h"
 
 @interface CorMainViewController ()
 
@@ -25,6 +26,11 @@
     
     [self trackCorporateOrders];
     // Do any additional setup after loading the view.
+    
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    [userd setBool:true forKey:@"service_status_preference"];
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate startOrStopTraccar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +45,14 @@
     
     EnvVar* env = [CGlobal sharedId].env;
     env.quote = false;
+}
+- (IBAction)clickWave:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    WaveViewController* vc = [ms instantiateViewControllerWithIdentifier:@"WaveViewController"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController pushViewController:vc animated:true];
+    });
 }
 - (IBAction)menu1:(id)sender {
     UIStoryboard *ms = [UIStoryboard storyboardWithName:@"Cor" bundle:nil];

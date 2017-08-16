@@ -271,6 +271,66 @@
     [uploadTask resume];
     
 }
+- (void)uploadImage4:(NSMutableDictionary*)params Data:(NSMutableDictionary*)imageData Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock{
+    
+    
+    NSDictionary *parameters = params;
+    
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:serverurl parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSString* key in imageData) {
+            NSData* value = [imageData objectForKey:key];
+            
+            NSString* name = key;
+            //        NSString* filename = [NSString stringWithFormat:@"image%d.jpg",k];
+            
+            [formData appendPartWithFileData:value name:name fileName:name mimeType:@"multipart/form-data;boundary=*****"];
+            // do stuff
+        }
+        
+        
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    if ([[serverurl lowercaseString] hasPrefix:@"https://"]) {
+        manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
+        [manager.securityPolicy setValidatesDomainName:NO];
+    }
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:nil
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      NSString* str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                      //str = @"{\"result\":400}";
+                      //NSLog(str);
+                      NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+                      id dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                      if (error == nil) {
+                          NSLog(@"Error: %@", error);
+                          if(completionBlock){
+                              if ([self checkResponse:dict]) {
+                                  
+                                  completionBlock(dict,nil);
+                              }else{
+                                  completionBlock(nil,[[NSError alloc] init]);
+                              }
+                              
+                          }
+                      } else {
+                          NSLog(@"%@ %@", response, responseObject);
+                          if(completionBlock) {
+                              completionBlock(nil,error);
+                          }
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+}
 - (void)uploadImage2:(NSMutableDictionary*)params Data:(NSMutableArray*)data_list Path:(NSString*)serverurl withCompletionBlock:(NetworkCompletionBlock)completionBlock{
     
         

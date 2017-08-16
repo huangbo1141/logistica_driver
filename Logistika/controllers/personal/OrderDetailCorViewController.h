@@ -10,9 +10,9 @@
 #import "ColoredView.h"
 #import "ConfirmBarViewController.h"
 #import "BorderTextField.h"
+#import "MyPopupDialog.h"
 
-
-@interface OrderDetailCorViewController : BasicViewController
+@interface OrderDetailCorViewController : BasicViewController<UITableViewDelegate,UITableViewDataSource,ViewDialogDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lbl_signature;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_signature_recv;
 @property (weak, nonatomic) IBOutlet UIButton *btnScan;
@@ -71,6 +71,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewAdditional;
 @property (weak, nonatomic) IBOutlet UIStackView *stackSignature;
+@property (weak, nonatomic) IBOutlet UIStackView *stackShipperDocument;
+@property (weak, nonatomic) IBOutlet UIStackView *stackReceiverDocument;
 @property (weak, nonatomic) IBOutlet UIStackView *stackPickup;
 @property (weak, nonatomic) IBOutlet UIStackView *stackEta;
 
@@ -91,4 +93,15 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgSignature;
 @property (weak, nonatomic) IBOutlet UIImageView *imgSignature_recv;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Receiver;
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Shipper;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *const_H_Shipper;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *const_H_Receiver;
+
+@property (strong, nonatomic) NSMutableArray* items_shipper;
+@property (strong, nonatomic) NSMutableArray* items_receiver;
+
+@property (assign, nonatomic) CGFloat cellHeight;
+
 @end

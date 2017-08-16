@@ -158,18 +158,23 @@ int64_t kRetryDelay = 30 * 1000;
         NSLog(@"tracking non personal corporation");
         return;
     }
+    
+    if (env.lastLogin <=0) {
+        return;
+    }
     params[@"orders"] = [CGlobal getOrderIds];
     
     params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
     params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
     params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
-    
+    params[@"speed"] = [NSString stringWithFormat:@"%f",position.speed];
     
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             [self delete:position];
+            NSLog(@"Send Track %f %f",position.latitude,position.longitude);
         }else{
             NSLog(@"Error");
         }

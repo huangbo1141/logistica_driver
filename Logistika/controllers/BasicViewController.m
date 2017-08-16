@@ -25,10 +25,7 @@
 @property (nonatomic,strong) NSMutableArray* trackOrderStrs;
 @property (nonatomic,strong) LimitSpeedView* speedView;
 
-@property (nonatomic,strong) NSDate* startTime;
-@property (nonatomic,strong) NSDate* endTime;
-@property (nonatomic,strong) NSTimer* timer;
-@property (nonatomic,assign) NSInteger tick;
+
 @end
 
 @implementation BasicViewController
@@ -52,61 +49,26 @@
             [self.view addSubview:self.speedView];
             self.speedView.frame = self.view.frame;
             
-            if (self.timer != nil) {
-                [self.timer invalidate];
-                self.timer = nil;
-            }
-            NSTimeInterval intval2hr = 3600*2;
-            if (g_isii) {
-              intval2hr = 30;
-            }
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:intval2hr target:self selector:@selector(runnable1:) userInfo:nil repeats:true];
-            self.tick = 0;
+            
+            
         }
         [self.speedView setData:data];
-        self.startTime = [NSDate date];
+        
     }else{
         if (self.speedView != nil) {
             [self.speedView removeFromSuperview];
         }
-        self.startTime = nil;
-        [self.timer invalidate];
     }
 }
--(void)runnable1:(id)sender{
-    //NSLog(@"Speed Limit View Runnable %ld",self.tick);
-    //self.tick = self.tick+1;
-    
-//    [CGlobal AlertMessage:@"Break Time Please stop at the nearest Truck Stop/Rest Area" Title:@"Break Time"];
-    g_breakShowing = true;
-    AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-    [delegate.warningSound stop];
-    delegate.warningSound = nil;
-    
-    
-    
-    MyPopupDialog* dialog = [[MyPopupDialog alloc] init];
-    BreakView* view = [[NSBundle mainBundle] loadNibNamed:@"PromptDialog" owner:self options:nil][1];
-    
-    [dialog setup:view backgroundDismiss:false backgroundColor:[UIColor darkGrayColor]];
-    
-    [dialog showPopup:self.view];
-    
-    view.breakSound = [delegate loadBeepSound:@"breaktime"];
-    [view.breakSound play];
-    [view setData:@{@"vc":self}];
-    
-    [self.timer invalidate];
-    self.timer = nil;
-}
--(void)recvNoti:(NSNotification*)notification{
-    if ([notification.object isKindOfClass:[NSMutableDictionary class]]) {
-        NSMutableDictionary* dict = notification.object;
-        if (self.speedView!=nil) {
-            [self.speedView setData:dict];
-        }
-    }
-}
+//
+//-(void)recvNoti:(NSNotification*)notification{
+//    if ([notification.object isKindOfClass:[NSMutableDictionary class]]) {
+//        NSMutableDictionary* dict = notification.object;
+//        if (self.speedView!=nil) {
+//            [self.speedView setData:dict];
+//        }
+//    }
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -26,5 +26,7 @@
 
 @property (nonatomic, strong) AVAudioPlayer *warningSound;
 -(AVAudioPlayer*)loadBeepSound:(NSString*)filename;
+
+@property (nonatomic,strong) NSTimer* timer;
 @end
 

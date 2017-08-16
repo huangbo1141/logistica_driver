@@ -25,6 +25,7 @@
 #import "PriceType.h"
 #import "CorporateModel.h"
 #import "ItemModel.h"
+#import <MapKit/MapKit.h>
 
 extern  UIColor*   COLOR_TOOLBAR_TEXT;
 extern  UIColor*   COLOR_TOOLBAR_BACK;
@@ -134,6 +135,9 @@ extern NSString* g_quote_id;
 extern PriceType* g_priceType;
 extern CorporateModel* g_corporateModel;
 extern LoginResponse* g_areaData;
+extern LoginResponse* g_waveData;
+extern LoginResponse* g_truckModels;
+extern CLLocation* g_lastLocation;
 extern NSString* g_track_id;
 
 //notifications
@@ -262,4 +266,5 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 +(void)removeOrderFromTrackOrder:(NSString*) orderID;
 +(NSString*)addOrderToTrackOrder:(NSString*)track_str;
 +(void)setOrderForTrackOrder:(NSMutableArray*)array;
++ (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString;
 @end

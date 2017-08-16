@@ -85,15 +85,24 @@
     {
         objc_property_t property = propertyArray[i];
         NSString *name = [[NSString alloc] initWithUTF8String:property_getName(property)];
+        NSString* attribute = [[NSString alloc] initWithUTF8String:property_getAttributes(property)];
         if (abcDict[name] != nil) {
             NSString* nameABC = abcDict[name];
             id value = dict[nameABC];
             
             if (value!=nil && [value isKindOfClass:[NSString class]] && value != [NSNull null] ) {
-                [targetClass setValue:value forKey:name];
+                if ([attribute containsString:@"NSString"]) {
+                    [targetClass setValue:value forKey:name];
+                }else if ([attribute containsString:@"NSNumber"]) {
+                    NSNumber* num = [NSNumber numberWithInt:[value intValue]];
+                    [targetClass setValue:num forKey:name];
+                }
             }else if (value!=nil && [value isKindOfClass:[NSNumber class]] && value != [NSNull null] ) {
-                NSNumber* val = value;
-                [targetClass setValue:[val stringValue]  forKey:name];
+                if ([attribute containsString:@"NSString"]) {
+                    [targetClass setValue:[value stringValue]  forKey:name];
+                }else if ([attribute containsString:@"NSNumber"]) {
+                    [targetClass setValue:value  forKey:name];
+                }
             }
         }
     }

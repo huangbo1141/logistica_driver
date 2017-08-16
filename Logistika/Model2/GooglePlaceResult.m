@@ -23,6 +23,17 @@
             GooglePlace* place = [[GooglePlace alloc] initWithDictionary:obj];
             _result = place;
         }
+        
+        obj = [dict objectForKey:@"results"];
+        if ([obj isKindOfClass:[NSArray class]]) {
+            
+            self.results = [[NSMutableArray alloc] init];
+            NSArray* array = obj;
+            for (int i=0; i<array.count; i++) {
+                GooglePlace* place = [[GooglePlace alloc] initWithDictionary:array[i]];
+                [self.results addObject:place];
+            }
+        }
     }
     return self;
 }

@@ -11,6 +11,7 @@
 
 @interface GooglePlaceResult : NSObject
 
+@property (nonatomic,strong) NSMutableArray* results;
 @property (nonatomic,strong) GooglePlace* result;
 @property (nonatomic,copy) NSString* status;
 

@@ -9,16 +9,18 @@
 #import "AppDelegate.h"
 #import "CGlobal.h"
 #import "PersonalMainViewController.h"
-#import <IQKeyboardManager.h>
+#import "IQKeyboardManager.h"
 #import "NetworkParser.h"
 #import "TCTrackingController.h"
 #import "MyNavViewController.h"
-
+#import "OrderMapViewController.h"
+#import "MyPopupDialog.h"
+#import "BreakView.h"
 
 // AIzaSyD6411yESCnRFYvjLbE4IvoagnN4j4t61s
 @interface AppDelegate ()
 @property (nonatomic, strong) TCTrackingController *trackingController;
-
+@property (nonatomic, strong) MyPopupDialog* dialog_BreakTime;
 @end
 
 @implementation AppDelegate
@@ -37,7 +39,9 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
-        
+    
+    [GMSServices provideAPIKey:@"AIzaSyAPN34OpSc-JfgEi_bCO08qmd1GOTTmeF0"];
+    
     return YES;
 }
 -(void)startOrStopTraccar{
@@ -188,7 +192,11 @@
     
     // Change service status
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:nil forKey:@"service_status_preference"];
+    
+    [userDefaults setBool:false forKey:@"service_status_preference"];
+    
+    EnvVar* env = [CGlobal sharedId].env;
+    env.lastLogin = -1;
     
     [self saveContext];
 }
@@ -282,20 +290,58 @@
     _locationManager.delegate = self;
     [_locationManager startUpdatingLocation];
 }
+-(void)runnable1:(id)sender{
+    //NSLog(@"Speed Limit View Runnable %ld",self.tick);
+    //self.tick = self.tick+1;
+    
+    //    [CGlobal AlertMessage:@"Break Time Please stop at the nearest Truck Stop/Rest Area" Title:@"Break Time"];
+    g_breakShowing = true;
+    AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    [delegate.warningSound stop];
+    delegate.warningSound = nil;
+    
+    
+    
+    MyPopupDialog* dialog = [[MyPopupDialog alloc] init];
+    BreakView* view = [[NSBundle mainBundle] loadNibNamed:@"PromptDialog" owner:self options:nil][1];
+    
+    [dialog setup:view backgroundDismiss:false backgroundColor:[UIColor darkGrayColor]];
+    
+    [dialog showPopup:self.window];
+    self.dialog_BreakTime = dialog;
+    
+    view.breakSound = [delegate loadBeepSound:@"breaktime"];
+    [view.breakSound play];
+    [view setData:@{@"vc":self}];
+    
+    [self.timer invalidate];
+    self.timer = nil;
+    
+    if (g_isii) {
+        NSTimeInterval intval2hr = 15;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:intval2hr target:self selector:@selector(runnable2:) userInfo:nil repeats:false];
+    }
+}
+-(void)runnable2:(id)sender{
+    g_isii = false;
+    [self.timer invalidate];
+    self.timer = nil;
+}
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    //g_lastLocation = newLocation;
+    g_lastLocation = newLocation;
     //    NSLog(@"%.6f %.6f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
     EnvVar* env = [CGlobal sharedId].env;
     
+    double gpsSpeed = newLocation.speed;
+    if (g_isii) {
+        gpsSpeed = arc4random_uniform(100);
+        gpsSpeed = 80 + gpsSpeed;
+    }
+    
+    double kph = gpsSpeed*3.6;
     // check if break time message shows
     if (env.lastLogin>0 && !g_breakShowing) {
         // signed
-        double gpsSpeed = newLocation.speed;
-        if (g_isii) {
-            gpsSpeed = arc4random_uniform(100);
-        }
-        double kph = gpsSpeed*3.6;
-//        NSLog(@"kph %.1f",kph);
         
         NSMutableDictionary*speedParam = [[NSMutableDictionary alloc] init];
         speedParam[@"speed"] = [NSString stringWithFormat:@"%.1f",kph];
@@ -307,7 +353,10 @@
             
             // notify about this
             UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-            if ([vc isKindOfClass:[BasicViewController class]]) {
+            if ([vc isKindOfClass:[OrderMapViewController class]]) {
+                OrderMapViewController*ovc = (OrderMapViewController*)vc;
+                [ovc setSpeedData:speedParam];
+            }else if ([vc isKindOfClass:[BasicViewController class]]) {
                 BasicViewController*bvc = (BasicViewController*)vc;
                 [bvc showSpeedView:speedParam];
             }
@@ -322,16 +371,51 @@
                 [_warningSound stop];
             }
             
+            if (self.timer == nil) {                
+                NSTimeInterval intval2hr = 3600*2;
+//                intval2hr = 300;
+                if (g_isii) {
+                    intval2hr = 300;
+                }
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:intval2hr target:self selector:@selector(runnable1:) userInfo:nil repeats:false];
+            }
+            
+            
         }else{
             // notify about this
             UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-            if ([vc isKindOfClass:[BasicViewController class]]) {
+            if ([vc isKindOfClass:[OrderMapViewController class]]) {
+                OrderMapViewController*ovc = (OrderMapViewController*)vc;
+                [ovc setSpeedData:speedParam];
+            }else if ([vc isKindOfClass:[BasicViewController class]]) {
                 BasicViewController*bvc = (BasicViewController*)vc;
                 [bvc showSpeedView:nil];
             }
             
             if(_warningSound != nil){
                 [_warningSound stop];
+            }
+            
+            if (self.timer!=nil) {
+                [self.timer invalidate];
+                self.timer = nil;
+            }
+            
+        }
+        
+    }else{
+        
+        if (kph>1) {
+            // moving
+        }else{
+            // almost stopped
+            if (g_breakShowing) {
+                
+                BreakView* view = (BreakView*)self.dialog_BreakTime.contentview;
+                [view.breakSound stop];
+                
+                [self.dialog_BreakTime dismissPopup];
+                g_breakShowing = false;
             }
         }
         
@@ -369,7 +453,8 @@
         if ([rootViewController isKindOfClass:[UINavigationController class]]) {
             UINavigationController*nav = (UINavigationController*)rootViewController;
             if (nav.viewControllers.count>0) {
-                UIViewController*vc = nav.viewControllers[0];
+                NSInteger index = nav.viewControllers.count - 1;
+                UIViewController*vc = nav.viewControllers[index];
                 return vc;
             }
         }

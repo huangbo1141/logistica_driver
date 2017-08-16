@@ -16,11 +16,11 @@
 #import "KMZViewController.h"
 #import "BarcodeScanViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "ShipperDocTableViewCell.h"
+#import "PhotoUploadViewController.h"
 
 @interface OrderDetailCorViewController ()
 @property (nonatomic,strong) OrderModel* orderModel;
-@property (nonatomic,assign) CGFloat cellHeight;
 @property (nonatomic,copy) NSString* mTime;
 @property (nonatomic,copy) NSString* mDate;
 
@@ -78,6 +78,8 @@
     if (self.imgSignature_recv.image!=nil) {
         _lbl_signature_recv.hidden = true;
     }
+    [self.tableView_Receiver reloadData];
+    [self.tableView_Shipper reloadData];
 }
 -(void)initTitle{
     if (self.type == g_ORDER) {
@@ -166,7 +168,7 @@
 -(void)initView{
     
     self.btnAction1.tag = 200;
-    
+    self.cellHeight = 60;
     UITapGestureRecognizer*gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     [_imgSignature addGestureRecognizer:gesture];
     _imgSignature.tag = 201;
@@ -219,6 +221,7 @@
             _stackEta.hidden = true;
         }
     }
+    self.stackShipperDocument.hidden = self.stackSignature.hidden;
     
     [self.btnAction1 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnAction2 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
@@ -241,8 +244,28 @@
     
     NSUInteger found = [c_freights indexOfObject:self.mode];
     if (found!=NSNotFound) {
-        _txtFrieght.text = [c_freights[found] uppercaseString];
+//        _txtFrieght.text = [c_freights[found] uppercaseString];
     }
+    _txtFrieght.text = @"Consignment";
+    _txtFrieght.enabled = false;
+    
+    UINib* nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Shipper registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+    nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Receiver registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+    self.tableView_Receiver.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Shipper.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Receiver.delegate = self;
+    self.tableView_Receiver.dataSource = self;
+    self.tableView_Shipper.delegate = self;
+    self.tableView_Shipper.dataSource = self;
+    
+    
+}
+-(void)setMode:(NSString *)mode{
+    _mode = [mode lowercaseString];
 }
 -(NSString*)getTime{
     NSDate* date = [NSDate date];
@@ -359,7 +382,7 @@
 -(void)showCarriers{
     if (g_carrierModel!=nil &&g_carrierModel.order_id!=nil) {
         CarrierModel* cm = g_carrierModel;
-        _txtFrieght.text = cm.freight;
+//        _txtFrieght.text = cm.freight;
         _txtLoadType.text = cm.load_type;
         _txtScanCon.text = cm.consignment;
         _txtDateTime.text = [NSString stringWithFormat:@"%@ %@",cm.date,cm.time];
@@ -406,10 +429,27 @@
         return;
     }
     
+    NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
+    imageParam[@"file"] = images[0];
+    for (int i=0; i<_items_shipper.count; i++) {
+        images = [[NSMutableArray alloc] init];
+        ItemModel* cell = _items_shipper[i];
+        imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        imageData = UIImagePNGRepresentation(cell.image_data);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        NSString* key = [NSString stringWithFormat:@"file%d",i];
+        imageParam[key] = images[0];
+    }
+    
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
     NSString* url = [NSString stringWithFormat:@"%@%@%@",g_baseUrl,ORDER_URL,@"carrier"];
-    [manager uploadImage3:params Data:images[0] Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager uploadImage4:params Data:imageParam Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //
@@ -452,9 +492,9 @@
     if (_mLoadType == nil || [_mLoadType length] == 0) {
         return false;
     }
-    if (_mConsignment == nil || [_mConsignment length] == 0) {
-        return false;
-    }
+//    if (_mConsignment == nil || [_mConsignment length] == 0) {
+//        return false;
+//    }
     if (_mVehicle == nil || [_mVehicle length] == 0) {
         return false;
     }
@@ -470,6 +510,8 @@
     if (_mTime == nil || [_mTime length] == 0) {
         return false;
     }
+    
+    
     return true;
 }
 - (void)didReceiveMemoryWarning {
@@ -593,12 +635,30 @@
         [CGlobal AlertMessage:@"Please Signature" Title:nil];
         return;
     }
+    
+    NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
+    imageParam[@"file"] = images[0];
+    for (int i=0; i<_items_receiver.count; i++) {
+        images = [[NSMutableArray alloc] init];
+        ItemModel* cell = _items_receiver[i];
+        imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        imageData = UIImagePNGRepresentation(cell.image_data);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        NSString* key = [NSString stringWithFormat:@"file%d",i];
+        imageParam[key] = images[0];
+    }
+    
     params[@"eta"] = self.mETA;
     
     NetworkParser* manager = [NetworkParser sharedManager];
     NSString* url = [NSString stringWithFormat:@"%@%@%@",g_baseUrl,ORDER_URL,@"complete_corporate_order"];
     [CGlobal showIndicator:self];
-    [manager uploadImage3:params Data:images[0] Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager uploadImage4:params Data:imageParam Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //
@@ -678,14 +738,72 @@
         [CGlobal stopIndicator:self];
     } method:@"POST"];
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_tableView_Shipper == tableView) {
+        self.const_H_Shipper.constant = self.items_shipper.count* self.cellHeight + 30;
+        [self.stackShipperDocument setNeedsUpdateConstraints];
+        [self.stackShipperDocument layoutIfNeeded];
+        return self.items_shipper.count;
+    }else if(_tableView_Receiver == tableView){
+        self.const_H_Receiver.constant = self.items_receiver.count* self.cellHeight + 30;
+        [self.stackReceiverDocument setNeedsUpdateConstraints];
+        [self.stackReceiverDocument layoutIfNeeded];
+        return self.items_receiver.count;
+    }
+    return 0;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if (_tableView_Shipper == tableView) {
+        [cell setData:@{@"aDelegate":self,@"model":self.items_shipper[indexPath.row],@"indexPath":indexPath,@"type":@"1"}];
+    }else if(_tableView_Receiver == tableView){
+        [cell setData:@{@"aDelegate":self,@"model":self.items_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"2"}];
+    }
+    return cell;
+}
+-(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
+    if ([view isKindOfClass:[ShipperDocTableViewCell class]]) {
+        if (data[@"action"]!=nil) {
+            NSString* action = data[@"action"];
+            NSDictionary* inputData = data[@"inputData"];
+            if ([action isEqualToString:@"delete"]) {
+                int type = [inputData[@"type"] intValue];
+                if (type == 1) {
+                    // shipper
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.items_shipper removeObjectAtIndex:path.row];
+                    [self.tableView_Shipper reloadData];
+                }else{
+                    // receiver
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.items_receiver removeObjectAtIndex:path.row];
+                    [self.tableView_Receiver reloadData];
+                }
+            }
+        }
+    }
+}
+- (IBAction)clickAddShipper:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        vc.limit = 1000;
+        vc.type = 1;
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+- (IBAction)clickAddReceiver:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        vc.limit = 1000;
+        vc.type = 2;
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+
 
 @end

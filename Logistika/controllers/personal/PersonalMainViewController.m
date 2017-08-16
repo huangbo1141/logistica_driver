@@ -10,7 +10,7 @@
 #import "CGlobal.h"
 #import "OrderPickUpViewController.h"
 #import "AppDelegate.h"
-
+#import "WaveViewController.h"
 
 @interface PersonalMainViewController ()
 
@@ -23,6 +23,11 @@
     
     // Do any additional setup after loading the view.
     [self trackOrders:1];
+    
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    [userd setBool:true forKey:@"service_status_preference"];
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate startOrStopTraccar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +43,15 @@
     EnvVar* env = [CGlobal sharedId].env;
     env.quote = false;
 }
+- (IBAction)clickWave:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    WaveViewController* vc = [ms instantiateViewControllerWithIdentifier:@"WaveViewController"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+
 - (IBAction)menu1:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
     OrderPickUpViewController* vc = [ms instantiateViewControllerWithIdentifier:@"OrderPickUpViewController"];

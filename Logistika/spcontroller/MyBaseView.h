@@ -15,5 +15,6 @@
 @property (nonatomic,strong) NSDictionary*inputData;
 //@property (nonatomic,strong) id model;
 
+@property (assign,nonatomic) CGFloat cellHeight;
 -(void)setData:(NSDictionary*)data;
 @end

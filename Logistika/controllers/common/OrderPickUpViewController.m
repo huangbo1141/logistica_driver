@@ -79,6 +79,13 @@
         self.viewRoot2.hidden = true;
         self.viewRoot3.hidden = true;
     }
+    
+    
+    [self sortData:self.data_0];
+    [self sortData:self.data_1];
+    [self sortData:self.data_2];
+    
+    
     [self.tableview1 reloadData];
     [self.tableview2 reloadData];
     [self.tableview3 reloadData];
@@ -126,6 +133,10 @@
         self.viewRoot2.hidden = true;
         self.viewRoot3.hidden = true;
     }
+    
+    [self sortData:self.data_0];
+    [self sortData:self.data_1];
+    [self sortData:self.data_2];
     
     [self.tableview1 reloadData];
     [self.tableview2 reloadData];
@@ -296,9 +307,6 @@
                     self.data_1 = [[NSMutableArray alloc] init];
                     self.data_2 = [[NSMutableArray alloc] init];
                     
-                    [self sortData:self.data_0];
-                    [self sortData:self.data_1];
-                    [self sortData:self.data_2];
                     
                     [self.tableview1 reloadData];
                     [self.tableview2 reloadData];
@@ -373,10 +381,6 @@
                     self.data_0 = [[NSMutableArray alloc] init];
                     self.data_1 = [[NSMutableArray alloc] init];
                     self.data_2 = [[NSMutableArray alloc] init];
-                    
-                    [self sortData:self.data_0];
-                    [self sortData:self.data_1];
-                    [self sortData:self.data_2];
                     
                     [self.tableview1 reloadData];
                     [self.tableview2 reloadData];

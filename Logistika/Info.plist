@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App want to access the location to track the package.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -31,6 +29,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Logistika App want to access camera to take picture.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App want to access the location to track the package.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Logistika app access your photo library to upload your photo</string>
 	<key>UIAppFonts</key>
@@ -58,5 +58,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+    </array>
 </dict>
 </plist>

@@ -51,10 +51,13 @@
     
     self.segment.tintColor = COLOR_PRIMARY;
     
-    EnvVar* env = [CGlobal sharedId].env;
-    if ([env.username length]>0) {
-        [self trackOrders:0];
-    }
+//    EnvVar* env = [CGlobal sharedId].env;
+//    if ([env.username length]>0 || [env.cor_email length]>0) {
+//        NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+//        [userd setBool:true forKey:@"service_status_preference"];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate startOrStopTraccar];
+//    }
 }
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;

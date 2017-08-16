@@ -22,7 +22,7 @@
 -(void)setData:(NSDictionary *)data{
     [super setData:data];
     
-    [self startLocationService];
+//    [self startLocationService];
 }
 - (IBAction)clickAction:(UIView*)sender {
     

@@ -10,6 +10,12 @@
 #import "BaseModel.h"
 #import "TblArea.h"
 #import "TblTruck.h"
+#import "WaveModel.h"
+#import "WaveOrderModel.h"
+#import "WaveOrderCorModel.h"
+#import "Step.h"
+//#import "Logistika-Swift.h"
+#import "CGlobal.h"
 
 @implementation LoginResponse
 
@@ -86,8 +92,96 @@
                 [self.truck addObject:area];
             }
         }
+        obj = [dict objectForKey:@"wave"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            NSArray* list = (NSArray*)obj;
+            self.wave = [[NSMutableArray alloc] init];
+            for (int i=0; i<list.count; i++) {
+                WaveModel* area = [[WaveModel alloc] initWithDictionary:list[i]];
+                [self.wave addObject:area];
+            }
+        }
     }
     return self;
 }
-
+-(instancetype)initWithDictionaryForWaveOrderModel:(NSDictionary*) dict{
+    self = [super init];
+    if(self){
+        [BaseModel parseResponse:self Dict:dict];
+        id obj = [dict objectForKey:@"wave"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            NSArray* list = (NSArray*)obj;
+            self.wave = [[NSMutableArray alloc] init];
+            for (int i=0; i<list.count; i++) {
+                WaveOrderModel* area = [[WaveOrderModel alloc] initWithDictionary:list[i]];
+                [self.wave addObject:area];
+            }
+        }
+    }
+    return self;
+}
+-(instancetype)initWithDictionaryForCorWaveOrderModel:(NSDictionary*) dict{
+    self = [super init];
+    if(self){
+        [BaseModel parseResponse:self Dict:dict];
+        id obj = [dict objectForKey:@"wave"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            NSArray* list = (NSArray*)obj;
+            self.wave = [[NSMutableArray alloc] init];
+            for (int i=0; i<list.count; i++) {
+                WaveOrderCorModel* area = [[WaveOrderCorModel alloc] initWithDictionary:list[i]];
+                [self.wave addObject:area];
+            }
+        }
+    }
+    return self;
+}
+-(instancetype)initWithDictionaryForRoute:(NSDictionary*) dict{
+    self = [super init];
+    if(self){
+        [BaseModel parseResponse:self Dict:dict];
+        Step*stepBean = [[Step alloc] init];
+        self.route = [[Route alloc] initWithDictionary:nil];
+        id obj = [dict objectForKey:@"routes"];
+        if (obj!=nil && obj!= [NSNull null] && [obj isKindOfClass:[NSArray class]]) {
+            NSArray* jArray = (NSArray*)obj;
+            for (int i=0; i<jArray.count; i++) {
+                id innerJObject = jArray[i];
+                if (innerJObject[@"legs"]!=nil) {
+                    NSArray* innerJarry = innerJObject[@"legs"];
+                    for (int j=0; j<innerJarry.count; j++) {
+                        id jObjectLegs = innerJarry[j];
+                        self.route.distanceText = jObjectLegs[@"distance"][@"text"];
+                        self.route.distanceValue = [jObjectLegs[@"distance"][@"value"] intValue];
+                        self.route.durationText = jObjectLegs[@"duration"][@"text"];
+                        self.route.durationValue = [jObjectLegs[@"duration"][@"text"] intValue];
+                        self.route.startAddress = jObjectLegs[@"start_address"];
+                        self.route.endAddress = jObjectLegs[@"end_address"];
+                        self.route.startLat = [jObjectLegs[@"start_location"][@"lat"] doubleValue];
+                        self.route.startLon = [jObjectLegs[@"start_location"][@"lng"] doubleValue];
+                        if (jObjectLegs[@"steps"]!=nil) {
+                            NSArray* jstepArray = jObjectLegs[@"steps"];
+                            for (int k=0; k<jstepArray.count; k++) {
+                                stepBean = [[Step alloc] init];
+                                if (jstepArray[k]!=nil) {
+                                    id jStepObject = jstepArray[k];
+                                    stepBean.html_instructions = jStepObject[@"html_instructions"];
+                                    stepBean.strPoint = jStepObject[@"polyline"][@"points"];
+                                    stepBean.startLat = [jStepObject[@"start_location"][@"lat"] doubleValue];
+                                    stepBean.startLon = [jStepObject[@"start_location"][@"lng"] doubleValue];
+                                    stepBean.endLat = [jStepObject[@"end_location"][@"lat"] doubleValue];
+                                    stepBean.endLon = [jStepObject[@"end_location"][@"lng"] doubleValue];
+                                    stepBean.listPoints = [CGlobal polylineWithEncodedString:stepBean.strPoint];
+                                                                        
+                                }
+                                [self.route.listStep addObject:stepBean];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return self;
+}
 @end

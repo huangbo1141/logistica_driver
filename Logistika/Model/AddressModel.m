@@ -16,20 +16,26 @@
         if (dict!=nil) {
             [BaseModel parseResponse:self Dict:dict];
             self.sourceAddress = dict[@"s_address"];
+            self.sourceArea = dict[@"s_area"];
             self.sourceCity = dict[@"s_city"];
             self.sourceState = dict[@"s_state"];
             self.sourcePinCode = dict[@"s_pincode"];
             self.sourcePhonoe = dict[@"s_phone"];
             self.sourceLandMark = dict[@"s_landmark"];
             self.sourceInstruction = dict[@"s_instruction"];
+            self.sourceLat = [dict[@"s_lat"] doubleValue];
+            self.sourceLng = [dict[@"s_lng"] doubleValue];
             
             self.desAddress = dict[@"d_address"];
+            self.desArea = dict[@"d_area"];
             self.desCity = dict[@"d_city"];
             self.desState = dict[@"d_state"];
             
             self.desPinCode = dict[@"d_pincode"];
             self.desLandMark = dict[@"d_landmark"];
             self.desInstruction = dict[@"d_instruction"];
+            self.desLat = [dict[@"d_lat"] doubleValue];
+            self.desLng = [dict[@"d_lng"] doubleValue];
             
             
         }

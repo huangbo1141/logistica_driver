@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIView+Property.h"
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 
 
 UIColor*   COLOR_TOOLBAR_TEXT;
@@ -24,7 +25,7 @@ UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
 NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
-//NSString* g_baseUrl = @"http://192.168.1.106";
+//NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";
 NSString* g_URL = @"/Employer/";
 NSString* SERVICE_URL = @"/WebService/";
@@ -40,6 +41,7 @@ BOOL g_isii = true;
 NSString*   APISERVICE_IP_URL = @"http://ip-api.com/json";
 NSString*   APISERVICE_MAP_URL = @"http://maps.googleapis.com/maps";
 NSString*   COMMON_PATH1 = @"/assets/rest/";
+//NSString*   COMMON_PATH1 = @"/assets/rest/";
 
 NSString*   ACTION_LOGIN = @"/signup_fb.php";
 NSString*   ACTION_CONFIRM = @"/confirm.php";
@@ -123,6 +125,9 @@ NSString* g_quote_id;
 PriceType* g_priceType;
 CorporateModel* g_corporateModel;
 LoginResponse* g_areaData;
+LoginResponse* g_waveData;
+LoginResponse* g_truckModels;
+CLLocation* g_lastLocation;
 NSString* g_track_id;
 
 //basic info
@@ -1303,28 +1308,10 @@ BOOL g_breakShowing = false;
     }
 }
 +(UIImage*)getImageForMap:(NSString*)number{
-    int spellsize = 12;
-    UIFont*font = [UIFont fontWithName:@"Helvetica" size:spellsize];
-    CGSize textSize = [number sizeWithAttributes:@{NSFontAttributeName:font}];
-    CGFloat bw = textSize.width;
-    CGFloat bh = textSize.height;
-    UIImage*bm = [UIImage imageNamed:@"map_pos.png"];
-    float radius = 10;
-    if (bw<bh) {
-        radius = bh/2;
-    }else{
-        radius = bw/2;
-    }
-    //radius+=5;
-    
-    int sm,cw,tw,th;
-    sm = 1;
-    cw = radius;
-    tw = 40;
-    th = 60;
-    CGPoint A = CGPointMake(5, 5);
-    CGPoint B = CGPointMake(35, 35);
-    
+    int tw = 30;
+    int th = 30;
+    UIImage*bm = [UIImage imageNamed:number];
+    //UIImage*bm = [CGlobal getColoredImage:@"marker1.png" Color:COLOR_PRIMARY];
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(tw,th), NO, 2.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     // drawing with a white stroke color
@@ -1336,19 +1323,7 @@ BOOL g_breakShowing = false;
     CGRect dst = CGRectMake(0,0,tw,th);
     [bm drawInRect:dst];
     
-    if ([number intValue] >= 1) {
-        CGRect circle_rect = CGRectMake(A.x, A.y, B.x-A.x, B.y-A.y);
-        CGContextSetRGBFillColor(context, 0.29, 0.60, 0.85,1.0);
-        CGContextFillEllipseInRect(context, circle_rect);
-        
-        CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-        NSDictionary* dict =  [NSDictionary dictionaryWithObjectsAndKeys:
-                               font, NSFontAttributeName,
-                               [NSNumber numberWithFloat:1.0], NSBaselineOffsetAttributeName, nil];
-        
-        CGRect text_rect = CGRectMake((circle_rect.size.width-bw)/2+circle_rect.origin.x,(circle_rect.size.height-bh)/2+circle_rect.origin.y,bw,bh);
-        [number drawInRect:text_rect withAttributes:dict];
-    }
+    
     UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return resultImage;
@@ -1669,14 +1644,95 @@ BOOL g_breakShowing = false;
     NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
     [userd setValue:array forKey:@"trackingOrderIds"];
     
-    if (array.count>0) {
-        [userd setBool:true forKey:@"service_status_preference"];
-        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate startOrStopTraccar];
-    }else if(array.count == 0){
-        [userd setBool:false forKey:@"service_status_preference"];
-        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate startOrStopTraccar];
+//    if (array.count>0) {
+//        [userd setBool:true forKey:@"service_status_preference"];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate startOrStopTraccar];
+//    }else if(array.count == 0){
+//        [userd setBool:false forKey:@"service_status_preference"];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate startOrStopTraccar];
+//    }
+}
++ (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString {
+    const char *bytes = [encodedString UTF8String];
+    NSUInteger length = [encodedString lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger idx = 0;
+    
+    NSUInteger count = length / 4;
+    CLLocationCoordinate2D *coords = calloc(count, sizeof(CLLocationCoordinate2D));
+    NSUInteger coordIdx = 0;
+    
+    float latitude = 0;
+    float longitude = 0;
+    while (idx < length) {
+        char byte = 0;
+        int res = 0;
+        char shift = 0;
+        
+        do {
+            byte = bytes[idx++] - 63;
+            res |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+        
+        float deltaLat = ((res & 1) ? ~(res >> 1) : (res >> 1));
+        latitude += deltaLat;
+        
+        shift = 0;
+        res = 0;
+        
+        do {
+            byte = bytes[idx++] - 0x3F;
+            res |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+        
+        float deltaLon = ((res & 1) ? ~(res >> 1) : (res >> 1));
+        longitude += deltaLon;
+        
+        float finalLat = latitude * 1E-5;
+        float finalLon = longitude * 1E-5;
+        
+        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(finalLat, finalLon);
+        coords[coordIdx++] = coord;
+        
+        if (coordIdx == count) {
+            NSUInteger newCount = count + 10;
+            coords = realloc(coords, newCount * sizeof(CLLocationCoordinate2D));
+            count = newCount;
+        }
     }
+    
+    MKPolyline *polyline = [MKPolyline polylineWithCoordinates:coords count:coordIdx];
+    free(coords);
+    
+    NSUInteger pointCount = polyline.pointCount;
+    
+    //allocate a C array to hold this many points/coordinates...
+    CLLocationCoordinate2D *routeCoordinates
+    = malloc(pointCount * sizeof(CLLocationCoordinate2D));
+    
+    //get the coordinates (all of them)...
+    [polyline getCoordinates:routeCoordinates
+                             range:NSMakeRange(0, pointCount)];
+    
+    //this part just shows how to use the results...
+    NSMutableArray* ret = [[NSMutableArray alloc] init];
+    NSLog(@"route pointCount = %d", pointCount);
+    for (int c=0; c < pointCount; c++)
+    {
+        NSLog(@"routeCoordinates[%d] = %f, %f",
+              c, routeCoordinates[c].latitude, routeCoordinates[c].longitude);
+        CGPoint pt = CGPointMake(routeCoordinates[c].latitude, routeCoordinates[c].longitude);
+        NSValue* value = [NSValue valueWithCGPoint:pt];
+        [ret addObject:value];
+    }
+    
+    //free the memory used by the C array when done with it...
+    free(routeCoordinates);
+//    free(polyline);
+    
+    return ret;
 }
 @end

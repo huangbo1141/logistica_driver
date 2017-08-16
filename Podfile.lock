@@ -14,8 +14,14 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - GoogleMaps (2.3.1):
+    - GoogleMaps/Maps (= 2.3.1)
+  - GoogleMaps/Base (2.3.1)
+  - GoogleMaps/Maps (2.3.1):
+    - GoogleMaps/Base
   - IQKeyboardManager (4.0.9)
   - MTBBarcodeScanner (5.0.0)
+  - OpenInGoogleMaps (0.1.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -23,18 +29,22 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - GoogleMaps
   - IQKeyboardManager
   - MTBBarcodeScanner
+  - OpenInGoogleMaps
   - SDWebImage (~> 3.7)
   - Stripe
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
   IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
   MTBBarcodeScanner: f7ac0087f2467ba73e4d429bb1bc2098fe11b09f
+  OpenInGoogleMaps: 60dd887d2e2b2149166a03bd6dab1d4478a7d3e8
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Stripe: dd6df0e2c6a8463e2f1ca9b15dc246e5ae1eee64
 
-PODFILE CHECKSUM: ade37cd262699b4f823566f10228b2c037b641aa
+PODFILE CHECKSUM: 63d2097146750e91caf48807b38b9deb8681ef16
 
 COCOAPODS: 1.1.1

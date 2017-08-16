@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GoogleGeometry.h"
 
 @interface GooglePlace : NSObject
 @property (nonatomic,copy) NSString*reference;
@@ -20,6 +21,7 @@
 @property (nonatomic,strong) NSMutableArray* types;
 @property (nonatomic,copy) NSString*xid;
 @property (nonatomic,strong) NSMutableArray*address_components;
+@property (nonatomic,strong) GoogleGeometry* geometry;
 
 @property (nonatomic,copy) NSString* googlePicture;
 @property (nonatomic,assign) double distance;
@@ -28,7 +30,6 @@
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
 
 -(NSString*)getAddressForTextQuery;
-
 
 
 @end

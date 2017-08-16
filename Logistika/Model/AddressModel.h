@@ -11,6 +11,7 @@
 @interface AddressModel : BaseModel
 
 @property (nonatomic,copy) NSString* sourceAddress;
+@property (nonatomic,copy) NSString* sourceArea;
 @property (nonatomic,copy) NSString* sourceCity;
 @property (nonatomic,copy) NSString* sourceState;
 @property (nonatomic,copy) NSString* sourcePinCode;
@@ -18,16 +19,16 @@
 @property (nonatomic,copy) NSString* sourceLandMark;
 @property (nonatomic,copy) NSString* sourceInstruction;
 
+@property (nonatomic,assign) double sourceLat;
+@property (nonatomic,assign) double sourceLng;
 
 @property (nonatomic,copy) NSString* desAddress;
+@property (nonatomic,copy) NSString* desArea;
 @property (nonatomic,copy) NSString* desCity;
 @property (nonatomic,copy) NSString* desState;
 @property (nonatomic,copy) NSString* desPinCode;
 @property (nonatomic,copy) NSString* desLandMark;
 @property (nonatomic,copy) NSString* desInstruction;
-
-@property (nonatomic,assign) double sourceLat;
-@property (nonatomic,assign) double  sourceLng;
 
 @property (nonatomic,assign) double  desLat;
 @property (nonatomic,assign) double  desLng;
