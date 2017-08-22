@@ -27,10 +27,14 @@
     [self trackCorporateOrders];
     // Do any additional setup after loading the view.
     
-    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
-    [userd setBool:true forKey:@"service_status_preference"];
+//    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+//    [userd setBool:true forKey:@"service_status_preference"];
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    delegate.trackingController = nil;
+//    [delegate startOrStopTraccar];
+    
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate startOrStopTraccar];
+    [delegate startTrackTimer];
 }
 
 - (void)didReceiveMemoryWarning {

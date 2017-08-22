@@ -24,6 +24,7 @@ UIColor*   COLOR_SECONDARY_GRAY;
 UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
+NSString* g_batteryLevel = @"";
 NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
 //NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";

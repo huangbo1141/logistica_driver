@@ -24,6 +24,7 @@
 #import "CGlobal.h"
 #import "NetworkParser.h"
 
+
 int64_t kRetryDelay = 30 * 1000;
 
 @interface TCTrackingController () <TCPositionProviderDelegate, TCNetworkManagerDelegate>
@@ -162,13 +163,23 @@ int64_t kRetryDelay = 30 * 1000;
     if (env.lastLogin <=0) {
         return;
     }
+    if (self.lastDate != nil) {
+        NSDate* date = [NSDate date];
+        NSTimeInterval intervals =  [date timeIntervalSinceDate:self.lastDate];
+        if (intervals < 10) {
+            NSLog(@"too shorts %f",intervals);
+            return;
+        }
+    }
     params[@"orders"] = [CGlobal getOrderIds];
     
     params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
     params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
     params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
     params[@"speed"] = [NSString stringWithFormat:@"%f",position.speed];
+    params[@"battery"] = g_batteryLevel;
     
+    self.lastDate = [NSDate date];
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {

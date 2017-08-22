@@ -20,5 +20,5 @@
 
 - (void)start;
 - (void)stop;
-
+@property (nonatomic,strong) NSDate* lastDate;
 @end

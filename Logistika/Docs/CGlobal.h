@@ -35,6 +35,7 @@ extern  UIColor*   COLOR_SECONDARY_GRAY;
 extern  UIColor*   COLOR_SECONDARY_THIRD;
 extern  UIColor*   COLOR_RESERVED;
 
+extern  NSString * g_batteryLevel;
 extern  NSString * g_baseUrl;
 extern  NSString * BASE_DATA_URL;
 extern  NSString* g_URL;

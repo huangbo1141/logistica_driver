@@ -11,7 +11,7 @@
 #import "PersonalMainViewController.h"
 #import "IQKeyboardManager.h"
 #import "NetworkParser.h"
-#import "TCTrackingController.h"
+
 #import "MyNavViewController.h"
 #import "OrderMapViewController.h"
 #import "MyPopupDialog.h"
@@ -19,7 +19,7 @@
 
 // AIzaSyD6411yESCnRFYvjLbE4IvoagnN4j4t61s
 @interface AppDelegate ()
-@property (nonatomic, strong) TCTrackingController *trackingController;
+
 @property (nonatomic, strong) MyPopupDialog* dialog_BreakTime;
 @end
 
@@ -66,7 +66,7 @@
     
     NSUserDefaults *defaults = userDefaults;
     BOOL status = [defaults boolForKey:@"service_status_preference"];
-    if (status && !self.trackingController) {
+    if (status) {
         
         NSString *validHost = @"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
         NSPredicate *hostPredicate  = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validHost];
@@ -97,6 +97,62 @@
 -(void)initData{
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+    
+    // Register for battery level and state change notifications.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryLevelDidChangeNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryStateChanged:)
+                                                 name:UIDeviceBatteryStateDidChangeNotification object:nil];
+}
+- (void)batteryLevelChanged:(NSNotification *)notification
+{
+    [self updateBatteryLevel];
+}
+
+- (void)batteryStateChanged:(NSNotification *)notification
+{
+    [self updateBatteryLevel];
+    [self updateBatteryState];
+}
+- (void)updateBatteryLevel
+{
+    float batteryLevel = [UIDevice currentDevice].batteryLevel;
+    if (batteryLevel < 0.0) {
+        // -1.0 means battery state is UIDeviceBatteryStateUnknown
+        g_batteryLevel = @"Unknown";
+    }
+    else {
+        static NSNumberFormatter *numberFormatter = nil;
+        if (numberFormatter == nil) {
+            numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+            [numberFormatter setMaximumFractionDigits:1];
+        }
+        
+        NSNumber *levelObj = [NSNumber numberWithFloat:batteryLevel];
+        g_batteryLevel = [numberFormatter stringFromNumber:levelObj];
+    }
+}
+
+- (void)updateBatteryState
+{
+//    NSArray *batteryStateCells = @[self.unknownCell, self.unpluggedCell, self.chargingCell, self.fullCell];
+//    
+//    UIDeviceBatteryState currentState = [UIDevice currentDevice].batteryState;
+//    
+//    for (int i = 0; i < [batteryStateCells count]; i++) {
+//        UITableViewCell *cell = (UITableViewCell *) batteryStateCells[i];
+//        
+//        if (i + UIDeviceBatteryStateUnknown == currentState) {
+//            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        }
+//        else {
+//            cell.accessoryType = UITableViewCellAccessoryNone;
+//        }
+//    }
 }
 - (void)keyboardOnScreen:(NSNotification *)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
@@ -170,6 +226,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 
@@ -186,6 +243,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -198,6 +256,7 @@
     EnvVar* env = [CGlobal sharedId].env;
     env.lastLogin = -1;
     
+    [self stopTrackTimer];
     [self saveContext];
 }
 
@@ -478,5 +537,78 @@
     UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
     
     return [self visibleViewController:presentedViewController];
+}
+-(void)stopTrackTimer{
+    if (self.trackTimer!=nil) {
+        [self.trackTimer invalidate];
+        self.trackTimer = nil;
+    }
+}
+-(void)startTrackTimer{
+    [self stopTrackTimer];
+    [self runnableTrack];
+    self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(runnableTrack) userInfo:nil repeats:true];
+}
+-(void)runnableTrack{
+    if (g_lastLocation==nil) {
+        return;
+    }
+    
+    EnvVar* env = [CGlobal sharedId].env;
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    
+    if (env.lastLogin <=0) {
+        return;
+    }
+    if (env.mode == c_PERSONAL) {
+        if ([env.user_id length]>0) {
+            params[@"employer_id"] = env.user_id;
+            NSLog(@"tracking personal %@",env.user_id);
+        }else{
+            NSLog(@"tracking personal return");
+            return;
+        }
+        
+        
+    }else if(env.mode == c_CORPERATION){
+        if ([env.corporate_user_id length]>0) {
+            params[@"employer_id"] = env.corporate_user_id;
+            NSLog(@"tracking corporation %@",env.corporate_user_id);
+        }else{
+            NSLog(@"tracking corporation return");
+            return;
+        }
+    }else{
+        NSLog(@"tracking non personal corporation");
+        return;
+    }
+    
+    
+    if (self.lastTrackDate != nil) {
+        NSDate* date = [NSDate date];
+        NSTimeInterval intervals =  [date timeIntervalSinceDate:self.lastTrackDate];
+        if (intervals < 10) {
+            NSLog(@"too shorts %f",intervals);
+            return;
+        }
+    }
+    params[@"orders"] = [CGlobal getOrderIds];
+    
+    params[@"timestamp"] = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]];
+    params[@"lat"] = [NSString stringWithFormat:@"%f",g_lastLocation.coordinate.latitude];
+    params[@"lon"] = [NSString stringWithFormat:@"%f",g_lastLocation.coordinate.longitude];
+    params[@"speed"] = [NSString stringWithFormat:@"%f",g_lastLocation.speed];
+    params[@"battery"] = g_batteryLevel;
+    
+    self.lastTrackDate = [NSDate date];
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            NSLog(@"Send Track %f %f",g_lastLocation.coordinate.latitude,g_lastLocation.coordinate.longitude);
+        }else{
+            NSLog(@"Error");
+        }
+    } method:@"get"];
 }
 @end

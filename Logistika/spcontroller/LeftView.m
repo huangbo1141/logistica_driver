@@ -154,6 +154,7 @@
             [env logOut];
             [CGlobal clearData];
             AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+            [delegate stopTrackTimer];
             [delegate defaultLogin];
             break;
         }

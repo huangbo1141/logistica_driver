@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "TCTrackingController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -28,5 +28,11 @@
 -(AVAudioPlayer*)loadBeepSound:(NSString*)filename;
 
 @property (nonatomic,strong) NSTimer* timer;
+@property (nonatomic, strong) TCTrackingController *trackingController;
+
+@property (nonatomic, strong) NSDate *lastTrackDate;
+@property (nonatomic,strong) NSTimer* trackTimer;
+-(void)stopTrackTimer;
+-(void)startTrackTimer;
 @end
 
