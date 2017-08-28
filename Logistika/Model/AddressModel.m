@@ -36,13 +36,22 @@
             self.desInstruction = dict[@"d_instruction"];
             self.desLat = [dict[@"d_lat"] doubleValue];
             self.desLng = [dict[@"d_lng"] doubleValue];
-            
+            self.desPhone = dict[@"d_phone"];
             
         }
         
         
     }
     return self;
+}
+-(void)setDesPhone:(NSString *)desPhone{
+    id value = desPhone;
+    
+    if (value!=nil && [value isKindOfClass:[NSString class]] && value != [NSNull null] && [value length]>0) {
+        _desPhone = value;
+    }else{
+        _desPhone = @" ";
+    }
 }
 -(void)initDefault{
     self.sourceLat = 0;
@@ -53,5 +62,6 @@
     
     self.duration = @"";
     self.distance = @"";
+    self.desPhone = @" ";
 }
 @end

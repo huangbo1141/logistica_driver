@@ -16,6 +16,7 @@
 #import <MapKit/MapKit.h>
 
 
+
 UIColor*   COLOR_TOOLBAR_TEXT;
 UIColor*   COLOR_TOOLBAR_BACK;
 UIColor*   COLOR_PRIMARY;
@@ -25,8 +26,8 @@ UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
 NSString* g_batteryLevel = @"";
-NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
-//NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
+//NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
+NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";
 NSString* g_URL = @"/Employer/";
 NSString* SERVICE_URL = @"/WebService/";
@@ -109,6 +110,7 @@ AddressModel* g_addressModel;
 DateModel* g_dateModel;
 ServiceModel* g_serviceModel;
 CarrierModel* g_carrierModel;
+VisibleModel* g_visibleModel;
 NSString* g_state;
 CGRect g_keyboardRect;
 
@@ -1735,5 +1737,23 @@ BOOL g_breakShowing = false;
 //    free(polyline);
     
     return ret;
+}
++(NSData*)getImageDataFromUIImage:(UIImage*)image{
+    if ([image isKindOfClass:[UIImage class]]) {
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        NSData*imageData = UIImageJPEGRepresentation(image, 0.7);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        imageData = UIImagePNGRepresentation(image);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        if ([images count]>0) {
+            return images[0];
+        }
+    }
+    
+    return nil;
 }
 @end

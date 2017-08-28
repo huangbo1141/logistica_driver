@@ -10,6 +10,7 @@
 #import "BaseModel.h"
 #import "CGlobal.h"
 #import "TblAddress.h"
+#import "VisibleModel.h"
 
 @implementation TblUser
 
@@ -29,7 +30,17 @@
             }
         }
         
-        
+        obj = [dict objectForKey:@"visible"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            if ([obj isKindOfClass:[NSArray class]]) {
+                NSArray* array = obj;
+                if ([array count]>0) {
+                    VisibleModel* model = [[VisibleModel alloc] initWithDictionary:array[0]];
+                    g_visibleModel = model;
+                }
+            }
+            
+        }
     }
     return self;
 }

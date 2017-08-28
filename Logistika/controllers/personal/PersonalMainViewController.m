@@ -46,6 +46,12 @@
     
     EnvVar* env = [CGlobal sharedId].env;
     env.quote = false;
+    
+    if ([g_visibleModel.waverVisible isEqualToString:@"0"]) {
+        self.viewWave.hidden = true;
+    }else{
+        self.viewWave.hidden = false;
+    }
 }
 - (IBAction)clickWave:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];

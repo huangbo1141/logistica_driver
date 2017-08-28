@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VisibleModel.h"
 
 @interface TblUser : NSObject
 

@@ -8,16 +8,18 @@
 
 #import "OrderDetailViewController.h"
 #import "CGlobal.h"
+#import "PhotoUploadViewController.h"
 
 #import "ReviewCameraTableViewCell.h"
 #import "ReviewItemTableViewCell.h"
 #import "ReviewPackageTableViewCell.h"
+#import "KMZViewController.h"
 
 #import "NetworkParser.h"
+#import "ShipperDocTableViewCell.h"
 
 @interface OrderDetailViewController ()
 @property (nonatomic,strong) OrderModel* orderModel;
-@property (nonatomic,assign) CGFloat cellHeight;
 @end
 
 @implementation OrderDetailViewController
@@ -44,8 +46,70 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = false;
+    if (self.imgSignature.image!=nil) {
+        _lbl_signature.hidden = true;
+    }
+    if (self.imgSignature_recv.image!=nil) {
+        _lbl_signature_recv.hidden = true;
+    }
+    [self.tableView_Receiver reloadData];
+    [self.tableView_Shipper reloadData];
+}
+-(void)handleGesture:(UITapGestureRecognizer*)gesture{
+    UIView*view = gesture.view;
+    if (view!=nil) {
+        int tag = (int)view.tag;
+        switch (tag) {
+            case 200:
+            {
+                // barcode
+                
+                break;
+            }
+            case 201:
+            {
+                // signature
+                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+                KMZViewController *vc = [ms instantiateViewControllerWithIdentifier:@"KMZViewController"];
+                vc.imageView = self.imgSignature;
+                [self.navigationController pushViewController:vc animated:true];
+                
+                break;
+            }
+            case 202:
+            {
+                // signature rec
+                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Common" bundle:nil];
+                KMZViewController *vc = [ms instantiateViewControllerWithIdentifier:@"KMZViewController"];
+                vc.imageView = self.imgSignature_recv;
+                [self.navigationController pushViewController:vc animated:true];
+                
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
 }
 -(void)initView{
+    self.stackShipper.hidden = true;
+    self.stackReceiver.hidden = true;
+    self.cellHeight_doc = 60;
+    
+    UITapGestureRecognizer*gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [_imgSignature addGestureRecognizer:gesture];
+    _imgSignature.tag = 201;
+    
+    gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [_imgSignature_recv addGestureRecognizer:gesture];
+    _imgSignature_recv.tag = 202;
+    
+    _imgSignature.userInteractionEnabled = true;
+    _imgSignature_recv.userInteractionEnabled = true;
+    
+    _imgSignature.userInteractionEnabled = false;
     if (self.type == g_ORDER) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"orders_for_pickup" value:@"" table:nil];
         self.title = title;
@@ -59,6 +123,10 @@
         
         self.btnAction1.tag = 200;
         self.btnAction2.tag = 201;
+        
+        self.stackShipper.hidden = false;
+        self.stackReceiver.hidden = true;
+        _imgSignature.userInteractionEnabled = true;
     }else if (self.type == g_PICKUP) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"picked_up" value:@"" table:nil];
         self.title = title;
@@ -74,6 +142,10 @@
         self.btnAction1.tag = 202;
         self.btnAction2.tag = 203;
         self.btnAction3.tag = 204;
+        
+        self.stackShipper.hidden = true;
+        self.stackReceiver.hidden = false;
+        
     }else if (self.type == g_COMPLETE) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"completed" value:@"" table:nil];
         self.title = title;
@@ -94,6 +166,8 @@
         self.btnAction1.tag = 205;
         self.btnAction2.tag = 206;
         
+        self.stackShipper.hidden = true;
+        self.stackReceiver.hidden = false;
     }else if (self.type == g_RETURN) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"returned" value:@"" table:nil];
         self.title = title;
@@ -101,10 +175,29 @@
         self.viewBottomAction.hidden = true;
         self.constraint_BOTTOMSPACE.constant = 0;
     }
+    if (g_visibleModel!=nil && [g_visibleModel.signatureVisible isEqualToString:@"0"]) {
+        self.stackReceiver.hidden = true;
+        self.stackShipper.hidden = true;
+    }
+    
     
     [self.btnAction1 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnAction2 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnAction3 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UINib* nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Shipper registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+    nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Receiver registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+    self.tableView_Receiver.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Shipper.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Receiver.delegate = self;
+    self.tableView_Receiver.dataSource = self;
+    self.tableView_Shipper.delegate = self;
+    self.tableView_Shipper.dataSource = self;
+    
 }
 -(void)showAddressDetails{
     if (g_addressModel.desAddress!=nil) {
@@ -120,11 +213,11 @@
         _lblDestCity.text = g_addressModel.desCity;
         _lblDestState.text = g_addressModel.desState;
         _lblDestPincode.text = g_addressModel.desPinCode;
-        //        _lblDestPhone.text = g_addressModel.des;
+        _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
         _lblDestInst.text = g_addressModel.desInstruction;
     }
-    _lblDestPhone.hidden = true;
+    //_lblDestPhone.hidden = true;
 }
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
@@ -221,6 +314,17 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_tableView_Shipper == tableView) {
+        self.const_H_Shipper.constant = self.items_shipper.count* self.cellHeight_doc + 30;
+        [self.stackShipperDocument setNeedsUpdateConstraints];
+        [self.stackShipperDocument layoutIfNeeded];
+        return self.items_shipper.count;
+    }else if(_tableView_Receiver == tableView){
+        self.const_H_Receiver.constant = self.items_receiver.count* self.cellHeight_doc + 30;
+        [self.stackReceiverDocument setNeedsUpdateConstraints];
+        [self.stackReceiverDocument layoutIfNeeded];
+        return self.items_receiver.count;
+    }
     CGFloat height = self.cellHeight * self.orderModel.itemModels.count;
     self.constraint_TH.constant = height;
     [self.tableView setNeedsUpdateConstraints];
@@ -228,6 +332,18 @@
     return self.orderModel.itemModels.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (_tableView_Shipper == tableView) {
+        ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        [cell setData:@{@"aDelegate":self,@"model":self.items_shipper[indexPath.row],@"indexPath":indexPath,@"type":@"1"}];
+        return cell;
+    }else if(_tableView_Receiver == tableView){
+        ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        [cell setData:@{@"aDelegate":self,@"model":self.items_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"2"}];
+        return cell;
+    }
+    
+    
     if (g_ORDER_TYPE == g_CAMERA_OPTION) {
         ReviewCameraTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         
@@ -252,7 +368,34 @@
     }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_tableView_Shipper == tableView) {
+        return self.cellHeight_doc;
+    }else if(_tableView_Receiver == tableView){
+        return self.cellHeight_doc;
+    }
     return self.cellHeight;
+}
+-(void)didSubmit:(NSDictionary *)data View:(UIView *)view{
+    if ([view isKindOfClass:[ShipperDocTableViewCell class]]) {
+        if (data[@"action"]!=nil) {
+            NSString* action = data[@"action"];
+            NSDictionary* inputData = data[@"inputData"];
+            if ([action isEqualToString:@"delete"]) {
+                int type = [inputData[@"type"] intValue];
+                if (type == 1) {
+                    // shipper
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.items_shipper removeObjectAtIndex:path.row];
+                    [self.tableView_Shipper reloadData];
+                }else{
+                    // receiver
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.items_receiver removeObjectAtIndex:path.row];
+                    [self.tableView_Receiver reloadData];
+                }
+            }
+        }
+    }
 }
 
 -(void)pickupOrder:(NSString*)state{
@@ -267,10 +410,53 @@
     {
         params[@"user_id"] = env.corporate_user_id;
     }
+    UIImage*image=nil;
+    NSMutableArray* array = nil;
+    if ([state isEqualToString:@"3"] || [state isEqualToString:@"4"]) {
+        // completed or delivered
+        if (self.type == g_ORDER) {
+            if (_stackShipper.hidden == false) {
+                if (_imgSignature.image == nil) {
+                    [CGlobal AlertMessage:@"Choose Shipper Signature" Title:nil];
+                    return;
+                }else{
+                    image = _imgSignature.image;
+                    array = _items_shipper;
+                }
+            }
+            
+        }else {
+            if (_stackReceiver.hidden == false) {
+                if (_imgSignature_recv.image == nil) {
+                    [CGlobal AlertMessage:@"Choose Receiver Signature" Title:nil];
+                    return;
+                }else{
+                    image = _imgSignature_recv.image;
+                    array = _items_receiver;
+                }
+            }
+            
+        }
+    }
+    NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
+    NSData*imageData = [CGlobal getImageDataFromUIImage:image];
+    if (imageData!=nil) {
+        imageParam[@"file"] = imageData;
+    }
+    for (int i=0; i<array.count; i++) {
+        ItemModel* cell = array[i];
+        imageData = [CGlobal getImageDataFromUIImage:cell.image_data];
+        if (imageData!=nil) {
+            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            imageParam[key] = imageData;
+        }
+        
+    }
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"change_order" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    NSString* url = [NSString stringWithFormat:@"%@%@%@",g_baseUrl,ORDER_URL,@"change_order"];
+    [manager uploadImage4:params Data:imageParam Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //
@@ -288,7 +474,33 @@
             NSLog(@"Error");
         }
         [CGlobal stopIndicator:self];
-    } method:@"POST"];
+    }];
+    
+    
+//    if (image == nil) {
+//        NetworkParser* manager = [NetworkParser sharedManager];
+//        [CGlobal showIndicator:self];
+//        [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"change_order" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+//            if (error == nil) {
+//                if (dict!=nil && dict[@"result"] != nil) {
+//                    //
+//                    if([dict[@"result"] intValue] == 400){
+//                        [CGlobal AlertMessage:@"Fail" Title:nil];
+//                    }else if([dict[@"result"] intValue] == 200){
+//                        // succ
+//                        NSString*trackstr = [NSString stringWithFormat:@"%@,%d",env.order_id,g_mode];
+//                        [CGlobal addOrderToTrackOrder:trackstr];
+//                        
+//                        [self.navigationController popViewControllerAnimated:true];
+//                    }
+//                }
+//            }else{
+//                NSLog(@"Error");
+//            }
+//            [CGlobal stopIndicator:self];
+//        } method:@"POST"];
+//    }
+    
 }
 -(void)cancelOrder{
     EnvVar* env = [CGlobal sharedId].env;
@@ -319,14 +531,25 @@
         [CGlobal stopIndicator:self];
     } method:@"POST"];
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (IBAction)clickAddShipper:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    vc.vc = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        vc.limit = 1000;
+        vc.type = 1;
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
+- (IBAction)clickAddReceiver:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    vc.vc = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        vc.limit = 1000;
+        vc.type = 2;
+        [self.navigationController pushViewController:vc animated:true];
+    });
+}
 
 @end

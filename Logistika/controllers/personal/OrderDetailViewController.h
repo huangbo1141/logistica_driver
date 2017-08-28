@@ -10,7 +10,7 @@
 #import "ColoredView.h"
 #import "ConfirmBarViewController.h"
 
-@interface OrderDetailViewController : BasicViewController
+@interface OrderDetailViewController : BasicViewController<UITableViewDelegate,UITableViewDataSource>
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTrackingNumber;
@@ -65,5 +65,28 @@
 @property (weak, nonatomic) IBOutlet UIView *viewBottomAction;
 
 @property (assign, nonatomic) int type;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imgSignature;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSignature_recv;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Receiver;
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Shipper;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *const_H_Shipper;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *const_H_Receiver;
+
+@property (strong, nonatomic) NSMutableArray* items_shipper;
+@property (strong, nonatomic) NSMutableArray* items_receiver;
+
+@property (weak, nonatomic) IBOutlet UIStackView* stackShipper;
+@property (weak, nonatomic) IBOutlet UIStackView* stackReceiver;
+
+@property (assign, nonatomic) CGFloat cellHeight;
+@property (assign, nonatomic) CGFloat cellHeight_doc;
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_signature;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_signature_recv;
+@property (weak, nonatomic) IBOutlet UIStackView *stackShipperDocument;
+@property (weak, nonatomic) IBOutlet UIStackView *stackReceiverDocument;
+
 
 @end

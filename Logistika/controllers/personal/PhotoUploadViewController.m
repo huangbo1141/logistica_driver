@@ -11,6 +11,7 @@
 #import "CGlobal.h"
 #import "ItemModel.h"
 #import "OrderDetailCorViewController.h"
+#import "OrderDetailViewController.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -77,29 +78,46 @@
                     [data addObject:item];
                 }
             }
+            
+            
             if (self.navigationController!=nil) {
                 UINavigationController* navc = self.navigationController;
-                for (int i=0; i<navc.viewControllers.count; i++) {
-                    UIViewController*vc = navc.viewControllers[i];
-                    if ([vc isKindOfClass:[OrderDetailCorViewController class]]) {
-                        // hgc need
-                        OrderDetailCorViewController* ovc = (OrderDetailCorViewController*)vc;
-                        if (self.type == 1) {
-                            // shipper
-                            if(ovc.items_shipper == nil){
-                                ovc.items_shipper = [[NSMutableArray alloc] init];
-                            }
-                            [ovc.items_shipper addObjectsFromArray:data];
-                        }else if(self.type == 2){
-                            if(ovc.items_receiver == nil){
-                                ovc.items_receiver = [[NSMutableArray alloc] init];
-                            }
-                            [ovc.items_receiver addObjectsFromArray:data];
+                if ([self.vc isKindOfClass:[OrderDetailCorViewController class]]) {
+                    // hgc need
+                    OrderDetailCorViewController* ovc = (OrderDetailCorViewController*)self.vc;
+                    if (self.type == 1) {
+                        // shipper
+                        if(ovc.items_shipper == nil){
+                            ovc.items_shipper = [[NSMutableArray alloc] init];
                         }
-                        //[navc popToViewController:cvc animated:false];
-                        [navc popViewControllerAnimated:true];
-                        return;
+                        [ovc.items_shipper addObjectsFromArray:data];
+                    }else if(self.type == 2){
+                        if(ovc.items_receiver == nil){
+                            ovc.items_receiver = [[NSMutableArray alloc] init];
+                        }
+                        [ovc.items_receiver addObjectsFromArray:data];
                     }
+                    //[navc popToViewController:cvc animated:false];
+                    [navc popViewControllerAnimated:true];
+                    return;
+                }else if ([self.vc isKindOfClass:[OrderDetailViewController class]]) {
+                    // hgc need
+                    OrderDetailViewController* ovc = (OrderDetailViewController*)self.vc;
+                    if (self.type == 1) {
+                        // shipper
+                        if(ovc.items_shipper == nil){
+                            ovc.items_shipper = [[NSMutableArray alloc] init];
+                        }
+                        [ovc.items_shipper addObjectsFromArray:data];
+                    }else if(self.type == 2){
+                        if(ovc.items_receiver == nil){
+                            ovc.items_receiver = [[NSMutableArray alloc] init];
+                        }
+                        [ovc.items_receiver addObjectsFromArray:data];
+                    }
+                    //[navc popToViewController:cvc animated:false];
+                    [navc popViewControllerAnimated:true];
+                    return;
                 }
                 // not found
 //                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];

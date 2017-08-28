@@ -72,6 +72,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewAdditional;
 @property (weak, nonatomic) IBOutlet UIStackView *stackSignature;
 @property (weak, nonatomic) IBOutlet UIStackView *stackShipperDocument;
+@property (weak, nonatomic) IBOutlet UIStackView *stackReceiver;
 @property (weak, nonatomic) IBOutlet UIStackView *stackReceiverDocument;
 @property (weak, nonatomic) IBOutlet UIStackView *stackPickup;
 @property (weak, nonatomic) IBOutlet UIStackView *stackEta;
@@ -101,6 +102,7 @@
 
 @property (strong, nonatomic) NSMutableArray* items_shipper;
 @property (strong, nonatomic) NSMutableArray* items_receiver;
+
 
 @property (assign, nonatomic) CGFloat cellHeight;
 

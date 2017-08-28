@@ -17,6 +17,14 @@
 #import "MyPopupDialog.h"
 #import "BreakView.h"
 
+#import <KSCrash/KSCrash.h> // TODO: Remove this
+#import <KSCrash/KSCrashInstallation+Alert.h>
+#import <KSCrash/KSCrashInstallationStandard.h>
+#import <KSCrash/KSCrashInstallationQuincyHockey.h>
+#import <KSCrash/KSCrashInstallationEmail.h>
+#import <KSCrash/KSCrashInstallationVictory.h>
+
+
 // AIzaSyD6411yESCnRFYvjLbE4IvoagnN4j4t61s
 @interface AppDelegate ()
 
@@ -35,6 +43,8 @@
     env.lastLogin = -1;
     env.quote = true;
     g_isii = false;
+    
+    [self installCrashHandler];
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
@@ -60,7 +70,7 @@
     
     
     [userDefaults setInteger:100 forKey:@"server_port_preference"];
-    [userDefaults setInteger:60 forKey:@"frequency_preference"];
+    [userDefaults setInteger:10 forKey:@"frequency_preference"];
     [userDefaults setInteger:0 forKey:@"angle_preference"];
     [userDefaults setInteger:0 forKey:@"distance_preference"];
     
@@ -610,5 +620,50 @@
             NSLog(@"Error");
         }
     } method:@"get"];
+}
+/**
+ Configure Crash Report Handler
+ **/
+- (void) installCrashHandler
+{
+    KSCrashInstallation* installation = [self makeEmailInstallation];
+    [installation install];
+    [KSCrash sharedInstance].deleteBehaviorAfterSendAll = KSCDeleteNever; // TODO: Remove this
+    
+    
+    // Send all outstanding reports. You can do this any time; it doesn't need
+    // to happen right as the app launches. Advanced-Example shows how to defer
+    // displaying the main view controller until crash reporting completes.
+    [installation sendAllReportsWithCompletion:^(NSArray* reports, BOOL completed, NSError* error)
+     {
+         if(completed)
+         {
+             NSLog(@"Sent %d reports", (int)[reports count]);
+         }
+         else
+         {
+             NSLog(@"Failed to send reports: %@", error);
+         }
+     }];
+}
+- (KSCrashInstallation*) makeEmailInstallation
+{
+    NSString* emailAddress = @"huangbo1117@gmail.com";
+    
+    KSCrashInstallationEmail* email = [KSCrashInstallationEmail sharedInstance];
+    email.recipients = @[emailAddress];
+    email.subject = @"Crash Report";
+    email.message = @"This is a crash report";
+    email.filenameFmt = @"crash-report-%d.txt.gz";
+    
+    [email addConditionalAlertWithTitle:@"Crash Detected"
+                                message:@"The app crashed last time it was launched. Send a crash report?"
+                              yesAnswer:@"Sure!"
+                               noAnswer:@"No thanks"];
+    
+    // Uncomment to send Apple style reports instead of JSON.
+    [email setReportStyle:KSCrashEmailReportStyleApple useDefaultFilenameFormat:YES];
+    
+    return email;
 }
 @end

@@ -26,6 +26,8 @@
 #import "CorporateModel.h"
 #import "ItemModel.h"
 #import <MapKit/MapKit.h>
+#import "VisibleModel.h"
+
 
 extern  UIColor*   COLOR_TOOLBAR_TEXT;
 extern  UIColor*   COLOR_TOOLBAR_BACK;
@@ -119,6 +121,7 @@ extern AddressModel* g_addressModel;
 extern DateModel* g_dateModel;
 extern ServiceModel* g_serviceModel;
 extern CarrierModel* g_carrierModel;
+extern VisibleModel* g_visibleModel;
 extern NSString* g_state;
 extern CGRect g_keyboardRect;
 
@@ -268,4 +271,5 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 +(NSString*)addOrderToTrackOrder:(NSString*)track_str;
 +(void)setOrderForTrackOrder:(NSMutableArray*)array;
 + (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString;
++(NSData*)getImageDataFromUIImage:(UIImage*)image;
 @end

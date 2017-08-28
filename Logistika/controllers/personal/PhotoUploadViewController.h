@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPreview;
 
 @property (strong, nonatomic) NSMutableArray* cells;
+@property (strong, nonatomic) UIViewController* vc;
 
 @property (nonatomic, assign) int limit;
 @property (nonatomic, assign) int type;

@@ -184,6 +184,7 @@
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"orders_for_pickup" value:@"" table:nil];
         self.title = title;
         
+        
         _stackSignature.hidden = false;
         _stackPickup.hidden = true;
     }else if (self.type == g_PICKUP) {
@@ -262,6 +263,12 @@
     self.tableView_Shipper.delegate = self;
     self.tableView_Shipper.dataSource = self;
     
+    if (g_visibleModel!=nil && [g_visibleModel.signatureVisible isEqualToString:@"0"]) {
+        self.stackSignature.hidden = true;
+        self.stackShipperDocument.hidden = true;
+        self.stackReceiver.hidden = true;
+        self.stackReceiverDocument.hidden = true;
+    }
     
 }
 -(void)setMode:(NSString *)mode{
@@ -302,11 +309,11 @@
         _lblDestCity.text = g_addressModel.desCity;
         _lblDestState.text = g_addressModel.desState;
         _lblDestPincode.text = g_addressModel.desPinCode;
-        //        _lblDestPhone.text = g_addressModel.des;
+        _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
         _lblDestInst.text = g_addressModel.desInstruction;
     }
-    _lblDestPhone.hidden = true;
+//    _lblDestPhone.hidden = true;
 }
 - (IBAction)scanBarcode:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
@@ -323,29 +330,40 @@
             // btn_pickup
             if (self.type == g_ORDER) {
                 if ([self checkInput]) {
-                    if (_imgSignature.image == nil) {
-                        [CGlobal AlertMessage:@"No Signature File" Title:nil];
+                    if (_stackSignature.hidden == false) {
+                        if (_imgSignature.image == nil) {
+                            [CGlobal AlertMessage:@"No Signature File" Title:nil];
+                            return;
+                        }else{
+                            [self insert_carrier:_imgSignature.image];
+                        }
                     }else{
-                        [self insert_carrier];
+                        [self insert_carrier:nil];
                     }
+                    
                 }else{
                     [CGlobal AlertMessage:@"Please Input All Info" Title:nil];
+                    return;
                 }
             }else if(self.type == g_ONHOLD){
-                if (self.imgSignature_recv.image != nil) {
-                    [self completeCorporateOrder:@"4"];
-                }else{
-                    [CGlobal AlertMessage:@"Signature" Title:nil];
+                if (_stackReceiver.hidden == false){
+                    if (self.imgSignature_recv.image == nil) {
+                        [CGlobal AlertMessage:@"Signature" Title:nil];
+                        return;
+                    }
                 }
+                [self completeCorporateOrder:@"4"];
             }
             break;
         }
         case 202:{
             // btn_delivered
             self.mETA = _txtEta.text;
-            if (self.imgSignature.image == nil) {
-                [CGlobal AlertMessage:@"Please Signature" Title:nil];
-                return;
+            if (_stackReceiver.hidden == false) {
+                if (self.imgSignature_recv.image == nil) {
+                    [CGlobal AlertMessage:@"Please Signature" Title:nil];
+                    return;
+                }
             }
             [self completeCorporateOrder:@"4"];
             
@@ -398,7 +416,7 @@
                               }];
     }
 }
--(void)insert_carrier{
+-(void)insert_carrier:(UIImage*)image{
     EnvVar* env = [CGlobal sharedId].env;
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     params[@"id"] = env.carrier_id;
@@ -415,36 +433,40 @@
     params[@"driver_name"] = _mDriverName;
     params[@"signature"] = @"signature";
     
-    NSMutableArray* images = [[NSMutableArray alloc] init];
-    NSData*imageData = UIImageJPEGRepresentation(self.imgSignature.image, 0.7);
-    if (imageData!=nil) {
-        [images addObject:imageData];
-    }
-    imageData = UIImagePNGRepresentation(self.imgSignature.image);
-    if (imageData!=nil) {
-        [images addObject:imageData];
-    }
-    if (images.count == 0) {
-        [CGlobal AlertMessage:@"Please Signature" Title:nil];
-        return;
+    NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
+    if (image!=nil) {
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        NSData*imageData = UIImageJPEGRepresentation(image, 0.7);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        imageData = UIImagePNGRepresentation(image);
+        if (imageData!=nil) {
+            [images addObject:imageData];
+        }
+        if (images.count == 0) {
+            [CGlobal AlertMessage:@"Please Signature" Title:nil];
+            return;
+        }
+        
+        
+        imageParam[@"file"] = images[0];
+        for (int i=0; i<_items_shipper.count; i++) {
+            images = [[NSMutableArray alloc] init];
+            ItemModel* cell = _items_shipper[i];
+            imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
+            if (imageData!=nil) {
+                [images addObject:imageData];
+            }
+            imageData = UIImagePNGRepresentation(cell.image_data);
+            if (imageData!=nil) {
+                [images addObject:imageData];
+            }
+            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            imageParam[key] = images[0];
+        }
     }
     
-    NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
-    imageParam[@"file"] = images[0];
-    for (int i=0; i<_items_shipper.count; i++) {
-        images = [[NSMutableArray alloc] init];
-        ItemModel* cell = _items_shipper[i];
-        imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
-        if (imageData!=nil) {
-            [images addObject:imageData];
-        }
-        imageData = UIImagePNGRepresentation(cell.image_data);
-        if (imageData!=nil) {
-            [images addObject:imageData];
-        }
-        NSString* key = [NSString stringWithFormat:@"file%d",i];
-        imageParam[key] = images[0];
-    }
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [CGlobal showIndicator:self];
@@ -621,38 +643,38 @@
         params[@"user_id"] = env.corporate_user_id;
     }
     
-    NSMutableArray* images = [[NSMutableArray alloc] init];
-    NSData*imageData = UIImageJPEGRepresentation(self.imgSignature_recv.image, 0.7);
-    if (imageData!=nil) {
-        [images addObject:imageData];
-    }
-    imageData = UIImagePNGRepresentation(self.imgSignature_recv.image);
-    if (imageData!=nil) {
-        [images addObject:imageData];
-    }
-    params[@"receiver_signature"] = @"receiver_signature";
-    if (images.count == 0) {
-        [CGlobal AlertMessage:@"Please Signature" Title:nil];
-        return;
-    }
-    
     NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
-    imageParam[@"file"] = images[0];
-    for (int i=0; i<_items_receiver.count; i++) {
-        images = [[NSMutableArray alloc] init];
-        ItemModel* cell = _items_receiver[i];
-        imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
+    if (_stackReceiver.hidden == false){
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        NSData*imageData = UIImageJPEGRepresentation(self.imgSignature_recv.image, 0.7);
         if (imageData!=nil) {
             [images addObject:imageData];
         }
-        imageData = UIImagePNGRepresentation(cell.image_data);
+        imageData = UIImagePNGRepresentation(self.imgSignature_recv.image);
         if (imageData!=nil) {
             [images addObject:imageData];
         }
-        NSString* key = [NSString stringWithFormat:@"file%d",i];
-        imageParam[key] = images[0];
+        params[@"receiver_signature"] = @"receiver_signature";
+        if (images.count == 0) {
+            [CGlobal AlertMessage:@"Please Signature" Title:nil];
+            return;
+        }
+        imageParam[@"file"] = images[0];
+        for (int i=0; i<_items_receiver.count; i++) {
+            images = [[NSMutableArray alloc] init];
+            ItemModel* cell = _items_receiver[i];
+            imageData = UIImageJPEGRepresentation(cell.image_data, 0.7);
+            if (imageData!=nil) {
+                [images addObject:imageData];
+            }
+            imageData = UIImagePNGRepresentation(cell.image_data);
+            if (imageData!=nil) {
+                [images addObject:imageData];
+            }
+            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            imageParam[key] = images[0];
+        }
     }
-    
     params[@"eta"] = self.mETA;
     
     NetworkParser* manager = [NetworkParser sharedManager];
@@ -738,8 +760,12 @@
         [CGlobal stopIndicator:self];
     } method:@"POST"];
 }
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.cellHeight;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (_tableView_Shipper == tableView) {
@@ -789,6 +815,7 @@
 - (IBAction)clickAddShipper:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
     PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    vc.vc = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         vc.limit = 1000;
         vc.type = 1;
@@ -798,6 +825,7 @@
 - (IBAction)clickAddReceiver:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
     PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    vc.vc = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         vc.limit = 1000;
         vc.type = 2;

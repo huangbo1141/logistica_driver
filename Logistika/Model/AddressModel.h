@@ -27,6 +27,7 @@
 @property (nonatomic,copy) NSString* desCity;
 @property (nonatomic,copy) NSString* desState;
 @property (nonatomic,copy) NSString* desPinCode;
+@property (nonatomic,copy) NSString* desPhone;
 @property (nonatomic,copy) NSString* desLandMark;
 @property (nonatomic,copy) NSString* desInstruction;
 
