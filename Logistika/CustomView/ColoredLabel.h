@@ -11,4 +11,6 @@
 @interface ColoredLabel : UILabel
 @property (nonatomic) IBInspectable NSInteger backMode;
 @property (nonatomic) IBInspectable CGFloat cornerRadious;
+@property (nonatomic) IBInspectable CGFloat msize;
+@property (nonatomic) IBInspectable CGFloat bsize;
 @end

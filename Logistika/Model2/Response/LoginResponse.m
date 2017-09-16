@@ -184,4 +184,36 @@
     }
     return self;
 }
+-(instancetype)initWithDictionaryForWavePersonalOrders:(NSDictionary*) dict{
+    self = [super init];
+    if(self){
+        [BaseModel parseResponse:self Dict:dict];
+        id obj = [dict objectForKey:@"orders"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            NSArray* list = (NSArray*)obj;
+            self.wave = [[NSMutableArray alloc] init];
+            for (int i=0; i<list.count; i++) {
+                WaveOrderModel* area = [[WaveOrderModel alloc] initWithDictionary:list[i]];
+                [self.wave addObject:area];
+            }
+        }
+    }
+    return self;
+}
+-(instancetype)initWithDictionaryForWaveCorporateOrders:(NSDictionary*) dict{
+    self = [super init];
+    if(self){
+        [BaseModel parseResponse:self Dict:dict];
+        id obj = [dict objectForKey:@"orders"];
+        if (obj!=nil && obj!= [NSNull null]) {
+            NSArray* list = (NSArray*)obj;
+            self.wave = [[NSMutableArray alloc] init];
+            for (int i=0; i<list.count; i++) {
+                WaveOrderCorModel* area = [[WaveOrderCorModel alloc] initWithDictionary:list[i]];
+                [self.wave addObject:area];
+            }
+        }
+    }
+    return self;
+}
 @end

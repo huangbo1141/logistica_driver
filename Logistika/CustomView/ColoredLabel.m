@@ -35,6 +35,11 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 4:{
+            self.textColor = COLOR_PRIMARY;
+            
+            break;
+        }
         case 3:{
             // sign up section title
             self.textColor = [CGlobal colorWithHexString:@"2f4f4f" Alpha:1.0f];
@@ -63,5 +68,17 @@
         self.layer.masksToBounds = true;
     }
     _cornerRadious = cornerRadious;
+}
+-(void)setMsize:(CGFloat)msize{
+    if (msize > 0) {
+        UIFont* font = [UIFont fontWithName:@"Verdana" size:msize];
+        self.font = font;
+    }
+}
+-(void)setBsize:(CGFloat)bsize{
+    if (bsize > 0) {
+        UIFont* font = [UIFont fontWithName:@"Verdana-Bold" size:bsize];
+        self.font = font;
+    }
 }
 @end

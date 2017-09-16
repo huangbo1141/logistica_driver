@@ -35,6 +35,15 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 3:{
+            self.textColor = COLOR_PRIMARY;
+            break;
+        }
+        case 2:{
+            self.textColor = [UIColor whiteColor];
+            
+            break;
+        }
         case 1:{
             // bottom banner label
             UIFont* font = [UIFont boldSystemFontOfSize:16.5];

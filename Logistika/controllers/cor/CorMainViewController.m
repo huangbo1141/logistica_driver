@@ -14,6 +14,8 @@
 #import "OrderResponse.h"
 #import "OrderHisModel.h"
 #import "WaveViewController.h"
+#import "CountResponse.h"
+#import "MapsViewController.h"
 
 @interface CorMainViewController ()
 
@@ -35,8 +37,42 @@
     
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [delegate startTrackTimer];
+    
+    NSArray* array = @[_lblWaveCnt,_lblOrderCnt,_lblPickupCnt,_lblPickedCnt,_lblCompletedCnt,_lblHoldCnt];
+    for (int i=0; i< array.count; i++) {
+        FontLabel* lbl = array[i];
+        lbl.msize = 22;
+    }
 }
-
+-(void)get_count_info{
+    EnvVar* env = [CGlobal sharedId].env;
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    params[@"order_type"] = @"1";
+    params[@"employer_id"] = env.corporate_user_id;
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [CGlobal showIndicator:self];
+    [manager ontemplateGeneralRequest2:params BasePath:g_URL Path:@"get_count_info" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                //
+                if([dict[@"result"] intValue] == 200){
+                    CountResponse* resp = [[CountResponse alloc] initWithDictionary:dict];
+                    _lblWaveCnt.text = resp.wave_count;
+                    _lblOrderCnt.text = resp.wave_order_count;
+                    _lblPickupCnt.text = resp.order_for_pickup;
+                    _lblPickedCnt.text = resp.pickedup;
+                    _lblCompletedCnt.text = resp.completed;
+                    _lblHoldCnt.text = resp.onhold;
+                    _lblReturnedCnt.text = resp.returned;
+                }
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        [CGlobal stopIndicator:self];
+    } method:@"POST"];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -49,6 +85,8 @@
     
     EnvVar* env = [CGlobal sharedId].env;
     env.quote = false;
+    
+    [self get_count_info];
 }
 - (IBAction)clickWave:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
@@ -93,7 +131,35 @@
 - (IBAction)menu5:(id)sender {
     
 }
-
+- (IBAction)callHub:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:12125551212"]];
+}
+- (IBAction)clickRoute:(id)sender {
+    EnvVar* env = [CGlobal sharedId].env;
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    params[@"employer_id"] = env.corporate_user_id;
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [CGlobal showIndicator:self];
+    [manager ontemplateGeneralRequest2:params BasePath:g_URL Path:@"get_wave_corporate_orders" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                //
+                if([dict[@"result"] intValue] == 200){
+                    LoginResponse* resp = [[LoginResponse alloc] initWithDictionaryForWaveCorporateOrders:dict];
+                    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Cor" bundle:nil];
+                    MapsViewController* vc = (MapsViewController*)[ms instantiateViewControllerWithIdentifier:@"MapsViewController"];
+                    vc.list_data = resp.wave;
+                    vc.type = 1;
+                    [self.navigationController pushViewController:vc animated:true];
+                }
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        [CGlobal stopIndicator:self];
+    } method:@"POST"];
+}
 
 /*
  #pragma mark - Navigation

@@ -80,17 +80,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfQ-Ne-mOl">
                                 <rect key="frame" x="0.0" y="75" width="320" height="493"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="moa-L1-cXD">
-                                        <rect key="frame" x="25" y="26" width="270" height="440"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="moa-L1-cXD">
+                                        <rect key="frame" x="20" y="20" width="280" height="453"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-2c-YIw" customClass="ColoredView">
-                                                <rect key="frame" x="0.0" y="0.0" width="270" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-7q-334">
-                                                        <rect key="frame" x="77" y="21" width="116.5" height="18"/>
+                                                        <rect key="frame" x="8" y="21" width="264" height="48"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAVE PLANNER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnk-Df-aQy" customClass="FontLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="264" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -99,14 +99,107 @@
                                                                         <real key="value" value="15"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="0"/>
+                                                                        <integer key="value" value="2"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CMO-A0-mWv">
+                                                                <rect key="frame" x="0.0" y="18" width="264" height="30"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aW-8R-iak">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="132" height="30"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZQ-pK-Wsv">
+                                                                                <rect key="frame" x="35.5" y="6" width="61" height="18"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wave : " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWM-Vs-shN" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="18"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V75-Tn-OO8" customClass="FontLabel">
+                                                                                        <rect key="frame" x="51" y="0.0" width="10" height="18"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="0AE-Lx-crg"/>
+                                                                            <constraint firstItem="uZQ-pK-Wsv" firstAttribute="centerY" secondItem="1aW-8R-iak" secondAttribute="centerY" id="XHI-mW-CLY"/>
+                                                                            <constraint firstItem="uZQ-pK-Wsv" firstAttribute="centerX" secondItem="1aW-8R-iak" secondAttribute="centerX" id="sZe-XK-5fG"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPs-Z5-3GB">
+                                                                        <rect key="frame" x="132" y="0.0" width="132" height="30"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwQ-02-Mqo">
+                                                                                <rect key="frame" x="31" y="6" width="71.5" height="18"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders : " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibd-98-RQh" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="61.5" height="18"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQP-xC-ImS" customClass="FontLabel">
+                                                                                        <rect key="frame" x="61.5" y="0.0" width="10" height="18"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="JwQ-02-Mqo" firstAttribute="centerY" secondItem="IPs-Z5-3GB" secondAttribute="centerY" id="36Z-7t-lgl"/>
+                                                                            <constraint firstItem="JwQ-02-Mqo" firstAttribute="centerX" secondItem="IPs-Z5-3GB" secondAttribute="centerX" id="Fjg-Ug-FYU"/>
+                                                                            <constraint firstAttribute="height" constant="30" id="SxU-M1-whW"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBs-um-Rai">
-                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
                                                         <connections>
                                                             <action selector="clickWave:" destination="i4p-by-gU2" eventType="touchUpInside" id="J1b-Mx-1Cb"/>
                                                         </connections>
@@ -114,8 +207,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="mCa-7q-334" firstAttribute="leading" secondItem="eHs-2c-YIw" secondAttribute="leading" constant="8" id="24H-JX-Bgp"/>
                                                     <constraint firstItem="mCa-7q-334" firstAttribute="centerY" secondItem="eHs-2c-YIw" secondAttribute="centerY" id="B4l-0n-1Ek"/>
-                                                    <constraint firstAttribute="height" constant="60" id="GrX-GF-0jI"/>
+                                                    <constraint firstAttribute="height" constant="90" id="GrX-GF-0jI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mCa-7q-334" secondAttribute="trailing" constant="8" id="Lkd-BU-QZf"/>
                                                     <constraint firstItem="mCa-7q-334" firstAttribute="centerX" secondItem="eHs-2c-YIw" secondAttribute="centerX" id="Ze3-vn-iE4"/>
                                                     <constraint firstItem="cBs-um-Rai" firstAttribute="top" secondItem="eHs-2c-YIw" secondAttribute="top" id="bsg-Dp-ChT"/>
                                                     <constraint firstAttribute="bottom" secondItem="cBs-um-Rai" secondAttribute="bottom" id="hc6-e3-xXE"/>
@@ -124,348 +219,568 @@
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                        <integer key="value" value="1"/>
+                                                        <integer key="value" value="7"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                        <real key="value" value="8"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywa-iO-swm">
-                                                <rect key="frame" x="0.0" y="80" width="270" height="360"/>
+                                                <rect key="frame" x="0.0" y="105" width="280" height="273"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="UGl-qy-wc1">
-                                                        <rect key="frame" x="10" y="0.0" width="250" height="360"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="UGl-qy-wc1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="273"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4SW-v3-IAl" customClass="ColoredView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RGY-zo-6RU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="81"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-0V-8eP">
-                                                                        <rect key="frame" x="88.5" y="13" width="73.5" height="34"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4SW-v3-IAl" customClass="ColoredView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WB-5V-WQG" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="18"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PickUp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-q6-Q8o" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="18" width="73.5" height="16"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-0V-8eP">
+                                                                                <rect key="frame" x="29.5" y="13.5" width="73.5" height="55"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMC-wZ-mx2" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="73.5" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VmI-Ye-V67">
+                                                                                        <rect key="frame" x="0.0" y="21" width="73.5" height="34"/>
+                                                                                        <subviews>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WB-5V-WQG" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PickUp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-q6-Q8o" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="18" width="73.5" height="16"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1V-WK-R6J">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="menu1:" destination="i4p-by-gU2" eventType="touchUpInside" id="CNq-yX-Q8R"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
-                                                                    </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1V-WK-R6J">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
-                                                                        <connections>
-                                                                            <action selector="menu1:" destination="i4p-by-gU2" eventType="touchUpInside" id="CNq-yX-Q8R"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="f1V-WK-R6J" secondAttribute="bottom" id="JaJ-ie-Q00"/>
+                                                                            <constraint firstItem="f1V-WK-R6J" firstAttribute="top" secondItem="4SW-v3-IAl" secondAttribute="top" id="Ka0-n5-zyi"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="f1V-WK-R6J" secondAttribute="trailing" id="NaI-02-zYa"/>
+                                                                            <constraint firstItem="f1V-WK-R6J" firstAttribute="leading" secondItem="4SW-v3-IAl" secondAttribute="leading" id="VxD-Pn-WgE"/>
+                                                                            <constraint firstItem="9VZ-0V-8eP" firstAttribute="centerY" secondItem="4SW-v3-IAl" secondAttribute="centerY" id="dgH-Jr-2Z9"/>
+                                                                            <constraint firstItem="9VZ-0V-8eP" firstAttribute="centerX" secondItem="4SW-v3-IAl" secondAttribute="centerX" id="hr9-aW-2oG"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcH-LN-xHO" customClass="ColoredView">
+                                                                        <rect key="frame" x="147.5" y="0.0" width="132.5" height="81"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vqu-eA-7cn">
+                                                                                <rect key="frame" x="30" y="13.5" width="72.5" height="55"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gf-2c-TzA" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="72.5" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="51l-BO-e7C">
+                                                                                        <rect key="frame" x="0.0" y="21" width="72.5" height="34"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picked Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMP-Wc-5XP" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="72.5" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMc-ES-o75" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="18" width="72.5" height="16"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83q-v9-W2g">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="menu2:" destination="i4p-by-gU2" eventType="touchUpInside" id="QPY-2C-3RU"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="vqu-eA-7cn" firstAttribute="centerX" secondItem="XcH-LN-xHO" secondAttribute="centerX" id="B2s-g7-ox7"/>
+                                                                            <constraint firstItem="83q-v9-W2g" firstAttribute="top" secondItem="XcH-LN-xHO" secondAttribute="top" id="Cqh-iC-w6x"/>
+                                                                            <constraint firstItem="vqu-eA-7cn" firstAttribute="centerY" secondItem="XcH-LN-xHO" secondAttribute="centerY" id="EfR-UO-T17"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="83q-v9-W2g" secondAttribute="trailing" id="W9C-KP-FAY"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="83q-v9-W2g" secondAttribute="bottom" id="i9g-hP-fTv"/>
+                                                                            <constraint firstItem="83q-v9-W2g" firstAttribute="leading" secondItem="XcH-LN-xHO" secondAttribute="leading" id="jkj-9R-G0t"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="60" id="C0s-5H-aPM"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="f1V-WK-R6J" secondAttribute="bottom" id="JaJ-ie-Q00"/>
-                                                                    <constraint firstItem="f1V-WK-R6J" firstAttribute="top" secondItem="4SW-v3-IAl" secondAttribute="top" id="Ka0-n5-zyi"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="f1V-WK-R6J" secondAttribute="trailing" id="NaI-02-zYa"/>
-                                                                    <constraint firstItem="f1V-WK-R6J" firstAttribute="leading" secondItem="4SW-v3-IAl" secondAttribute="leading" id="VxD-Pn-WgE"/>
-                                                                    <constraint firstItem="9VZ-0V-8eP" firstAttribute="centerY" secondItem="4SW-v3-IAl" secondAttribute="centerY" id="dgH-Jr-2Z9"/>
-                                                                    <constraint firstItem="9VZ-0V-8eP" firstAttribute="centerX" secondItem="4SW-v3-IAl" secondAttribute="centerX" id="hr9-aW-2oG"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcH-LN-xHO" customClass="ColoredView">
-                                                                <rect key="frame" x="0.0" y="75" width="250" height="60"/>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="k78-Zt-lx6">
+                                                                <rect key="frame" x="0.0" y="96" width="280" height="81"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vqu-eA-7cn">
-                                                                        <rect key="frame" x="89.5" y="13" width="72.5" height="34"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-n9-qFG" customClass="ColoredView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picked Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMP-Wc-5XP" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="72.5" height="18"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMc-ES-o75" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="18" width="72.5" height="16"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Grc-dT-Q8h">
+                                                                                <rect key="frame" x="27" y="13" width="78.5" height="55"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xad-5J-mkX" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="78.5" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yOX-XT-roC">
+                                                                                        <rect key="frame" x="0.0" y="21" width="78.5" height="34"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFk-qX-4U1" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="771-FK-t8q" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="18" width="78.5" height="16"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-Pi-6k9">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="menu3:" destination="i4p-by-gU2" eventType="touchUpInside" id="OKY-7w-97X"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
-                                                                    </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83q-v9-W2g">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
-                                                                        <connections>
-                                                                            <action selector="menu2:" destination="i4p-by-gU2" eventType="touchUpInside" id="QPY-2C-3RU"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Grc-dT-Q8h" firstAttribute="centerX" secondItem="Nwo-n9-qFG" secondAttribute="centerX" id="3mx-U7-Jfr"/>
+                                                                            <constraint firstItem="Grc-dT-Q8h" firstAttribute="centerY" secondItem="Nwo-n9-qFG" secondAttribute="centerY" id="4ZU-CE-1ov"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="1XY-Pi-6k9" secondAttribute="trailing" id="93O-P7-MkH"/>
+                                                                            <constraint firstItem="1XY-Pi-6k9" firstAttribute="leading" secondItem="Nwo-n9-qFG" secondAttribute="leading" id="DcW-XX-KbB"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="1XY-Pi-6k9" secondAttribute="bottom" id="Kmi-EA-m9G"/>
+                                                                            <constraint firstItem="1XY-Pi-6k9" firstAttribute="top" secondItem="Nwo-n9-qFG" secondAttribute="top" id="yac-OM-Krh"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05B-XG-1kE" customClass="ColoredView">
+                                                                        <rect key="frame" x="147.5" y="0.0" width="132.5" height="81"/>
+                                                                        <subviews>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-rs-bIJ">
+                                                                                <rect key="frame" x="38" y="13" width="58" height="55"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4L0-Gl-7pi" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="58" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fAj-Dz-0kL">
+                                                                                        <rect key="frame" x="0.0" y="21" width="58" height="34"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On Hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBj-Ux-hCS" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="58" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhk-7y-fsx" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="18" width="58" height="16"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1T1-TL-oss">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="menu4:" destination="i4p-by-gU2" eventType="touchUpInside" id="hVm-FG-6hb"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="1T1-TL-oss" firstAttribute="leading" secondItem="05B-XG-1kE" secondAttribute="leading" id="0aJ-nZ-BAV"/>
+                                                                            <constraint firstItem="Xd1-rs-bIJ" firstAttribute="centerY" secondItem="05B-XG-1kE" secondAttribute="centerY" id="7ep-oj-euG"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="1T1-TL-oss" secondAttribute="bottom" id="FEF-iq-OJM"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="1T1-TL-oss" secondAttribute="trailing" id="I2S-Ki-Lul"/>
+                                                                            <constraint firstItem="1T1-TL-oss" firstAttribute="top" secondItem="05B-XG-1kE" secondAttribute="top" id="b5C-Ag-JFT"/>
+                                                                            <constraint firstItem="Xd1-rs-bIJ" firstAttribute="centerX" secondItem="05B-XG-1kE" secondAttribute="centerX" id="mAx-nP-ate"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="vqu-eA-7cn" firstAttribute="centerX" secondItem="XcH-LN-xHO" secondAttribute="centerX" id="B2s-g7-ox7"/>
-                                                                    <constraint firstItem="83q-v9-W2g" firstAttribute="top" secondItem="XcH-LN-xHO" secondAttribute="top" id="Cqh-iC-w6x"/>
-                                                                    <constraint firstItem="vqu-eA-7cn" firstAttribute="centerY" secondItem="XcH-LN-xHO" secondAttribute="centerY" id="EfR-UO-T17"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="83q-v9-W2g" secondAttribute="trailing" id="W9C-KP-FAY"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="83q-v9-W2g" secondAttribute="bottom" id="i9g-hP-fTv"/>
-                                                                    <constraint firstItem="83q-v9-W2g" firstAttribute="leading" secondItem="XcH-LN-xHO" secondAttribute="leading" id="jkj-9R-G0t"/>
-                                                                    <constraint firstAttribute="height" constant="60" id="xuG-R0-4uI"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-n9-qFG" customClass="ColoredView">
-                                                                <rect key="frame" x="0.0" y="150" width="250" height="60"/>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6Sp-U9-l0n">
+                                                                <rect key="frame" x="0.0" y="192" width="280" height="81"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Grc-dT-Q8h">
-                                                                        <rect key="frame" x="86.5" y="13" width="78.5" height="34"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq4-b9-ChH" customClass="ColoredView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFk-qX-4U1" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="18"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="771-FK-t8q" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="18" width="78.5" height="16"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ybG-cS-7uu">
+                                                                                <rect key="frame" x="34" y="13.5" width="66" height="55"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sV-Bl-Nos" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ne0-Ms-hFd">
+                                                                                        <rect key="frame" x="0.0" y="21" width="66" height="34"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Returned" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI0-vE-jGp" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="66" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="365-Yq-hi6" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="18" width="66" height="16"/>
+                                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-z5-6cy">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="menu5:" destination="i4p-by-gU2" eventType="touchUpInside" id="k3q-wX-88D"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
-                                                                    </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-Pi-6k9">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
-                                                                        <connections>
-                                                                            <action selector="menu3:" destination="i4p-by-gU2" eventType="touchUpInside" id="OKY-7w-97X"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="Grc-dT-Q8h" firstAttribute="centerX" secondItem="Nwo-n9-qFG" secondAttribute="centerX" id="3mx-U7-Jfr"/>
-                                                                    <constraint firstItem="Grc-dT-Q8h" firstAttribute="centerY" secondItem="Nwo-n9-qFG" secondAttribute="centerY" id="4ZU-CE-1ov"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="1XY-Pi-6k9" secondAttribute="trailing" id="93O-P7-MkH"/>
-                                                                    <constraint firstItem="1XY-Pi-6k9" firstAttribute="leading" secondItem="Nwo-n9-qFG" secondAttribute="leading" id="DcW-XX-KbB"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="1XY-Pi-6k9" secondAttribute="bottom" id="Kmi-EA-m9G"/>
-                                                                    <constraint firstAttribute="height" constant="60" id="duj-k0-EJh"/>
-                                                                    <constraint firstItem="1XY-Pi-6k9" firstAttribute="top" secondItem="Nwo-n9-qFG" secondAttribute="top" id="yac-OM-Krh"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05B-XG-1kE" customClass="ColoredView">
-                                                                <rect key="frame" x="0.0" y="225" width="250" height="60"/>
-                                                                <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-rs-bIJ">
-                                                                        <rect key="frame" x="96" y="13" width="58" height="34"/>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="ybG-cS-7uu" firstAttribute="centerY" secondItem="qq4-b9-ChH" secondAttribute="centerY" id="3O8-eD-XDZ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="S6Q-z5-6cy" secondAttribute="trailing" id="3P6-z7-TzS"/>
+                                                                            <constraint firstItem="ybG-cS-7uu" firstAttribute="centerX" secondItem="qq4-b9-ChH" secondAttribute="centerX" id="8X6-BN-59S"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="S6Q-z5-6cy" secondAttribute="bottom" id="EUr-q6-m0S"/>
+                                                                            <constraint firstItem="S6Q-z5-6cy" firstAttribute="leading" secondItem="qq4-b9-ChH" secondAttribute="leading" id="nOa-sp-aD4"/>
+                                                                            <constraint firstItem="S6Q-z5-6cy" firstAttribute="top" secondItem="qq4-b9-ChH" secondAttribute="top" id="sM7-NO-Trn"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZfI-g1-HIk" customClass="ColoredView">
+                                                                        <rect key="frame" x="147.5" y="0.0" width="132.5" height="81"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On Hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBj-Ux-hCS" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="58" height="18"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhk-7y-fsx" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="18" width="58" height="16"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DiF-O6-w93">
+                                                                                <rect key="frame" x="24" y="21.5" width="86" height="39"/>
+                                                                                <subviews>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gjQ-4V-9VT">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="18"/>
+                                                                                        <subviews>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EntelliRoute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xry-Qz-FVh" customClass="FontLabel">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="86" height="18"/>
+                                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                                <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                        <real key="value" value="15"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                        <integer key="value" value="2"/>
+                                                                                                    </userDefinedRuntimeAttribute>
+                                                                                                </userDefinedRuntimeAttributes>
+                                                                                            </label>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2G-wc-S4X" customClass="FontLabel">
+                                                                                        <rect key="frame" x="0.0" y="23" width="86" height="16"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                                                <real key="value" value="15"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                                <integer key="value" value="2"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnb-xd-99G">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="81"/>
+                                                                                <connections>
+                                                                                    <action selector="clickRoute:" destination="i4p-by-gU2" eventType="touchUpInside" id="RA4-4R-J3B"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
-                                                                    </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1T1-TL-oss">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
-                                                                        <connections>
-                                                                            <action selector="menu4:" destination="i4p-by-gU2" eventType="touchUpInside" id="hVm-FG-6hb"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="mnb-xd-99G" firstAttribute="top" secondItem="ZfI-g1-HIk" secondAttribute="top" id="1U6-Kc-hQ6"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="mnb-xd-99G" secondAttribute="trailing" id="3AV-Dj-bxL"/>
+                                                                            <constraint firstItem="DiF-O6-w93" firstAttribute="centerY" secondItem="ZfI-g1-HIk" secondAttribute="centerY" id="ib5-Jw-obV"/>
+                                                                            <constraint firstItem="DiF-O6-w93" firstAttribute="centerX" secondItem="ZfI-g1-HIk" secondAttribute="centerX" id="p1H-Lm-wJd"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="mnb-xd-99G" secondAttribute="bottom" id="qNh-vv-VX1"/>
+                                                                            <constraint firstItem="mnb-xd-99G" firstAttribute="leading" secondItem="ZfI-g1-HIk" secondAttribute="leading" id="z9k-2d-AxK"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                                <integer key="value" value="7"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="1T1-TL-oss" firstAttribute="leading" secondItem="05B-XG-1kE" secondAttribute="leading" id="0aJ-nZ-BAV"/>
-                                                                    <constraint firstItem="Xd1-rs-bIJ" firstAttribute="centerY" secondItem="05B-XG-1kE" secondAttribute="centerY" id="7ep-oj-euG"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="1T1-TL-oss" secondAttribute="bottom" id="FEF-iq-OJM"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="1T1-TL-oss" secondAttribute="trailing" id="I2S-Ki-Lul"/>
-                                                                    <constraint firstItem="1T1-TL-oss" firstAttribute="top" secondItem="05B-XG-1kE" secondAttribute="top" id="b5C-Ag-JFT"/>
-                                                                    <constraint firstAttribute="height" constant="60" id="gHk-2D-PFd"/>
-                                                                    <constraint firstItem="Xd1-rs-bIJ" firstAttribute="centerX" secondItem="05B-XG-1kE" secondAttribute="centerX" id="mAx-nP-ate"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq4-b9-ChH" customClass="ColoredView">
-                                                                <rect key="frame" x="0.0" y="300" width="250" height="60"/>
-                                                                <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ybG-cS-7uu">
-                                                                        <rect key="frame" x="92" y="13" width="66" height="34"/>
-                                                                        <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Returned" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI0-vE-jGp" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="66" height="18"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="365-Yq-hi6" customClass="FontLabel">
-                                                                                <rect key="frame" x="0.0" y="18" width="66" height="16"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
-                                                                                        <real key="value" value="15"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                                        <integer key="value" value="0"/>
-                                                                                    </userDefinedRuntimeAttribute>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                        </subviews>
-                                                                    </stackView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-z5-6cy">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
-                                                                        <connections>
-                                                                            <action selector="menu5:" destination="i4p-by-gU2" eventType="touchUpInside" id="k3q-wX-88D"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="ybG-cS-7uu" firstAttribute="centerY" secondItem="qq4-b9-ChH" secondAttribute="centerY" id="3O8-eD-XDZ"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="S6Q-z5-6cy" secondAttribute="trailing" id="3P6-z7-TzS"/>
-                                                                    <constraint firstItem="ybG-cS-7uu" firstAttribute="centerX" secondItem="qq4-b9-ChH" secondAttribute="centerX" id="8X6-BN-59S"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="S6Q-z5-6cy" secondAttribute="bottom" id="EUr-q6-m0S"/>
-                                                                    <constraint firstAttribute="height" constant="60" id="Ebg-7V-qor"/>
-                                                                    <constraint firstItem="S6Q-z5-6cy" firstAttribute="leading" secondItem="qq4-b9-ChH" secondAttribute="leading" id="nOa-sp-aD4"/>
-                                                                    <constraint firstItem="S6Q-z5-6cy" firstAttribute="top" secondItem="qq4-b9-ChH" secondAttribute="top" id="sM7-NO-Trn"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="UGl-qy-wc1" secondAttribute="trailing" constant="10" id="BVB-rO-Nnx"/>
-                                                    <constraint firstItem="UGl-qy-wc1" firstAttribute="leading" secondItem="Ywa-iO-swm" secondAttribute="leading" constant="10" id="EPg-rU-9mi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UGl-qy-wc1" secondAttribute="trailing" id="BVB-rO-Nnx"/>
+                                                    <constraint firstItem="UGl-qy-wc1" firstAttribute="leading" secondItem="Ywa-iO-swm" secondAttribute="leading" id="EPg-rU-9mi"/>
                                                     <constraint firstItem="UGl-qy-wc1" firstAttribute="top" secondItem="Ywa-iO-swm" secondAttribute="top" id="Mkd-Tf-PoP"/>
                                                     <constraint firstAttribute="bottom" secondItem="UGl-qy-wc1" secondAttribute="bottom" id="bqv-uU-9AQ"/>
                                                 </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAB-2a-7Ue" customClass="ColoredView">
+                                                <rect key="frame" x="0.0" y="393" width="280" height="60"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6CJ-QB-sGT">
+                                                        <rect key="frame" x="103.5" y="21" width="74.5" height="18"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CALL HUB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmY-g8-Ope" customClass="FontLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="74.5" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="msize">
+                                                                        <real key="value" value="15"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                                        <integer key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlz-Ph-dud">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="60"/>
+                                                        <connections>
+                                                            <action selector="callHub:" destination="i4p-by-gU2" eventType="touchUpInside" id="DKv-oY-wJ9"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="6CJ-QB-sGT" firstAttribute="centerY" secondItem="RAB-2a-7Ue" secondAttribute="centerY" id="6aI-w0-Eka"/>
+                                                    <constraint firstItem="6CJ-QB-sGT" firstAttribute="centerX" secondItem="RAB-2a-7Ue" secondAttribute="centerX" id="EZu-kS-3KH"/>
+                                                    <constraint firstItem="Wlz-Ph-dud" firstAttribute="leading" secondItem="RAB-2a-7Ue" secondAttribute="leading" id="GlP-Z8-cAA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Wlz-Ph-dud" secondAttribute="bottom" id="Lol-db-Q0r"/>
+                                                    <constraint firstItem="Wlz-Ph-dud" firstAttribute="top" secondItem="RAB-2a-7Ue" secondAttribute="top" id="R0u-e9-N2T"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Wlz-Ph-dud" secondAttribute="trailing" id="cuY-Ja-JD1"/>
+                                                    <constraint firstAttribute="height" constant="60" id="lhe-r8-Uyc"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="backMode">
+                                                        <integer key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadious">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="moa-L1-cXD" secondAttribute="trailing" constant="25" id="4c5-SL-dHP"/>
-                                    <constraint firstItem="moa-L1-cXD" firstAttribute="leading" secondItem="bfQ-Ne-mOl" secondAttribute="leading" constant="25" id="GTc-A4-DWD"/>
-                                    <constraint firstItem="moa-L1-cXD" firstAttribute="centerY" secondItem="bfQ-Ne-mOl" secondAttribute="centerY" id="NAk-qv-zdY"/>
+                                    <constraint firstAttribute="trailing" secondItem="moa-L1-cXD" secondAttribute="trailing" constant="20" id="4c5-SL-dHP"/>
+                                    <constraint firstItem="moa-L1-cXD" firstAttribute="top" secondItem="bfQ-Ne-mOl" secondAttribute="top" constant="20" id="7dQ-xz-blK"/>
+                                    <constraint firstItem="moa-L1-cXD" firstAttribute="leading" secondItem="bfQ-Ne-mOl" secondAttribute="leading" constant="20" id="GTc-A4-DWD"/>
+                                    <constraint firstAttribute="bottom" secondItem="moa-L1-cXD" secondAttribute="bottom" constant="20" id="wK1-tv-HeB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -481,6 +796,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblCompletedCnt" destination="xad-5J-mkX" id="qgz-Hm-HxV"/>
+                        <outlet property="lblHoldCnt" destination="4L0-Gl-7pi" id="enZ-j0-57k"/>
+                        <outlet property="lblOrderCnt" destination="eQP-xC-ImS" id="DL4-Xr-IMi"/>
+                        <outlet property="lblPickedCnt" destination="2Gf-2c-TzA" id="7OJ-dU-Stv"/>
+                        <outlet property="lblPickupCnt" destination="yMC-wZ-mx2" id="nBV-jJ-xwN"/>
+                        <outlet property="lblReturnedCnt" destination="2sV-Bl-Nos" id="mtn-Xs-saV"/>
+                        <outlet property="lblWaveCnt" destination="V75-Tn-OO8" id="u3y-hw-EDL"/>
                         <outlet property="topBarView" destination="wXn-9D-75N" id="O6w-08-2dU"/>
                         <outlet property="viewWave" destination="eHs-2c-YIw" id="uv1-Fx-PvE"/>
                     </connections>

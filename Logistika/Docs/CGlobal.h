@@ -132,6 +132,8 @@ extern NSMutableArray* g_orderCorporateHisModels;
 extern NSMutableArray* g_cancelModels;
 extern NSMutableArray* g_quoteModels;
 extern NSMutableArray* g_orderRescheduleModels;
+extern NSMutableArray* g_waveMapOrders;
+extern NSMutableArray* g_waveMapCorOrders;
 
 extern NSString* g_page_type;
 extern NSString* g_quote_order_id;

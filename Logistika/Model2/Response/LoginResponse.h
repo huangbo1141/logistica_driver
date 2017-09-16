@@ -30,4 +30,6 @@
 -(instancetype)initWithDictionaryForWaveOrderModel:(NSDictionary*) dict;
 -(instancetype)initWithDictionaryForCorWaveOrderModel:(NSDictionary*) dict;
 -(instancetype)initWithDictionaryForRoute:(NSDictionary*) dict;
+-(instancetype)initWithDictionaryForWavePersonalOrders:(NSDictionary*) dict;
+-(instancetype)initWithDictionaryForWaveCorporateOrders:(NSDictionary*) dict;
 @end

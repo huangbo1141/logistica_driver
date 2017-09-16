@@ -303,7 +303,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CLoginNav" automaticallyAdjustsScrollViewInsets="NO" id="c5d-WH-D3v" customClass="MyNavViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="iuq-de-vqh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iuq-de-vqh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

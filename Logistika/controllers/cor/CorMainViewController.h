@@ -8,8 +8,15 @@
 
 #import "MenuViewController.h"
 #import "ColoredButton.h"
+#import "FontLabel.h"
 
 @interface CorMainViewController : MenuViewController
 
-
+@property (weak, nonatomic) IBOutlet FontLabel *lblWaveCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblOrderCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblPickupCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblPickedCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblCompletedCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblHoldCnt;
+@property (weak, nonatomic) IBOutlet FontLabel *lblReturnedCnt;
 @end

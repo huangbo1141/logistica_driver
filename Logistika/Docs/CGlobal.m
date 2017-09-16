@@ -26,8 +26,8 @@ UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
 NSString* g_batteryLevel = @"";
-//NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
-NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
+NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
+//NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";
 NSString* g_URL = @"/Employer/";
 NSString* SERVICE_URL = @"/WebService/";
@@ -121,6 +121,8 @@ NSMutableArray* g_orderCorporateHisModels;
 NSMutableArray* g_cancelModels;
 NSMutableArray* g_quoteModels;
 NSMutableArray* g_orderRescheduleModels;
+NSMutableArray* g_waveMapOrders;
+NSMutableArray* g_waveMapCorOrders;
 
 NSString* g_page_type;
 NSString* g_quote_order_id;

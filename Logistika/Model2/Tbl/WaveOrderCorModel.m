@@ -40,9 +40,20 @@
             
             if (dict[@"address"]!=nil) {
                 NSArray*obj = dict[@"address"];
-                for (int i=0; i<obj.count; i++) {
-                    NSMutableDictionary*idict = obj[i];
-                    self.addressModel = [[AddressModel alloc] initWithDictionary:idict];
+                if ([obj isKindOfClass:[NSArray class]]) {
+                    for (int i=0; i<obj.count; i++) {
+                        NSMutableDictionary*idict = obj[i];
+                        self.addressModel = [[AddressModel alloc] initWithDictionary:idict];
+                    }
+                }
+            }
+            if (dict[@"addresses"]!=nil) {
+                NSArray*obj = dict[@"addresses"];
+                if ([obj isKindOfClass:[NSArray class]]) {
+                    for (int i=0; i<obj.count; i++) {
+                        NSMutableDictionary*idict = obj[i];
+                        self.addressModel = [[AddressModel alloc] initWithDictionary:idict];
+                    }
                 }
             }
             
