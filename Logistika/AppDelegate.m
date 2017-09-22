@@ -70,7 +70,7 @@
     
     
     [userDefaults setInteger:100 forKey:@"server_port_preference"];
-    [userDefaults setInteger:10 forKey:@"frequency_preference"];
+    [userDefaults setInteger:30 forKey:@"frequency_preference"];
     [userDefaults setInteger:0 forKey:@"angle_preference"];
     [userDefaults setInteger:0 forKey:@"distance_preference"];
     

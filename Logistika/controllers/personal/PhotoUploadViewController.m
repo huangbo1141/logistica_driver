@@ -135,7 +135,7 @@
 }
 -(void)loadBeepSound{
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"wav"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
     
     NSError *error;

@@ -29,14 +29,14 @@
     [self trackCorporateOrders];
     // Do any additional setup after loading the view.
     
-//    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
-//    [userd setBool:true forKey:@"service_status_preference"];
-//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    delegate.trackingController = nil;
-//    [delegate startOrStopTraccar];
-    
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    [userd setBool:true forKey:@"service_status_preference"];
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [delegate startTrackTimer];
+    delegate.trackingController = nil;
+    [delegate startOrStopTraccar];
+    
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [delegate startTrackTimer];
     
     NSArray* array = @[_lblWaveCnt,_lblOrderCnt,_lblPickupCnt,_lblPickedCnt,_lblCompletedCnt,_lblHoldCnt];
     for (int i=0; i< array.count; i++) {
