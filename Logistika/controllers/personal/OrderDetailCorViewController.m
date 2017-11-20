@@ -1,4 +1,4 @@
-//
+	//
 //  OrderDetailCorViewController.m
 //  Logistika
 //
@@ -27,6 +27,7 @@
 @property (nonatomic,copy) NSString* mFreight;
 @property (nonatomic,copy) NSString* mLoadType;
 @property (nonatomic,copy) NSString* mConsignment;
+@property (nonatomic,copy) NSString* mConsignment_receiver;
 @property (nonatomic,copy) NSString* mVehicle;
 @property (nonatomic,copy) NSString* mDriverId;
 @property (nonatomic,copy) NSString* mDriverName;
@@ -35,6 +36,9 @@
 
 @property (nonatomic,copy) NSString* mETA;
 @property (nonatomic,copy) NSString* mWeight;
+
+@property (nonatomic,strong) NSMutableArray* consigments;
+@property (nonatomic,strong) NSMutableArray* consigments_receiver;
 @end
 
 @implementation OrderDetailCorViewController
@@ -42,7 +46,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.consigments = [[NSMutableArray alloc] init];
+    self.consigments_receiver = [[NSMutableArray alloc] init];
     
+    if (g_isii) {
+        for (int i=0; i<10; i++) {
+            [self.consigments_receiver addObject:@"1122334455"];
+        }
+        
+    }
+    _mConsignment_receiver = @"";
+    _mConsignment = @"";
     [self initView];
     [self initTitle];
     EnvVar* env = [CGlobal sharedId].env;
@@ -53,7 +67,7 @@
     _lblOrderNumber.text = env.order_id;
     _lblTrackingNumber.text = g_track_id;
     
-    NSArray* fields = @[self.txtFrieght,self.txtLoadType,self.txtScanCon,self.txtDateTime,self.txtVehicleNumber,self.txtDriverID,self.txtDriverName];
+    NSArray* fields = @[self.txtFrieght,self.txtLoadType,self.txtDateTime,self.txtVehicleNumber,self.txtDriverID,self.txtDriverName];
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, (screenRect.size.width-16)*0.5, 24);
     for (int i=0; i<fields.count; i++) {
@@ -67,6 +81,7 @@
         BorderTextField*field = fields[i];
         [field addBotomLayer:frame];
     }
+    
     //self.txtWeight,self.txtEta
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -80,6 +95,8 @@
     }
     [self.tableView_Receiver reloadData];
     [self.tableView_Shipper reloadData];
+    [self.tableView_Consigment reloadData];
+    [self.tableView_Consigment_Receiver reloadData];
 }
 -(void)initTitle{
     if (self.type == g_ORDER) {
@@ -130,11 +147,6 @@
         switch (tag) {
             case 200:
             {
-                // barcode
-                UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-                BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
-                vc.targetLabel = self.txtScanCon;
-                [self.navigationController pushViewController:vc animated:true];
                 
                 break;
             }
@@ -165,6 +177,18 @@
         }
     }
 }
+- (IBAction)clickAddScan:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
+    vc.consigment = self.consigments;
+    [self.navigationController pushViewController:vc animated:true];
+}
+- (IBAction)clickAddScanReceiver:(id)sender {
+    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
+    BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
+    vc.consigment = self.consigments_receiver;
+    [self.navigationController pushViewController:vc animated:true];
+}
 -(void)initView{
     
     self.btnAction1.tag = 200;
@@ -180,6 +204,8 @@
     _imgSignature.userInteractionEnabled = true;
     _imgSignature_recv.userInteractionEnabled = true;
     
+    _btnScan.hidden = true;
+    _btnScan_Receiver.hidden = true;
     if (self.type == g_ORDER) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"orders_for_pickup" value:@"" table:nil];
         self.title = title;
@@ -187,6 +213,7 @@
         
         _stackSignature.hidden = false;
         _stackPickup.hidden = true;
+        _btnScan.hidden =false;
     }else if (self.type == g_PICKUP) {
         NSString* title = [[NSBundle mainBundle] localizedStringForKey:@"picked_up" value:@"" table:nil];
         self.title = title;
@@ -195,20 +222,15 @@
         _stackPickup.hidden = false;
         
         _txtLoadType.enabled = false;
-        _txtScanCon.enabled = false;
         _txtDriverID.enabled = false;
         _txtDriverName.enabled = false;
         _imgSignature.userInteractionEnabled = false;
         _txtVehicleNumber.enabled = false;
         _txtDateTime.enabled = false;
         
-        _txtScanCon.userInteractionEnabled = false;
-        _btnScan.enabled = false;
-        
+        _btnScan_Receiver.hidden = false;
     }else {
         _txtLoadType.enabled = false;
-        _txtScanCon.enabled = false;
-        _txtScanCon.userInteractionEnabled = false;
         _btnScan.enabled = false;
         _txtDriverID.enabled = false;
         _txtDriverName.enabled = false;
@@ -220,6 +242,7 @@
         if (self.type == g_ONHOLD) {
             _stackPickup.hidden = false;
             _stackEta.hidden = true;
+            _btnScan_Receiver.hidden = false;
         }
     }
     self.stackShipperDocument.hidden = self.stackSignature.hidden;
@@ -227,10 +250,6 @@
     [self.btnAction1 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnAction2 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [self.btnAction3 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if (g_isii) {
-        _txtScanCon.text = @"11223344";
-    }
     
     _mDate = [self getDate];
     _mTime = [self getTime];
@@ -256,18 +275,33 @@
     nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
     [self.tableView_Receiver registerNib:nib forCellReuseIdentifier:@"cell"];
     
+    nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Consigment registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+    nib = [UINib nibWithNibName:@"ShipperDocTableViewCell" bundle:nil];
+    [self.tableView_Consigment_Receiver registerNib:nib forCellReuseIdentifier:@"cell"];
+    
     self.tableView_Receiver.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView_Shipper.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Consigment.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView_Consigment_Receiver.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView_Receiver.delegate = self;
     self.tableView_Receiver.dataSource = self;
     self.tableView_Shipper.delegate = self;
     self.tableView_Shipper.dataSource = self;
+    self.tableView_Consigment.delegate = self;
+    self.tableView_Consigment.dataSource = self;
+    self.tableView_Consigment_Receiver.delegate = self;
+    self.tableView_Consigment_Receiver.dataSource = self;
     
+    self.stackReceiverDocument.hidden = false;
     if (g_visibleModel!=nil && [g_visibleModel.signatureVisible isEqualToString:@"0"]) {
         self.stackSignature.hidden = true;
         self.stackShipperDocument.hidden = true;
         self.stackReceiver.hidden = true;
-        self.stackReceiverDocument.hidden = true;
+        
+    }else{
+        
     }
     
 }
@@ -315,13 +349,6 @@
     }
 //    _lblDestPhone.hidden = true;
 }
-- (IBAction)scanBarcode:(id)sender {
-    UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    BarcodeScanViewController*vc = [ms instantiateViewControllerWithIdentifier:@"BarcodeScanViewController"];
-    vc.targetLabel = self.txtScanCon;
-    [self.navigationController pushViewController:vc animated:true];
-}
-
 -(void)clickView:(UIView*)sender{
     int tag = (int)sender.tag;
     switch (tag) {
@@ -402,7 +429,13 @@
         CarrierModel* cm = g_carrierModel;
 //        _txtFrieght.text = cm.freight;
         _txtLoadType.text = cm.load_type;
-        _txtScanCon.text = cm.consignment;
+        NSString *lastTrimString = [cm.consignment stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([lastTrimString length]>0) {
+            NSArray* strings = [cm.consignment componentsSeparatedByString:@":"];
+            self.consigments = [[NSMutableArray alloc] initWithArray:strings];
+            [self.tableView_Consigment reloadData];
+        }
+
         _txtDateTime.text = [NSString stringWithFormat:@"%@ %@",cm.date,cm.time];
         _txtVehicleNumber.text = cm.vehicle;
         _txtDriverID.text = cm.driver_id;
@@ -503,7 +536,21 @@
 -(BOOL)checkInput{
     self.mFreight = _txtFrieght.text;
     self.mLoadType = _txtLoadType.text;
-    self.mConsignment = _txtScanCon.text;
+    for (int i=0; i<self.consigments.count; i++) {
+        if(i==0){
+            self.mConsignment = self.consigments[i];
+        }else{
+            self.mConsignment = [NSString stringWithFormat:@"%@:%@",self.mConsignment,self.consigments[i]];
+        }
+    }
+    
+    for (int i=0; i<self.consigments_receiver.count; i++) {
+        if(i==0){
+            self.mConsignment_receiver = self.consigments_receiver[i];
+        }else{
+            self.mConsignment_receiver = [NSString stringWithFormat:@"%@:%@",self.mConsignment_receiver,self.consigments_receiver[i]];
+        }
+    }
     self.mVehicle = _txtVehicleNumber.text;
     self.mDriverId = _txtDriverID.text;
     self.mDriverName = _txtDriverName.text;
@@ -643,6 +690,14 @@
         params[@"user_id"] = env.corporate_user_id;
     }
     
+    for (int i=0; i<self.consigments_receiver.count; i++) {
+        if(i==0){
+            self.mConsignment_receiver = self.consigments_receiver[i];
+        }else{
+            self.mConsignment_receiver = [NSString stringWithFormat:@"%@:%@",self.mConsignment_receiver,self.consigments_receiver[i]];
+        }
+    }
+    
     NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
     if (_stackReceiver.hidden == false){
         NSMutableArray* images = [[NSMutableArray alloc] init];
@@ -676,6 +731,8 @@
         }
     }
     params[@"eta"] = self.mETA;
+    params[@"receiver_consignment"] = _mConsignment_receiver;
+    
     
     NetworkParser* manager = [NetworkParser sharedManager];
     NSString* url = [NSString stringWithFormat:@"%@%@%@",g_baseUrl,ORDER_URL,@"complete_corporate_order"];
@@ -778,8 +835,22 @@
         [self.stackReceiverDocument setNeedsUpdateConstraints];
         [self.stackReceiverDocument layoutIfNeeded];
         return self.items_receiver.count;
+    }else if(_tableView_Consigment == tableView){
+        self.constraint_SCANTH.constant = self.consigments.count* self.cellHeight + 30;
+        [self.stackConsigment setNeedsUpdateConstraints];
+        [self.stackConsigment layoutIfNeeded];
+        [self.tableView_Consigment setNeedsUpdateConstraints];
+        [self.tableView_Consigment layoutIfNeeded];
+        return self.consigments.count;
+    }else{
+        self.constraint_SCANTH_Receiver.constant = self.consigments_receiver.count* self.cellHeight + 30;
+        [self.stackConsigment_Receiver setNeedsUpdateConstraints];
+        [self.stackConsigment_Receiver layoutIfNeeded];
+        [self.tableView_Consigment_Receiver setNeedsUpdateConstraints];
+        [self.tableView_Consigment_Receiver layoutIfNeeded];
+        return self.consigments_receiver.count;
     }
-    return 0;
+    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -787,6 +858,22 @@
         [cell setData:@{@"aDelegate":self,@"model":self.items_shipper[indexPath.row],@"indexPath":indexPath,@"type":@"1"}];
     }else if(_tableView_Receiver == tableView){
         [cell setData:@{@"aDelegate":self,@"model":self.items_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"2"}];
+    }else if(_tableView_Consigment == tableView){
+        NSString* remove = @"0";
+        if (self.btnScan.hidden) {
+            remove = @"1";
+        }else{
+            remove = @"0";
+        }
+        [cell setData:@{@"aDelegate":self,@"model":self.consigments[indexPath.row],@"indexPath":indexPath,@"type":@"3",@"remove":remove}];
+    }else if(_tableView_Consigment_Receiver == tableView){
+        NSString* remove = @"0";
+        if (self.btnScan_Receiver.hidden) {
+            remove = @"1";
+        }else{
+            remove = @"0";
+        }
+        [cell setData:@{@"aDelegate":self,@"model":self.consigments_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"4",@"remove":remove}];
     }
     return cell;
 }
@@ -802,11 +889,21 @@
                     NSIndexPath* path = inputData[@"indexPath"];
                     [self.items_shipper removeObjectAtIndex:path.row];
                     [self.tableView_Shipper reloadData];
-                }else{
+                }else if(type == 2){
                     // receiver
                     NSIndexPath* path = inputData[@"indexPath"];
                     [self.items_receiver removeObjectAtIndex:path.row];
                     [self.tableView_Receiver reloadData];
+                }else if(type == 3){
+                    // receiver
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.consigments removeObjectAtIndex:path.row];
+                    [self.tableView_Consigment reloadData];
+                }else{
+                    // receiver
+                    NSIndexPath* path = inputData[@"indexPath"];
+                    [self.consigments_receiver removeObjectAtIndex:path.row];
+                    [self.tableView_Consigment_Receiver reloadData];
                 }
             }
         }

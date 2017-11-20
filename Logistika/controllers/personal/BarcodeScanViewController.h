@@ -10,5 +10,6 @@
 
 @interface BarcodeScanViewController : BasicViewController
 
-@property (nonatomic,strong) UITextField* targetLabel;
+@property (nonatomic,strong) NSMutableArray* consigment;
+
 @end

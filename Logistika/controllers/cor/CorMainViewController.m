@@ -28,12 +28,13 @@
     
     [self trackCorporateOrders];
     // Do any additional setup after loading the view.
-    
-    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
-    [userd setBool:true forKey:@"service_status_preference"];
-    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    delegate.trackingController = nil;
-    [delegate startOrStopTraccar];
+
+    [self trackCorporateOrders];
+//    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+//    [userd setBool:true forKey:@"service_status_preference"];
+//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    delegate.trackingController = nil;
+//    [delegate startOrStopTraccar];
     
 //    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //    [delegate startTrackTimer];
@@ -43,6 +44,29 @@
         FontLabel* lbl = array[i];
         lbl.msize = 22;
     }
+    [self get_truck];
+}
+-(void)get_truck{
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    
+    NetworkParser* manager = [NetworkParser sharedManager];
+    [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_truck" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        if (error == nil) {
+            if (dict!=nil && dict[@"result"] != nil) {
+                if ([dict[@"result"] intValue] == 200) {
+                    LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
+                    
+                    g_truckModels = data;
+                    
+                }else{
+                    //                    [CGlobal AlertMessage:@"Fail" Title:nil];
+                }
+            }
+        }else{
+            NSLog(@"Error");
+        }
+        
+    } method:@"POST"];
 }
 -(void)get_count_info{
     EnvVar* env = [CGlobal sharedId].env;
@@ -87,6 +111,13 @@
     env.quote = false;
     
     [self get_count_info];
+    if ([g_visibleModel.waverVisible isEqualToString:@"0"]) {
+        _viewWave.hidden = true;
+        _viewRoute.hidden = true;
+    }else{
+        _viewWave.hidden = false;
+        _viewRoute.hidden = false;
+    }
 }
 - (IBAction)clickWave:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
@@ -149,6 +180,7 @@
                     LoginResponse* resp = [[LoginResponse alloc] initWithDictionaryForWaveCorporateOrders:dict];
                     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Cor" bundle:nil];
                     MapsViewController* vc = (MapsViewController*)[ms instantiateViewControllerWithIdentifier:@"MapsViewController"];
+                    [CGlobal sortWaveList:resp.wave];
                     vc.list_data = resp.wave;
                     vc.type = 1;
                     [self.navigationController pushViewController:vc animated:true];

@@ -41,7 +41,7 @@
     //    //        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:Constants.COLOR_TOOLBAR_TEXT];
     //    let titleDict: [String:Any] = [NSForegroundColorAttributeName: Constants.COLOR_TOOLBAR_TEXT]
     //    self.navigationBar.titleTextAttributes = titleDict
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-500, 0)
                                                          forBarMetrics:UIBarMetricsDefault];
 }
 

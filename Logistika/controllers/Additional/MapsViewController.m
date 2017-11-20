@@ -12,6 +12,7 @@
 #import "CGlobal.h"
 #import "NetworkParser.h"
 #import "Step.h"
+#import "InfoView3.h"
 
 @interface MapsViewController ()
 @property (nonatomic,strong) NSMutableArray* markerPoints;
@@ -27,6 +28,7 @@
     self.navigationController.navigationBar.hidden = false;
     self.title = @"Wave Mapper";
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -69,6 +71,26 @@
         
     });
 }
+-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker{
+    
+    if([marker.userData isKindOfClass:[NSMutableDictionary class]]){
+        NSMutableDictionary* userData = marker.userData;
+        int index = [userData[@"index"] intValue];
+        NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"UserInfoWindow" owner:self options:nil];
+
+        InfoView3* view = array[2];
+        NSString* snipt = marker.snippet;
+        
+        [view setData:@{@"vc":self,@"index":userData[@"index"],@"wave_model":self.list_data[index]}];
+        CGRect frame = view.frame;
+        CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, [view getHeight]);
+        view.frame = newFrame;
+        
+        return view;
+        
+    }
+    return nil;
+}
 -(void)draw{
     self.array_marker = [[NSMutableArray alloc] init];
     for (int i=0; i< self.markerPoints.count; i++) {
@@ -79,6 +101,8 @@
             WaveOrderModel*imodel = self.list_data[i];
             if ([imodel.state isEqualToString:@"2"]) {
                 marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+            }else if ([imodel.state isEqualToString:@"5"]) {
+                marker.icon = [GMSMarker markerImageWithColor:[UIColor orangeColor]];
             }else{
                 marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
             }
@@ -86,10 +110,17 @@
             WaveOrderCorModel*imodel = self.list_data[i];
             if ([imodel.state isEqualToString:@"2"]) {
                 marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+            }else if ([imodel.state isEqualToString:@"5"]) {
+                marker.icon = [GMSMarker markerImageWithColor:[UIColor orangeColor]];
             }else{
                 marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
             }
         }
+        NSString* number =[NSString stringWithFormat:@"Disp %d",i+1];
+        marker.icon = [CGlobal getImageForDisp:number Image:marker.icon];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        data[@"index"] = [NSString stringWithFormat:@"%d",i];
+        marker.userData = data;
         marker.position = CLLocationCoordinate2DMake(pt.x, pt.y);
         marker.map = self.mapView;
         

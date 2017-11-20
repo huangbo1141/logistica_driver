@@ -54,6 +54,8 @@
     }
     [self.tableView_Receiver reloadData];
     [self.tableView_Shipper reloadData];
+    
+    
 }
 -(void)handleGesture:(UITapGestureRecognizer*)gesture{
     UIView*view = gesture.view;
@@ -175,10 +177,7 @@
         self.viewBottomAction.hidden = true;
         self.constraint_BOTTOMSPACE.constant = 0;
     }
-    if (g_visibleModel!=nil && [g_visibleModel.signatureVisible isEqualToString:@"0"]) {
-        self.stackReceiver.hidden = true;
-        self.stackShipper.hidden = true;
-    }
+    
     
     
     [self.btnAction1 addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
@@ -198,6 +197,12 @@
     self.tableView_Shipper.delegate = self;
     self.tableView_Shipper.dataSource = self;
     
+    if (g_visibleModel!=nil && [g_visibleModel.signatureVisible isEqualToString:@"0"]) {
+        self.stackReceiver.hidden = true;
+        self.stackShipper.hidden = true;
+    }else{
+        
+    }
 }
 -(void)showAddressDetails{
     if (g_addressModel.desAddress!=nil) {

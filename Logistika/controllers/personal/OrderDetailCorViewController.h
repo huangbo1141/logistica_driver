@@ -22,6 +22,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblOrderNumber;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_BOTTOMSPACE;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_SCANTH;
+
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_TH;
 //
 //@property (weak, nonatomic) IBOutlet UIView *viewHeader;
@@ -86,7 +88,7 @@
 @property (weak, nonatomic) IBOutlet BorderTextField *txtEta;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtFrieght;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtLoadType;
-@property (weak, nonatomic) IBOutlet BorderTextField *txtScanCon;
+
 @property (weak, nonatomic) IBOutlet BorderTextField *txtDateTime;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtVehicleNumber;
 @property (weak, nonatomic) IBOutlet BorderTextField *txtDriverID;
@@ -105,5 +107,11 @@
 
 
 @property (assign, nonatomic) CGFloat cellHeight;
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Consigment;
+@property (weak, nonatomic) IBOutlet UIStackView *stackConsigment;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_SCANTH_Receiver;
+@property (weak, nonatomic) IBOutlet UITableView *tableView_Consigment_Receiver;
+@property (weak, nonatomic) IBOutlet UIStackView *stackConsigment_Receiver;
+@property (weak, nonatomic) IBOutlet UIButton *btnScan_Receiver;
 @end

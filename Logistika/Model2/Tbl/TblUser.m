@@ -39,7 +39,10 @@
                     g_visibleModel = model;
                 }
             }
-            
+        }
+        if (g_visibleModel == nil) {
+            g_visibleModel = [[VisibleModel alloc] init];
+            [g_visibleModel initDefault];
         }
     }
     return self;

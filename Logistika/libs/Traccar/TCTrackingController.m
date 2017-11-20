@@ -109,10 +109,11 @@ int64_t kRetryDelay = 30 * 1000;
 //
 
 - (void)write:(TCPosition *)position {
-    if (self.online && self.waiting) {
-        [self read];
-        self.waiting = NO;
-    }
+    [self read];
+//    if (self.online && self.waiting) {
+//        [self read];
+//        self.waiting = NO;
+//    }
 }
 
 - (void)read {
@@ -176,8 +177,14 @@ int64_t kRetryDelay = 30 * 1000;
     params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
     params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
     params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
-    params[@"speed"] = [NSString stringWithFormat:@"%f",position.speed];
+//    params[@"speed"] = [NSString stringWithFormat:@"%f",position.speed];
+    params[@"speed"] = g_vehiclespeed;
+    
     params[@"battery"] = g_batteryLevel;
+    params[@"plugin"] = @"false";
+    
+//    params[@"speed"] =@"111.0";
+//    params[@"battery"] =@"45%";
     
     self.lastDate = [NSDate date];
     
@@ -185,7 +192,7 @@ int64_t kRetryDelay = 30 * 1000;
     [manager ontemplateGeneralRequest2:params BasePath:@"" Path:@"/Track/send" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             [self delete:position];
-            NSLog(@"Send Track %f %f",position.latitude,position.longitude);
+            NSLog(@"Send Track %@ %@",params[@"lat"],params[@"lon"]);
         }else{
             NSLog(@"Error");
         }

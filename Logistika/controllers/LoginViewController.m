@@ -50,7 +50,7 @@
 //            _txtUsername.text= @".com";
             _txtPassword.text= @"password1";
         }else{
-            _txtUsername.text= @"corp@corp.com";
+            _txtUsername.text= @"corpemp@corpemp.com";
             _txtPassword.text= @"password1";
         }
     }

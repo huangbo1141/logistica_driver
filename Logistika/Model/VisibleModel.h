@@ -18,5 +18,5 @@
 
 
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
-
+-(void)initDefault;
 @end

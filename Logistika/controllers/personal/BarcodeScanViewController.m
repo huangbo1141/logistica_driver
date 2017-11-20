@@ -68,7 +68,7 @@
         for (AVMetadataMachineReadableCodeObject *code in codes) {
             self.code = code.stringValue;
             NSLog(@"code",self.code);
-            self.targetLabel.text = self.code;
+            [self.consigment addObject:self.code];
             [self.navigationController popViewControllerAnimated:true];
 //            if (code.stringValue && [self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
 //                [self.uniqueCodes addObject:code.stringValue];

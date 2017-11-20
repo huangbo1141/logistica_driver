@@ -21,9 +21,12 @@
                 // already parsed
             }else if(product_type == g_ITEM_OPTION){
                 NSArray* dim = [dict[@"dimension"] componentsSeparatedByString:@"X"];
-                self.dimension1 = dim[0];
-                self.dimension2 = dim[1];
-                self.dimension3 = dim[2];
+                if (dim.count>=3) {
+                    self.dimension1 = dim[0];
+                    self.dimension2 = dim[1];
+                    self.dimension3 = dim[2];
+                }
+                
                 
             }else if(product_type == g_PACKAGE_OPTION){
                 

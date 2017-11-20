@@ -44,7 +44,7 @@
     env.quote = true;
     g_isii = false;
     
-    [self installCrashHandler];
+//    [self installCrashHandler];
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
@@ -70,7 +70,7 @@
     
     
     [userDefaults setInteger:100 forKey:@"server_port_preference"];
-    [userDefaults setInteger:30 forKey:@"frequency_preference"];
+    [userDefaults setInteger:1 forKey:@"frequency_preference"];
     [userDefaults setInteger:0 forKey:@"angle_preference"];
     [userDefaults setInteger:0 forKey:@"distance_preference"];
     
@@ -408,6 +408,12 @@
     }
     
     double kph = gpsSpeed*3.6;
+    if (kph>0) {
+        g_vehiclespeed = [NSString stringWithFormat:@"%.1f",kph];
+    }else{
+        g_vehiclespeed = @"0.0";
+    }
+    
     // check if break time message shows
     if (env.lastLogin>0 && !g_breakShowing) {
         // signed
@@ -416,7 +422,7 @@
         speedParam[@"speed"] = [NSString stringWithFormat:@"%.1f",kph];
         speedParam[@"speed_limit"] = [NSString stringWithFormat:@"%.1f",g_limitSpeed_kph];
         
-        if (kph>1) {
+        if (kph>9) {
             // kph>g_limitSpeed_kph
             // kph>1
             

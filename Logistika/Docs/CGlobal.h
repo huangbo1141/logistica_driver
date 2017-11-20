@@ -38,6 +38,7 @@ extern  UIColor*   COLOR_SECONDARY_THIRD;
 extern  UIColor*   COLOR_RESERVED;
 
 extern  NSString * g_batteryLevel;
+extern  NSString* g_vehiclespeed ;
 extern  NSString * g_baseUrl;
 extern  NSString * BASE_DATA_URL;
 extern  NSString* g_URL;
@@ -236,6 +237,7 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 
 +(UIImage*)getImageForMap:(UIImage*)bm NSString:(NSString*)number;
 +(UIImage*)getImageForMap:(NSString*)number;
++(UIImage*)getImageForDisp:(NSString*)number Image:(UIImage*)image;
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
 +(NSMutableDictionary*)getQuestionDict:(id)targetClass;
 +(void)parseResponse:(id)targetClass Dict:(NSDictionary*)dict;
@@ -274,4 +276,6 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 +(void)setOrderForTrackOrder:(NSMutableArray*)array;
 + (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString;
 +(NSData*)getImageDataFromUIImage:(UIImage*)image;
++(NSString*)getTruck:(NSString*)truck;
++(void)sortWaveList:(NSMutableArray*)data;
 @end

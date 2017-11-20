@@ -33,7 +33,18 @@
     if ([self.model isKindOfClass:[ItemModel class]]) {
         ItemModel* model = self.model;
         self.imgPhoto.image = model.image_data;
+        self.lblLabel.hidden = true;
+        self.imgPhoto.hidden = false;
+    }else if([self.model isKindOfClass:[NSString class]]){
+        self.lblLabel.text = self.model;
+        self.lblLabel.hidden = false;
+        self.imgPhoto.hidden = true;
         
+        if ([self.inputData[@"remove"] intValue] == 1) {
+            self.btnRemove.hidden = true;
+        }else{
+            self.btnRemove.hidden = false;
+        }
     }
 }
 @end

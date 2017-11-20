@@ -31,6 +31,10 @@
 	<string>Logistika App want to access camera to take picture.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App want to access the location to track the package.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>App want to access the location to track the package.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>App want to access the location to track the package.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Logistika app access your photo library to upload your photo</string>
 	<key>UIAppFonts</key>

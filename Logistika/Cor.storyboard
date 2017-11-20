@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -241,7 +242,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="132.5" height="86.5"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kVr-gM-itd">
-                                                                                        <rect key="frame" x="30" y="16.5" width="73.5" height="55"/>
+                                                                                        <rect key="frame" x="30" y="25.5" width="73.5" height="37"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b55-Jm-7d5" customClass="FontLabel">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="73.5" height="16"/>
@@ -258,10 +259,10 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b2E-LE-bFu">
-                                                                                                <rect key="frame" x="0.0" y="21" width="73.5" height="34"/>
+                                                                                                <rect key="frame" x="0.0" y="21" width="73.5" height="16"/>
                                                                                                 <subviews>
                                                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvl-H6-BHD" customClass="FontLabel">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="73.5" height="18"/>
+                                                                                                        <rect key="frame" x="0.0" y="-256.5" width="73.5" height="0.0"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -275,7 +276,7 @@
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PickUp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvI-H3-WUh" customClass="FontLabel">
-                                                                                                        <rect key="frame" x="0.0" y="18" width="73.5" height="16"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="73.5" height="16"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -321,7 +322,7 @@
                                                                                 <rect key="frame" x="147.5" y="0.0" width="132.5" height="86.5"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="h0v-tb-q2T">
-                                                                                        <rect key="frame" x="30.5" y="16.5" width="72.5" height="55"/>
+                                                                                        <rect key="frame" x="30.5" y="24.5" width="72.5" height="39"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="no6-Pq-UUH" customClass="FontLabel">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="72.5" height="16"/>
@@ -338,7 +339,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pp8-N1-KFL">
-                                                                                                <rect key="frame" x="0.0" y="21" width="72.5" height="34"/>
+                                                                                                <rect key="frame" x="0.0" y="21" width="72.5" height="18"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picked Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUU-yA-Ivp" customClass="FontLabel">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="72.5" height="18"/>
@@ -355,7 +356,7 @@
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
                                                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b17-4s-f72" customClass="FontLabel">
-                                                                                                        <rect key="frame" x="0.0" y="18" width="72.5" height="16"/>
+                                                                                                        <rect key="frame" x="0.0" y="-255.5" width="72.5" height="0.0"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -406,7 +407,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="132.5" height="86.5"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tVL-Xg-3Jg">
-                                                                                        <rect key="frame" x="27" y="16.5" width="78.5" height="55"/>
+                                                                                        <rect key="frame" x="27" y="24.5" width="78.5" height="39"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4f-Dt-ji7" customClass="FontLabel">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="78.5" height="16"/>
@@ -423,7 +424,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MEy-cb-0Ta">
-                                                                                                <rect key="frame" x="0.0" y="21" width="78.5" height="34"/>
+                                                                                                <rect key="frame" x="0.0" y="21" width="78.5" height="18"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11g-77-vNB" customClass="FontLabel">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="78.5" height="18"/>
@@ -440,7 +441,7 @@
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
                                                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF8-DX-Gun" customClass="FontLabel">
-                                                                                                        <rect key="frame" x="0.0" y="18" width="78.5" height="16"/>
+                                                                                                        <rect key="frame" x="0.0" y="-357" width="78.5" height="0.0"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -486,7 +487,7 @@
                                                                                 <rect key="frame" x="147.5" y="0.0" width="132.5" height="86.5"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yEk-WK-LtG">
-                                                                                        <rect key="frame" x="37.5" y="16.5" width="58" height="55"/>
+                                                                                        <rect key="frame" x="37.5" y="24.5" width="58" height="39"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpG-UX-ptt" customClass="FontLabel">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="58" height="16"/>
@@ -503,7 +504,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JmU-b6-eUO">
-                                                                                                <rect key="frame" x="0.0" y="21" width="58" height="34"/>
+                                                                                                <rect key="frame" x="0.0" y="21" width="58" height="18"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On Hold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXW-8j-OUe" customClass="FontLabel">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="58" height="18"/>
@@ -520,7 +521,7 @@
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
                                                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esK-dz-UVN" customClass="FontLabel">
-                                                                                                        <rect key="frame" x="0.0" y="18" width="58" height="16"/>
+                                                                                                        <rect key="frame" x="0.0" y="-357" width="58" height="0.0"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -723,6 +724,8 @@
                         <outlet property="lblPickupCnt" destination="b55-Jm-7d5" id="For-Zt-52f"/>
                         <outlet property="lblWaveCnt" destination="oGx-Fa-XIj" id="4UU-mb-zlM"/>
                         <outlet property="topBarView" destination="Pei-B7-0uc" id="0AV-1h-V5x"/>
+                        <outlet property="viewRoute" destination="U0j-74-TVj" id="3W3-nK-Dpx"/>
+                        <outlet property="viewWave" destination="dla-6S-xN1" id="BVa-02-tZe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzT-W6-m1u" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,8 +14,9 @@
 #import "UIView+Property.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
-
-
+#import "TblTruck.h"
+#import "WaveOrderModel.h"
+#import "WaveOrderCorModel.h"
 
 UIColor*   COLOR_TOOLBAR_TEXT;
 UIColor*   COLOR_TOOLBAR_BACK;
@@ -26,8 +27,9 @@ UIColor*   COLOR_SECONDARY_THIRD;
 UIColor*   COLOR_RESERVED;
 
 NSString* g_batteryLevel = @"";
+NSString* g_vehiclespeed = @"";
 NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
-//NSString* g_baseUrl = @"http://192.168.1.100/Delivery";
+//NSString* g_baseUrl = @"http://192.168.1.133/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";
 NSString* g_URL = @"/Employer/";
 NSString* SERVICE_URL = @"/WebService/";
@@ -1333,6 +1335,40 @@ BOOL g_breakShowing = false;
     UIGraphicsEndImageContext();
     return resultImage;
 }
++(UIImage*)getImageForDisp:(NSString*)number Image:(UIImage*)image{
+    
+    CGFloat textAreaHeight =30;
+    CGFloat totalWidth = 80;
+    CGFloat spellsize = 20;
+    UIFont*font = [UIFont fontWithName:@"Helvetica" size:spellsize];
+    CGSize textSize = [number sizeWithAttributes:@{NSFontAttributeName:font}];
+    CGFloat totalHeight = image.size.height + textAreaHeight;
+    CGRect totalRect = CGRectMake(0, 0, totalWidth, totalHeight);
+    CGRect markerRt = CGRectMake((totalWidth - image.size.width)/2, 0, image.size.width, image.size.height);
+    CGRect textRt = CGRectMake((totalWidth - textSize.width)/2, image.size.height + (textAreaHeight -spellsize)/2 , textSize.width, textSize.height);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(totalRect.size.width,totalRect.size.height), NO, 2.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // drawing with a white stroke color
+    CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+    // drawing with a white fill color
+    CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0);
+    //    CGContextFillRect(context, CGRectMake(0, cw, sm*2+dw, th));
+    
+    
+    [image drawInRect:markerRt];
+    
+    CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+    NSDictionary* dict =  [NSDictionary dictionaryWithObjectsAndKeys:
+                           font, NSFontAttributeName,
+                           [NSNumber numberWithFloat:1.0], NSBaselineOffsetAttributeName, nil];
+    
+    [number drawInRect:textRt withAttributes:dict];
+    
+    
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultImage;
+}
 +(UIImage*)getColoredImage:(NSString*)imgName Color:(UIColor*)color{
     UIImage *image = [UIImage imageNamed:imgName];
     
@@ -1649,15 +1685,15 @@ BOOL g_breakShowing = false;
     NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
     [userd setValue:array forKey:@"trackingOrderIds"];
     
-//    if (array.count>0) {
-//        [userd setBool:true forKey:@"service_status_preference"];
-//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [delegate startOrStopTraccar];
-//    }else if(array.count == 0){
-//        [userd setBool:false forKey:@"service_status_preference"];
-//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [delegate startOrStopTraccar];
-//    }
+    if (array.count>0) {
+        [userd setBool:true forKey:@"service_status_preference"];
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate startOrStopTraccar];
+    }else if(array.count == 0){
+        [userd setBool:false forKey:@"service_status_preference"];
+        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [delegate startOrStopTraccar];
+    }
 }
 + (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString {
     const char *bytes = [encodedString UTF8String];
@@ -1757,5 +1793,53 @@ BOOL g_breakShowing = false;
     }
     
     return nil;
+}
++(NSString*)getTruck:(NSString*)truck{
+    for (int i=0; i< g_truckModels.truck.count; i++) {
+        TblTruck* tblTruck = g_truckModels.truck[i];
+        if([tblTruck.code isEqualToString:truck]){
+            return tblTruck.name;
+        }
+    }
+    return nil;
+}
++(void)sortWaveList:(NSMutableArray*)data{
+    [data sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSNumber* n1 ;
+        NSNumber* n2 ;
+        NSNumber* p1 ;
+        NSNumber* p2 ;
+        if ([obj1 isKindOfClass:[WaveOrderModel class]]) {
+            WaveOrderModel*model1 = obj1;
+            int int1 = [model1.order_id intValue];
+            n1 =[NSNumber numberWithInt:int1];
+            int1 = [model1.priority intValue];
+            p1 = [NSNumber numberWithInt:int1];
+        }else if ([obj1 isKindOfClass:[WaveOrderCorModel class]]) {
+            WaveOrderCorModel*model1 = obj1;
+            int int1 = [model1.order_id intValue];
+            n1 =[NSNumber numberWithInt:int1];
+            int1 = [model1.priority intValue];
+            p1 = [NSNumber numberWithInt:int1];
+        }
+        
+        if ([obj2 isKindOfClass:[WaveOrderModel class]]) {
+            WaveOrderModel*model2 = obj2;
+            int int1 = [model2.order_id intValue];
+            n2 =[NSNumber numberWithInt:int1];
+            int1 = [model2.priority intValue];
+            p2 = [NSNumber numberWithInt:int1];
+        }else if ([obj2 isKindOfClass:[WaveOrderCorModel class]]) {
+            WaveOrderCorModel*model2 = obj2;
+            int int1 = [model2.order_id intValue];
+            n2 =[NSNumber numberWithInt:int1];
+            int1 = [model2.priority intValue];
+            p2 = [NSNumber numberWithInt:int1];
+        }
+        if ([p1 intValue] == [p2 intValue]) {
+            return [n2 compare:n1];
+        }
+        return [p1 compare:p2];
+    }];
 }
 @end

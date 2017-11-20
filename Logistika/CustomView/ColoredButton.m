@@ -34,6 +34,16 @@
 }
 -(void)setBackMode:(NSInteger)backMode{
     switch (backMode) {
+        case 4:{
+            // Sign in button
+            self.backgroundColor = [CGlobal colorWithHexString:@"6f7575" Alpha:1.0f];
+            [self setTitleColor:[CGlobal colorWithHexString:@"ffffff" Alpha:1.0f] forState:UIControlStateNormal];
+            // set font
+            
+            UIFont* font = [UIFont fontWithName:@"Verdana-Bold" size:15];
+            self.titleLabel.font = font;
+            break;
+        }
         case 3:{
             // bottom banner button
             self.backgroundColor = COLOR_PRIMARY;

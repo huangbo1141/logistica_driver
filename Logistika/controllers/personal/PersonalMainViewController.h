@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet FontLabel *lblHoldCnt;
 @property (weak, nonatomic) IBOutlet FontLabel *lblReturnedCnt;
 
+@property (weak, nonatomic) IBOutlet ColoredView *viewRoute;
 
 @end

@@ -54,13 +54,17 @@
 -(void)getWaves{
     self.pageIndex = 0;
     
+    EnvVar * env = [CGlobal sharedId].env;
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     data[@"type"] = @"1";
     if (g_mode == c_PERSONAL) {
         data[@"order_type"] = @"0";
+        data[@"employer_id"] = env.user_id;
     }else{
         data[@"order_type"] = @"1";
+        data[@"employer_id"] = env.corporate_user_id;
     }
+    
     
     [CGlobal showIndicator:self];
     NetworkParser* manager = [NetworkParser sharedManager];
@@ -209,35 +213,9 @@
         }
     }
     
-    [self sortData:array];
+    [CGlobal sortWaveList:array];
     
     self.waveOrders = array;
-}
--(void)sortData:(NSMutableArray*)data{
-    [data sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        NSNumber* n1 ;
-        NSNumber* n2 ;
-        if ([obj1 isKindOfClass:[WaveOrderModel class]]) {
-            WaveOrderModel*model1 = obj1;
-            int int1 = [model1.order_id intValue];
-            n1 =[NSNumber numberWithInt:int1];
-        }else if ([obj1 isKindOfClass:[WaveOrderCorModel class]]) {
-            WaveOrderCorModel*model1 = obj1;
-            int int1 = [model1.order_id intValue];
-            n1 =[NSNumber numberWithInt:int1];
-        }
-        
-        if ([obj2 isKindOfClass:[WaveOrderModel class]]) {
-            WaveOrderModel*model2 = obj2;
-            int int1 = [model2.order_id intValue];
-            n2 =[NSNumber numberWithInt:int1];
-        }else if ([obj2 isKindOfClass:[WaveOrderCorModel class]]) {
-            WaveOrderCorModel*model2 = obj2;
-            int int1 = [model2.order_id intValue];
-            n2 =[NSNumber numberWithInt:int1];
-        }
-        return [n2 compare:n1];
-    }];
 }
 -(void)filterCorporateWaves:(NSString*)wave_id{
     NSMutableArray* array = [[NSMutableArray alloc] init];
@@ -247,7 +225,7 @@
             [array addObject:item];
         }
     }
-    [self sortData:array];
+    [CGlobal sortWaveList:array];
     self.waveOrders = array;
 }
 - (void)didReceiveMemoryWarning {

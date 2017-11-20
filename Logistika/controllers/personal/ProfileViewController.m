@@ -47,31 +47,7 @@
     textDelegate.length = 10;
     self.txtPhoneNumber.delegate = textDelegate;
     self.textDelegate = textDelegate;
-    
-    [self setAreaDatas];
-    
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    NetworkParser* manager = [NetworkParser sharedManager];
-    [manager ontemplateGeneralRequest2:data BasePath:BASE_DATA_URL Path:@"get_basic" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
-        if (error == nil) {
-            if (dict!=nil && dict[@"result"] != nil) {
-                if ([dict[@"result"] intValue] == 200) {
-                    LoginResponse* data = [[LoginResponse alloc] initWithDictionary:dict];
-                    if (data.area.count > 0) {
-                        g_areaData = data;
-                        [self setAreaDatas];
-                    }
-                    
-                }else{
-                    [CGlobal AlertMessage:@"Fail" Title:nil];
-                }
-            }
-        }else{
-            NSLog(@"Error");
-        }
         
-    } method:@"POST"];
-    
     NSArray* fields = @[self.txtFirstName,self.txtLastName,self.txtPhoneNumber,self.txtAddress,self.txtState,self.txtLandMark,self.txtEmail,self.txtPassword,self.txtRePassword,self.txtAnswer,self.txtArea,self.txtCity,self.txtPin];
     CGRect screenRect = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, screenRect.size.width-40, 30);

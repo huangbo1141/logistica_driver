@@ -151,6 +151,9 @@
         }
         case 210:{
             // sign out
+            g_visibleModel = [[VisibleModel alloc] init];
+            [g_visibleModel initDefault];
+            
             [env logOut];
             [CGlobal clearData];
             AppDelegate* delegate = [UIApplication sharedApplication].delegate;

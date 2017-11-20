@@ -12,6 +12,7 @@
 @interface ShipperDocTableViewCell : BaseTableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *btnRemove;
+@property (weak, nonatomic) IBOutlet UILabel *lblLabel;
 
 -(void)setData:(NSDictionary *)data;
 @end

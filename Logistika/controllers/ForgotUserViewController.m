@@ -77,13 +77,13 @@
                             [self.btnSubmit setTitle:@"Submit" forState:UIControlStateNormal];
                             self.btnSubmit.tag = 201;
                         }else {
-                            self.lblMessage.hidden = false;
-//                            NSString*message = @"We didn't find the phone";
-//                            [CGlobal AlertMessage:message Title:nil];
+//                            self.lblMessage.hidden = false;
+                            NSString*message = @"We didn't find the phone";
+                            [CGlobal AlertMessage:message Title:nil];
                         }
                     }else{
-//                        NSString*message = @"We didn't find the phone";
-//                        [CGlobal AlertMessage:message Title:nil];
+                        NSString*message = @"We didn't find the phone";
+                        [CGlobal AlertMessage:message Title:nil];
                     }
                 }else{
                     NSLog(@"Error");
@@ -112,13 +112,12 @@
                             
                             [self showPassword:email];
                         }else {
-                            self.lblMessage.hidden = false;
-//                            NSString*message = @"We didn't find the details in our records. Please try again";
-//                            [CGlobal AlertMessage:message Title:nil];
+                            NSString*message = @"We didn't find the details in our records. Please try again";
+                            [CGlobal AlertMessage:message Title:nil];
                         }
                     }else{
-//                        NSString*message = @"We didn't find the details in our records. Please try again";
-//                        [CGlobal AlertMessage:message Title:nil];
+                        NSString*message = @"We didn't find the details in our records. Please try again";
+                        [CGlobal AlertMessage:message Title:nil];
                     }
                 }else{
                     NSLog(@"Error");
