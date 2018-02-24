@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -685,7 +685,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="H7r-gf-423" firstAttribute="top" secondItem="uxF-2x-PAh" secondAttribute="top" id="18i-fm-pb0"/>
                                                     <constraint firstItem="H7r-gf-423" firstAttribute="leading" secondItem="uxF-2x-PAh" secondAttribute="leading" id="2B0-yQ-GVV"/>
@@ -696,7 +696,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Tjw-O7-qJo" firstAttribute="leading" secondItem="Kvn-TG-8cc" secondAttribute="leading" constant="20" id="OZy-vR-0x8"/>
                                     <constraint firstItem="Tjw-O7-qJo" firstAttribute="top" secondItem="Kvn-TG-8cc" secondAttribute="top" constant="20" id="b2w-jJ-8Fu"/>
@@ -705,7 +705,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81960784310000001" green="0.6705882353" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pei-B7-0uc" secondAttribute="trailing" id="6lv-is-ONu"/>
                             <constraint firstItem="Kvn-TG-8cc" firstAttribute="leading" secondItem="TEn-pU-buQ" secondAttribute="leading" id="9gJ-f4-8IF"/>
@@ -717,6 +717,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="Kvn-TG-8cc" id="1vG-Nd-ePH"/>
                         <outlet property="lblCompletedCnt" destination="O4f-Dt-ji7" id="4hT-FN-0nq"/>
                         <outlet property="lblHoldCnt" destination="DpG-UX-ptt" id="Ul5-3u-Vw5"/>
                         <outlet property="lblOrderCnt" destination="h4o-3m-tie" id="Ck9-Xc-x8U"/>
@@ -754,7 +755,7 @@
                                                 <rect key="frame" x="25" y="20" width="270" height="140"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="AWF-c6-euf" firstAttribute="leading" secondItem="dwJ-dR-kuK" secondAttribute="leading" constant="25" id="0LE-gl-hJC"/>
                                             <constraint firstAttribute="bottom" secondItem="AWF-c6-euf" secondAttribute="bottom" constant="20" id="cIA-zA-n7j"/>
@@ -763,6 +764,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dwJ-dR-kuK" secondAttribute="trailing" id="3Pz-5u-M36"/>
                                     <constraint firstItem="dwJ-dR-kuK" firstAttribute="top" secondItem="kEf-d8-Spk" secondAttribute="top" id="9WH-uI-4nV"/>
@@ -772,7 +774,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81960784310000001" green="0.6705882353" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kEf-d8-Spk" firstAttribute="leading" secondItem="7nu-gn-uRX" secondAttribute="leading" id="eab-k4-pOY"/>
                             <constraint firstItem="Ut1-5g-ANx" firstAttribute="top" secondItem="kEf-d8-Spk" secondAttribute="bottom" id="lae-2E-sM9"/>
@@ -856,7 +858,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="KBf-Nw-tVS" firstAttribute="top" secondItem="Dab-84-KCq" secondAttribute="top" id="0y4-Cd-Zu5"/>
                                     <constraint firstItem="5kO-m5-or2" firstAttribute="leading" secondItem="Dab-84-KCq" secondAttribute="leading" constant="25" id="75h-k3-GD8"/>
@@ -868,7 +870,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Dab-84-KCq" secondAttribute="trailing" id="8ei-wY-saC"/>
                             <constraint firstItem="Dab-84-KCq" firstAttribute="leading" secondItem="ofj-EM-oL7" secondAttribute="leading" id="Cit-Bx-efg"/>

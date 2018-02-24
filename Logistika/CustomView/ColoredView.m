@@ -45,7 +45,7 @@
             [shadowView.layer setShadowColor:[UIColor colorWithRed:225.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0].CGColor];
             [shadowView.layer setShadowOpacity:1.0];
             [shadowView.layer setShadowRadius:5.0];
-            [shadowView.layer setShadowOffset:CGSizeMake(5.0f, 5.0f)];
+            [shadowView.layer setShadowOffset:CGSizeMake(0.0f, 2.0f)];
             break;
         }
         case 6:{
@@ -58,7 +58,7 @@
             [shadowView.layer setShadowColor:[UIColor colorWithRed:225.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0].CGColor];
             [shadowView.layer setShadowOpacity:1.0];
             [shadowView.layer setShadowRadius:5.0];
-            [shadowView.layer setShadowOffset:CGSizeMake(5.0f, 5.0f)];
+            [shadowView.layer setShadowOffset:CGSizeMake(0.0f, 2.0f)];
             break;
         }
         case 5:{
@@ -70,7 +70,7 @@
             [shadowView.layer setShadowColor:[UIColor colorWithRed:225.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0].CGColor];
             [shadowView.layer setShadowOpacity:1.0];
             [shadowView.layer setShadowRadius:5.0];
-            [shadowView.layer setShadowOffset:CGSizeMake(5.0f, 5.0f)];
+            [shadowView.layer setShadowOffset:CGSizeMake(0.0f, 2.0f)];
             break;
         }
         case 4:{

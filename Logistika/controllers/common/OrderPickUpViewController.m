@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     [self initViews];
     
     
@@ -430,18 +430,21 @@
         id data = self.data_0[indexPath.row];
         [cell setOrderData:data];
         
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }else if (tableView == self.tableview2) {
         OrderItemTableViewCell1* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         id data = self.data_1[indexPath.row];
         [cell setOrderData:data];
         
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }else{
         OrderItemTableViewCell1* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         id data = self.data_2[indexPath.row];
         [cell setOrderData:data];
         
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }
 }

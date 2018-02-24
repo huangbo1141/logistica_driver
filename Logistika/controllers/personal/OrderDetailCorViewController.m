@@ -45,6 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
     self.consigments = [[NSMutableArray alloc] init];
     self.consigments_receiver = [[NSMutableArray alloc] init];

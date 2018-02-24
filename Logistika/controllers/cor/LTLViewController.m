@@ -23,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self get_truck];
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
 }
 -(void)viewWillAppear:(BOOL)animated{
     switch (self.type) {

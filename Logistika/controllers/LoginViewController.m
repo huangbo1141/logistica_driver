@@ -25,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
     [_btnSignIn addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     [_btnForgotPassword addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];

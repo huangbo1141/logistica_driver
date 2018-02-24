@@ -54,6 +54,8 @@
     self.drawerLayout = vc.view.drawerLayout;
     self.vc = vc;
     
+    UIFont* font= [UIFont systemFontOfSize:18.0f weight:UIFontWeightHeavy];
+    self.caption.font = font;
     [self updateCaption];
     
 }

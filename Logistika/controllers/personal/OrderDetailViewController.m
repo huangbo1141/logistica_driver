@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     [self initView];
     EnvVar* env = [CGlobal sharedId].env;
     [self showItemLists];
@@ -341,10 +341,12 @@
     if (_tableView_Shipper == tableView) {
         ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         [cell setData:@{@"aDelegate":self,@"model":self.items_shipper[indexPath.row],@"indexPath":indexPath,@"type":@"1"}];
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }else if(_tableView_Receiver == tableView){
         ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         [cell setData:@{@"aDelegate":self,@"model":self.items_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"2"}];
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }
     
@@ -355,6 +357,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }else if(g_ORDER_TYPE == g_ITEM_OPTION){
         ReviewItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -362,6 +365,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }else{
         ReviewPackageTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -369,6 +373,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
+        cell.backgroundColor = COLOR_SECONDARY_THIRD;
         return cell;
     }
 }

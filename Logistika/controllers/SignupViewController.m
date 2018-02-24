@@ -30,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
     [_btnCreate addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
     _btnCreate.tag = 200;

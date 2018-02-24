@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     _lblMessage.hidden = true;
     
     _stack2.hidden = true;

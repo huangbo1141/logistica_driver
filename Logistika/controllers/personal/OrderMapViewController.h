@@ -27,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cons_bottomSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cons_bottomHandleHeight;
+
 @property (weak, nonatomic) IBOutlet UIView *viewBottom;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickup1;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickup2;

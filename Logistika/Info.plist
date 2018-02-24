@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Logistika Employee</string>
+	<string>HurryR Driver</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,6 +20,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,12 +33,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Logistika App want to access camera to take picture.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App want to access the location to track the package.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App want to access the location to track the package.</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>App want to access the location to track the package.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>App want to access the location to track the package.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App want to access the location to track the package.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Logistika app access your photo library to upload your photo</string>
 	<key>UIAppFonts</key>
@@ -62,9 +66,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>comgooglemaps</string>
-    </array>
 </dict>
 </plist>

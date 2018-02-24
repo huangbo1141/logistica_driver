@@ -1530,6 +1530,8 @@ BOOL g_breakShowing = false;
                      @"Cash on Pick up"];
     
     COLOR_PRIMARY = [CGlobal colorWithHexString:@"008080" Alpha:1.0f];
+    COLOR_SECONDARY_PRIMARY = [CGlobal colorWithHexString:@"D2AB00" Alpha:1.0f];
+    COLOR_SECONDARY_THIRD = [CGlobal colorWithHexString:@"D6C165" Alpha:1.0f];
     
     PUBLISHABLE_KEY = @"pk_test_C0xTsdez4BI0rXKZp6ObLitq";
     

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnGuest;
 @property (weak, nonatomic) IBOutlet UIButton *btnCall;
 @property (weak, nonatomic) IBOutlet UIButton *btnTracking;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 
 @end

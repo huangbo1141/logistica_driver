@@ -12,6 +12,7 @@
 #import "FontLabel.h"
 
 @interface PersonalMainViewController : MenuViewController
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet ColoredView *viewWave;
 @property (weak, nonatomic) IBOutlet FontLabel *lblWaveCnt;
 @property (weak, nonatomic) IBOutlet FontLabel *lblOrderCnt;

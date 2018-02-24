@@ -12,6 +12,7 @@
 #import "ColoredView.h"
 
 @interface CorMainViewController : MenuViewController
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet FontLabel *lblWaveCnt;
 @property (weak, nonatomic) IBOutlet FontLabel *lblOrderCnt;

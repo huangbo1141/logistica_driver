@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,7 +45,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ux1-Pi-Yg5" firstAttribute="centerY" secondItem="Az2-Nl-77s" secondAttribute="centerY" id="2Vd-Wb-a9j"/>
                                             <constraint firstAttribute="width" constant="76" id="DtB-is-ce3"/>
@@ -74,7 +75,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="jPu-FM-BSS" firstAttribute="centerX" secondItem="OyG-eB-LFk" secondAttribute="centerX" id="Jwv-6S-ltc"/>
                                                     <constraint firstItem="jPu-FM-BSS" firstAttribute="centerY" secondItem="OyG-eB-LFk" secondAttribute="centerY" id="mcz-NW-ogF"/>
@@ -98,7 +99,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="dRj-YU-nT8" firstAttribute="centerX" secondItem="5Mv-Sl-NtK" secondAttribute="centerX" id="5iL-Af-nF7"/>
                                                     <constraint firstItem="dRj-YU-nT8" firstAttribute="centerY" secondItem="5Mv-Sl-NtK" secondAttribute="centerY" id="Rxj-cN-hG7"/>
@@ -117,7 +118,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="7VR-xk-wdo" secondAttribute="bottom" id="Aa1-kT-a9M"/>
                             <constraint firstItem="7VR-xk-wdo" firstAttribute="top" secondItem="3Ou-5i-9hZ" secondAttribute="top" id="NKJ-GO-QRr"/>
@@ -126,6 +127,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="3Ou-5i-9hZ" secondAttribute="trailing" id="gWC-La-Lg1"/>
                     <constraint firstItem="3Ou-5i-9hZ" firstAttribute="top" secondItem="J7b-42-0wg" secondAttribute="top" id="t3E-0g-hsM"/>
@@ -133,6 +135,7 @@
                     <constraint firstAttribute="bottom" secondItem="3Ou-5i-9hZ" secondAttribute="bottom" id="z9m-7G-rFT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="imgContent" destination="Ux1-Pi-Yg5" id="Ce7-gT-DaJ"/>
                 <outlet property="lblQuantity" destination="jPu-FM-BSS" id="Srw-aK-uyg"/>

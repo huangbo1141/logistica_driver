@@ -25,7 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
     [self trackOrders:1];
     

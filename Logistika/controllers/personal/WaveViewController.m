@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
     [self initBase];
     [self get_truck];
     
@@ -244,7 +245,7 @@
     
     [cell setData:@{@"indexPath":indexPath,@"model":self.waveOrders[indexPath.row],@"aDelegate":self,@"vc":self}];
     
-    
+    cell.backgroundColor = COLOR_SECONDARY_THIRD;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -29,6 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.contentView.backgroundColor = COLOR_SECONDARY_THIRD;
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
     [_segment addTarget:self action:@selector(onChange:) forControlEvents:UIControlEventValueChanged];

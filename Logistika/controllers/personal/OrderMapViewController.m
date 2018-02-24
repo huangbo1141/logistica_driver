@@ -36,13 +36,15 @@
 @property (nonatomic,strong) GMSPolyline* m_GMSPolyline;
 
 @property (nonatomic,strong) GMSMarker* curMarker;
+
+@property (nonatomic,assign) CGFloat bottomValue1;
 @end
 
 @implementation OrderMapViewController
 
 -(void)toggleBottomView{
     if (self.cons_bottomSpace.constant == 0) {
-        self.cons_bottomSpace.constant = -100;
+        self.cons_bottomSpace.constant = self.bottomValue1;
         [self.btnBottom setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     }else{
         self.cons_bottomSpace.constant = 0;
@@ -58,6 +60,16 @@
     _lblSpeed.text =   @"0 km";
     _stackTool1.hidden = true;
     
+    CGFloat height = [UIApplication sharedApplication].statusBarFrame.size.height;
+    if (height == 20) {
+        self.bottomValue1 = -100;
+        self.cons_bottomHandleHeight.constant = -40;
+    }else{
+        self.bottomValue1 = -100 - 44;
+        self.cons_bottomHandleHeight.constant = -60;
+    }
+    NSLog(@"bottom value1 = %f",self.bottomValue1);
+    
     self.lblPickup1.text = g_addressModel.sourceAddress;
     self.lblPickup2.text = g_addressModel.sourceState;
     self.lblPickup3.text = g_addressModel.sourceCity;
@@ -70,7 +82,8 @@
     [self.btnBottom setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     self.btnBottom.tintColor = [UIColor blackColor];
     
-    self.cons_bottomSpace.constant = -100;
+    
+    self.cons_bottomSpace.constant = self.bottomValue1;
     
     self.mapView.camera = [[GMSCameraPosition alloc] initWithTarget:self.userPosition zoom:gms_camera_zoom bearing:0 viewingAngle:0];
     
