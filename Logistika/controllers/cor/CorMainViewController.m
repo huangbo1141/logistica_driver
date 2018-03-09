@@ -42,6 +42,7 @@
     
 //    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //    [delegate startTrackTimer];
+    // test mac
     
     NSArray* array = @[_lblWaveCnt,_lblOrderCnt,_lblPickupCnt,_lblPickedCnt,_lblCompletedCnt,_lblHoldCnt];
     for (int i=0; i< array.count; i++) {
