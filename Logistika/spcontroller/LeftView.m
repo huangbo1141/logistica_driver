@@ -156,9 +156,14 @@
             
             [env logOut];
             [CGlobal clearData];
-            AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+            NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+            [userd setBool:false forKey:@"service_status_preference"];
+            AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             [delegate stopTrackTimer];
+            
             [delegate defaultLogin];
+            
+            
             break;
         }
         default:

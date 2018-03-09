@@ -214,6 +214,7 @@
         _lblPickLandMark.text = g_addressModel.sourceLandMark;
         _lblPickInst.text = g_addressModel.sourceInstruction;
         
+        
         _lblDestAddress.text = g_addressModel.desAddress;
         _lblDestCity.text = g_addressModel.desCity;
         _lblDestState.text = g_addressModel.desState;
@@ -221,6 +222,9 @@
         _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
         _lblDestInst.text = g_addressModel.desInstruction;
+        
+        _lblPickName.text = g_addressModel.sourceName;
+        _lblDestName.text = g_addressModel.desName;
     }
     //_lblDestPhone.hidden = true;
 }
@@ -451,13 +455,13 @@
     NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
     NSData*imageData = [CGlobal getImageDataFromUIImage:image];
     if (imageData!=nil) {
-        imageParam[@"file"] = imageData;
+        imageParam[@"file0"] = imageData;
     }
     for (int i=0; i<array.count; i++) {
         ItemModel* cell = array[i];
         imageData = [CGlobal getImageDataFromUIImage:cell.image_data];
         if (imageData!=nil) {
-            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            NSString* key = [NSString stringWithFormat:@"file%d",i+1];
             imageParam[key] = imageData;
         }
         

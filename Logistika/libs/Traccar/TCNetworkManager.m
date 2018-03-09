@@ -18,8 +18,14 @@
 #import <arpa/inet.h>
 
 static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info) {
-    TCNetworkManager *networkManager = (__bridge TCNetworkManager *)info;
-    [networkManager.delegate didUpdateNetwork:[TCNetworkManager onlineForFlags:flags]];
+    @try{
+        TCNetworkManager *networkManager = (__bridge TCNetworkManager *)info;
+        [networkManager.delegate didUpdateNetwork:[TCNetworkManager onlineForFlags:flags]];
+    }@catch(NSException* exception){
+        
+    }
+    
+    
 }
 
 @interface TCNetworkManager ()

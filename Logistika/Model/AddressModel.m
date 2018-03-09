@@ -38,11 +38,56 @@
             self.desLng = [dict[@"d_lng"] doubleValue];
             self.desPhone = dict[@"d_phone"];
             
+            self.desName = dict[@"d_name"];
+            
+            if(self.sourcePhonoe!=nil){
+                NSArray* components = [self.sourcePhonoe componentsSeparatedByString:@":"];
+                if (components.count == 2) {
+                    self.sourcePhonoe = components[1];
+                    self.sourceName = components[0];
+                }else if(components.count == 1){
+                    self.sourcePhonoe = components[0];
+                }else {
+                    self.sourcePhonoe = @" ";
+                }
+            }
+            [self checkValueForView];
         }
         
         
     }
     return self;
+}
+-(void)checkValueForView{
+    if(self.desInstruction == [NSNull null]){
+        self.desInstruction = @" ";
+    }else if ([self.desInstruction length]>0) {
+        //ok
+    }else{
+        self.desInstruction = @" ";
+    }
+    if(self.desName == [NSNull null]){
+        self.desName = @" ";
+    }else if ([self.desName length]>0) {
+        //ok
+    }else{
+        self.desName = @" ";
+    }
+    if(self.sourceName == [NSNull null]){
+        self.sourceName = @" ";
+    }else if ([self.sourceName length]>0) {
+        //ok
+    }else{
+        self.sourceName = @" ";
+    }
+    
+    if(self.desLandMark == [NSNull null]){
+        self.desLandMark = @" ";
+    }else if ([self.desLandMark length]>0) {
+        //ok
+    }else{
+        self.desLandMark = @" ";
+    }
 }
 -(void)setDesPhone:(NSString *)desPhone{
     id value = desPhone;

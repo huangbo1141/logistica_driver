@@ -44,8 +44,9 @@
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(0, 0, 20, 20);
         [btn addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-        UIImage* image = [UIImage imageNamed:@"ic_action_done.png"];
-        [btn setImage:image forState:UIControlStateNormal];
+        //UIImage* image = [UIImage imageNamed:@"ic_action_done.png"];
+        //[btn setImage:image forState:UIControlStateNormal];
+        [btn setTitle:@"Upload" forState:UIControlStateNormal];
         
         UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView:btn];
         btn.tag = 100;

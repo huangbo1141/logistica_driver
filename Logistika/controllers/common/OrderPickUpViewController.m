@@ -93,6 +93,9 @@
     if (self.data_0.count == 0 && self.data_1.count == 0 && self.data_2.count == 0) {
         [CGlobal AlertMessage:@"No Orders" Title:nil];
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self segChanged:self.segControl];
+    });
 }
 -(void)filterDataCorporate{
     NSUInteger found = [c_freights indexOfObject:self.mode];
@@ -145,9 +148,15 @@
     [self.tableview1 reloadData];
     [self.tableview2 reloadData];
     [self.tableview3 reloadData];
+    
+    
     if (self.data_0.count == 0 && self.data_1.count == 0 && self.data_2.count == 0) {
         [CGlobal AlertMessage:@"No Orders" Title:nil];
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self segChanged:self.segControl];
+    });
 }
 
 - (IBAction)segChanged:(id)sender {

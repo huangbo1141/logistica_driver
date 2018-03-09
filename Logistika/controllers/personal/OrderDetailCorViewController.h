@@ -39,7 +39,7 @@
 
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UILabel *lblPickName;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickAddress;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickCity;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickState;
@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDestPhone;
 @property (weak, nonatomic) IBOutlet UILabel *lblDestLandMark;
 @property (weak, nonatomic) IBOutlet UILabel *lblDestInst;
+@property (weak, nonatomic) IBOutlet UILabel *lblDestName;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblPickDate;
 

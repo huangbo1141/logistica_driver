@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet BorderTextField *txtFeedback;
 //@property (weak, nonatomic) IBOutlet GCPlaceholderTextView *txtFeedback;
 
+@property (weak, nonatomic) IBOutlet UIView *viewRoot;
 @property (weak, nonatomic) IBOutlet ColoredButton *btnSubmit;
 @end

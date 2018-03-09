@@ -28,13 +28,14 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.contentView.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
-    [self trackOrders:1];
     
-//    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
-//    [userd setBool:true forKey:@"service_status_preference"];
-//    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    delegate.trackingController = nil;
-//    [delegate startOrStopTraccar];
+//    [self trackOrders:1];
+    
+    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+    [userd setBool:true forKey:@"service_status_preference"];
+    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    delegate.trackingController = nil;
+    [delegate startOrStopTraccar];
     
 //    AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
 //    [delegate startTrackTimer];

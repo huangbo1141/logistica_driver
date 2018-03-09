@@ -348,6 +348,9 @@
         _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
         _lblDestInst.text = g_addressModel.desInstruction;
+        
+        _lblPickName.text = g_addressModel.sourceName;
+        _lblDestName.text = g_addressModel.desName;
     }
 //    _lblDestPhone.hidden = true;
 }
@@ -485,7 +488,7 @@
         }
         
         
-        imageParam[@"file"] = images[0];
+        imageParam[@"file0"] = images[0];
         for (int i=0; i<_items_shipper.count; i++) {
             images = [[NSMutableArray alloc] init];
             ItemModel* cell = _items_shipper[i];
@@ -497,7 +500,7 @@
             if (imageData!=nil) {
                 [images addObject:imageData];
             }
-            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            NSString* key = [NSString stringWithFormat:@"file%d",i+1];
             imageParam[key] = images[0];
         }
     }
@@ -716,7 +719,7 @@
             [CGlobal AlertMessage:@"Please Signature" Title:nil];
             return;
         }
-        imageParam[@"file"] = images[0];
+        imageParam[@"file0"] = images[0];
         for (int i=0; i<_items_receiver.count; i++) {
             images = [[NSMutableArray alloc] init];
             ItemModel* cell = _items_receiver[i];
@@ -728,7 +731,7 @@
             if (imageData!=nil) {
                 [images addObject:imageData];
             }
-            NSString* key = [NSString stringWithFormat:@"file%d",i];
+            NSString* key = [NSString stringWithFormat:@"file%d",i+1];
             imageParam[key] = images[0];
         }
     }

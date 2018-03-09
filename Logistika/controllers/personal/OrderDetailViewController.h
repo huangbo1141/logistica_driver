@@ -41,6 +41,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblPickLandMark;
 @property (weak, nonatomic) IBOutlet UILabel *lblPickInst;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblPickName;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblDestName;
+
 @property (weak, nonatomic) IBOutlet UILabel *lblDestAddress;
 @property (weak, nonatomic) IBOutlet UILabel *lblDestCity;
 @property (weak, nonatomic) IBOutlet UILabel *lblDestState;

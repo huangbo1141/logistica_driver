@@ -9,5 +9,6 @@
 #import "MenuViewController.h"
 
 @interface ContactUsViewController : MenuViewController
+@property (weak, nonatomic) IBOutlet UIView *viewRoot;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 @end

@@ -107,6 +107,7 @@
                     </view>
                     <connections>
                         <outlet property="topBarView" destination="YHX-zA-P5B" id="19s-Hw-MrA"/>
+                        <outlet property="viewRoot" destination="wxz-Ya-bXr" id="CZX-Xb-9kr"/>
                         <outlet property="webview" destination="EVZ-8E-7DR" id="4Hd-Xo-17R"/>
                     </connections>
                 </viewController>
@@ -276,6 +277,7 @@
                         <outlet property="txtFeedback" destination="iBj-zX-tzL" id="izI-G3-rAR"/>
                         <outlet property="txtFirst" destination="PuX-2q-Oel" id="lyl-nB-ZuJ"/>
                         <outlet property="txtLast" destination="qSB-sW-Svk" id="5sP-pm-lN5"/>
+                        <outlet property="viewRoot" destination="RoA-fJ-nAH" id="nKf-yq-dOO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7p-Ph-fCw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,6 +382,7 @@
                     </view>
                     <connections>
                         <outlet property="topBarView" destination="kO1-xY-cud" id="2k3-1K-p62"/>
+                        <outlet property="viewRoot" destination="kek-D2-hFc" id="fO6-7p-dDJ"/>
                         <outlet property="webview" destination="rul-gj-zOv" id="wii-cx-yHt"/>
                     </connections>
                 </viewController>
@@ -485,6 +488,7 @@
                     </view>
                     <connections>
                         <outlet property="topBarView" destination="2Zh-DG-5ot" id="rc4-Sl-Sc1"/>
+                        <outlet property="viewRoot" destination="BHO-EW-vp4" id="tWX-MD-UO6"/>
                         <outlet property="webview" destination="VF8-bI-qDF" id="yrx-y9-ez9"/>
                     </connections>
                 </viewController>

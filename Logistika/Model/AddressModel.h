@@ -30,6 +30,8 @@
 @property (nonatomic,copy) NSString* desPhone;
 @property (nonatomic,copy) NSString* desLandMark;
 @property (nonatomic,copy) NSString* desInstruction;
+@property (nonatomic,copy) NSString* desName;
+@property (nonatomic,copy) NSString* sourceName;
 
 @property (nonatomic,assign) double  desLat;
 @property (nonatomic,assign) double  desLng;

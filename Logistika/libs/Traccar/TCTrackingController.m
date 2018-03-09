@@ -181,7 +181,12 @@ int64_t kRetryDelay = 30 * 1000;
     params[@"speed"] = g_vehiclespeed;
     
     params[@"battery"] = g_batteryLevel;
-    params[@"plugin"] = @"false";
+    
+    if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging) {
+        params[@"plugin"] = @"true";
+    }else{
+        params[@"plugin"] = @"false";
+    }
     
 //    params[@"speed"] =@"111.0";
 //    params[@"battery"] =@"45%";
