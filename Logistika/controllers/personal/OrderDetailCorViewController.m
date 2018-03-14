@@ -323,7 +323,7 @@
 -(NSString*)getDate{
     NSDate* date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    [dateFormat setDateFormat:@"dd-MM-yyyy"];
     NSTimeZone* sourceTimeZone = [NSTimeZone systemTimeZone];
     [dateFormat setTimeZone:sourceTimeZone];
     

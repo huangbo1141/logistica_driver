@@ -63,10 +63,10 @@
     CGFloat height = [UIApplication sharedApplication].statusBarFrame.size.height;
     if (height == 20) {
         self.bottomValue1 = -100;
-        self.cons_bottomHandleHeight.constant = -40;
+        self.cons_bottomHandleHeight.constant = 40;
     }else{
         self.bottomValue1 = -100 - 44;
-        self.cons_bottomHandleHeight.constant = -60;
+        self.cons_bottomHandleHeight.constant = 60;
     }
     NSLog(@"bottom value1 = %f",self.bottomValue1);
     

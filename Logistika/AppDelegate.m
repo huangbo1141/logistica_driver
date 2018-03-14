@@ -448,7 +448,7 @@
             
             if (self.timer == nil) {                
                 NSTimeInterval intval2hr = 3600*2;
-//                intval2hr = 300;
+                intval2hr = 300;
                 if (g_isii) {
                     intval2hr = 300;
                 }

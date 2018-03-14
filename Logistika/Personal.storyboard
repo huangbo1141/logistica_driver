@@ -2972,7 +2972,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhY-Xe-r7q" customClass="ColoredView">
-                                                <rect key="frame" x="26.5" y="0.0" width="0.0" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-R0-Cjc">
                                                         <rect key="frame" x="27.5" y="21" width="53" height="18"/>
@@ -3386,7 +3386,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J33-br-E5U">
-                                <rect key="frame" x="190" y="373" width="90" height="40"/>
+                                <rect key="frame" x="190" y="473" width="90" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1y-e3-WRC">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -3413,7 +3413,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uib-Hl-4W5">
-                                <rect key="frame" x="0.0" y="428" width="320" height="140"/>
+                                <rect key="frame" x="0.0" y="528" width="320" height="140"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rY-ii-9sb">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -3429,7 +3429,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="0FX-46-OAj" firstAttribute="centerY" secondItem="3rY-ii-9sb" secondAttribute="centerY" id="8o8-VX-1S1"/>
                                             <constraint firstAttribute="height" constant="40" id="EFD-R3-OVK"/>
@@ -3574,7 +3573,7 @@
                         <constraints>
                             <constraint firstItem="FAM-7t-URS" firstAttribute="leading" secondItem="hYK-zX-sl2" secondAttribute="leading" id="3S3-pc-hBr"/>
                             <constraint firstItem="uib-Hl-4W5" firstAttribute="leading" secondItem="hYK-zX-sl2" secondAttribute="leading" id="51Z-Tb-M6x"/>
-                            <constraint firstItem="4DA-uK-ZHE" firstAttribute="top" secondItem="uib-Hl-4W5" secondAttribute="bottom" id="LaE-Ps-tns"/>
+                            <constraint firstItem="4DA-uK-ZHE" firstAttribute="top" secondItem="uib-Hl-4W5" secondAttribute="bottom" constant="-100" id="LaE-Ps-tns"/>
                             <constraint firstItem="FAM-7t-URS" firstAttribute="top" secondItem="vtj-5Z-dGW" secondAttribute="bottom" id="QTU-R4-9NC"/>
                             <constraint firstAttribute="trailing" secondItem="OnN-91-xsZ" secondAttribute="trailing" id="TQJ-nf-vVx"/>
                             <constraint firstItem="OnN-91-xsZ" firstAttribute="leading" secondItem="hYK-zX-sl2" secondAttribute="leading" id="VVN-rm-tbO"/>
