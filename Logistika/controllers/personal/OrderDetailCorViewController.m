@@ -488,7 +488,7 @@
         }
         
         
-        imageParam[@"file0"] = images[0];
+        imageParam[@"signature0"] = images[0];
         for (int i=0; i<_items_shipper.count; i++) {
             images = [[NSMutableArray alloc] init];
             ItemModel* cell = _items_shipper[i];
@@ -719,7 +719,7 @@
             [CGlobal AlertMessage:@"Please Signature" Title:nil];
             return;
         }
-        imageParam[@"file0"] = images[0];
+        imageParam[@"signature0"] = images[0];
         for (int i=0; i<_items_receiver.count; i++) {
             images = [[NSMutableArray alloc] init];
             ItemModel* cell = _items_receiver[i];

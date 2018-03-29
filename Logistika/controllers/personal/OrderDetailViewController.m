@@ -455,7 +455,7 @@
     NSMutableDictionary* imageParam = [[NSMutableDictionary alloc] init];
     NSData*imageData = [CGlobal getImageDataFromUIImage:image];
     if (imageData!=nil) {
-        imageParam[@"file0"] = imageData;
+        imageParam[@"signature0"] = imageData;
     }
     for (int i=0; i<array.count; i++) {
         ItemModel* cell = array[i];
