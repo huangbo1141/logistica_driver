@@ -2972,7 +2972,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhY-Xe-r7q" customClass="ColoredView">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                <rect key="frame" x="26.5" y="0.0" width="0.0" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-R0-Cjc">
                                                         <rect key="frame" x="27.5" y="21" width="53" height="18"/>
@@ -3040,7 +3040,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Lt-ba-St4" customClass="ColoredView">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                <rect key="frame" x="26.5" y="0.0" width="0.0" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iwF-C2-Bqb">
                                                         <rect key="frame" x="26" y="21" width="53" height="18"/>
@@ -4163,18 +4163,40 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYX-Oh-GKg" customClass="ColoredView">
                                         <rect key="frame" x="0.0" y="458" width="320" height="90"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w40-vf-Fyh">
-                                                <rect key="frame" x="0.0" y="3" width="375" height="85"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFD-VZ-dBz">
+                                                <rect key="frame" x="0.0" y="2.5" width="319" height="85"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GvX-y6-ycS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="85"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiQ-Rw-qyK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="1" height="85"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="1" id="zGN-9T-cgo"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="85" id="ViM-Rq-892"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="85" id="geK-Po-Q33"/>
+                                                    <constraint firstAttribute="trailing" secondItem="GvX-y6-ycS" secondAttribute="trailing" id="2s2-L8-mRW"/>
+                                                    <constraint firstAttribute="height" constant="85" id="AF3-b1-T61"/>
+                                                    <constraint firstItem="GvX-y6-ycS" firstAttribute="leading" secondItem="RFD-VZ-dBz" secondAttribute="leading" id="QhD-lP-RAS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GvX-y6-ycS" secondAttribute="bottom" id="jHQ-3I-tDS"/>
+                                                    <constraint firstItem="GvX-y6-ycS" firstAttribute="top" secondItem="RFD-VZ-dBz" secondAttribute="top" id="sui-8r-wuL"/>
                                                 </constraints>
-                                            </stackView>
+                                            </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="w40-vf-Fyh" firstAttribute="leading" secondItem="WYX-Oh-GKg" secondAttribute="leading" id="eBJ-zf-O32"/>
+                                            <constraint firstAttribute="trailing" secondItem="RFD-VZ-dBz" secondAttribute="trailing" constant="1" id="29J-q5-7b0"/>
+                                            <constraint firstItem="RFD-VZ-dBz" firstAttribute="centerY" secondItem="WYX-Oh-GKg" secondAttribute="centerY" id="Ttu-lv-EOI"/>
+                                            <constraint firstItem="RFD-VZ-dBz" firstAttribute="leading" secondItem="WYX-Oh-GKg" secondAttribute="leading" id="Uoh-aT-K5l"/>
                                             <constraint firstAttribute="height" constant="90" id="rQX-ej-ETw"/>
-                                            <constraint firstItem="w40-vf-Fyh" firstAttribute="centerY" secondItem="WYX-Oh-GKg" secondAttribute="centerY" id="z3Y-Fz-dCW"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="backMode">
@@ -4189,7 +4211,7 @@
                                         <rect key="frame" x="0.0" y="423" width="320" height="35"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFV-VW-SZ0" customClass="FontLabel">
-                                                <rect key="frame" x="103.5" y="8" width="113" height="20"/>
+                                                <rect key="frame" x="104" y="8.5" width="112.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -4252,7 +4274,7 @@
                     </view>
                     <connections>
                         <outlet property="segControl" destination="I1w-HR-ll0" id="s9y-YE-PjC"/>
-                        <outlet property="stackImageCells" destination="w40-vf-Fyh" id="phM-9g-GSh"/>
+                        <outlet property="stackImageCells" destination="GvX-y6-ycS" id="ZdP-DD-zAS"/>
                         <outlet property="viewPreview" destination="af0-U9-00e" id="7gG-nr-cYp"/>
                     </connections>
                 </viewController>

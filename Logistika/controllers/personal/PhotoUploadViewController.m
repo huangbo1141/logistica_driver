@@ -41,15 +41,19 @@
 //    [alert show];
     
     if (self.navigationController!= nil) {
-        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, 0, 20, 20);
-        [btn addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
-        //UIImage* image = [UIImage imageNamed:@"ic_action_done.png"];
-        //[btn setImage:image forState:UIControlStateNormal];
-        [btn setTitle:@"Upload" forState:UIControlStateNormal];
+//        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn.frame = CGRectMake(0, 0, 20, 20);
+//        [btn addTarget:self action:@selector(clickView:) forControlEvents:UIControlEventTouchUpInside];
+//        //UIImage* image = [UIImage imageNamed:@"ic_action_done.png"];
+//        //[btn setImage:image forState:UIControlStateNormal];
+//        [btn setTitle:@"Upload" forState:UIControlStateNormal];
+//
+//        UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//        btn.tag = 100;
         
-        UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-        btn.tag = 100;
+        UIBarButtonItem*item = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStylePlain target:self action:@selector(clickView:)];
+        [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18.0f weight:UIFontWeightHeavy],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+        item.tag = 100;
         self.navigationItem.rightBarButtonItems = @[item];
     }
     
