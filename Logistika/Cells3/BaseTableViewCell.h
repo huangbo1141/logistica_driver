@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSDictionary* inputData;
 @property (nonatomic,strong) id<ViewDialogDelegate> aDelegate;
 
+@property (strong,nonatomic) MyPopupDialog* dialog;
 -(void)setData:(NSDictionary*)data;
 
 @end

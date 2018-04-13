@@ -22,4 +22,5 @@
 @property (strong,nonatomic) ItemModel*data;
 -(void)initMe:(ItemModel*)model;
 
+-(CGFloat)getHeight:(CGFloat)padding Width:(CGFloat)width;
 @end

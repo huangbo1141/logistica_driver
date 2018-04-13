@@ -20,6 +20,8 @@
 
 @interface OrderDetailViewController ()
 @property (nonatomic,strong) OrderModel* orderModel;
+@property (nonatomic,strong) NSMutableDictionary* height_dict;
+@property (nonatomic,assign) CGFloat totalHeight;
 @end
 
 @implementation OrderDetailViewController
@@ -27,21 +29,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initView];
     EnvVar* env = [CGlobal sharedId].env;
     [self showItemLists];
     [self showAddressDetails];
     self.lblPickDate.text = [NSString stringWithFormat:@"Pick up on: %@%@",g_dateModel.date,g_dateModel.time];
-    self.lblServiceLevel.text = [NSString stringWithFormat:@"%@, $%@, %@",g_serviceModel.name,g_serviceModel.price,g_serviceModel.time_in];
-//    _lblPaymentMethod.text = [NSString stringWithFormat:@"Pyament Method: %@", curPaymentWay];
-    _lblPaymentMethod.text = [NSString stringWithFormat:@"Cash on Pick Up"];
+    self.lblServiceLevel.text = [NSString stringWithFormat:@"%@, %@%@, %@",g_serviceModel.name,symbol_dollar,g_serviceModel.price,g_serviceModel.time_in];
+    _lblPaymentMethod.text = [NSString stringWithFormat:@"Pyament Method: %@", curPaymentWay];
+//    _lblPaymentMethod.text = [NSString stringWithFormat:@"Cash on Pick Up"];	
     
     _lblOrderNumber.text = env.order_id;
     _lblTrackingNumber.text = g_track_id;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+ 
+    [self hideAddressFields];
+}
+-(void)calculateRowHeight{
+    self.height_dict = [[NSMutableDictionary alloc] init];
+    self.totalHeight = 0;
+    for (int i=0; i<self.orderModel.itemModels.count; i++) {
+        NSIndexPath*path = [NSIndexPath indexPathForRow:i inSection:0];
+        CGFloat height = [CGlobal tableView1:self.tableView tableView2:self.tableView tableView3:self.tableView heightForRowAtIndexPath:path DefaultHeight:self.cellHeight Data:self.orderModel OrderType:g_ORDER_TYPE Padding:16 Width:0];
+        NSString*key = [NSString stringWithFormat:@"%d",i];
+        NSString*value = [NSString stringWithFormat:@"%f",height];
+        self.height_dict[key] = value;
+        self.totalHeight = self.totalHeight + height;
+    }
+}
+-(void)hideAddressFields{
+    //    _lblPickAddress.hidden = true;
+    _lblPickCity.hidden = true;
+    _lblPickState.hidden = true;
+    _lblPickPincode.hidden = true;
     
+    //    _lblDestAddress.hidden = true;
+    _lblDestCity.hidden = true;
+    _lblDestState.hidden = true;
+    _lblDestPincode.hidden = true;
+    
+    _lblPickAddress.numberOfLines = 0;
+    _lblDestAddress.numberOfLines = 0;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -212,7 +241,8 @@
         _lblPickPincode.text = g_addressModel.sourcePinCode;
         _lblPickPhone.text = g_addressModel.sourcePhonoe;
         _lblPickLandMark.text = g_addressModel.sourceLandMark;
-        _lblPickInst.text = g_addressModel.sourceInstruction;
+        
+        
         
         
         _lblDestAddress.text = g_addressModel.desAddress;
@@ -221,7 +251,19 @@
         _lblDestPincode.text = g_addressModel.desPinCode;
         _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
-        _lblDestInst.text = g_addressModel.desInstruction;
+        
+        NSString* sin = [g_addressModel.sourceInstruction stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([sin length]>0) {
+            _lblPickInst.text = g_addressModel.sourceInstruction;
+        }else{
+            _lblPickInst.hidden = true;
+        }
+        sin = [g_addressModel.desInstruction stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([sin length]>0) {
+            _lblDestInst.text = g_addressModel.desInstruction;
+        }else{
+            _lblDestInst.hidden = true;
+        }
         
         _lblPickName.text = g_addressModel.sourceName;
         _lblDestName.text = g_addressModel.desName;
@@ -312,6 +354,7 @@
         self.tableView.dataSource = self;
     }
     
+    [self calculateRowHeight];
     [self.tableView reloadData];
 }
 
@@ -334,8 +377,8 @@
         [self.stackReceiverDocument layoutIfNeeded];
         return self.items_receiver.count;
     }
-    CGFloat height = self.cellHeight * self.orderModel.itemModels.count;
-    self.constraint_TH.constant = height;
+    
+    self.constraint_TH.constant = self.totalHeight;
     [self.tableView setNeedsUpdateConstraints];
     [self.tableView layoutIfNeeded];
     return self.orderModel.itemModels.count;
@@ -345,12 +388,12 @@
     if (_tableView_Shipper == tableView) {
         ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         [cell setData:@{@"aDelegate":self,@"model":self.items_shipper[indexPath.row],@"indexPath":indexPath,@"type":@"1"}];
-        cell.backgroundColor = COLOR_SECONDARY_THIRD;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }else if(_tableView_Receiver == tableView){
         ShipperDocTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         [cell setData:@{@"aDelegate":self,@"model":self.items_receiver[indexPath.row],@"indexPath":indexPath,@"type":@"2"}];
-        cell.backgroundColor = COLOR_SECONDARY_THIRD;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
     
@@ -361,7 +404,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
-        cell.backgroundColor = COLOR_SECONDARY_THIRD;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }else if(g_ORDER_TYPE == g_ITEM_OPTION){
         ReviewItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -369,7 +412,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
-        cell.backgroundColor = COLOR_SECONDARY_THIRD;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }else{
         ReviewPackageTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -377,7 +420,7 @@
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.aDelegate = self;
-        cell.backgroundColor = COLOR_SECONDARY_THIRD;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
 }
@@ -386,6 +429,11 @@
         return self.cellHeight_doc;
     }else if(_tableView_Receiver == tableView){
         return self.cellHeight_doc;
+    }
+    NSString* key = [NSString stringWithFormat:@"%d",indexPath.row];
+    if(self.height_dict[key]!=nil){
+        NSString* value = self.height_dict[key];
+        return [value floatValue];
     }
     return self.cellHeight;
 }
@@ -471,6 +519,7 @@
     [CGlobal showIndicator:self];
     NSString* url = [NSString stringWithFormat:@"%@%@%@",g_baseUrl,ORDER_URL,@"change_order"];
     [manager uploadImage4:params Data:imageParam Path:url withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        [CGlobal stopIndicator:self];
         if (error == nil) {
             if (dict!=nil && dict[@"result"] != nil) {
                 //
@@ -481,13 +530,16 @@
                     NSString*trackstr = [NSString stringWithFormat:@"%@,%d",env.order_id,g_mode];
                     [CGlobal addOrderToTrackOrder:trackstr];
                     
-                    [self.navigationController popViewControllerAnimated:true];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.navigationController popViewControllerAnimated:true];
+                    });
+                    
                 }
             }
         }else{
             NSLog(@"Error");
         }
-        [CGlobal stopIndicator:self];
+        
     }];
     
     

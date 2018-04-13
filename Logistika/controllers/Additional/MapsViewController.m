@@ -83,7 +83,11 @@
         
         [view setData:@{@"vc":self,@"index":userData[@"index"],@"wave_model":self.list_data[index]}];
         CGRect frame = view.frame;
-        CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, [view getHeight]);
+        
+        CGRect scRect = [[UIScreen mainScreen] bounds];
+        scRect.size.width = MIN(scRect.size.width -32,388);
+        
+        CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, scRect.size.width, [view getHeight]);
         view.frame = newFrame;
         
         return view;
@@ -199,7 +203,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)clickHub:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:12125551212"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:support_phone]];
 }
 
 /*

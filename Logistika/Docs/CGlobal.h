@@ -47,7 +47,8 @@ extern  NSString* ORDER_URL;
 extern  NSString* FORGOT;
 extern  NSString* ZIP_LOCATION ;
 extern  NSString* PHOTO_URL ;
-
+extern  NSString*   symbol_dollar;
+extern  NSString* support_phone ;
 extern BOOL g_isii;
 
 extern  NSString*   APISERVICE_IP_URL;
@@ -278,4 +279,5 @@ typedef void (^ImagePickerCallback)(UIImage* image);
 +(NSData*)getImageDataFromUIImage:(UIImage*)image;
 +(NSString*)getTruck:(NSString*)truck;
 +(void)sortWaveList:(NSMutableArray*)data;
++(CGFloat)tableView1:(UITableView *)tableView1 tableView2:(UITableView *)tableView2 tableView3:(UITableView *)tableView3 heightForRowAtIndexPath:(NSIndexPath *)indexPath DefaultHeight:(CGFloat)cellHeight Data:(OrderModel*)orderModel OrderType:(int)orderType  Padding:(CGFloat)padding Width:(CGFloat)width;
 @end

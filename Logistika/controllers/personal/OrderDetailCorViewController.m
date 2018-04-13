@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = COLOR_SECONDARY_THIRD;
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     self.consigments = [[NSMutableArray alloc] init];
     self.consigments_receiver = [[NSMutableArray alloc] init];
@@ -85,6 +85,21 @@
     }
     
     //self.txtWeight,self.txtEta
+    [self hideAddressFields];
+}
+-(void)hideAddressFields{
+    //    _lblPickAddress.hidden = true;
+    _lblPickCity.hidden = true;
+    _lblPickState.hidden = true;
+    _lblPickPincode.hidden = true;
+    
+    //    _lblDestAddress.hidden = true;
+    _lblDestCity.hidden = true;
+    _lblDestState.hidden = true;
+    _lblDestPincode.hidden = true;
+    
+    _lblPickAddress.numberOfLines = 0;
+    _lblDestAddress.numberOfLines = 0;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -339,7 +354,13 @@
         _lblPickPincode.text = g_addressModel.sourcePinCode;
         _lblPickPhone.text = g_addressModel.sourcePhonoe;
         _lblPickLandMark.text = g_addressModel.sourceLandMark;
-        _lblPickInst.text = g_addressModel.sourceInstruction;
+        
+        NSString* sin = [g_addressModel.sourceInstruction stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([sin length]>0) {
+            _lblPickInst.text = g_addressModel.sourceInstruction;
+        }else{
+            _lblPickInst.hidden = true;
+        }
         
         _lblDestAddress.text = g_addressModel.desAddress;
         _lblDestCity.text = g_addressModel.desCity;
@@ -347,7 +368,13 @@
         _lblDestPincode.text = g_addressModel.desPinCode;
         _lblDestPhone.text = g_addressModel.desPhone;
         _lblDestLandMark.text = g_addressModel.desLandMark;
-        _lblDestInst.text = g_addressModel.desInstruction;
+        
+        sin = [g_addressModel.desInstruction stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([sin length]>0) {
+            _lblDestInst.text = g_addressModel.desInstruction;
+        }else{
+            _lblDestInst.hidden = true;
+        }
         
         _lblPickName.text = g_addressModel.sourceName;
         _lblDestName.text = g_addressModel.desName;

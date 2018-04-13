@@ -72,4 +72,7 @@
         [dialog dismissPopup];
     }
 }
+-(CGFloat)getHeight:(CGFloat)padding Width:(CGFloat)width{
+    return 40;
+}
 @end

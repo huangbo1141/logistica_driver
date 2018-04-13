@@ -496,6 +496,7 @@
             }
             
             vc.type = self.type;
+            curPaymentWay = model.payment;
             self.title = @"";
             [self.navigationController pushViewController:vc animated:true];
         });
@@ -513,6 +514,7 @@
                         
             vc.type = self.type;
             vc.mode = self.mode;
+            curPaymentWay = model.payment;
             self.title = @"";
             [self.navigationController pushViewController:vc animated:true];
         });

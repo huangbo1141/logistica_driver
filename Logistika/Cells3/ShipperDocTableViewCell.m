@@ -9,6 +9,7 @@
 #import "ShipperDocTableViewCell.h"
 #import "SelectImageCell.h"
 #import "ItemModel.h"
+#import "ViewPhotoFull.h"
 
 @implementation ShipperDocTableViewCell
 
@@ -45,6 +46,22 @@
         }else{
             self.btnRemove.hidden = false;
         }
+    }
+}
+- (IBAction)clickImage:(id)sender {
+    if (self.imgPhoto.image!=nil) {
+        // show full content
+        if ([self.aDelegate isKindOfClass:[UIViewController class]]) {
+            UIViewController* vc = self.aDelegate;
+            NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"ViewPhotoFull" owner:vc options:nil];
+            ViewPhotoFull* view = array[0];
+            [view firstProcess:@{@"vc":vc,@"image":self.imgPhoto.image,@"aDelegate":self}];
+            
+            self.dialog = [[MyPopupDialog alloc] init];
+            [self.dialog setup:view backgroundDismiss:true backgroundColor:[UIColor grayColor]];
+            [self.dialog showPopup:vc.view];
+        }
+        
     }
 }
 @end

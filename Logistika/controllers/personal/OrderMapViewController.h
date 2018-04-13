@@ -22,6 +22,7 @@
 
 @property (nonatomic) IBInspectable NSInteger backMode;
 
+@property (weak, nonatomic) IBOutlet UIStackView *viewBottomStack;
 -(void)setSpeedData:(NSDictionary*)data;
 @property (weak, nonatomic) IBOutlet UIStackView *stackTool1;
 

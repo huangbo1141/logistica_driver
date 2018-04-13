@@ -53,6 +53,28 @@
     [self.viewBottom setNeedsUpdateConstraints];
     [self.viewBottom layoutIfNeeded];
 }
+-(void)calcBottomHeight{
+    CGFloat height = [UIApplication sharedApplication].statusBarFrame.size.height;
+    
+    CGRect scRect = [[UIScreen mainScreen] bounds];
+    scRect.size.width = scRect.size.width -16;
+    scRect.size.height = 20;
+    CGSize size = [self.viewBottomStack systemLayoutSizeFittingSize:scRect.size withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityDefaultLow];
+    //        NSLog(@"widthwidth %f height %f",size.width,size.height);
+    
+    NSLog(@"height estimated %f",size.height);
+    
+    if (height == 20) {
+        self.bottomValue1 = -1*size.height;
+        self.cons_bottomHandleHeight.constant = 40;
+    }else{
+        self.bottomValue1 = -1*size.height - 44;
+        self.cons_bottomHandleHeight.constant = 60;
+    }
+    NSLog(@"bottom value1 = %f",self.bottomValue1);
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -60,15 +82,7 @@
     _lblSpeed.text =   @"0 km";
     _stackTool1.hidden = true;
     
-    CGFloat height = [UIApplication sharedApplication].statusBarFrame.size.height;
-    if (height == 20) {
-        self.bottomValue1 = -100;
-        self.cons_bottomHandleHeight.constant = 40;
-    }else{
-        self.bottomValue1 = -100 - 44;
-        self.cons_bottomHandleHeight.constant = 60;
-    }
-    NSLog(@"bottom value1 = %f",self.bottomValue1);
+    
     
     self.lblPickup1.text = g_addressModel.sourceAddress;
     self.lblPickup2.text = g_addressModel.sourceState;
@@ -82,8 +96,9 @@
     [self.btnBottom setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     self.btnBottom.tintColor = [UIColor blackColor];
     
-    
+    [self calcBottomHeight];
     self.cons_bottomSpace.constant = self.bottomValue1;
+    
     
     self.mapView.camera = [[GMSCameraPosition alloc] initWithTarget:self.userPosition zoom:gms_camera_zoom bearing:0 viewingAngle:0];
     
@@ -125,6 +140,10 @@
         [self drawPath:self.sourcePosition Dest:self.destinationPosition];
         
     });
+    
+    self.mapView.myLocationEnabled = true;
+    self.mapView.settings.myLocationButton = true;
+    
 }
 - (IBAction)clickBottom:(id)sender {
     [self toggleBottomView];
@@ -225,6 +244,14 @@
                 view.lblArea.text = g_addressModel.desArea;
                 view.lblCity.text = g_addressModel.desCity;
             }
+            
+            CGRect frame = view.frame;
+            CGRect scRect = [[UIScreen mainScreen] bounds];
+            scRect.size.width = MIN(scRect.size.width -32,320);
+            
+            CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, scRect.size.width, [view getHeight]);
+            view.frame = newFrame;
+            
             return view;
         }else{
             InfoView2* view = array[1];
@@ -247,16 +274,34 @@
                 }
                 
                 [view setData:@{@"vc":self}];
-                CGRect frame = view.frame;
-                CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, [view getHeight]);
-                view.frame = newFrame;
                 
+                CGRect frame = view.frame;
+                CGRect scRect = [[UIScreen mainScreen] bounds];
+                scRect.size.width = MIN(scRect.size.width -32,320);
+                
+                CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, scRect.size.width, [view getHeight]);
+                view.frame = newFrame;                
                 return view;
             }
             
         }
     }
     return nil;
+}
+- (IBAction)tapZoomButton:(UIView*)sender {
+    int tag = sender.tag;
+    if (tag == 1) {
+        float zoom = self.mapView.camera.zoom;
+        zoom = zoom + 0.5;
+        [self.mapView animateToZoom:zoom];
+    }else if(tag == 2){
+        float zoom = self.mapView.camera.zoom;
+        zoom = zoom - 0.5;
+        if (zoom>0) {
+            [self.mapView animateToZoom:zoom];
+        }
+        
+    }
 }
 -(void)setSpeedData:(NSDictionary*)data{
     if (data!=nil) {

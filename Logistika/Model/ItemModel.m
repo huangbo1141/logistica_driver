@@ -44,6 +44,7 @@
     self.weight = c_weight[0];
     self.weight_value = [c_weight_value[0] intValue];
     self.quantity = c_quantity[0];
+    self.mPackage = @"0";
 }
 -(void)firstPackage{
     self.title = c_packageLists[0];
@@ -53,5 +54,12 @@
     self.weight = c_weight[0];
     self.weight_value = [c_weight_value[0] intValue];
     self.quantity = c_quantity[0];
+     self.mPackage = @"0";
+}
+-(NSString*)getDimetion{
+    if ([_dimension1 length]>0 && [_dimension2 length]>0 && [_dimension3 length]>0) {
+        return [NSString stringWithFormat:@"%@X%@X%@",_dimension1,_dimension2,_dimension3];
+    }
+    return @"";
 }
 @end

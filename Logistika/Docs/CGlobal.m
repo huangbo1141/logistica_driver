@@ -17,6 +17,8 @@
 #import "TblTruck.h"
 #import "WaveOrderModel.h"
 #import "WaveOrderCorModel.h"
+#import "ReviewItemTableViewCell.h"
+#import "ReviewPackageTableViewCell.h"
 
 UIColor*   COLOR_TOOLBAR_TEXT;
 UIColor*   COLOR_TOOLBAR_BACK;
@@ -37,6 +39,8 @@ NSString* ORDER_URL = @"/Order/";
 NSString* FORGOT = @"/Forgot/";
 NSString* ZIP_LOCATION = @"http://maps.googleapis.com/maps/api/geocode/json";
 NSString* PHOTO_URL = @"/uploads/";
+NSString*   symbol_dollar = @"₹";
+NSString* support_phone = @"tel:9372863299";
 //NSString* g_baseUrl = @"https://travpholer.com/adminuser";
 BOOL g_lock = false;
 BOOL g_isii = true;
@@ -1687,15 +1691,15 @@ BOOL g_breakShowing = false;
     NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
     [userd setValue:array forKey:@"trackingOrderIds"];
     
-    if (array.count>0) {
-        [userd setBool:true forKey:@"service_status_preference"];
-        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate startOrStopTraccar];
-    }else if(array.count == 0){
-        [userd setBool:false forKey:@"service_status_preference"];
-        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [delegate startOrStopTraccar];
-    }
+//    if (array.count>0) {
+//        [userd setBool:true forKey:@"service_status_preference"];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate startOrStopTraccar];
+//    }else if(array.count == 0){
+//        [userd setBool:false forKey:@"service_status_preference"];
+//        AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [delegate startOrStopTraccar];
+//    }
 }
 + (NSMutableArray*)polylineWithEncodedString:(NSString *)encodedString {
     const char *bytes = [encodedString UTF8String];
@@ -1843,5 +1847,30 @@ BOOL g_breakShowing = false;
         }
         return [p1 compare:p2];
     }];
+}
++(CGFloat)tableView1:(UITableView *)tableView1 tableView2:(UITableView *)tableView2 tableView3:(UITableView *)tableView3 heightForRowAtIndexPath:(NSIndexPath *)indexPath DefaultHeight:(CGFloat)cellHeight Data:(OrderModel*)orderModel OrderType:(int)orderType  Padding:(CGFloat)padding Width:(CGFloat)width{
+    
+    if (orderType == g_CAMERA_OPTION) {
+        return cellHeight;
+    }else if(orderType == g_ITEM_OPTION){
+        ReviewItemTableViewCell* cell = [tableView2 dequeueReusableCellWithIdentifier:@"cell"];
+        [cell initMe:orderModel.itemModels[indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setFontSizeForReviewOrder:17.0f];
+        
+        CGFloat height = [cell getHeight:padding Width:width];
+        
+        return height;
+    }else{
+        ReviewPackageTableViewCell* cell = [tableView3 dequeueReusableCellWithIdentifier:@"cell"];
+        
+        [cell initMe:orderModel.itemModels[indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setFontSizeForReviewOrder:17.0f];
+        
+        CGFloat height = [cell getHeight:padding Width:width];
+        
+        return height;
+    }
 }
 @end

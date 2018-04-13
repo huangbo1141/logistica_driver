@@ -174,9 +174,9 @@ int64_t kRetryDelay = 30 * 1000;
     }
     params[@"orders"] = [CGlobal getOrderIds];
     
-    params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
-    params[@"lat"] = [NSString stringWithFormat:@"%f",position.latitude];
-    params[@"lon"] = [NSString stringWithFormat:@"%f",position.longitude];
+//    params[@"timestamp"] = [NSString stringWithFormat:@"%f",position.time.timeIntervalSince1970];
+    params[@"lat"] = [NSString stringWithFormat:@"%f",g_lastLocation.coordinate.latitude];
+    params[@"lon"] = [NSString stringWithFormat:@"%f",g_lastLocation.coordinate.longitude];
 //    params[@"speed"] = [NSString stringWithFormat:@"%f",position.speed];
     params[@"speed"] = g_vehiclespeed;
     

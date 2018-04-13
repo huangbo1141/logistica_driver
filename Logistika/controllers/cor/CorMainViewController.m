@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
     //test vmware
 
-//    [self trackCorporateOrders];
+    [self trackCorporateOrders];
     NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
     [userd setBool:true forKey:@"service_status_preference"];
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -168,7 +168,7 @@
     
 }
 - (IBAction)callHub:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:12125551212"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:support_phone]];
 }
 - (IBAction)clickRoute:(id)sender {
     EnvVar* env = [CGlobal sharedId].env;

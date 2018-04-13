@@ -29,7 +29,7 @@
     self.contentView.backgroundColor = COLOR_SECONDARY_THIRD;
     // Do any additional setup after loading the view.
     
-//    [self trackOrders:1];
+    [self trackOrders:1];
     
     NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
     [userd setBool:true forKey:@"service_status_preference"];
@@ -181,7 +181,7 @@
     });
 }
 - (IBAction)callHub:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:12125551212"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:support_phone]];
 }
 - (IBAction)clickRoute:(id)sender {
     EnvVar* env = [CGlobal sharedId].env;

@@ -604,7 +604,7 @@
         NSDate* date = [NSDate date];
         NSTimeInterval intervals =  [date timeIntervalSinceDate:self.lastTrackDate];
         if (intervals < 10) {
-            NSLog(@"too shorts %f",intervals);
+            NSLog(@"too shorts AppDelegate %f",intervals);
             return;
         }
     }

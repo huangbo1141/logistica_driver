@@ -23,4 +23,7 @@
 
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
 -(void)firstPackage;
+-(NSString*)getDimetion;
+
+@property (nonatomic,copy) NSString* mPackage;
 @end

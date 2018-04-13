@@ -28,4 +28,8 @@
 @property (nonatomic,strong) NSMutableArray* itemModels;
 
 -(CGFloat)getHeight;
+
+@property (weak, nonatomic) IBOutlet UIStackView *stackRoot;
+@property (nonatomic,strong) NSMutableDictionary* height_dict;
+@property (nonatomic,assign) CGFloat totalHeight;
 @end
