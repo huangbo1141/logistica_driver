@@ -1848,12 +1848,12 @@ BOOL g_breakShowing = false;
         return [p1 compare:p2];
     }];
 }
-+(CGFloat)tableView1:(UITableView *)tableView1 tableView2:(UITableView *)tableView2 tableView3:(UITableView *)tableView3 heightForRowAtIndexPath:(NSIndexPath *)indexPath DefaultHeight:(CGFloat)cellHeight Data:(OrderModel*)orderModel OrderType:(int)orderType  Padding:(CGFloat)padding Width:(CGFloat)width{
++(CGFloat)tableView1:(UITableView *)tableView1 heightForRowAtIndexPath:(NSIndexPath *)indexPath DefaultHeight:(CGFloat)cellHeight Data:(OrderModel*)orderModel OrderType:(int)orderType  Padding:(CGFloat)padding Width:(CGFloat)width{
     
     if (orderType == g_CAMERA_OPTION) {
         return cellHeight;
     }else if(orderType == g_ITEM_OPTION){
-        ReviewItemTableViewCell* cell = [tableView2 dequeueReusableCellWithIdentifier:@"cell"];
+        ReviewItemTableViewCell* cell = [tableView1 dequeueReusableCellWithIdentifier:@"cell2"];
         [cell initMe:orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setFontSizeForReviewOrder:17.0f];
@@ -1862,7 +1862,7 @@ BOOL g_breakShowing = false;
         
         return height;
     }else{
-        ReviewPackageTableViewCell* cell = [tableView3 dequeueReusableCellWithIdentifier:@"cell"];
+        ReviewPackageTableViewCell* cell = [tableView1 dequeueReusableCellWithIdentifier:@"cell3"];
         
         [cell initMe:orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
