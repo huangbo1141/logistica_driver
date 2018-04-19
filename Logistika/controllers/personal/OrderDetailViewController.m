@@ -51,7 +51,7 @@
     self.totalHeight = 0;
     for (int i=0; i<self.orderModel.itemModels.count; i++) {
         NSIndexPath*path = [NSIndexPath indexPathForRow:i inSection:0];
-        CGFloat height = [CGlobal tableView1:self.tableView tableView2:self.tableView tableView3:self.tableView heightForRowAtIndexPath:path DefaultHeight:self.cellHeight Data:self.orderModel OrderType:g_ORDER_TYPE Padding:16 Width:0];
+        CGFloat height = [CGlobal tableView1:self.tableView heightForRowAtIndexPath:path DefaultHeight:self.cellHeight Data:self.orderModel OrderType:g_ORDER_TYPE Padding:16 Width:0];
         NSString*key = [NSString stringWithFormat:@"%d",i];
         NSString*value = [NSString stringWithFormat:@"%f",height];
         self.height_dict[key] = value;
@@ -326,7 +326,7 @@
         self.viewHeader_PACKAGE.hidden = true;
         
         UINib* nib = [UINib nibWithNibName:@"ReviewCameraTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
+        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell1"];
         self.cellHeight = 40;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -337,7 +337,7 @@
         self.viewHeader_PACKAGE.hidden = true;
         
         UINib* nib = [UINib nibWithNibName:@"ReviewItemTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
+        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell2"];
         self.cellHeight = 40;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -348,7 +348,7 @@
         self.viewHeader_PACKAGE.hidden = false;
         
         UINib* nib = [UINib nibWithNibName:@"ReviewPackageTableViewCell" bundle:nil];
-        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
+        [self.tableView registerNib:nib forCellReuseIdentifier:@"cell3"];
         self.cellHeight = 40;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -399,7 +399,7 @@
     
     
     if (g_ORDER_TYPE == g_CAMERA_OPTION) {
-        ReviewCameraTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        ReviewCameraTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
         
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -407,7 +407,7 @@
         cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }else if(g_ORDER_TYPE == g_ITEM_OPTION){
-        ReviewItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        ReviewItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -415,7 +415,7 @@
         cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }else{
-        ReviewPackageTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        ReviewPackageTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
         
         [cell initMe:self.orderModel.itemModels[indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
