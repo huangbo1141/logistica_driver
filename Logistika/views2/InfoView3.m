@@ -158,10 +158,11 @@
 }
 -(CGFloat)getHeight{
     CGRect scRect = [[UIScreen mainScreen] bounds];
-    scRect.size.width = MIN(scRect.size.width -32,388);
+    scRect.size.width = MIN(scRect.size.width -32 - 16,388);
     scRect.size.height = 20;
     
     CGSize size = [self.stackRoot systemLayoutSizeFittingSize:scRect.size withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityDefaultLow];
+    
     //        NSLog(@"widthwidth %f height %f",size.width,size.height);
     
     NSLog(@"height estimated %f",size.height);
@@ -221,7 +222,7 @@
     self.totalHeight = 0;
     
     CGRect scRect = [[UIScreen mainScreen] bounds];
-    scRect.size.width = MIN(scRect.size.width -32,388);
+    scRect.size.width = MIN(scRect.size.width -32 - 16,388);
     
     for (int i=0; i<self.orderModel.itemModels.count; i++) {
         NSIndexPath*path = [NSIndexPath indexPathForRow:i inSection:0];

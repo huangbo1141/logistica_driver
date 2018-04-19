@@ -40,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDesArea;
 @property (weak, nonatomic) IBOutlet UILabel *lblDesCity;
 @property (weak, nonatomic) IBOutlet UILabel *lblDesState;
+@property (weak, nonatomic) IBOutlet UIStackView *stackSource;
+@property (weak, nonatomic) IBOutlet UIStackView *stackDes;
 
 @property (weak, nonatomic) IBOutlet UIStackView *stackRoot;
 @property (nonatomic,strong) NSMutableDictionary* height_dict;

@@ -37,14 +37,29 @@
     for (int i=0; i<self.list_data.count; i++) {
         id model = self.list_data[i];
         if ([model isKindOfClass:[WaveOrderModel class]]) {
+            
+            NSValue* val;
             WaveOrderModel*imodel = (WaveOrderModel*)model;
-            CGPoint pt = CGPointMake(imodel.addressModel.sourceLat, imodel.addressModel.sourceLng);
-            NSValue* val = [NSValue valueWithCGPoint:pt];
+            if ([imodel.state isEqualToString:@"2"]) {
+                CGPoint pt = CGPointMake(imodel.addressModel.sourceLat, imodel.addressModel.sourceLng);
+                val = [NSValue valueWithCGPoint:pt];
+            }else{
+                CGPoint pt = CGPointMake(imodel.addressModel.desLat, imodel.addressModel.desLng);
+                val = [NSValue valueWithCGPoint:pt];
+            }
+            
             [array addObject:val];
         }else if ([model isKindOfClass:[WaveOrderCorModel class]]) {
             WaveOrderCorModel*imodel = (WaveOrderCorModel*)model;
-            CGPoint pt = CGPointMake(imodel.addressModel.sourceLat, imodel.addressModel.sourceLng);
-            NSValue* val = [NSValue valueWithCGPoint:pt];
+            NSValue* val;
+            if ([imodel.state isEqualToString:@"2"]) {
+                CGPoint pt = CGPointMake(imodel.addressModel.sourceLat, imodel.addressModel.sourceLng);
+                val = [NSValue valueWithCGPoint:pt];
+            }else{
+                CGPoint pt = CGPointMake(imodel.addressModel.desLat, imodel.addressModel.desLng);
+                val = [NSValue valueWithCGPoint:pt];
+            }
+            
             [array addObject:val];
         }
     }
