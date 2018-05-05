@@ -89,7 +89,7 @@
     if (params[@"employer_id"] == nil) {
         return;
     }
-    [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_orders_by_state" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_orders_by_tracking" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             // succ
             self.trackOrderStrs = [[NSMutableArray alloc] init];
@@ -141,7 +141,7 @@
     params[@"state"] = @"3";
     NetworkParser* manager = [NetworkParser sharedManager];
 //    [CGlobal showIndicator:self];
-    [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_corporate_orders_by_state" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
+    [manager ontemplateGeneralRequest2:params BasePath:ORDER_URL Path:@"get_corporate_orders_by_tracking" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
         if (error == nil) {
             // succ
             if (dict[@"result" ]!=nil) {
