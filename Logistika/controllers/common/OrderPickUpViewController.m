@@ -101,10 +101,13 @@
     NSUInteger found = [c_freights indexOfObject:self.mode];
     if (found!=NSNotFound) {
         self.mMode = [c_freights[found] uppercaseString];
+    }else{
+        self.mMode = [self.mode uppercaseString];
     }
     self.data_0 = [[NSMutableArray alloc] init];
     self.data_1 = [[NSMutableArray alloc] init];
     self.data_2 = [[NSMutableArray alloc] init];
+    NSLog(@"mode %@",self.mMode);
     if (_type ==0 || _type == 1 || _type == 3) {
         // divide
         for (int i=0; i<_response.orders.count; i++) {
@@ -125,6 +128,9 @@
                 }
                 
             }
+            
+            NSLog(@"mode %@",model.freight);
+            NSLog(@"sname %@",sname);
         }
         
     }else{

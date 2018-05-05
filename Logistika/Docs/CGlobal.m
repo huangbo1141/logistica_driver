@@ -1539,7 +1539,7 @@ BOOL g_breakShowing = false;
     
     PUBLISHABLE_KEY = @"pk_test_C0xTsdez4BI0rXKZp6ObLitq";
     
-    c_freights = @[@"cl",@"ftl",@"stl",@"rl"];
+    c_freights = @[@"cl",@"ftl",@"stl",@"rl",@"al",@"ltl"];
     
     c_menu_title = @[@"profile",@"about",@"contact",@"feedback",@"privacy",@"sign"];
 }

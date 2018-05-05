@@ -140,9 +140,12 @@
 -(void)getWavePersonalOrders{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
-    data[@"id"] = @"0";
+    WaveModel* wv = g_waveData.wave[0];
+    data[@"id"] = wv.id;
     data[@"employer_id"] = env.user_id;
     data[@"order_type"] = @"0";
+    
+//    data[@"id"] = @"0";
     
     NetworkParser* manager = [NetworkParser sharedManager];
     [manager ontemplateGeneralRequest2:data BasePath:g_URL Path:@"get_personal_wave_byid" withCompletionBlock:^(NSDictionary *dict, NSError *error) {
@@ -174,7 +177,9 @@
 -(void)getWaveCorporateOrders{
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     EnvVar* env = [CGlobal sharedId].env;
-    data[@"id"] = @"0";
+    WaveModel* wv = g_waveData.wave[0];
+    data[@"id"] = wv.id;
+//    data[@"id"] = @"0";
     data[@"employer_id"] = env.corporate_user_id;
     data[@"order_type"] = @"1";
     
