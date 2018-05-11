@@ -151,6 +151,7 @@
 		4D5201F31EAA387700819627 /* UIUnderlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5201F21EAA387700819627 /* UIUnderlinedButton.m */; };
 		4D68F80E1F161DCD007FABDE /* LimitSpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D68F80D1F161DCD007FABDE /* LimitSpeedView.m */; };
 		4D68F8111F1653C1007FABDE /* MyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D68F8101F1653C1007FABDE /* MyBaseView.m */; };
+		4D779C4920A5A28E00B52AAC /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D779C4820A5A28D00B52AAC /* PhotoViewController.swift */; };
 		4D77F62E1EAB60000081689D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D77F6301EAB60000081689D /* Localizable.strings */; };
 		4D8450ED1EF296D300496CF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8450EC1EF296D300496CF5 /* ViewController.m */; };
 		4D8450EF1EF296DD00496CF5 /* new_white.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4D8450EE1EF296DD00496CF5 /* new_white.mp4 */; };
@@ -525,6 +526,7 @@
 		4D68F80D1F161DCD007FABDE /* LimitSpeedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimitSpeedView.m; sourceTree = "<group>"; };
 		4D68F80F1F1653C1007FABDE /* MyBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseView.h; sourceTree = "<group>"; };
 		4D68F8101F1653C1007FABDE /* MyBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseView.m; sourceTree = "<group>"; };
+		4D779C4820A5A28D00B52AAC /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		4D77F62F1EAB60000081689D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4D8450EB1EF296D300496CF5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4D8450EC1EF296D300496CF5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -1384,6 +1386,7 @@
 				4D4CD3641F30EAD700A123E3 /* OrderMapViewController.m */,
 				4D4CD3CD1F31D71600A123E3 /* PhotoUploadViewController.h */,
 				4D4CD3CE1F31D71600A123E3 /* PhotoUploadViewController.m */,
+				4D779C4820A5A28D00B52AAC /* PhotoViewController.swift */,
 			);
 			path = personal;
 			sourceTree = "<group>";
@@ -1893,6 +1896,7 @@
 				4D126C731EA5AA4500C69B89 /* UIScrollView+Helpers.m in Sources */,
 				4D3ECB5A1EBDCF52009E850A /* ReviewPackageTableViewCell.m in Sources */,
 				4D84510B1EF2F79A00496CF5 /* TCDatabaseHelper.m in Sources */,
+				4D779C4920A5A28E00B52AAC /* PhotoViewController.swift in Sources */,
 				4D37F5B21F30903A00E3AAAE /* WaveViewController.m in Sources */,
 				4D126C571EA5AA4500C69B89 /* CellGeneral.m in Sources */,
 				4D126CCF1EA708BF00C69B89 /* LeftView.m in Sources */,

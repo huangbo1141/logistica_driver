@@ -943,7 +943,7 @@
 }
 - (IBAction)clickAddShipper:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    PhotoViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoViewController"];
     vc.vc = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         vc.limit = 1000;
@@ -953,7 +953,7 @@
 }
 - (IBAction)clickAddReceiver:(id)sender {
     UIStoryboard* ms = [UIStoryboard storyboardWithName:@"Personal" bundle:nil];
-    PhotoUploadViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoUploadViewController"];
+    PhotoViewController* vc = [ms instantiateViewControllerWithIdentifier:@"PhotoViewController"];
     vc.vc = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         vc.limit = 1000;
