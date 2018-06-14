@@ -30,7 +30,9 @@ UIColor*   COLOR_RESERVED;
 
 NSString* g_batteryLevel = @"";
 NSString* g_vehiclespeed = @"";
-NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
+
+NSString* g_baseUrl = @"http://logistika1-001-site3.ctempurl.com";
+//NSString* g_baseUrl = @"http://pgollapudi-001-site1.atempurl.com";
 //NSString* g_baseUrl = @"http://192.168.1.108/Delivery";
 NSString* BASE_DATA_URL = @"/Basic/";
 NSString* g_URL = @"/Employer/";
