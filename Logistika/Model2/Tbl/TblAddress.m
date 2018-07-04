@@ -15,8 +15,12 @@
         
         [BaseModel parseResponse:self Dict:dict];
         
-        if (self.address2 == nil) {
+        if (self.address2 == nil || [self.address2 isKindOfClass:[NSNull class] ]) {
             self.address2 = dict[@"area"];
+        }
+        
+        if([self.address2 isKindOfClass:[NSNull class]]){
+            self.address2 = @" ";
         }
         
     }

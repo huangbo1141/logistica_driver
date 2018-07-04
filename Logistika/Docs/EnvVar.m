@@ -207,6 +207,7 @@ static NSString * kDefaultsLastLoggedInKey = @"LASTLOGGEDIN";
     [self saveDefaults:@"user_type" value:address_id];
 }
 -(void)setAddress2:(NSString *)address2{
+    
     _address2 = address2;
     [self saveDefaults:@"address2" value:address2];
 }
