@@ -3040,7 +3040,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Lt-ba-St4" customClass="ColoredView">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                <rect key="frame" x="26.5" y="0.0" width="0.0" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iwF-C2-Bqb">
                                                         <rect key="frame" x="26" y="21" width="53" height="18"/>
